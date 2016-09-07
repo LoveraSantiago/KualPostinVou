@@ -1,6 +1,10 @@
 package lovera.kualpostinvou.modelos;
 
-public class Estabelecimento {
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
+public class Estabelecimento implements Serializable{
 
     private int codCnes;
     private String codUnidade;

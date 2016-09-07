@@ -1,22 +1,20 @@
 package lovera.kualpostinvou;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 
-import java.util.HashMap;
+import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
-import lovera.kualpostinvou.conexao.ApiEstabelecimentoSaude;
+import lovera.kualpostinvou.conexao.Conexao;
+import lovera.kualpostinvou.conexao.MsgFromConexao;
 import lovera.kualpostinvou.modelos.Estabelecimento;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
+import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MsgFromConexao{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,33 +22,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    public void consumirEstabelecimentos(View view){
+        String municipio = getStringFromIptText(R.id.edtMunicipio);
+        String uf = getStringFromIptText(R.id.edtUf);
+        int paginas = Integer.parseInt(getStringFromIptText(R.id.edtPaginas));
+        int qtdd = Integer.parseInt(getStringFromIptText(R.id.edtQtd));
+
+        Conexao conexao = new Conexao(this);
+        conexao.getEstabelecimentos(municipio, uf, null, paginas, qtdd);
+    }
+
+    public String getStringFromIptText(int id){
+        EditText editText = (EditText) findViewById(id);
+        return editText.getText().toString();
+    }
+
     @Override
-    protected void onResume() {
-        super.onResume();
-
-        Map<String, String> maparams = new HashMap<>();
-        maparams.put("uf", "SP");
-
-        Retrofit retrofit = new Retrofit
-                                .Builder()
-                                .baseUrl("http://mobile-aceite.tcu.gov.br/mapa-da-saude/")
-                                .addConverterFactory(GsonConverterFactory.create())
-                                .build();
-        ApiEstabelecimentoSaude saudeApi = retrofit.create(ApiEstabelecimentoSaude.class);
-        Call<List<Estabelecimento>> call = saudeApi.getEstabelecimentos(maparams);
-        call.enqueue(new Callback<List<Estabelecimento>>() {
-            @Override
-            public void onResponse(Response<List<Estabelecimento>> response, Retrofit retrofit) {
-                List<Estabelecimento> estabelecimentos = response.body();
-                for(Estabelecimento e : estabelecimentos){
-                    Log.i("SUCESS", e.getNomeFantasia());
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                Log.e("ERROR", "erro no retrofit", t);
-            }
-        });
+    public void passarListaDeEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos) {
+        Intent intent = new Intent(this, ListaEstabelecimentosActivity.class);
+        intent.putExtra("LISTAESTABELECIMENTOS",(Serializable) listaDeEstabelecimentos);
+        startActivity(intent);
     }
 }
