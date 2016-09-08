@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.conexao;
+package lovera.kualpostinvou.conexao.utils;
 
 public class ConstantesParametros {
 
@@ -7,5 +7,6 @@ public class ConstantesParametros {
     public static String CAMPOS = "campos";
     public static String PAGINA = "pagina";
     public static String QUANTIDADE = "quantidade";
-
+    public static String TEXTO = "texto";
+    public static String CATEGORIA = "categoria";
 }

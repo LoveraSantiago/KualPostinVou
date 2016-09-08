@@ -9,8 +9,9 @@ import android.widget.EditText;
 import java.io.Serializable;
 import java.util.List;
 
-import lovera.kualpostinvou.conexao.Conexao;
-import lovera.kualpostinvou.conexao.MsgFromConexao;
+import lovera.kualpostinvou.conexao.ConexaoSaude;
+import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
+import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
 
@@ -28,8 +29,8 @@ public class MainActivity extends AppCompatActivity implements MsgFromConexao{
         int paginas = Integer.parseInt(getStringFromIptText(R.id.edtPaginas));
         int qtdd = Integer.parseInt(getStringFromIptText(R.id.edtQtd));
 
-        Conexao conexao = new Conexao(this);
-        conexao.getEstabelecimentos(municipio, uf, null, paginas, qtdd);
+        ConexaoSaude conexaoSaude = new ConexaoSaude(this);
+        conexaoSaude.getEstabelecimentos(municipio, uf, null, paginas, qtdd);
     }
 
     public String getStringFromIptText(int id){
@@ -42,5 +43,15 @@ public class MainActivity extends AppCompatActivity implements MsgFromConexao{
         Intent intent = new Intent(this, ListaEstabelecimentosActivity.class);
         intent.putExtra("LISTAESTABELECIMENTOS",(Serializable) listaDeEstabelecimentos);
         startActivity(intent);
+    }
+
+    @Override
+    public void passarEstabelecimento(Estabelecimento estabelecimento) {
+
+    }
+
+    @Override
+    public void passarListaDeEspecialidades(List<Especialidade> especialidades) {
+        
     }
 }

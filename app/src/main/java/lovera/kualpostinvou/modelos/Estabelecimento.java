@@ -26,7 +26,7 @@ public class Estabelecimento implements Serializable{
     private String tipoUnidadeCnes;
     private String categoriaUnidade;
     private String logradouro;
-    private int numero;
+    private String numero;
     private String bairro;
     private String cidade;
     private String uf;
@@ -196,11 +196,11 @@ public class Estabelecimento implements Serializable{
         this.logradouro = logradouro;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
