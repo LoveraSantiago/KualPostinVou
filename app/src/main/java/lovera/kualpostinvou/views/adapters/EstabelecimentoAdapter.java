@@ -64,7 +64,9 @@ public class EstabelecimentoAdapter extends BaseAdapter{
         setTextToLabel(estabelecimento.getRetencao(), R.id.lblRetencao, layout);
         setTextToLabel(estabelecimento.getFluxoClientela(), R.id.lblFlxClientela, layout);
         setTextToLabel(estabelecimento.getOrigemGeografica(), R.id.lblOrigGeograf, layout);
-
+        setTextToLabel(estabelecimento.getTemAtendimentoAmbulatorial(), R.id.lblAtendAmbulat, layout);
+        setTextToLabel(estabelecimento.getTemAtendimentoUrgencia(), R.id.lblAtendEmgc, layout);
+        setTextToLabel(estabelecimento.getTemCentroCirurgico(), R.id.lblCCirurg, layout);
         return layout;
     }
 
