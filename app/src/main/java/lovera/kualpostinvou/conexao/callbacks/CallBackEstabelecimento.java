@@ -1,7 +1,5 @@
 package lovera.kualpostinvou.conexao.callbacks;
 
-import java.util.List;
-
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import retrofit.Callback;
