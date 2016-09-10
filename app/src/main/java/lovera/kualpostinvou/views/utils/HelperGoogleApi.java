@@ -1,15 +1,13 @@
 package lovera.kualpostinvou.views.utils;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -22,10 +20,18 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 
+import java.io.Serializable;
+
 import lovera.kualpostinvou.MainActivity;
 import lovera.kualpostinvou.modelos.Localizacao;
 
-public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
+public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, Serializable{
+
+    public static HelperGoogleApi helperStatic;
+
+    public static int USUARIO_ESCOLHENDO_OPCAO = 0;
+    public static int DISPOSITIVO_NAO_TEM_GPS = 1;
+    public static int BUSCAR_GEOLOCALIZACAO = 2;
 
     private final GoogleApiClient mGoogleApiClient;
     private final MainActivity activity;
@@ -42,9 +48,19 @@ public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, Goo
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
+
+        helperStatic = this;
     }
 
-    private boolean temLastLocation(){
+    public GoogleApiClient getmGoogleApiClient() {
+        return mGoogleApiClient;
+    }
+
+    public static boolean staticTemLastLocation(){
+        return helperStatic.temLastLocation();
+    }
+
+    public boolean temLastLocation(){
         if (ActivityCompat.checkSelfPermission(this.activity, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this.activity, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return false;
@@ -58,67 +74,6 @@ public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, Goo
         return false;
     }
 
-    //TODO ver se tem alguma forma de desligar esse cara.
-    private void forceLocationRequest(){
-        LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(5000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setExpirationDuration(50000);
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest);
-
-        final PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
-        result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
-
-            @Override
-            public void onResult(@NonNull LocationSettingsResult locationSettingsResult) {
-                final Status status = locationSettingsResult.getStatus();
-                switch (status.getStatusCode()) {
-                    case LocationSettingsStatusCodes.SUCCESS:
-                        tente5Vezes();
-                        break;
-                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                        try{
-                            status.startResolutionForResult(activity, activity.RESULT_FROM_HELPERGOOGLE);
-                        }
-                        catch (IntentSender.SendIntentException e) {
-                            // Ignore the error.
-                        }
-                        break;
-                    case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                        break;
-                }
-            }
-        });
-    }
-
-    private boolean tente5Vezes(){
-        final Handler handler = new Handler();
-        final Runnable runnable = new Runnable() {
-
-            @Override
-            public void run() {
-                temLastLocation();
-            }
-        };
-
-        for(int i = 0; i < 5; i++){
-            if(!temLastLocation()){
-                handler.postDelayed(runnable, 1000);
-            }
-            else return true;
-        }
-        return false;
-    }
-
-    public Localizacao getLocalizacao() throws Exception {
-        if(temLastLocation()) return this.localizacao;
-
-        forceLocationRequest();
-        if(temLastLocation()) return this.localizacao;
-        throw new Exception();
-    }
-
     public void connect(){
         this.mGoogleApiClient.connect();
     }
@@ -129,7 +84,21 @@ public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, Goo
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+        if(temLastLocation()){
+            this.activity.passarLocalizacao(this.localizacao);
+        }
+        else{
+            popupLigarGps();
+        }
+    }
 
+    public void passarLocalizacao(){
+        this.activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                activity.passarLocalizacao(localizacao);
+            }
+        });
     }
 
     @Override
@@ -140,5 +109,48 @@ public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, Goo
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    //TODO ver se tem alguma forma de desligar esse cara.
+    private void popupLigarGps(){
+        LocationRequest mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setExpirationDuration(50000);
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest
+                                                        .Builder()
+                                                        .addLocationRequest(mLocationRequest);
+
+        final PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(this.mGoogleApiClient, builder.build());
+        result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
+
+            @Override
+            public void onResult(@NonNull LocationSettingsResult locationSettingsResult) {
+                final Status status = locationSettingsResult.getStatus();
+                Log.i("LocationSettings", status.getStatusCode() +"");
+                switch (status.getStatusCode()) {
+                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+
+                        try{
+                            status.startResolutionForResult(activity, USUARIO_ESCOLHENDO_OPCAO);
+                        }
+                        catch (IntentSender.SendIntentException e) {
+                        }
+                        break;
+                    case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                        try{
+                            status.startResolutionForResult(activity, DISPOSITIVO_NAO_TEM_GPS);
+                        }
+                        catch (IntentSender.SendIntentException e) {
+                        }
+                        break;
+                }
+            }
+        });
+    }
+
+    public Localizacao getLocalizacao() {
+        return localizacao;
     }
 }

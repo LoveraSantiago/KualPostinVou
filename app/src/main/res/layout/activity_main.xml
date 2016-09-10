@@ -114,6 +114,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Rest Consumer Estabelecimentos Geolocalizacao"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -125,6 +131,7 @@
                 android:id="@+id/lblLatitude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="-"
                 android:layout_weight="1"/>
 
             <TextView
@@ -137,7 +144,9 @@
                 android:id="@+id/lblLongitude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="-"
                 android:layout_weight="1"/>
+
 
         </LinearLayout>
 
@@ -221,11 +230,29 @@
 
         </LinearLayout>
 
-        <Button
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Buscar"
-            android:onClick="consumirEstabelecimentosGeolocalizacao"/>
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buscar"
+                android:onClick="consumirEstabelecimentosGeolocalizacao"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="info:"/>
+
+            <TextView
+                android:id="@+id/infoGps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 </RelativeLayout>

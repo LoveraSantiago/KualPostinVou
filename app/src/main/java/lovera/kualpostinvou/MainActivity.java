@@ -3,6 +3,7 @@ package lovera.kualpostinvou;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -20,13 +21,12 @@ import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
+import lovera.kualpostinvou.views.services.LocalizacaoService;
 import lovera.kualpostinvou.views.utils.HelperGoogleApi;
 
 public class MainActivity extends AppCompatActivity implements MsgFromConexao {
 
     private HelperGoogleApi helperGoogle;
-
-    public static final int RESULT_FROM_HELPERGOOGLE = 0;
 
     private SeekBar seekBar;
     private Spinner spinner;
@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity implements MsgFromConexao {
         setContentView(R.layout.activity_main);
 
         this.helperGoogle = new HelperGoogleApi(this);
-        inicialiarSeekBar();
-        inicialiarSpinner();
+        inicializarSeekBar();
+        inicializarSpinner();
     }
 
     @Override
@@ -55,13 +55,29 @@ public class MainActivity extends AppCompatActivity implements MsgFromConexao {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == RESULT_FROM_HELPERGOOGLE){
-            try {
-                this.helperGoogle.getLocalizacao();
-            } catch (Exception e) {
-                e.printStackTrace();
+//        if(requestCode == HelperGoogleApi.BUSCAR_GEOLOCALIZACAO){
+//            Intent intent = new Intent(this, LocalizacaoService.class);
+//            this.startService(intent);
+//        }
+        if(requestCode == HelperGoogleApi.USUARIO_ESCOLHENDO_OPCAO){
+            switch (resultCode){
+                case MainActivity.RESULT_OK:
+                    Intent intent = new Intent(this, LocalizacaoService.class);
+                    this.startService(intent);
+                    break;
+                case MainActivity.RESULT_CANCELED:
+                    setTextToLabel("Usuario não permitiu gps", R.id.infoGps);
+                    break;
             }
+
         }
+        else if(requestCode == HelperGoogleApi.DISPOSITIVO_NAO_TEM_GPS){
+            setTextToLabel("Dispositivo não tem gps", R.id.infoGps);
+        }
+    }
+
+    public void falhaDeLocalizacao(){
+        setTextToLabel("Posicao não localizada", R.id.infoGps);
     }
 
     public void consumirEstabelecimentos(View view) {
@@ -75,21 +91,18 @@ public class MainActivity extends AppCompatActivity implements MsgFromConexao {
     }
 
     public void consumirEstabelecimentosGeolocalizacao(View view){
-        try {
-            Localizacao localizacao = this.helperGoogle.getLocalizacao();
-            setTextToLabel(localizacao.getLatitude(), R.id.lblLatitude);
-            setTextToLabel(localizacao.getLongitude(), R.id.lblLongitude);
-            int paginas = Integer.parseInt(getStringFromIptText(R.id.edtPaginas2));
-            int qtdd = Integer.parseInt(getStringFromIptText(R.id.edtQtd2));
-            int raio = Integer.parseInt(getStringFromIptText(R.id.lblSeekBar));
-            String categoria = this.spinner.getSelectedItem().toString();
 
-            ConexaoSaude conexaoSaude = new ConexaoSaude(this);
-            conexaoSaude.getEstabelecimentos(localizacao.getLatitude(), localizacao.getLongitude(), raio, null, categoria, null, paginas, qtdd);
+        double latitude = Double.parseDouble(getStringFromIptText(R.id.lblLatitude));
+        double longitude = Double.parseDouble(getStringFromIptText(R.id.lblLongitude));
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        int paginas = Integer.parseInt(getStringFromIptText(R.id.edtPaginas2));
+        int qtdd = Integer.parseInt(getStringFromIptText(R.id.edtQtd2));
+        int raio = Integer.parseInt(getStringFromIptText(R.id.lblSeekBar));
+        String categoria = this.spinner.getSelectedItem().toString();
+
+        ConexaoSaude conexaoSaude = new ConexaoSaude(this);
+        conexaoSaude.getEstabelecimentos(latitude, longitude, raio, null, categoria, null, paginas, qtdd);
+
     }
 
     public String getStringFromIptText(int id) {
@@ -114,6 +127,11 @@ public class MainActivity extends AppCompatActivity implements MsgFromConexao {
 
     }
 
+    public void passarLocalizacao(Localizacao localizacao){
+        setTextToLabel(localizacao.getLatitude(), R.id.lblLatitude);
+        setTextToLabel(localizacao.getLongitude(), R.id.lblLongitude);
+    }
+
     public void setTextToLabel(String texto, int id){
         TextView lblCodigo = (TextView) findViewById(id);
         lblCodigo.setText(texto);
@@ -127,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements MsgFromConexao {
         setTextToLabel(String.valueOf(texto), id);
     }
 
-    private void inicialiarSeekBar(){
+    private void inicializarSeekBar(){
         this.seekBar = (SeekBar) findViewById(R.id.seek_bar);
         this.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
@@ -151,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements MsgFromConexao {
         });
     }
 
-    private void inicialiarSpinner(){
+    private void inicializarSpinner(){
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Categoria.getTextos());
         this.spinner = (Spinner) findViewById(R.id.spinner);
         this.spinner.setAdapter(adapter);
