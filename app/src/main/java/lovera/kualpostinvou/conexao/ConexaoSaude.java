@@ -57,10 +57,10 @@ public class ConexaoSaude {
      * @param raio * Obrigatório
      */
     public void getEstabelecimentos(double latitude, double longitude, int raio, String texto, String categoria, String campos, int pagina, int quantidade){
-        String infLongLatRaio = helper.factoryString_LongLatRaio(latitude, longitude, raio);
+//        String infLongLatRaio = helper.factoryString_LongLatRaio(latitude, longitude, raio);
         Map<String, String> mapParams = helper.factoryMap_EndP_Estabelecimentos(texto, categoria, campos, pagina, quantidade);
 
-        Call<List<Estabelecimento>> call = this.endpointSaude.getEstabelecimentos(infLongLatRaio, mapParams);
+        Call<List<Estabelecimento>> call = this.endpointSaude.getEstabelecimentos(String.valueOf(latitude), String.valueOf(longitude), String.valueOf(raio) , mapParams);
         call.enqueue(new CallBackEstabelecimentos(this.msg));
     }
 

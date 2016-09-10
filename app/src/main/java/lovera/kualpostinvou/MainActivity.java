@@ -92,17 +92,22 @@ public class MainActivity extends AppCompatActivity implements MsgFromConexao {
 
     public void consumirEstabelecimentosGeolocalizacao(View view){
 
-        double latitude = Double.parseDouble(getStringFromIptText(R.id.lblLatitude));
-        double longitude = Double.parseDouble(getStringFromIptText(R.id.lblLongitude));
+        double latitude = Double.parseDouble(getStringFromLabelText(R.id.lblLatitude));
+        double longitude = Double.parseDouble(getStringFromLabelText(R.id.lblLongitude));
 
         int paginas = Integer.parseInt(getStringFromIptText(R.id.edtPaginas2));
         int qtdd = Integer.parseInt(getStringFromIptText(R.id.edtQtd2));
-        int raio = Integer.parseInt(getStringFromIptText(R.id.lblSeekBar));
+        int raio = Integer.parseInt(getStringFromLabelText(R.id.lblSeekBar));
         String categoria = this.spinner.getSelectedItem().toString();
 
         ConexaoSaude conexaoSaude = new ConexaoSaude(this);
         conexaoSaude.getEstabelecimentos(latitude, longitude, raio, null, categoria, null, paginas, qtdd);
 
+    }
+
+    public String getStringFromLabelText(int id){
+        TextView editText = (TextView) findViewById(id);
+        return editText.getText().toString();
     }
 
     public String getStringFromIptText(int id) {

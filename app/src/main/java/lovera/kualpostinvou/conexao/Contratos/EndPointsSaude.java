@@ -15,8 +15,11 @@ public interface EndPointsSaude {
     @GET("rest/estabelecimentos")
     Call<List<Estabelecimento>> getEstabelecimentos(@QueryMap Map<String, String> params);
 
-    @GET("rest/estabelecimentos/{infLongLatRaio}")
-    Call<List<Estabelecimento>> getEstabelecimentos(@Path("infLongLatRaio") String infLongLatRario, @QueryMap Map<String, String> params);
+    @GET("rest/estabelecimentos/latitude/{infLatitude}/longitude/{infLongitude}/raio/{infRaio}")
+    Call<List<Estabelecimento>> getEstabelecimentos(@Path("infLatitude") String infLatitude,
+                                                    @Path("infLongitude")   String infLongitude,
+                                                    @Path("infRaio")        String infRaio,
+                                                    @QueryMap Map<String, String> params);
 
     @GET("rest/estabelecimentos/unidade/{codUnidade}")
     Call<Estabelecimento> getEstabelecimento(@Path("codUnidade") String codUnidade);
