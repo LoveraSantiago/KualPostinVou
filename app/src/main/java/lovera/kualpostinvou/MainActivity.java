@@ -20,6 +20,7 @@ import lovera.kualpostinvou.modelos.Categoria;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
+import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
 import lovera.kualpostinvou.views.services.LocalizacaoService;
 import lovera.kualpostinvou.views.utils.HelperGoogleApi;
@@ -125,6 +126,11 @@ public class MainActivity extends AppCompatActivity implements MsgFromConexao {
 
     @Override
     public void passarListaDeEspecialidades(List<Especialidade> especialidades) {
+
+    }
+
+    @Override
+    public void passarListaDeProfissionais(List<Profissional> profissionais) {
 
     }
 
