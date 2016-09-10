@@ -55,10 +55,6 @@ public class MainActivity extends AppCompatActivity implements MsgFromConexao {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if(requestCode == HelperGoogleApi.BUSCAR_GEOLOCALIZACAO){
-//            Intent intent = new Intent(this, LocalizacaoService.class);
-//            this.startService(intent);
-//        }
         if(requestCode == HelperGoogleApi.USUARIO_ESCOLHENDO_OPCAO){
             switch (resultCode){
                 case MainActivity.RESULT_OK:

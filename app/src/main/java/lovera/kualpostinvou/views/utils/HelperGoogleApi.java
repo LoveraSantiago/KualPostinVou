@@ -27,11 +27,10 @@ import lovera.kualpostinvou.modelos.Localizacao;
 
 public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, Serializable{
 
-    public static HelperGoogleApi helperStatic;
+    private static HelperGoogleApi helperGoogleUnicaInstancia;
 
     public static int USUARIO_ESCOLHENDO_OPCAO = 0;
-    public static int DISPOSITIVO_NAO_TEM_GPS = 1;
-    public static int BUSCAR_GEOLOCALIZACAO = 2;
+    public static int DISPOSITIVO_NAO_TEM_GPS  = 1;
 
     private final GoogleApiClient mGoogleApiClient;
     private final MainActivity activity;
@@ -49,15 +48,7 @@ public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, Goo
                 .addApi(LocationServices.API)
                 .build();
 
-        helperStatic = this;
-    }
-
-    public GoogleApiClient getmGoogleApiClient() {
-        return mGoogleApiClient;
-    }
-
-    public static boolean staticTemLastLocation(){
-        return helperStatic.temLastLocation();
+        helperGoogleUnicaInstancia = this;
     }
 
     public boolean temLastLocation(){
@@ -150,7 +141,7 @@ public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, Goo
         });
     }
 
-    public Localizacao getLocalizacao() {
-        return localizacao;
+    public static HelperGoogleApi getHelperGoogleUnicaInstancia(){
+        return helperGoogleUnicaInstancia;
     }
 }
