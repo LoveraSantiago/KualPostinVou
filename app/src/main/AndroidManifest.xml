@@ -7,19 +7,24 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
+        android:name=".Aplicacao"
         android:allowBackup="true"
         android:icon="@drawable/logo_icn2"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity" >
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
+        <activity android:name=".MainActivity"
+                  android:theme="@style/no_actionbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
+        <activity android:name=".views.TempActivity"/>
         <activity android:name=".views.ListaEstabelecimentosActivity"/>
 
         <service android:name="lovera.kualpostinvou.views.services.LocalizacaoService"/>

@@ -22,8 +22,8 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 
 import java.io.Serializable;
 
-import lovera.kualpostinvou.MainActivity;
 import lovera.kualpostinvou.modelos.Localizacao;
+import lovera.kualpostinvou.views.TempActivity;
 
 public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, Serializable{
 
@@ -33,11 +33,11 @@ public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, Goo
     public static int DISPOSITIVO_NAO_TEM_GPS  = 1;
 
     private final GoogleApiClient mGoogleApiClient;
-    private final MainActivity activity;
+    private final TempActivity activity;
 
     private final Localizacao localizacao;
 
-    public HelperGoogleApi(MainActivity activity) {
+    public HelperGoogleApi(TempActivity activity) {
         this.activity = activity;
 
         this.localizacao = new Localizacao();
