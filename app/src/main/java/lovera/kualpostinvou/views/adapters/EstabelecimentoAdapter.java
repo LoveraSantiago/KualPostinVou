@@ -7,9 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import lovera.kualpostinvou.R;
@@ -48,7 +45,7 @@ public class EstabelecimentoAdapter extends BaseAdapter{
         View layout = null;
 
         if(convertView == null){
-            layout = inflater.inflate(R.layout.estabelecimento_linha_lista, null);
+            layout = inflater.inflate(R.layout.linha_lista_estabelecimento, null);
         }
         else{
             layout = convertView;

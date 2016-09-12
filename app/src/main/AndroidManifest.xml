@@ -12,12 +12,11 @@
         android:icon="@drawable/logo_icn2"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
-        <activity android:name=".MainActivity"
-                  android:theme="@style/no_actionbar">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -26,6 +25,7 @@
 
         <activity android:name=".views.TempActivity"/>
         <activity android:name=".views.ListaEstabelecimentosActivity"/>
+        <activity android:name=".views.PrincipalActivity"/>
 
         <service android:name="lovera.kualpostinvou.views.services.LocalizacaoService"/>
     </application>

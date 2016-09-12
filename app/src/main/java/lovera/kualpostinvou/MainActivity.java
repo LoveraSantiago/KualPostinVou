@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import lovera.kualpostinvou.views.PrincipalActivity;
 import lovera.kualpostinvou.views.TempActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         this.layout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Intent intent = new Intent(MainActivity.this, TempActivity.class);
+                Intent intent = new Intent(MainActivity.this, PrincipalActivity.class);
                 startActivity(intent);
                 finish();
                 return false;
