@@ -27,6 +27,8 @@ public class PrincipalActivity extends AppCompatActivity{
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
 
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,16 +37,25 @@ public class PrincipalActivity extends AppCompatActivity{
 
         setContentView(R.layout.activity_principal);
 
+        this.toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(this.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         this.mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         this.mDrawerList = (ListView) findViewById(R.id.left_drawer);
         this.mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.linha_lista_navigationdrawer,new String[]{"A", "B", "C"}));
         this.mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        this.mDrawerToggle = new ActionBarDrawerToggleFilha(this, this.mDrawerLayout, R.string.drawer_open, R.string.drawer_close);
+        this.mDrawerToggle = new ActionBarDrawerToggleFilha(this, this.mDrawerLayout, this.toolbar, R.string.drawer_open, R.string.drawer_close);
         this.mDrawerLayout.addDrawerListener(this.mDrawerToggle);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        this.mDrawerLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mDrawerToggle.syncState();
+            }
+        });
     }
 
     private void selectItem(int position) {
@@ -63,7 +74,7 @@ public class PrincipalActivity extends AppCompatActivity{
     @Override
     public void setTitle(CharSequence title) {
         this.titulo = title.toString();
-        getActionBar().setTitle(this.titulo);
+        getSupportActionBar().setTitle(this.titulo);
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -75,22 +86,22 @@ public class PrincipalActivity extends AppCompatActivity{
 
     private class ActionBarDrawerToggleFilha extends ActionBarDrawerToggle {
 
-
-        public ActionBarDrawerToggleFilha(Activity activity, DrawerLayout drawerLayout, @StringRes int openDrawerContentDescRes, @StringRes int closeDrawerContentDescRes) {
-            super(activity, drawerLayout, openDrawerContentDescRes, closeDrawerContentDescRes);
+        public ActionBarDrawerToggleFilha(Activity activity, DrawerLayout drawerLayout, Toolbar toolbar, @StringRes int openDrawerContentDescRes, @StringRes int closeDrawerContentDescRes) {
+            super(activity, drawerLayout, toolbar, openDrawerContentDescRes, closeDrawerContentDescRes);
         }
 
         @Override
         public void onDrawerClosed(View drawerView) {
             super.onDrawerClosed(drawerView);
-            getActionBar().setTitle(titulo);
+            getSupportActionBar().setTitle(titulo);
+            invalidateOptionsMenu();
         }
 
         @Override
         public void onDrawerOpened(View drawerView) {
             super.onDrawerOpened(drawerView);
-            super.onDrawerOpened(drawerView);
-            getActionBar().setTitle(tituloOriginal);
+            getSupportActionBar().setTitle(tituloOriginal);
+            invalidateOptionsMenu();
         }
     }
 }
