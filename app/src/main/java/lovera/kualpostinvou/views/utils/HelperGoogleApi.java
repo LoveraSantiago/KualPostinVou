@@ -23,7 +23,6 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import java.io.Serializable;
 
 import lovera.kualpostinvou.modelos.Localizacao;
-import lovera.kualpostinvou.views.TempActivity;
 
 public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, Serializable{
 

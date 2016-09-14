@@ -23,7 +23,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".views.TempActivity"/>
         <activity android:name=".views.ListaEstabelecimentosActivity"/>
         <activity android:name=".views.PrincipalActivity"/>
 

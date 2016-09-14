@@ -14,12 +14,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.views.adapters.MyAdapter;
-import lovera.kualpostinvou.views.fragments.PlanetFragment;
+import lovera.kualpostinvou.views.fragments.TempFragment;
 
 public class PrincipalActivity extends AppCompatActivity{
 
@@ -76,10 +75,12 @@ public class PrincipalActivity extends AppCompatActivity{
                 mDrawerToggle.syncState();
             }
         });
+
+        selectItem(0);
     }
 
     private void selectItem(int position) {
-        Fragment fragment = new PlanetFragment();
+        Fragment fragment = new TempFragment();
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()

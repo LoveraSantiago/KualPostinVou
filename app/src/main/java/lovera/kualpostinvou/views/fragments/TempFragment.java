@@ -1,9 +1,12 @@
-package lovera.kualpostinvou.views;
+package lovera.kualpostinvou.views.fragments;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.SeekBar;
@@ -21,7 +24,6 @@ import com.facebook.login.widget.LoginButton;
 import java.io.Serializable;
 import java.util.List;
 
-import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
@@ -30,11 +32,12 @@ import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Profissional;
+import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
 import lovera.kualpostinvou.views.redes_sociais.facebook.Facebook_Coisas;
 import lovera.kualpostinvou.views.services.LocalizacaoService;
 import lovera.kualpostinvou.views.utils.HelperGoogleApi;
 
-public class TempActivity extends AppCompatActivity implements MsgFromConexao{
+public class TempFragment extends Fragment implements MsgFromConexao{
 
     private HelperGoogleApi helperGoogle;
 
@@ -43,47 +46,47 @@ public class TempActivity extends AppCompatActivity implements MsgFromConexao{
 
     private LoginButton loginButton;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.temp);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.temp, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         this.helperGoogle = new HelperGoogleApi(this);
         inicializarSeekBar();
         inicializarSpinner();
         inicializarBtnFacebook();
+
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         this.helperGoogle.connect();
         super.onStart();
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         this.helperGoogle.disconnect();
         super.onStop();
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == HelperGoogleApi.USUARIO_ESCOLHENDO_OPCAO){
-            switch (resultCode){
-                case TempActivity.RESULT_OK:
-                    Intent intent = new Intent(this, LocalizacaoService.class);
-                    this.startService(intent);
-                    break;
-                case TempActivity.RESULT_CANCELED:
-                    setTextToLabel("Usuario não permitiu gps", R.id.infoGps);
-                    break;
+            if(resultCode == getActivity().RESULT_OK){
+                Intent intent = new Intent(getActivity(), LocalizacaoService.class);
+                getActivity().startService(intent);
+            }
+            else if(resultCode == getActivity().RESULT_CANCELED){
+                setTextToLabel("Usuario não permitiu gps", R.id.infoGps);
             }
 
         }
-        else if(requestCode == HelperGoogleApi.DISPOSITIVO_NAO_TEM_GPS){
-            setTextToLabel("Dispositivo não tem gps", R.id.infoGps);
-        }
-
         Facebook_Coisas.getFaceCoisasUnicaInstancia().getCallbackManager().onActivityResult(requestCode, resultCode, data);
     }
 
@@ -99,21 +102,6 @@ public class TempActivity extends AppCompatActivity implements MsgFromConexao{
 
         ConexaoSaude conexaoSaude = new ConexaoSaude(this);
         conexaoSaude.getEstabelecimentos(municipio, uf, null, paginas, qtdd);
-    }
-
-    public void consumirEstabelecimentosGeolocalizacao(View view){
-
-        double latitude = Double.parseDouble(getStringFromLabelText(R.id.lblLatitude));
-        double longitude = Double.parseDouble(getStringFromLabelText(R.id.lblLongitude));
-
-        int paginas = Integer.parseInt(getStringFromIptText(R.id.edtPaginas2));
-        int qtdd = Integer.parseInt(getStringFromIptText(R.id.edtQtd2));
-        int raio = Integer.parseInt(getStringFromLabelText(R.id.lblSeekBar));
-        String categoria = this.spinner.getSelectedItem().toString();
-
-        ConexaoSaude conexaoSaude = new ConexaoSaude(this);
-        conexaoSaude.getEstabelecimentos(latitude, longitude, raio, null, categoria, null, paginas, qtdd);
-
     }
 
     public String getStringFromLabelText(int id){
@@ -227,5 +215,4 @@ public class TempActivity extends AppCompatActivity implements MsgFromConexao{
     public void logoutFacebook(View view){
         LoginManager.getInstance().logOut();
     }
-
 }
