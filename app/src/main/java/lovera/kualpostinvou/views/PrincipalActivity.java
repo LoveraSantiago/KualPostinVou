@@ -9,6 +9,8 @@ import android.support.annotation.StringRes;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import lovera.kualpostinvou.R;
+import lovera.kualpostinvou.views.adapters.MyAdapter;
 import lovera.kualpostinvou.views.fragments.PlanetFragment;
 
 public class PrincipalActivity extends AppCompatActivity{
@@ -24,10 +27,20 @@ public class PrincipalActivity extends AppCompatActivity{
     private String tituloOriginal;
 
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
+//    private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
 
     private Toolbar toolbar;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    RecyclerView.LayoutManager mLayoutManager;
+
+    private String TITLES[] = {"Home","Events","Mail","Shop","Travel"};
+    int ICONS[] = {R.drawable.home2, R.drawable.icon_event_details,R.drawable.mail_2,R.drawable.shop,R.drawable.travel};
+    private String nome = "Santuga Lovera";
+    private String email = "santiago.lovera@gmail.com";
+    private int profile = R.drawable.icon_people_128;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,10 +55,17 @@ public class PrincipalActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        this.mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        this.mRecyclerView.setHasFixedSize(true);
+        this.mAdapter = new MyAdapter(TITLES, ICONS, nome, email, profile);
+        this.mRecyclerView.setAdapter(this.mAdapter);
+        this.mLayoutManager = new LinearLayoutManager(this);
+        this.mRecyclerView.setLayoutManager(this.mLayoutManager);
+
         this.mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        this.mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        this.mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.linha_lista_navigationdrawer,new String[]{"A", "B", "C"}));
-        this.mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+//        this.mDrawerList = (ListView) findViewById(R.id.left_drawer);
+//        this.mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.linha_lista_navigationdrawer,new String[]{"A", "B", "C"}));
+//        this.mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         this.mDrawerToggle = new ActionBarDrawerToggleFilha(this, this.mDrawerLayout, this.toolbar, R.string.drawer_open, R.string.drawer_close);
         this.mDrawerLayout.addDrawerListener(this.mDrawerToggle);
@@ -66,9 +86,9 @@ public class PrincipalActivity extends AppCompatActivity{
                        .replace(R.id.content_frame, fragment)
                        .commit();
 
-        this.mDrawerList.setItemChecked(position, true);
+//        this.mDrawerList.setItemChecked(position, true);
         setTitle("Pos" + position);
-        this.mDrawerLayout.closeDrawer(this.mDrawerList);
+//        this.mDrawerLayout.closeDrawer(this.mDrawerList);
     }
 
     @Override
