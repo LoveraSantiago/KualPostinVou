@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import lovera.kualpostinvou.R;
+import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
@@ -27,6 +28,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private Context contextOut;
     private View last;
+    private MsgFromNavigationDrawer msg;
 
     // Creating a ViewHolder which extends the RecyclerView View Holder
     // ViewHolder are used to to store the inflated views in order to recycle them
@@ -40,6 +42,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         TextView Name;
         TextView email;
         Context context;
+
 
         public ViewHolder(View itemView, int ViewType, Context c) {                 // Creating ViewHolder Constructor with View and viewType As a parameter
             super(itemView);
@@ -73,14 +76,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             if(last != null){
                 last.setBackgroundColor(Color.WHITE);
             }
-
             v.setBackgroundColor(Color.RED);
+            msg.selectItem(getAdapterPosition());
             Toast.makeText(context,"The Item Clicked is: "+getAdapterPosition(),Toast.LENGTH_SHORT).show();
             last = v;
         }
     }
 
-    public MyAdapter(String Titles[],int Icons[],String Name,String Email, int Profile, Context context){ // MyAdapter Constructor with titles and icons parameter
+    public MyAdapter(String Titles[],int Icons[],String Name,String Email, int Profile, Context context, MsgFromNavigationDrawer msg){ // MyAdapter Constructor with titles and icons parameter
         // titles, icons, name, email, profile pic are passed from the main activity as we
         mNavTitles = Titles;                //have seen earlier
         mIcons = Icons;
@@ -89,7 +92,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         profile = Profile;                     //here we assign those passed values to the values we declared here
         //in adapter
         this.contextOut = context;
-
+        this.msg = msg;
 
     }
 

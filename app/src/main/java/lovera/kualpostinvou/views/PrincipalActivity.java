@@ -18,10 +18,11 @@ import android.widget.ListView;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.views.adapters.MyAdapter;
+import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 import lovera.kualpostinvou.views.redes_sociais.google.Google_Coisas;
 
-public class PrincipalActivity extends AppCompatActivity{
+public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer{
 
     private String titulo;
     private String tituloOriginal;
@@ -56,7 +57,7 @@ public class PrincipalActivity extends AppCompatActivity{
 
         this.mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         this.mRecyclerView.setHasFixedSize(true);
-        this.mAdapter = new MyAdapter(TITLES, ICONS, nome, email, profile, this);
+        this.mAdapter = new MyAdapter(TITLES, ICONS, nome, email, profile, this, this);
         this.mRecyclerView.setAdapter(this.mAdapter);
         this.mLayoutManager = new LinearLayoutManager(this);
         this.mRecyclerView.setLayoutManager(this.mLayoutManager);
@@ -87,7 +88,8 @@ public class PrincipalActivity extends AppCompatActivity{
         super.onStop();
     }
 
-    private void selectItem(int position) {
+    @Override
+    public void selectItem(int position) {
         Fragment fragment = new FragRedesSociais();
 
         FragmentManager fragmentManager = getFragmentManager();
@@ -96,6 +98,7 @@ public class PrincipalActivity extends AppCompatActivity{
                        .commit();
 
         setTitle("Pos" + position);
+        this.mDrawerLayout.closeDrawer(this.mRecyclerView);
     }
 
     @Override
