@@ -43,7 +43,9 @@ public class LocalizacaoService extends Service{
 
         @Override
         public void run() {
-            final HelperGeolocalizacao helper = HelperGeolocalizacao.getHelperGoogleUnicaInstancia();
+//            final HelperGeolocalizacao helper = HelperGeolocalizacao.getHelperGoogleUnicaInstancia();
+            // TODO: 14/09/2016 repensar responsabilidade de geolocalizacao
+            final HelperGeolocalizacao helper = null;
             while(!helper.temLastLocation() && count < 10){
                 try{
                     Thread.sleep(1500);

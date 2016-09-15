@@ -79,29 +79,15 @@ public class TempFragment extends Fragment implements MsgFromConexao{
         setTextToLabel("Posicao não localizada", R.id.infoGps);
     }
 
-    public void consumirEstabelecimentos(View view) {
-        String municipio = getStringFromIptText(R.id.edtMunicipio);
-        String uf = getStringFromIptText(R.id.edtUf);
-        int paginas = Integer.parseInt(getStringFromIptText(R.id.edtPaginas));
-        int qtdd = Integer.parseInt(getStringFromIptText(R.id.edtQtd));
-
-        ConexaoSaude conexaoSaude = new ConexaoSaude(this);
-        conexaoSaude.getEstabelecimentos(municipio, uf, null, paginas, qtdd);
-    }
 
     public String getStringFromLabelText(int id){
-        TextView editText = (TextView) findViewById(id);
-        return editText.getText().toString();
-    }
-
-    public String getStringFromIptText(int id) {
-        EditText editText = (EditText) findViewById(id);
+        TextView editText = (TextView) getView().findViewById(id);
         return editText.getText().toString();
     }
 
     @Override
     public void passarListaDeEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos) {
-        Intent intent = new Intent(this, ListaEstabelecimentosActivity.class);
+        Intent intent = new Intent(getActivity(), ListaEstabelecimentosActivity.class);
         intent.putExtra("LISTAESTABELECIMENTOS", (Serializable) listaDeEstabelecimentos);
         startActivity(intent);
     }
@@ -127,7 +113,7 @@ public class TempFragment extends Fragment implements MsgFromConexao{
     }
 
     public void setTextToLabel(String texto, int id){
-        TextView lblCodigo = (TextView) findViewById(id);
+        TextView lblCodigo = (TextView) getView().findViewById(id);
         lblCodigo.setText(texto);
     }
 
@@ -140,7 +126,7 @@ public class TempFragment extends Fragment implements MsgFromConexao{
     }
 
     private void inicializarSeekBar(){
-        this.seekBar = (SeekBar) findViewById(R.id.seek_bar);
+        this.seekBar = (SeekBar) getView().findViewById(R.id.seek_bar);
         this.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             int valor = 1;
@@ -164,8 +150,8 @@ public class TempFragment extends Fragment implements MsgFromConexao{
     }
 
     private void inicializarSpinner(){
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Categoria.getTextos());
-        this.spinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Categoria.getTextos());
+        this.spinner = (Spinner) getView().findViewById(R.id.spinner);
         this.spinner.setAdapter(adapter);
     }
 
@@ -177,7 +163,7 @@ public class TempFragment extends Fragment implements MsgFromConexao{
             setTextToLabel("Sim", R.id.lblStatusFaceLogado);
         }
 
-        this.loginButton = (LoginButton) findViewById(R.id.faceLoginButton);
+        this.loginButton = (LoginButton) getView().findViewById(R.id.faceLoginButton);
         this.loginButton.registerCallback(Facebook_Coisas.getFaceCoisasUnicaInstancia().getCallbackManager(),
                 new FacebookCallback<LoginResult>() {
                     @Override
@@ -187,12 +173,12 @@ public class TempFragment extends Fragment implements MsgFromConexao{
 
                     @Override
                     public void onCancel() {
-                        Toast.makeText(TempActivity.this, "Facebook cancelado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Facebook cancelado", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onError(FacebookException error) {
-                        Toast.makeText(TempActivity.this, "Facebook erro", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Facebook erro", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
