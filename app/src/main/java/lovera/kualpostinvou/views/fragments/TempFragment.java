@@ -60,19 +60,6 @@ public class TempFragment extends Fragment implements MsgFromConexao{
         inicializarSeekBar();
         inicializarSpinner();
         inicializarBtnFacebook();
-
-    }
-
-    @Override
-    public void onStart() {
-        this.helperGoogle.connect();
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        this.helperGoogle.disconnect();
-        super.onStop();
     }
 
     @Override

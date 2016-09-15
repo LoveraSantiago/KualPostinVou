@@ -19,6 +19,7 @@ import android.widget.ListView;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.views.adapters.MyAdapter;
 import lovera.kualpostinvou.views.fragments.TempFragment;
+import lovera.kualpostinvou.views.redes_sociais.google.Google_Coisas;
 
 public class PrincipalActivity extends AppCompatActivity{
 
@@ -77,6 +78,18 @@ public class PrincipalActivity extends AppCompatActivity{
         });
 
         selectItem(0);
+    }
+
+    @Override
+    protected void onStart() {
+        Google_Coisas.getGoogleCoisasUnicaInstancia().connect();
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        Google_Coisas.getGoogleCoisasUnicaInstancia().disconnect();
+        super.onStop();
     }
 
     private void selectItem(int position) {

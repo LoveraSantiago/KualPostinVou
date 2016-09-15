@@ -24,7 +24,7 @@ import java.io.Serializable;
 
 import lovera.kualpostinvou.modelos.Localizacao;
 
-public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, Serializable{
+public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     private static HelperGoogleApi helperGoogleUnicaInstancia;
 
