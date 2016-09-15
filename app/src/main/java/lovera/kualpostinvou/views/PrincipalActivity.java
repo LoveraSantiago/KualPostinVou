@@ -18,7 +18,7 @@ import android.widget.ListView;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.views.adapters.MyAdapter;
-import lovera.kualpostinvou.views.fragments.TempFragment;
+import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 import lovera.kualpostinvou.views.redes_sociais.google.Google_Coisas;
 
 public class PrincipalActivity extends AppCompatActivity{
@@ -93,7 +93,7 @@ public class PrincipalActivity extends AppCompatActivity{
     }
 
     private void selectItem(int position) {
-        Fragment fragment = new TempFragment();
+        Fragment fragment = new FragRedesSociais();
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()

@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
@@ -20,11 +19,8 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 
-import java.io.Serializable;
-
 import lovera.kualpostinvou.modelos.Localizacao;
-import lovera.kualpostinvou.views.fragments.TempFragment;
-import lovera.kualpostinvou.views.redes_sociais.google.Google_Coisas;
+import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao;
 
 public class HelperGeolocalizacao {
 
@@ -32,11 +28,11 @@ public class HelperGeolocalizacao {
     public static int DISPOSITIVO_NAO_TEM_GPS  = 1;
 
     private final GoogleApiClient mGoogleApiClient;
-    private final TempFragment tempFragment;
+    private final FragBuscaEstabGeoLocalizacao tempFragment;
 
     private final Localizacao localizacao;
 
-    public HelperGeolocalizacao(TempFragment fragment) {
+    public HelperGeolocalizacao(FragBuscaEstabGeoLocalizacao fragment) {
         this.tempFragment = fragment;
 
         this.localizacao = new Localizacao();
