@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.utils;
+package lovera.kualpostinvou.views.redes_sociais.google;
 
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
@@ -23,36 +23,30 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import java.io.Serializable;
 
 import lovera.kualpostinvou.modelos.Localizacao;
+import lovera.kualpostinvou.views.fragments.TempFragment;
+import lovera.kualpostinvou.views.redes_sociais.google.Google_Coisas;
 
-public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
-
-    private static HelperGoogleApi helperGoogleUnicaInstancia;
+public class HelperGeolocalizacao {
 
     public static int USUARIO_ESCOLHENDO_OPCAO = 0;
     public static int DISPOSITIVO_NAO_TEM_GPS  = 1;
 
     private final GoogleApiClient mGoogleApiClient;
-    private final TempActivity activity;
+    private final TempFragment tempFragment;
 
     private final Localizacao localizacao;
 
-    public HelperGoogleApi(TempActivity activity) {
-        this.activity = activity;
+    public HelperGeolocalizacao(TempFragment fragment) {
+        this.tempFragment = fragment;
 
         this.localizacao = new Localizacao();
 
-        this.mGoogleApiClient = new GoogleApiClient.Builder(this.activity)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-
-        helperGoogleUnicaInstancia = this;
+        this.mGoogleApiClient = Google_Coisas.getGoogleCoisasUnicaInstancia().getmGoogleApiClient();
     }
 
     public boolean temLastLocation(){
-        if (ActivityCompat.checkSelfPermission(this.activity, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this.activity, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this.tempFragment.getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this.tempFragment.getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return false;
         }
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(this.mGoogleApiClient);
@@ -72,10 +66,10 @@ public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, Goo
         this.mGoogleApiClient.disconnect();
     }
 
-    @Override
+    //Importante esse cara deve ser chamado ou refatorado.
     public void onConnected(@Nullable Bundle bundle) {
         if(temLastLocation()){
-            this.activity.passarLocalizacao(this.localizacao);
+            this.tempFragment.passarLocalizacao(this.localizacao);
         }
         else{
             popupLigarGps();
@@ -83,22 +77,12 @@ public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, Goo
     }
 
     public void passarLocalizacao(){
-        this.activity.runOnUiThread(new Runnable() {
+        this.tempFragment.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                activity.passarLocalizacao(localizacao);
+                tempFragment.passarLocalizacao(localizacao);
             }
         });
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
     }
 
     //TODO ver se tem alguma forma de desligar esse cara.
@@ -123,14 +107,14 @@ public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, Goo
                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
 
                         try{
-                            status.startResolutionForResult(activity, USUARIO_ESCOLHENDO_OPCAO);
+                            status.startResolutionForResult(tempFragment.getActivity(), USUARIO_ESCOLHENDO_OPCAO);
                         }
                         catch (IntentSender.SendIntentException e) {
                         }
                         break;
                     case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
                         try{
-                            status.startResolutionForResult(activity, DISPOSITIVO_NAO_TEM_GPS);
+                            status.startResolutionForResult(tempFragment.getActivity(), DISPOSITIVO_NAO_TEM_GPS);
                         }
                         catch (IntentSender.SendIntentException e) {
                         }
@@ -138,9 +122,5 @@ public class HelperGoogleApi implements GoogleApiClient.ConnectionCallbacks, Goo
                 }
             }
         });
-    }
-
-    public static HelperGoogleApi getHelperGoogleUnicaInstancia(){
-        return helperGoogleUnicaInstancia;
     }
 }

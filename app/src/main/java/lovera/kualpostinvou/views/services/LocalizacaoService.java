@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import lovera.kualpostinvou.views.utils.HelperGoogleApi;
+import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 
 public class LocalizacaoService extends Service{
 
@@ -43,7 +43,7 @@ public class LocalizacaoService extends Service{
 
         @Override
         public void run() {
-            final HelperGoogleApi helper = HelperGoogleApi.getHelperGoogleUnicaInstancia();
+            final HelperGeolocalizacao helper = HelperGeolocalizacao.getHelperGoogleUnicaInstancia();
             while(!helper.temLastLocation() && count < 10){
                 try{
                     Thread.sleep(1500);

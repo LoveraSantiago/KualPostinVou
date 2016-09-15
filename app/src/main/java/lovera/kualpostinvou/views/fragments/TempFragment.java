@@ -35,11 +35,9 @@ import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
 import lovera.kualpostinvou.views.redes_sociais.facebook.Facebook_Coisas;
 import lovera.kualpostinvou.views.services.LocalizacaoService;
-import lovera.kualpostinvou.views.utils.HelperGoogleApi;
+import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 
 public class TempFragment extends Fragment implements MsgFromConexao{
-
-    private HelperGoogleApi helperGoogle;
 
     private SeekBar seekBar;
     private Spinner spinner;
@@ -56,7 +54,7 @@ public class TempFragment extends Fragment implements MsgFromConexao{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        this.helperGoogle = new HelperGoogleApi(this);
+
         inicializarSeekBar();
         inicializarSpinner();
         inicializarBtnFacebook();
@@ -64,7 +62,7 @@ public class TempFragment extends Fragment implements MsgFromConexao{
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == HelperGoogleApi.USUARIO_ESCOLHENDO_OPCAO){
+        if(requestCode == HelperGeolocalizacao.USUARIO_ESCOLHENDO_OPCAO){
             if(resultCode == getActivity().RESULT_OK){
                 Intent intent = new Intent(getActivity(), LocalizacaoService.class);
                 getActivity().startService(intent);

@@ -56,4 +56,8 @@ public class Google_Coisas implements GoogleApiClient.ConnectionCallbacks, Googl
     public static Google_Coisas getGoogleCoisasUnicaInstancia() {
         return googleCoisasUnicaInstancia;
     }
+
+    public GoogleApiClient getmGoogleApiClient() {
+        return mGoogleApiClient;
+    }
 }
