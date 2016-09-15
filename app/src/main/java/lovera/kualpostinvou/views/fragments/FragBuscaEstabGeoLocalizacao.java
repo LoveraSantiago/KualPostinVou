@@ -45,7 +45,7 @@ public class FragBuscaEstabGeoLocalizacao extends Fragment implements MsgFromCon
     }
 
     private void inicializarSeekBar(){
-        this.seekBar = (SeekBar) getView().findViewById(R.id.seek_bar);
+        this.seekBar = (SeekBar) getView().findViewById(R.id.f2_seekbar);
         this.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             int valor = 1;
@@ -53,7 +53,7 @@ public class FragBuscaEstabGeoLocalizacao extends Fragment implements MsgFromCon
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 valor = progress;
-                setTextToLabel(valor, R.id.lblSeekBar);
+                setTextToLabel(valor, R.id.f2_lblseekbar);
             }
 
             @Override
@@ -83,14 +83,17 @@ public class FragBuscaEstabGeoLocalizacao extends Fragment implements MsgFromCon
         setTextToLabel(String.valueOf(texto), id);
     }
 
-    public void consumirEstabelecimentos(View view) {
-        String municipio = getStringFromIptText(R.id.f1_edtMunicipio);
-        String uf = getStringFromIptText(R.id.f1_edtUf);
-        int paginas = Integer.parseInt(getStringFromIptText(R.id.f1_edtPaginas));
-        int qtdd = Integer.parseInt(getStringFromIptText(R.id.f1_edtQtd));
+    public void consumirEstabelecimentosGeolocalizacao(View view){
+        double latitude = Double.parseDouble(getStringFromIptText(R.id.f2_lblLatitude));
+        double longitude = Double.parseDouble(getStringFromIptText(R.id.f2_lblLongitude));
+
+        int paginas = Integer.parseInt(getStringFromIptText(R.id.f2_edtPaginas));
+        int qtdd = Integer.parseInt(getStringFromIptText(R.id.f2_edtQtd));
+        int raio = Integer.parseInt(getStringFromIptText(R.id.f2_lblseekbar));
+        String categoria = this.spinner.getSelectedItem().toString();
 
         ConexaoSaude conexaoSaude = new ConexaoSaude(this);
-        conexaoSaude.getEstabelecimentos(municipio, uf, null, paginas, qtdd);
+        conexaoSaude.getEstabelecimentos(latitude, longitude, raio, null, categoria, null, paginas, qtdd);
     }
 
     public String getStringFromIptText(int id) {
