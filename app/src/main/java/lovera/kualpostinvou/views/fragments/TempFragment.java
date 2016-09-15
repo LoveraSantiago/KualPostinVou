@@ -39,9 +39,6 @@ import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 
 public class TempFragment extends Fragment implements MsgFromConexao{
 
-    private SeekBar seekBar;
-    private Spinner spinner;
-
     private LoginButton loginButton;
 
     @Nullable
@@ -53,10 +50,6 @@ public class TempFragment extends Fragment implements MsgFromConexao{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
-        inicializarSeekBar();
-        inicializarSpinner();
         inicializarBtnFacebook();
     }
 
@@ -123,36 +116,6 @@ public class TempFragment extends Fragment implements MsgFromConexao{
 
     public void setTextToLabel(double texto, int id){
         setTextToLabel(String.valueOf(texto), id);
-    }
-
-    private void inicializarSeekBar(){
-        this.seekBar = (SeekBar) getView().findViewById(R.id.seek_bar);
-        this.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
-            int valor = 1;
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                valor = progress;
-                setTextToLabel(valor, R.id.lblSeekBar);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-    }
-
-    private void inicializarSpinner(){
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Categoria.getTextos());
-        this.spinner = (Spinner) getView().findViewById(R.id.spinner);
-        this.spinner.setAdapter(adapter);
     }
 
     private void inicializarBtnFacebook(){
