@@ -57,7 +57,7 @@ public class PrincipalActivity extends AppCompatActivity{
 
         this.mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         this.mRecyclerView.setHasFixedSize(true);
-        this.mAdapter = new MyAdapter(TITLES, ICONS, nome, email, profile);
+        this.mAdapter = new MyAdapter(TITLES, ICONS, nome, email, profile, this);
         this.mRecyclerView.setAdapter(this.mAdapter);
         this.mLayoutManager = new LinearLayoutManager(this);
         this.mRecyclerView.setLayoutManager(this.mLayoutManager);

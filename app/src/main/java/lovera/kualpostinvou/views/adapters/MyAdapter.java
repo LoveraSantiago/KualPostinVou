@@ -1,11 +1,14 @@
 package lovera.kualpostinvou.views.adapters;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import lovera.kualpostinvou.R;
 
@@ -22,11 +25,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private int profile;        //int Resource for header view profile picture
     private String email;       //String Resource for header view email
 
+    private Context contextOut;
+    private View last;
 
     // Creating a ViewHolder which extends the RecyclerView View Holder
     // ViewHolder are used to to store the inflated views in order to recycle them
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         int Holderid;
 
         TextView textView;
@@ -34,10 +39,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         ImageView profile;
         TextView Name;
         TextView email;
+        Context context;
 
-
-        public ViewHolder(View itemView, int ViewType) {                 // Creating ViewHolder Constructor with View and viewType As a parameter
+        public ViewHolder(View itemView, int ViewType, Context c) {                 // Creating ViewHolder Constructor with View and viewType As a parameter
             super(itemView);
+            context = c;
+            itemView.setClickable(true);
+            itemView.setOnClickListener(this);
+
 
 
             // Here we set the appropriate view in accordance with the the view type as passed when the holder object is created
@@ -57,12 +66,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             }
         }
 
+        @Override
+        public void onClick(View v) {
+            if(getAdapterPosition() == 0) return;
 
+            if(last != null){
+                last.setBackgroundColor(Color.WHITE);
+            }
+
+            v.setBackgroundColor(Color.RED);
+            Toast.makeText(context,"The Item Clicked is: "+getAdapterPosition(),Toast.LENGTH_SHORT).show();
+            last = v;
+        }
     }
 
-
-
-    public MyAdapter(String Titles[],int Icons[],String Name,String Email, int Profile){ // MyAdapter Constructor with titles and icons parameter
+    public MyAdapter(String Titles[],int Icons[],String Name,String Email, int Profile, Context context){ // MyAdapter Constructor with titles and icons parameter
         // titles, icons, name, email, profile pic are passed from the main activity as we
         mNavTitles = Titles;                //have seen earlier
         mIcons = Icons;
@@ -70,7 +88,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         email = Email;
         profile = Profile;                     //here we assign those passed values to the values we declared here
         //in adapter
-
+        this.contextOut = context;
 
 
     }
@@ -88,7 +106,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         if (viewType == TYPE_ITEM) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.linha_lista_navigationdrawer, parent, false); //Inflating the layout
 
-            ViewHolder vhItem = new ViewHolder(v,viewType); //Creating ViewHolder and passing the object of type view
+            ViewHolder vhItem = new ViewHolder(v,viewType, contextOut); //Creating ViewHolder and passing the object of type view
 
             return vhItem; // Returning the created object
 
@@ -98,7 +116,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.linha_header_navigationdrawer,parent,false); //Inflating the layout
 
-            ViewHolder vhHeader = new ViewHolder(v,viewType); //Creating ViewHolder and passing the object of type view
+            ViewHolder vhHeader = new ViewHolder(v,viewType, contextOut); //Creating ViewHolder and passing the object of type view
 
             return vhHeader; //returning the object created
 
