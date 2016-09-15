@@ -22,10 +22,16 @@ import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
 import lovera.kualpostinvou.modelos.Categoria;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
+import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
+import lovera.kualpostinvou.views.redes_sociais.facebook.Facebook_Coisas;
+import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
+import lovera.kualpostinvou.views.services.LocalizacaoService;
 
 public class FragBuscaEstabGeoLocalizacao extends Fragment implements MsgFromConexao {
+
+    private static int ID_FRAGMENT = 2;
 
     private SeekBar seekBar;
     private Spinner spinner;
@@ -42,6 +48,24 @@ public class FragBuscaEstabGeoLocalizacao extends Fragment implements MsgFromCon
 
         inicializarSeekBar();
         inicializarSpinner();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == HelperGeolocalizacao.USUARIO_ESCOLHENDO_OPCAO){
+            if(resultCode == getActivity().RESULT_OK){
+                Intent intent = new Intent(getActivity(), LocalizacaoService.class);
+                getActivity().startService(intent);
+            }
+            else if(resultCode == getActivity().RESULT_CANCELED){
+                setTextToLabel("Usuario não permitiu gps", R.id.infoGps);
+            }
+
+        }
+    }
+
+    public void falhaDeLocalizacao(){
+        setTextToLabel("Posicao não localizada", R.id.infoGps);
     }
 
     private void inicializarSeekBar(){
@@ -99,6 +123,11 @@ public class FragBuscaEstabGeoLocalizacao extends Fragment implements MsgFromCon
     public String getStringFromIptText(int id) {
         EditText editText = (EditText) getView().findViewById(id);
         return editText.getText().toString();
+    }
+
+    public void passarLocalizacao(Localizacao localizacao){
+        setTextToLabel(localizacao.getLatitude(), R.id.lblLatitude);
+        setTextToLabel(localizacao.getLongitude(), R.id.lblLongitude);
     }
 
     @Override
