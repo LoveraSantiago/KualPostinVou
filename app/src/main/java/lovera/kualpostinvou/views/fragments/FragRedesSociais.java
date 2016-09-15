@@ -47,18 +47,18 @@ public class FragRedesSociais extends Fragment{
 
     private void inicializarBtnFacebook(){
         if(AccessToken.getCurrentAccessToken() == null){
-            setTextToLabel("Não", R.id.lblStatusFaceLogado);
+            setTextToLabel("Não", R.id.f3_lblstatus_facelogado);
         }
         else{
-            setTextToLabel("Sim", R.id.lblStatusFaceLogado);
+            setTextToLabel("Sim", R.id.f3_lblstatus_facelogado);
         }
 
-        this.loginButton = (LoginButton) getView().findViewById(R.id.faceLoginButton);
+        this.loginButton = (LoginButton) getView().findViewById(R.id.f3_face_loginbutton);
         this.loginButton.registerCallback(Facebook_Coisas.getFaceCoisasUnicaInstancia().getCallbackManager(),
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        setTextToLabel("Acabou de logar", R.id.lblStatusFaceLogado);
+                        setTextToLabel("Acabou de logar", R.id.f3_lblstatus_facelogado);
                     }
 
                     @Override

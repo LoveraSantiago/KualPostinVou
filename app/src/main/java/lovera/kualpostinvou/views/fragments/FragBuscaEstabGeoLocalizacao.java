@@ -58,14 +58,14 @@ public class FragBuscaEstabGeoLocalizacao extends Fragment implements MsgFromCon
                 getActivity().startService(intent);
             }
             else if(resultCode == getActivity().RESULT_CANCELED){
-                setTextToLabel("Usuario não permitiu gps", R.id.infoGps);
+                setTextToLabel("Usuario não permitiu gps", R.id.f2_infogps);
             }
 
         }
     }
 
     public void falhaDeLocalizacao(){
-        setTextToLabel("Posicao não localizada", R.id.infoGps);
+        setTextToLabel("Posicao não localizada", R.id.f2_infogps);
     }
 
     private void inicializarSeekBar(){
@@ -94,7 +94,7 @@ public class FragBuscaEstabGeoLocalizacao extends Fragment implements MsgFromCon
 
     private void inicializarSpinner(){
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Categoria.getTextos());
-        this.spinner = (Spinner) getView().findViewById(R.id.spinner);
+        this.spinner = (Spinner) getView().findViewById(R.id.f2_spinner);
         this.spinner.setAdapter(adapter);
     }
 
@@ -126,8 +126,8 @@ public class FragBuscaEstabGeoLocalizacao extends Fragment implements MsgFromCon
     }
 
     public void passarLocalizacao(Localizacao localizacao){
-        setTextToLabel(localizacao.getLatitude(), R.id.lblLatitude);
-        setTextToLabel(localizacao.getLongitude(), R.id.lblLongitude);
+        setTextToLabel(localizacao.getLatitude(), R.id.f2_lblLatitude);
+        setTextToLabel(localizacao.getLongitude(), R.id.f2_lblLongitude);
     }
 
     @Override
