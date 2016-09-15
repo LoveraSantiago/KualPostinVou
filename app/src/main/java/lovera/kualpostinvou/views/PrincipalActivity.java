@@ -27,7 +27,6 @@ public class PrincipalActivity extends AppCompatActivity{
     private String tituloOriginal;
 
     private DrawerLayout mDrawerLayout;
-//    private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
 
     private Toolbar toolbar;
@@ -63,10 +62,6 @@ public class PrincipalActivity extends AppCompatActivity{
         this.mRecyclerView.setLayoutManager(this.mLayoutManager);
 
         this.mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        this.mDrawerList = (ListView) findViewById(R.id.left_drawer);
-//        this.mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.linha_lista_navigationdrawer,new String[]{"A", "B", "C"}));
-//        this.mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
         this.mDrawerToggle = new ActionBarDrawerToggleFilha(this, this.mDrawerLayout, this.toolbar, R.string.drawer_open, R.string.drawer_close);
         this.mDrawerLayout.addDrawerListener(this.mDrawerToggle);
 
@@ -100,9 +95,7 @@ public class PrincipalActivity extends AppCompatActivity{
                        .replace(R.id.content_frame, fragment)
                        .commit();
 
-//        this.mDrawerList.setItemChecked(position, true);
         setTitle("Pos" + position);
-//        this.mDrawerLayout.closeDrawer(this.mDrawerList);
     }
 
     @Override
