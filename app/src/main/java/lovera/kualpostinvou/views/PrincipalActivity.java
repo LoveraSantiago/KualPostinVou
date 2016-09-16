@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,12 +43,15 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     private int profile = R.drawable.icon_people_128;
 
     private Map<Integer, FragmentMenu> mapFragments;
+    private FragmentManager fragmentManager;
+    private FragBuscaEstabelecimentos frag1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         this.tituloOriginal = getTitle().toString();
+        this.fragmentManager = getFragmentManager();
 
         setContentView(R.layout.activity_principal);
         inicializarToolbar();
@@ -65,9 +69,11 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     }
 
     private void inicializarFragmentMap(){
+        this.frag1 = new FragBuscaEstabelecimentos();
+
         this.mapFragments = new HashMap<>();
         this.mapFragments.put(FragRedesSociais.ID_FRAGMENT, new FragRedesSociais());
-        this.mapFragments.put(FragBuscaEstabelecimentos.ID_FRAGMENT, new FragBuscaEstabelecimentos());
+        this.mapFragments.put(FragBuscaEstabelecimentos.ID_FRAGMENT, this.frag1);
         this.mapFragments.put(FragBuscaEstabGeoLocalizacao.ID_FRAGMENT, new FragBuscaEstabGeoLocalizacao());
     }
 
@@ -107,11 +113,10 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     public void selectItem(int position) {
         FragmentMenu fragment = this.mapFragments.get(position);
 
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                       .replace(R.id.content_frame, fragment)
-                       .addToBackStack("")
-                       .commit();
+        this.fragmentManager.beginTransaction()
+                            .replace(R.id.content_frame, fragment)
+                            .addToBackStack("")
+                            .commit();
 
         setTitle(fragment.getFragmentTitulo());
         this.mDrawerLayout.closeDrawer(this.mRecyclerView);
@@ -126,6 +131,10 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    public void consumirEstabelecimentos(View view) {
+        this.frag1.consumirEstabelecimentos();
     }
 
     public String getTitulo() {

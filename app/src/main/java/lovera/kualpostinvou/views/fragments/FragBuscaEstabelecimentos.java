@@ -31,7 +31,7 @@ public class FragBuscaEstabelecimentos extends FragmentMenu implements MsgFromCo
         return inflater.inflate(R.layout.fragment_buscaestabelecimentos, container, false);
     }
 
-    public void consumirEstabelecimentos(View view) {
+    public void consumirEstabelecimentos() {
         String municipio = getStringFromIptText(R.id.f1_edtMunicipio);
         String uf = getStringFromIptText(R.id.f1_edtUf);
         int paginas = Integer.parseInt(getStringFromIptText(R.id.f1_edtPaginas));
