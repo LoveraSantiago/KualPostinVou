@@ -107,6 +107,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                        .replace(R.id.content_frame, fragment)
+                       .addToBackStack("")
                        .commit();
 
         setTitle(fragment.getFragmentTitulo());
