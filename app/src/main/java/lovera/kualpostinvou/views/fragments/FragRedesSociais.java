@@ -1,6 +1,5 @@
 package lovera.kualpostinvou.views.fragments;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,12 +17,12 @@ import com.facebook.login.widget.LoginButton;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.views.redes_sociais.facebook.Facebook_Coisas;
-import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
-import lovera.kualpostinvou.views.services.LocalizacaoService;
 
-public class FragRedesSociais extends Fragment{
+public class FragRedesSociais extends FragmentMenu {
 
-    private static int ID_FRAGMENT = 3;
+    public static String TITULO_FRAGMENT = "Redes Sociais";
+    public static int ID_FRAGMENT = 3;
+    public static int ICONE = R.drawable.icn3;
 
     private LoginButton loginButton;
 
@@ -76,5 +75,20 @@ public class FragRedesSociais extends Fragment{
     public void setTextToLabel(String texto, int id){
         TextView lblCodigo = (TextView) getView().findViewById(id);
         lblCodigo.setText(texto);
+    }
+
+    @Override
+    public int getFragmentId() {
+        return ID_FRAGMENT;
+    }
+
+    @Override
+    public String getFragmentTitulo() {
+        return TITULO_FRAGMENT;
+    }
+
+    @Override
+    public int getIcone() {
+        return ICONE;
     }
 }

@@ -1,6 +1,5 @@
 package lovera.kualpostinvou.views.fragments;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,13 +24,14 @@ import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
-import lovera.kualpostinvou.views.redes_sociais.facebook.Facebook_Coisas;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 import lovera.kualpostinvou.views.services.LocalizacaoService;
 
-public class FragBuscaEstabGeoLocalizacao extends Fragment implements MsgFromConexao {
+public class FragBuscaEstabGeoLocalizacao extends FragmentMenu implements MsgFromConexao {
 
-    private static int ID_FRAGMENT = 2;
+    public static String TITULO_FRAGMENT = "Estabelecimentos por GPS";
+    public static int ID_FRAGMENT = 2;
+    public static int ICONE = R.drawable.icn2;
 
     private SeekBar seekBar;
     private Spinner spinner;
@@ -150,5 +150,20 @@ public class FragBuscaEstabGeoLocalizacao extends Fragment implements MsgFromCon
     @Override
     public void passarListaDeProfissionais(List<Profissional> profissionais) {
 
+    }
+
+    @Override
+    public int getFragmentId() {
+        return ID_FRAGMENT;
+    }
+
+    @Override
+    public String getFragmentTitulo() {
+        return TITULO_FRAGMENT;
+    }
+
+    @Override
+    public int getIcone() {
+        return ICONE;
     }
 }

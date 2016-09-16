@@ -1,7 +1,6 @@
 package lovera.kualpostinvou.views;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,13 +12,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.views.adapters.MyAdapter;
 import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
+import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao;
+import lovera.kualpostinvou.views.fragments.FragBuscaEstabelecimentos;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;
+import lovera.kualpostinvou.views.fragments.FragmentMenu;
 import lovera.kualpostinvou.views.redes_sociais.google.Google_Coisas;
 
 public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer{
@@ -35,12 +38,11 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     private RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager mLayoutManager;
 
-    private String TITLES[] = {"Home","Events","Mail","Shop","Travel"};
-    int ICONS[] = {R.drawable.home2, R.drawable.icon_event_details,R.drawable.mail_2,R.drawable.shop,R.drawable.travel};
     private String nome = "Santuga Lovera";
     private String email = "santiago.lovera@gmail.com";
     private int profile = R.drawable.icon_people_128;
 
+    private Map<Integer, FragmentMenu> mapFragments;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,7 +59,10 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
         this.mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         this.mRecyclerView.setHasFixedSize(true);
-        this.mAdapter = new MyAdapter(TITLES, ICONS, nome, email, profile, this, this);
+
+        inicializarFragmentMap();
+
+        this.mAdapter = new MyAdapter(this.mapFragments, nome, email, profile, this, this);
         this.mRecyclerView.setAdapter(this.mAdapter);
         this.mLayoutManager = new LinearLayoutManager(this);
         this.mRecyclerView.setLayoutManager(this.mLayoutManager);
@@ -73,7 +78,14 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
             }
         });
 
-        selectItem(0);
+        selectItem(1);
+    }
+
+    private void inicializarFragmentMap(){
+        this.mapFragments = new HashMap<>();
+        this.mapFragments.put(FragRedesSociais.ID_FRAGMENT, new FragRedesSociais());
+        this.mapFragments.put(FragBuscaEstabelecimentos.ID_FRAGMENT, new FragBuscaEstabelecimentos());
+        this.mapFragments.put(FragBuscaEstabGeoLocalizacao.ID_FRAGMENT, new FragBuscaEstabGeoLocalizacao());
     }
 
     @Override
@@ -90,14 +102,14 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     @Override
     public void selectItem(int position) {
-        Fragment fragment = new FragRedesSociais();
+        FragmentMenu fragment = this.mapFragments.get(position);
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                        .replace(R.id.content_frame, fragment)
                        .commit();
 
-        setTitle("Pos" + position);
+        setTitle(fragment.getFragmentTitulo());
         this.mDrawerLayout.closeDrawer(this.mRecyclerView);
     }
 
@@ -105,13 +117,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     public void setTitle(CharSequence title) {
         this.titulo = title.toString();
         getSupportActionBar().setTitle(this.titulo);
-    }
-
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
-        }
     }
 
     private class ActionBarDrawerToggleFilha extends ActionBarDrawerToggle {

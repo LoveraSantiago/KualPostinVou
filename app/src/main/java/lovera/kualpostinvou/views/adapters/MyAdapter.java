@@ -10,8 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Map;
+
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
+import lovera.kualpostinvou.views.fragments.FragmentMenu;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
@@ -19,15 +22,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // IF the view under inflation and population is header or Item
     private static final int TYPE_ITEM = 1;
 
-    private String mNavTitles[]; // String Array to store the passed titles Value from MainActivity.java
-    private int mIcons[];       // Int Array to store the passed icons resource value from MainActivity.java
-
     private String name;        //String Resource for header View Name
     private int profile;        //int Resource for header view profile picture
     private String email;       //String Resource for header view email
 
     private Context contextOut;
     private View last;
+
+    private final Map<Integer, FragmentMenu> mapFragments;
     private MsgFromNavigationDrawer msg;
 
     // Creating a ViewHolder which extends the RecyclerView View Holder
@@ -78,15 +80,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             }
             v.setBackgroundColor(Color.RED);
             msg.selectItem(getAdapterPosition());
-            Toast.makeText(context,"The Item Clicked is: "+getAdapterPosition(),Toast.LENGTH_SHORT).show();
             last = v;
         }
     }
 
-    public MyAdapter(String Titles[],int Icons[],String Name,String Email, int Profile, Context context, MsgFromNavigationDrawer msg){ // MyAdapter Constructor with titles and icons parameter
+    public MyAdapter(Map<Integer, FragmentMenu> mapFragments,String Name,String Email, int Profile, Context context, MsgFromNavigationDrawer msg){ // MyAdapter Constructor with titles and icons parameter
         // titles, icons, name, email, profile pic are passed from the main activity as we
-        mNavTitles = Titles;                //have seen earlier
-        mIcons = Icons;
+
+        this.mapFragments = mapFragments;
         name = Name;
         email = Email;
         profile = Profile;                     //here we assign those passed values to the values we declared here
@@ -136,8 +137,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(MyAdapter.ViewHolder holder, int position) {
         if(holder.Holderid ==1) {                              // as the list view is going to be called after the header view so we decrement the
             // position by 1 and pass it to the holder while setting the text and image
-            holder.textView.setText(mNavTitles[position - 1]); // Setting the Text with the array of our Titles
-            holder.imageView.setImageResource(mIcons[position -1]);// Settimg the image with array of our icons
+            holder.textView.setText(this.mapFragments.get(position).getFragmentTitulo()); // Setting the Text with the array of our Titles
+            holder.imageView.setImageResource(this.mapFragments.get(position).getIcone());// Settimg the image with array of our icons
         }
         else{
 
@@ -150,7 +151,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // This method returns the number of items present in the list
     @Override
     public int getItemCount() {
-        return mNavTitles.length+1; // the number of items in the list will be +1 the titles including the header view.
+        return this.mapFragments.size() + 1; // the number of items in the list will be +1 the titles including the header view.
     }
 
 
