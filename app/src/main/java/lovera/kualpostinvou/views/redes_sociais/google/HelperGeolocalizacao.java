@@ -54,16 +54,7 @@ public class HelperGeolocalizacao {
         return false;
     }
 
-    public void connect(){
-        this.mGoogleApiClient.connect();
-    }
-
-    public void disconnect(){
-        this.mGoogleApiClient.disconnect();
-    }
-
-    //Importante esse cara deve ser chamado ou refatorado.
-    public void onConnected(@Nullable Bundle bundle) {
+    public void verLocalizacao() {
         if(temLastLocation()){
             this.tempFragment.passarLocalizacao(this.localizacao);
         }
@@ -83,6 +74,7 @@ public class HelperGeolocalizacao {
 
     //TODO ver se tem alguma forma de desligar esse cara.
     private void popupLigarGps(){
+        Log.i("GPS", "popoup chamado");
         LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(10000);
         mLocationRequest.setFastestInterval(5000);

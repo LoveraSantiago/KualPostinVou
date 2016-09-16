@@ -36,6 +36,8 @@ public class FragBuscaEstabGeoLocalizacao extends FragmentMenu implements MsgFro
     private SeekBar seekBar;
     private Spinner spinner;
 
+    private HelperGeolocalizacao helperGps;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,9 +47,16 @@ public class FragBuscaEstabGeoLocalizacao extends FragmentMenu implements MsgFro
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        this.helperGps = new HelperGeolocalizacao(this);
 
         inicializarSeekBar();
         inicializarSpinner();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        this.helperGps.verLocalizacao();
     }
 
     @Override
@@ -60,7 +69,6 @@ public class FragBuscaEstabGeoLocalizacao extends FragmentMenu implements MsgFro
             else if(resultCode == getActivity().RESULT_CANCELED){
                 setTextToLabel("Usuario não permitiu gps", R.id.f2_infogps);
             }
-
         }
     }
 
@@ -107,7 +115,7 @@ public class FragBuscaEstabGeoLocalizacao extends FragmentMenu implements MsgFro
         setTextToLabel(String.valueOf(texto), id);
     }
 
-    public void consumirEstabelecimentosGeolocalizacao(View view){
+    public void consumirEstabelecimentosGeolocalizacao(){
         double latitude = Double.parseDouble(getStringFromIptText(R.id.f2_lblLatitude));
         double longitude = Double.parseDouble(getStringFromIptText(R.id.f2_lblLongitude));
 

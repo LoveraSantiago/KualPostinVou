@@ -45,6 +45,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     private Map<Integer, FragmentMenu> mapFragments;
     private FragmentManager fragmentManager;
     private FragBuscaEstabelecimentos frag1;
+    private FragBuscaEstabGeoLocalizacao frag2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -135,6 +136,10 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     public void consumirEstabelecimentos(View view) {
         this.frag1.consumirEstabelecimentos();
+    }
+
+    public void consumirEstabelecimentosGeolocalizacao(){
+        this.frag2.consumirEstabelecimentosGeolocalizacao();
     }
 
     public String getTitulo() {
