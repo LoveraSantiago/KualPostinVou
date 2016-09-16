@@ -1,0 +1,127 @@
+package lovera.kualpostinvou.views.navigationdrawer;
+
+import android.content.Context;
+import android.graphics.Color;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.Map;
+
+import lovera.kualpostinvou.R;
+import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
+import lovera.kualpostinvou.views.contratos.MsgFromViewHolder;
+import lovera.kualpostinvou.views.fragments.FragmentMenu;
+
+public class MyAdapter extends RecyclerView.Adapter<ViewHolder> implements MsgFromViewHolder{
+
+    public static final int TYPE_HEADER = 0;
+    public static final int TYPE_ITEM = 1;
+
+    private String name;        //String Resource for header View Name
+    private int profile;        //int Resource for header view profile picture
+    private String email;       //String Resource for header view email
+
+    private Context contextOut;
+    private View ultimaView;
+
+    private final Map<Integer, FragmentMenu> mapFragments;
+    private MsgFromNavigationDrawer msg;
+
+    @Override
+    public void setUltimaViewClicada(View view) {
+        this.ultimaView = view;
+    }
+
+    @Override
+    public View getUltimaViewClicada() {
+        return this.ultimaView;
+    }
+
+    public MyAdapter(Map<Integer, FragmentMenu> mapFragments,String Name,String Email, int Profile, Context context, MsgFromNavigationDrawer msg){ // MyAdapter Constructor with titles and icons parameter
+        // titles, icons, name, email, profile pic are passed from the main activity as we
+
+        this.mapFragments = mapFragments;
+        name = Name;
+        email = Email;
+        profile = Profile;                     //here we assign those passed values to the values we declared here
+        //in adapter
+        this.contextOut = context;
+        this.msg = msg;
+
+    }
+
+
+
+    //Below first we ovverride the method onCreateViewHolder which is called when the ViewHolder is
+    //Created, In this method we inflate the item_row.xml layout if the viewType is Type_ITEM or else we inflate header.xml
+    // if the viewType is TYPE_HEADER
+    // and pass it to the view holder
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        if (viewType == TYPE_ITEM) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.linha_lista_navigationdrawer, parent, false); //Inflating the layout
+
+            ViewHolder vhItem = new ViewHolder(v,viewType, contextOut, this.msg, this); //Creating ViewHolder and passing the object of type view
+
+            return vhItem; // Returning the created object
+
+            //inflate your layout and pass it to view holder
+
+        } else if (viewType == TYPE_HEADER) {
+
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.linha_header_navigationdrawer,parent,false); //Inflating the layout
+
+            ViewHolder vhHeader = new ViewHolder(v,viewType, contextOut, this.msg, this); //Creating ViewHolder and passing the object of type view
+
+            return vhHeader; //returning the object created
+
+
+        }
+        return null;
+
+    }
+
+    //Next we override a method which is called when the item in a row is needed to be displayed, here the int position
+    // Tells us item at which position is being constructed to be displayed and the holder id of the holder object tell us
+    // which view type is being created 1 for item row
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        if(holder.getHolderid() ==1) {                              // as the list view is going to be called after the header view so we decrement the
+            // position by 1 and pass it to the holder while setting the text and image
+            holder.getTextView().setText(this.mapFragments.get(position).getFragmentTitulo()); // Setting the Text with the array of our Titles
+            holder.getImageView().setImageResource(this.mapFragments.get(position).getIcone());// Settimg the image with array of our icons
+        }
+        else{
+
+            holder.getProfile().setImageResource(profile);           // Similarly we set the resources for header view
+            holder.getName().setText(name);
+            holder.getEmail().setText(email);
+        }
+    }
+
+    // This method returns the number of items present in the list
+    @Override
+    public int getItemCount() {
+        return this.mapFragments.size() + 1; // the number of items in the list will be +1 the titles including the header view.
+    }
+
+
+    // Witht the following method we check what type of view is being passed
+    @Override
+    public int getItemViewType(int position) {
+        if (isPositionHeader(position))
+            return TYPE_HEADER;
+
+        return TYPE_ITEM;
+    }
+
+    private boolean isPositionHeader(int position) {
+        return position == 0;
+    }
+}
