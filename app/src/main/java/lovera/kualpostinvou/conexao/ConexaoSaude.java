@@ -44,9 +44,9 @@ public class ConexaoSaude {
         call.enqueue(new CallBackEstabelecimento(this.msg));
     }
 
-    public void getEstabelecimentos(String municipio, String uf, List<String> campos, int pagina, int quantidade){
+    public void getEstabelecimentos(String municipio, String uf, List<String> campos, String especialidade, int pagina, int quantidade){
 
-        Map<String, String> mapParams = helper.factoryMap_EndP_Estabelecimentos(municipio, uf, campos, pagina, quantidade);
+        Map<String, String> mapParams = helper.factoryMap_EndP_Estabelecimentos(municipio, uf, campos, especialidade, pagina, quantidade);
 
         Call<List<Estabelecimento>> call = this.endpointSaude.getEstabelecimentos(mapParams);
         call.enqueue(new CallBackEstabelecimentos(this.msg));
@@ -58,7 +58,7 @@ public class ConexaoSaude {
      * @param longitude * Obrigatóriov
      * @param raio * Obrigatório
      */
-    public void getEstabelecimentos(double latitude, double longitude, int raio, String texto, String categoria, String campos, int pagina, int quantidade){
+    public void getEstabelecimentos(double latitude, double longitude, float raio, String texto, String categoria, String campos, int pagina, int quantidade){
 //        String infLongLatRaio = helper.factoryString_LongLatRaio(latitude, longitude, raio);
         Map<String, String> mapParams = helper.factoryMap_EndP_Estabelecimentos(texto, categoria, campos, pagina, quantidade);
 

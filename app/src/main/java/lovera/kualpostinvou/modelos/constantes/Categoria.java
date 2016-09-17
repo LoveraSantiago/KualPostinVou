@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.modelos;
+package lovera.kualpostinvou.modelos.constantes;
 
 public enum Categoria {
 

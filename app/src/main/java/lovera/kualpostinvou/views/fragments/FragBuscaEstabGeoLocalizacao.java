@@ -18,7 +18,7 @@ import java.util.List;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
-import lovera.kualpostinvou.modelos.Categoria;
+import lovera.kualpostinvou.modelos.constantes.Categoria;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
@@ -112,12 +112,12 @@ public class FragBuscaEstabGeoLocalizacao extends FragmentMenu implements MsgFro
     }
 
     public void consumirEstabelecimentosGeolocalizacao(){
-        double latitude = Double.parseDouble(getStringFromIptText(R.id.f2_lblLatitude));
-        double longitude = Double.parseDouble(getStringFromIptText(R.id.f2_lblLongitude));
+        double latitude = Double.parseDouble (getStringFromTextView(R.id.f2_lblLatitude));
+        double longitude = Double.parseDouble(getStringFromTextView(R.id.f2_lblLongitude));
 
         int paginas = Integer.parseInt(getStringFromIptText(R.id.f2_edtPaginas));
         int qtdd = Integer.parseInt(getStringFromIptText(R.id.f2_edtQtd));
-        int raio = Integer.parseInt(getStringFromIptText(R.id.f2_lblseekbar));
+        float raio = Float.parseFloat(getStringFromTextView(R.id.f2_lblseekbar));
         String categoria = this.spinner.getSelectedItem().toString();
 
         ConexaoSaude conexaoSaude = new ConexaoSaude(this);
@@ -127,6 +127,11 @@ public class FragBuscaEstabGeoLocalizacao extends FragmentMenu implements MsgFro
     public String getStringFromIptText(int id) {
         EditText editText = (EditText) getView().findViewById(id);
         return editText.getText().toString();
+    }
+
+    public String getStringFromTextView(int id) {
+        TextView textView = (TextView) getView().findViewById(id);
+        return textView.getText().toString();
     }
 
     public void passarLocalizacao(Localizacao localizacao){

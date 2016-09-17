@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,6 +19,8 @@ import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Profissional;
+import lovera.kualpostinvou.modelos.constantes.Categoria;
+import lovera.kualpostinvou.modelos.constantes.Especialidades;
 import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
 
 public class FragBuscaEstabelecimentos extends FragmentMenu implements MsgFromConexao{
@@ -25,10 +29,24 @@ public class FragBuscaEstabelecimentos extends FragmentMenu implements MsgFromCo
     public static int ID_FRAGMENT = 1;
     public static int ICONE = R.drawable.icn1;
 
+    private Spinner spinner;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_buscaestabelecimentos, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        inicializarSpinner();
+    }
+
+    private void inicializarSpinner(){
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Especialidades.getTextos());
+        this.spinner = (Spinner) getView().findViewById(R.id.f1_spinner);
+        this.spinner.setAdapter(adapter);
     }
 
     public void consumirEstabelecimentos() {
@@ -36,9 +54,10 @@ public class FragBuscaEstabelecimentos extends FragmentMenu implements MsgFromCo
         String uf = getStringFromIptText(R.id.f1_edtUf);
         int paginas = Integer.parseInt(getStringFromIptText(R.id.f1_edtPaginas));
         int qtdd = Integer.parseInt(getStringFromIptText(R.id.f1_edtQtd));
+        String especialidade = this.spinner.getSelectedItem().toString();
 
         ConexaoSaude conexaoSaude = new ConexaoSaude(this);
-        conexaoSaude.getEstabelecimentos(municipio, uf, null, paginas, qtdd);
+        conexaoSaude.getEstabelecimentos(municipio, uf, null, especialidade, paginas, qtdd);
     }
 
     public String getStringFromIptText(int id) {

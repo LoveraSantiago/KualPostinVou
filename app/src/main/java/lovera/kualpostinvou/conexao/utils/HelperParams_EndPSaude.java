@@ -4,38 +4,35 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static lovera.kualpostinvou.conexao.utils.ConstantesParametros.CAMPOS;
-import static lovera.kualpostinvou.conexao.utils.ConstantesParametros.CATEGORIA;
-import static lovera.kualpostinvou.conexao.utils.ConstantesParametros.MUNICIPIO;
-import static lovera.kualpostinvou.conexao.utils.ConstantesParametros.PAGINA;
-import static lovera.kualpostinvou.conexao.utils.ConstantesParametros.QUANTIDADE;
-import static lovera.kualpostinvou.conexao.utils.ConstantesParametros.TEXTO;
-import static lovera.kualpostinvou.conexao.utils.ConstantesParametros.UF;
+import static lovera.kualpostinvou.modelos.constantes.Parametros.*;
 
 public class HelperParams_EndPSaude {
 
     //Ser usado no endpoint "rest/estabelecimentos"
-    public Map<String, String> factoryMap_EndP_Estabelecimentos(String municipio, String uf, List<String> campos, int pagina, int quantidade){
+    public Map<String, String> factoryMap_EndP_Estabelecimentos(String municipio, String uf, List<String> campos, String especialidade, int pagina, int quantidade){
         Map<String, String> map = new HashMap<>();
 
         if(isStringNotNullOrEmpty(municipio)){
-            map.put(MUNICIPIO, municipio);
+            map.put(MUNICIPIO.getTexto(), municipio);
         }
         if(isStringNotNullOrEmpty(uf)){
-            map.put(UF, uf);
+            map.put(UF.getTexto(), uf);
+        }
+        if(isStringNotNullOrEmpty(especialidade)){
+            map.put(ESPECIALIDADE.getTexto(), especialidade);
         }
         if(isListNotNullOrEmpty(campos)){
             StringBuilder camposVirgula = new StringBuilder();
             for(String campo : campos){
                 camposVirgula.append(campo + ",");
             }
-            map.put(CAMPOS, camposVirgula.toString());
+            map.put(CAMPOS.getTexto(), camposVirgula.toString());
         }
         if(isNumberMaiorQueZero(pagina)){
-            map.put(PAGINA, String.valueOf(pagina));
+            map.put(PAGINA.getTexto(), String.valueOf(pagina));
         }
         if(isNumberMaiorQueZero(quantidade)){
-            map.put(QUANTIDADE, String.valueOf(quantidade));
+            map.put(QUANTIDADE.getTexto(), String.valueOf(quantidade));
         }
         return map;
     }
@@ -44,19 +41,19 @@ public class HelperParams_EndPSaude {
         Map<String, String> map = new HashMap<>();
 
         if(isStringNotNullOrEmpty(texto)){
-            map.put(TEXTO, texto);
+            map.put(TEXTO.getTexto(), texto);
         }
         if(isStringNotNullOrEmpty(categoria)){
-            map.put(CATEGORIA, categoria);
+            map.put(CATEGORIA.getTexto(), categoria);
         }
         if(isStringNotNullOrEmpty(campos)){
-            map.put(CAMPOS, campos);
+            map.put(CAMPOS.getTexto(), campos);
         }
         if(isNumberMaiorQueZero(pagina)){
-            map.put(PAGINA, String.valueOf(pagina));
+            map.put(PAGINA.getTexto(), String.valueOf(pagina));
         }
         if(isNumberMaiorQueZero(quantidade)){
-            map.put(QUANTIDADE, String.valueOf(quantidade));
+            map.put(QUANTIDADE.getTexto(), String.valueOf(quantidade));
         }
         return map;
     }

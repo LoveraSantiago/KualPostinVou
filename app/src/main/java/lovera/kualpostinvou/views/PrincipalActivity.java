@@ -64,7 +64,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         inicializarFragmentMap();
         inicializarNavigationDrawer();
 
-        selectItem(1);
+        selectItem(0);
     }
 
     private void inicializarToolbar(){
@@ -76,11 +76,12 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     private void inicializarFragmentMap(){
         this.frag1 = new FragBuscaEstabelecimentos();
+        this.frag2 = new FragBuscaEstabGeoLocalizacao();
 
         this.mapFragments = new HashMap<>();
         this.mapFragments.put(FragRedesSociais.ID_FRAGMENT, new FragRedesSociais());
         this.mapFragments.put(FragBuscaEstabelecimentos.ID_FRAGMENT, this.frag1);
-        this.mapFragments.put(FragBuscaEstabGeoLocalizacao.ID_FRAGMENT, new FragBuscaEstabGeoLocalizacao());
+        this.mapFragments.put(FragBuscaEstabGeoLocalizacao.ID_FRAGMENT, this.frag2);
     }
 
     private void inicializarNavigationDrawer(){
@@ -117,6 +118,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     @Override
     public void selectItem(int position) {
+        if(position == 0) return;
         FragmentMenu fragment = this.mapFragments.get(position);
 
         this.fragmentManager.beginTransaction()
@@ -149,7 +151,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         this.frag1.consumirEstabelecimentos();
     }
 
-    public void consumirEstabelecimentosGeolocalizacao(){
+    public void consumirEstabelecimentosGeolocalizacao(View view){
         this.frag2.consumirEstabelecimentosGeolocalizacao();
     }
 

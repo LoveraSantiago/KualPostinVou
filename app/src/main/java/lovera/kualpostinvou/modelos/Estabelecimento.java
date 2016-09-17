@@ -7,6 +7,7 @@ import java.io.Serializable;
 public class Estabelecimento implements Serializable{
 
     private int codCnes;
+    private String cnpj;
     private String codUnidade;
     private String nomeFantasia;
     private String natureza;
@@ -35,6 +36,14 @@ public class Estabelecimento implements Serializable{
     private String turnoAtendimento;
     private double lat;
     private double longi;
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
 
     public int getCodCnes() {
         return codCnes;
