@@ -17,6 +17,8 @@ public class Google_Coisas implements GoogleApiClient.ConnectionCallbacks, Googl
 
     private final GoogleApiClient mGoogleApiClient;
 
+    private HelperGeolocalizacao helperGps;
+
     public Google_Coisas(Application aplicacao) {
         this.aplicacao = aplicacao;
 
@@ -59,5 +61,13 @@ public class Google_Coisas implements GoogleApiClient.ConnectionCallbacks, Googl
 
     public GoogleApiClient getmGoogleApiClient() {
         return mGoogleApiClient;
+    }
+
+    public HelperGeolocalizacao getHelperGps() {
+        return helperGps;
+    }
+
+    public void setHelperGps(HelperGeolocalizacao helperGps) {
+        this.helperGps = helperGps;
     }
 }

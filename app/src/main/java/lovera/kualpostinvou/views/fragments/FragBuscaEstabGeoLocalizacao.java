@@ -72,10 +72,6 @@ public class FragBuscaEstabGeoLocalizacao extends FragmentMenu implements MsgFro
         }
     }
 
-    public void falhaDeLocalizacao(){
-        setTextToLabel("Posicao não localizada", R.id.f2_infogps);
-    }
-
     private void inicializarSeekBar(){
         this.seekBar = (SeekBar) getView().findViewById(R.id.f2_seekbar);
         this.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

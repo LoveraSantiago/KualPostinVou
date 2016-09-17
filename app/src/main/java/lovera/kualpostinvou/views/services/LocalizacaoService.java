@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import lovera.kualpostinvou.views.redes_sociais.google.Google_Coisas;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 
 public class LocalizacaoService extends Service{
@@ -43,9 +44,7 @@ public class LocalizacaoService extends Service{
 
         @Override
         public void run() {
-//            final HelperGeolocalizacao helper = HelperGeolocalizacao.getHelperGoogleUnicaInstancia();
-            // TODO: 14/09/2016 repensar responsabilidade de geolocalizacao
-            final HelperGeolocalizacao helper = null;
+            final HelperGeolocalizacao helper = Google_Coisas.getGoogleCoisasUnicaInstancia().getHelperGps();
             while(!helper.temLastLocation() && count < 10){
                 try{
                     Thread.sleep(1500);

@@ -1,6 +1,7 @@
 package lovera.kualpostinvou.views;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
@@ -10,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +25,8 @@ import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 import lovera.kualpostinvou.views.fragments.FragmentMenu;
 import lovera.kualpostinvou.views.navigationdrawer.ActionBarDrawerToggleImpl;
 import lovera.kualpostinvou.views.redes_sociais.google.Google_Coisas;
+import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
+import lovera.kualpostinvou.views.services.LocalizacaoService;
 
 public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer{
 
@@ -46,6 +50,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     private FragmentManager fragmentManager;
     private FragBuscaEstabelecimentos frag1;
     private FragBuscaEstabGeoLocalizacao frag2;
+    private FragmentMenu fragAtiva;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -121,12 +126,18 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
         setTitle(fragment.getFragmentTitulo());
         this.mDrawerLayout.closeDrawer(this.mRecyclerView);
+        this.fragAtiva = fragment;
     }
 
     @Override
     public void setTitle(CharSequence title) {
         this.titulo = title.toString();
         getSupportActionBar().setTitle(this.titulo);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        this.fragAtiva.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

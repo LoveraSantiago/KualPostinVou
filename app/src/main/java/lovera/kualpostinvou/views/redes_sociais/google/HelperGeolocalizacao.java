@@ -3,9 +3,7 @@ package lovera.kualpostinvou.views.redes_sociais.google;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
@@ -22,7 +20,7 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao;
 
-public class HelperGeolocalizacao {
+public class HelperGeolocalizacao{
 
     public static int USUARIO_ESCOLHENDO_OPCAO = 0;
     public static int DISPOSITIVO_NAO_TEM_GPS  = 1;
@@ -38,6 +36,16 @@ public class HelperGeolocalizacao {
         this.localizacao = new Localizacao();
 
         this.mGoogleApiClient = Google_Coisas.getGoogleCoisasUnicaInstancia().getmGoogleApiClient();
+        Google_Coisas.getGoogleCoisasUnicaInstancia().setHelperGps(this);
+    }
+
+    public void verLocalizacao() {
+        if(temLastLocation()){
+            this.tempFragment.passarLocalizacao(this.localizacao);
+        }
+        else{
+            popupLigarGps();
+        }
     }
 
     public boolean temLastLocation(){
@@ -52,15 +60,6 @@ public class HelperGeolocalizacao {
             return true;
         }
         return false;
-    }
-
-    public void verLocalizacao() {
-        if(temLastLocation()){
-            this.tempFragment.passarLocalizacao(this.localizacao);
-        }
-        else{
-            popupLigarGps();
-        }
     }
 
     public void passarLocalizacao(){
@@ -81,8 +80,9 @@ public class HelperGeolocalizacao {
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setExpirationDuration(50000);
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest
-                                                        .Builder()
-                                                        .addLocationRequest(mLocationRequest);
+                .Builder()
+                .addLocationRequest(mLocationRequest)
+                .setAlwaysShow(true);
 
         final PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(this.mGoogleApiClient, builder.build());
         result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
@@ -90,7 +90,6 @@ public class HelperGeolocalizacao {
             @Override
             public void onResult(@NonNull LocationSettingsResult locationSettingsResult) {
                 final Status status = locationSettingsResult.getStatus();
-                Log.i("LocationSettings", status.getStatusCode() +"");
                 switch (status.getStatusCode()) {
                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
 
