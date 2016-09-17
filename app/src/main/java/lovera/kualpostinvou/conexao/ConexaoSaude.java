@@ -7,12 +7,14 @@ import lovera.kualpostinvou.conexao.callbacks.CallBackEspecialidades;
 import lovera.kualpostinvou.conexao.callbacks.CallBackEstabelecimento;
 import lovera.kualpostinvou.conexao.callbacks.CallBackEstabelecimentos;
 import lovera.kualpostinvou.conexao.callbacks.CallBackProfissionais;
+import lovera.kualpostinvou.conexao.callbacks.CallBackServicos;
 import lovera.kualpostinvou.conexao.contratos.EndPointsSaude;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
 import lovera.kualpostinvou.conexao.utils.HelperParams_EndPSaude;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Profissional;
+import lovera.kualpostinvou.modelos.Servicos;
 import retrofit.Call;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
@@ -74,5 +76,10 @@ public class ConexaoSaude {
     public void getProfissionais(String codUnidade){
         Call<List<Profissional>> call = this.endpointSaude.getProfissionais(codUnidade);
         call.enqueue(new CallBackProfissionais(this.msg));
+    }
+
+    public void getServicos(String codUnidade){
+        Call<List<Servicos>> call = this.endpointSaude.getServicos(codUnidade);
+        call.enqueue(new CallBackServicos(this.msg));
     }
 }

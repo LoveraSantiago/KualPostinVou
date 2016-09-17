@@ -18,6 +18,7 @@ import java.util.List;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
+import lovera.kualpostinvou.modelos.Servicos;
 import lovera.kualpostinvou.modelos.constantes.Categoria;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
@@ -159,6 +160,11 @@ public class FragBuscaEstabGeoLocalizacao extends FragmentMenu implements MsgFro
     @Override
     public void passarListaDeProfissionais(List<Profissional> profissionais) {
 
+    }
+
+    @Override
+    public void passarListaDeServicos(List<Servicos> servicos) {
+        
     }
 
     @Override

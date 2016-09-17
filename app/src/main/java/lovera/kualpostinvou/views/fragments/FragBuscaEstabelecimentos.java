@@ -19,6 +19,7 @@ import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Profissional;
+import lovera.kualpostinvou.modelos.Servicos;
 import lovera.kualpostinvou.modelos.constantes.Categoria;
 import lovera.kualpostinvou.modelos.constantes.Especialidades;
 import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
@@ -87,6 +88,10 @@ public class FragBuscaEstabelecimentos extends FragmentMenu implements MsgFromCo
 
     }
 
+    @Override
+    public void passarListaDeServicos(List<Servicos> servicos) {
+
+    }
 
     @Override
     public int getFragmentId() {

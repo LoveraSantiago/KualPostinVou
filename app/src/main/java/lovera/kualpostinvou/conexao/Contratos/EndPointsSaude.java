@@ -6,6 +6,7 @@ import java.util.Map;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Profissional;
+import lovera.kualpostinvou.modelos.Servicos;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -30,4 +31,7 @@ public interface EndPointsSaude {
 
     @GET("rest/profissionais/unidade/{codUnidade}")
     Call<List<Profissional>> getProfissionais(@Path("codUnidade") String codUnidade);
+
+    @GET("GET /rest/servicos/unidade/{codUnidade}")
+    Call<List<Servicos>> getServicos(@Path("codUnidade") String codUnidade);
 }
