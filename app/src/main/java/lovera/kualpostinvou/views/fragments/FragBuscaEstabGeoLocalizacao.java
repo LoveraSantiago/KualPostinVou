@@ -164,7 +164,7 @@ public class FragBuscaEstabGeoLocalizacao extends FragmentMenu implements MsgFro
 
     @Override
     public void passarListaDeServicos(List<Servicos> servicos) {
-        
+
     }
 
     @Override

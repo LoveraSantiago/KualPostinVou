@@ -17,6 +17,7 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 
+import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao;
 
@@ -35,8 +36,8 @@ public class HelperGeolocalizacao{
 
         this.localizacao = new Localizacao();
 
-        this.mGoogleApiClient = Google_Coisas.getGoogleCoisasUnicaInstancia().getmGoogleApiClient();
-        Google_Coisas.getGoogleCoisasUnicaInstancia().setHelperGps(this);
+        this.mGoogleApiClient = Aplicacao.getGoogleCoisas().getmGoogleApiClient();
+        Aplicacao.getGoogleCoisas().setHelperGps(this);
     }
 
     public void verLocalizacao() {

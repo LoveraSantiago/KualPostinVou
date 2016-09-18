@@ -8,7 +8,7 @@ import lovera.kualpostinvou.conexao.callbacks.CallBackEstabelecimento;
 import lovera.kualpostinvou.conexao.callbacks.CallBackEstabelecimentos;
 import lovera.kualpostinvou.conexao.callbacks.CallBackProfissionais;
 import lovera.kualpostinvou.conexao.callbacks.CallBackServicos;
-import lovera.kualpostinvou.conexao.contratos.EndPointsSaude;
+import lovera.kualpostinvou.conexao.endpoints.EndPointsSaude;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
 import lovera.kualpostinvou.conexao.utils.HelperParams_EndPSaude;
 import lovera.kualpostinvou.modelos.Especialidade;

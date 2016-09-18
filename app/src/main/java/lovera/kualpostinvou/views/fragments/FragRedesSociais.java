@@ -12,9 +12,12 @@ import android.widget.Toast;
 import com.facebook.AccessToken;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.views.redes_sociais.facebook.Facebook_Coisas;
 
@@ -40,7 +43,7 @@ public class FragRedesSociais extends FragmentMenu {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Facebook_Coisas.getFaceCoisasUnicaInstancia().getCallbackManager().onActivityResult(requestCode, resultCode, data);
+        Aplicacao.getFaceCoisas().getCallbackManager().onActivityResult(requestCode, resultCode, data);
     }
 
     private void inicializarBtnFacebook(){
@@ -52,10 +55,17 @@ public class FragRedesSociais extends FragmentMenu {
         }
 
         this.loginButton = (LoginButton) getView().findViewById(R.id.f3_face_loginbutton);
-        this.loginButton.registerCallback(Facebook_Coisas.getFaceCoisasUnicaInstancia().getCallbackManager(),
+        this.loginButton.registerCallback(Aplicacao.getFaceCoisas().getCallbackManager(),
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
+                        new ProfileTracker(){
+                            @Override
+                            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                                Aplicacao.getFaceCoisas().onLoginFeito();
+                                this.stopTracking();
+                            }
+                        };
                         setTextToLabel("Acabou de logar", R.id.f3_lblstatus_facelogado);
                     }
 

@@ -10,23 +10,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
-import lovera.kualpostinvou.views.navigationdrawer.MyAdapter;
+import lovera.kualpostinvou.modelos.Pessoa;
+import lovera.kualpostinvou.views.navigationdrawer.RecyclerViewAdapterImpl;
 import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabelecimentos;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 import lovera.kualpostinvou.views.fragments.FragmentMenu;
 import lovera.kualpostinvou.views.navigationdrawer.ActionBarDrawerToggleImpl;
+import lovera.kualpostinvou.views.navigationdrawer.PessoaLogada;
+import lovera.kualpostinvou.views.redes_sociais.facebook.Facebook_Coisas;
 import lovera.kualpostinvou.views.redes_sociais.google.Google_Coisas;
-import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
-import lovera.kualpostinvou.views.services.LocalizacaoService;
 
 public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer{
 
@@ -42,10 +45,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private String nome = "Santuga Lovera";
-    private String email = "santiago.lovera@gmail.com";
-    private int profile = R.drawable.icon_people_128;
-
     private Map<Integer, FragmentMenu> mapFragments;
     private FragmentManager fragmentManager;
     private FragBuscaEstabelecimentos frag1;
@@ -57,6 +56,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         super.onCreate(savedInstanceState);
 
         this.tituloOriginal = getTitle().toString();
+
         this.fragmentManager = getFragmentManager();
 
         setContentView(R.layout.activity_principal);
@@ -87,7 +87,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     private void inicializarNavigationDrawer(){
         this.mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         this.mRecyclerView.setHasFixedSize(true);
-        this.mAdapter = new MyAdapter(this.mapFragments, nome, email, profile, this, this);
+        this.mAdapter = new RecyclerViewAdapterImpl(this.mapFragments, this);
         this.mRecyclerView.setAdapter(this.mAdapter);
         this.mLayoutManager = new LinearLayoutManager(this);
         this.mRecyclerView.setLayoutManager(this.mLayoutManager);
@@ -106,14 +106,20 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     @Override
     protected void onStart() {
-        Google_Coisas.getGoogleCoisasUnicaInstancia().connect();
+        Aplicacao.getGoogleCoisas().connect();
         super.onStart();
     }
 
     @Override
     protected void onStop() {
-        Google_Coisas.getGoogleCoisasUnicaInstancia().disconnect();
+        Aplicacao.getGoogleCoisas().disconnect();
         super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Aplicacao.getFaceCoisas().onDestroy();
+        super.onDestroy();
     }
 
     @Override

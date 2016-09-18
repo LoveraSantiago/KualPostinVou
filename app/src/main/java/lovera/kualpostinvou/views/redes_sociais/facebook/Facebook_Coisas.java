@@ -3,37 +3,84 @@ package lovera.kualpostinvou.views.redes_sociais.facebook;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.net.Uri;
 import android.util.Base64;
 import android.util.Log;
 
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
+import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import lovera.kualpostinvou.Aplicacao;
+import lovera.kualpostinvou.modelos.Pessoa;
 
 public class Facebook_Coisas {
 
-    private static Facebook_Coisas faceCoisasUnicaInstancia;
-
     private final Aplicacao aplicacao;
-    CallbackManager callbackManager;
+    private CallbackManager callbackManager;
+    private AccessTokenTracker accessTokenTracker;
 
     public Facebook_Coisas(Aplicacao aplicacao) {
         this.aplicacao = aplicacao;
-        this.faceCoisasUnicaInstancia = this;
-
-        iniciliazarSdk();
+        inicializarSdk();
     }
 
-    private void iniciliazarSdk(){
+    private void inicializarSdk(){
         FacebookSdk.sdkInitialize(this.aplicacao.getApplicationContext());
         AppEventsLogger.activateApp(this.aplicacao);
 
         this.callbackManager = CallbackManager.Factory.create();
+        inicializarAccessTokenTracker();
+    }
+
+    private void inicializarAccessTokenTracker(){
+        this.accessTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
+                if(currentAccessToken == null){
+                    onLogoutFeito();
+                }
+            }
+        };
+        this.accessTokenTracker.startTracking();
+    }
+
+    public void onDestroy(){
+        this.accessTokenTracker.stopTracking();
+    }
+
+    public void onLoginFeito(){
+        Aplicacao.getPessoaLogada().inicializarPessoa();
+    }
+
+    public void onLogoutFeito(){
+        Aplicacao.getPessoaLogada().inicializarPessoa();
+    }
+
+    public void getPessoaLogada(){
+        Profile profile = Profile.getCurrentProfile();
+
+        if(profile != null){
+            Pessoa pessoa = Aplicacao.getPessoaLogada().getPessoa();
+            Log.i("FacebookCoisas", "entrou");
+            pessoa.setNomeCompleto(profile.getName());
+            pessoa.setUriImgPerfil(profile.getProfilePictureUri(150, 150));
+            pessoa.setEmail("apegar@apegar");
+        }
+        else{
+//            Aplicacao.getPessoaLogada().resetPessoa();
+            Log.i("FacebookCoisas", "nao entrou");
+        }
+    }
+
+    public CallbackManager getCallbackManager() {
+        return callbackManager;
     }
 
     public void printHashKey(){
@@ -52,13 +99,5 @@ public class Facebook_Coisas {
             e.printStackTrace();
         }
 
-    }
-
-    public static Facebook_Coisas getFaceCoisasUnicaInstancia() {
-        return faceCoisasUnicaInstancia;
-    }
-
-    public CallbackManager getCallbackManager() {
-        return callbackManager;
     }
 }

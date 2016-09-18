@@ -11,8 +11,6 @@ import com.google.android.gms.location.LocationServices;
 
 public class Google_Coisas implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
-    private static Google_Coisas googleCoisasUnicaInstancia;
-
     private Application aplicacao;
 
     private final GoogleApiClient mGoogleApiClient;
@@ -27,8 +25,6 @@ public class Google_Coisas implements GoogleApiClient.ConnectionCallbacks, Googl
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-
-        googleCoisasUnicaInstancia = this;
     }
 
     public void connect(){
@@ -53,10 +49,6 @@ public class Google_Coisas implements GoogleApiClient.ConnectionCallbacks, Googl
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
-    }
-
-    public static Google_Coisas getGoogleCoisasUnicaInstancia() {
-        return googleCoisasUnicaInstancia;
     }
 
     public GoogleApiClient getmGoogleApiClient() {

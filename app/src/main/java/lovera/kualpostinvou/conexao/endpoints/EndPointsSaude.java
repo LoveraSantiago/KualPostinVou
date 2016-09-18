@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.conexao.contratos;
+package lovera.kualpostinvou.conexao.endpoints;
 
 import java.util.List;
 import java.util.Map;

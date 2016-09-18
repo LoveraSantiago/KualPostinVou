@@ -1,5 +1,8 @@
 package lovera.kualpostinvou.modelos;
 
+import android.net.Uri;
+
+import java.net.URI;
 import java.util.List;
 
 public class Pessoa {
@@ -17,8 +20,17 @@ public class Pessoa {
     private String tokenGoogle;
     private String tokenInstagram;
     private String tokenTwitter;
+    private String email;
+
+    private Uri uriImgPerfil;
+    private int intImgPerfil;
 
     private List<Link> links;
+
+    @Override
+    public String toString() {
+        return "Pessoa { nome: " + this.nomeCompleto + "}";
+    }
 
     public double getLatitude() {
         return latitude;
@@ -122,5 +134,29 @@ public class Pessoa {
 
     public void setLinks(List<Link> links) {
         this.links = links;
+    }
+
+    public Uri getUriImgPerfil() {
+        return uriImgPerfil;
+    }
+
+    public void setUriImgPerfil(Uri uriImgPerfil) {
+        this.uriImgPerfil = uriImgPerfil;
+    }
+
+    public int getIntImgPerfil() {
+        return intImgPerfil;
+    }
+
+    public void setIntImgPerfil(int intImgPerfil) {
+        this.intImgPerfil = intImgPerfil;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
