@@ -20,7 +20,6 @@ public class Aplicacao extends Application{
         faceCoisas = new Facebook_Coisas(this);
 //        faceCoisas.printHashKey();
         pessoaLogada = new PessoaLogada();
-        pessoaLogada.inicializarPessoa();
     }
 
     public static PessoaLogada getPessoaLogada() {

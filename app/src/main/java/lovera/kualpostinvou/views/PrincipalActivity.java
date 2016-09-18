@@ -64,6 +64,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         inicializarFragmentMap();
         inicializarNavigationDrawer();
 
+        Aplicacao.getPessoaLogada().inicializarPessoa();
         selectItem(0);
     }
 

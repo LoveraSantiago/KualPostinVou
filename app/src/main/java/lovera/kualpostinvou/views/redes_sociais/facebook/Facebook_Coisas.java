@@ -1,9 +1,11 @@
 package lovera.kualpostinvou.views.redes_sociais.facebook;
 
+import android.app.Activity;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 
@@ -11,20 +13,33 @@ import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphRequestAsyncTask;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.modelos.Pessoa;
+import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao;
+import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 
 public class Facebook_Coisas {
 
     private final Aplicacao aplicacao;
     private CallbackManager callbackManager;
     private AccessTokenTracker accessTokenTracker;
+
+    private String campoEmail;
 
     public Facebook_Coisas(Aplicacao aplicacao) {
         this.aplicacao = aplicacao;
@@ -43,6 +58,9 @@ public class Facebook_Coisas {
         this.accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
+                if(currentAccessToken != null){
+                    inicializarCamposExtras();
+                }
                 if(currentAccessToken == null){
                     onLogoutFeito();
                 }
@@ -51,12 +69,49 @@ public class Facebook_Coisas {
         this.accessTokenTracker.startTracking();
     }
 
+    private void inicializarCamposExtras(){
+        final GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+                if (object.has("email")) {
+                    try {
+                        campoEmail = object.getString("email");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        request.setParameters(gerarBundleParamsCamposExtras());
+        request.executeAsync();
+    }
+
     public void onDestroy(){
         this.accessTokenTracker.stopTracking();
     }
 
     public void onLoginFeito(){
-        Aplicacao.getPessoaLogada().inicializarPessoa();
+        final GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+                if (object.has("email")) {
+                    try {
+                        campoEmail = object.getString("email");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                Aplicacao.getPessoaLogada().inicializarPessoa();
+            }
+        });
+        request.setParameters(gerarBundleParamsCamposExtras());
+        request.executeAsync();
+    }
+
+    private Bundle gerarBundleParamsCamposExtras(){
+        Bundle params = new Bundle();
+        params.putString("fields", "email");
+        return params;
     }
 
     public void onLogoutFeito(){
@@ -70,12 +125,8 @@ public class Facebook_Coisas {
             Pessoa pessoa = Aplicacao.getPessoaLogada().getPessoa();
             Log.i("FacebookCoisas", "entrou");
             pessoa.setNomeCompleto(profile.getName());
-            pessoa.setUriImgPerfil(profile.getProfilePictureUri(150, 150));
-            pessoa.setEmail("apegar@apegar");
-        }
-        else{
-//            Aplicacao.getPessoaLogada().resetPessoa();
-            Log.i("FacebookCoisas", "nao entrou");
+            pessoa.setUriImgPerfil(profile.getProfilePictureUri(160, 160));
+            pessoa.setEmail(this.campoEmail);
         }
     }
 
@@ -93,11 +144,12 @@ public class Facebook_Coisas {
                 md.update(signature.toByteArray());
                 Log.d("SSL_KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
             }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
+        }
+        catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-
+        catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 }

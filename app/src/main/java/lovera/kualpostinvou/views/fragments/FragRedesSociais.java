@@ -17,6 +17,8 @@ import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import java.util.Arrays;
+
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.views.redes_sociais.facebook.Facebook_Coisas;
@@ -55,6 +57,7 @@ public class FragRedesSociais extends FragmentMenu {
         }
 
         this.loginButton = (LoginButton) getView().findViewById(R.id.f3_face_loginbutton);
+        this.loginButton.setReadPermissions(Arrays.asList("email"));
         this.loginButton.registerCallback(Aplicacao.getFaceCoisas().getCallbackManager(),
                 new FacebookCallback<LoginResult>() {
                     @Override

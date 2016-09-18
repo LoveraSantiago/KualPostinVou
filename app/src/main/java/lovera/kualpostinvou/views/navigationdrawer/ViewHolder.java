@@ -45,10 +45,10 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
         else{
             Aplicacao.getPessoaLogada().setReceptorMsg(this);
             this.Name = (TextView) itemView.findViewById(R.id.nome);
-            this.Name.setId(R.id.ancora);
             this.email = (TextView) itemView.findViewById(R.id.email);
             this.profile = (ImageView) itemView.findViewById(R.id.circleView);
             this.Holderid = 0;
+            headerAlterado();
         }
     }
 
