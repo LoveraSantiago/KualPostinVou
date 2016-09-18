@@ -2,7 +2,7 @@ package lovera.kualpostinvou;
 
 import android.app.Application;
 
-import lovera.kualpostinvou.views.navigationdrawer.PessoaLogada;
+import lovera.kualpostinvou.views.redes_sociais.PessoaLogada;
 import lovera.kualpostinvou.views.redes_sociais.facebook.Facebook_Coisas;
 import lovera.kualpostinvou.views.redes_sociais.google.Google_Coisas;
 

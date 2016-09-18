@@ -1,6 +1,5 @@
 package lovera.kualpostinvou.views.navigationdrawer;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +12,7 @@ import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
 import lovera.kualpostinvou.views.contratos.MsgFromViewHolder;
 import lovera.kualpostinvou.views.fragments.FragmentMenu;
+import lovera.kualpostinvou.views.redes_sociais.PessoaLogada;
 
 public class RecyclerViewAdapterImpl extends RecyclerView.Adapter<ViewHolder> implements MsgFromViewHolder{
 

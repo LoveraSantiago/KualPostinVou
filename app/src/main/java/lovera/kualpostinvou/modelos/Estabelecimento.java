@@ -1,7 +1,5 @@
 package lovera.kualpostinvou.modelos;
 
-import android.os.Parcelable;
-
 import java.io.Serializable;
 
 public class Estabelecimento implements Serializable{

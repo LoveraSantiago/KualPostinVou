@@ -10,26 +10,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
-import lovera.kualpostinvou.modelos.Pessoa;
-import lovera.kualpostinvou.views.navigationdrawer.RecyclerViewAdapterImpl;
 import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabelecimentos;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 import lovera.kualpostinvou.views.fragments.FragmentMenu;
 import lovera.kualpostinvou.views.navigationdrawer.ActionBarDrawerToggleImpl;
-import lovera.kualpostinvou.views.navigationdrawer.PessoaLogada;
-import lovera.kualpostinvou.views.redes_sociais.facebook.Facebook_Coisas;
-import lovera.kualpostinvou.views.redes_sociais.google.Google_Coisas;
+import lovera.kualpostinvou.views.navigationdrawer.RecyclerViewAdapterImpl;
+import lovera.kualpostinvou.views.redes_sociais.PessoaLogada;
 
 public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer{
 
@@ -64,7 +59,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         inicializarFragmentMap();
         inicializarNavigationDrawer();
 
-        Aplicacao.getPessoaLogada().inicializarPessoa();
+        Aplicacao.getPessoaLogada().inicializarPessoa(PessoaLogada.FACEBOOK);
         selectItem(0);
     }
 

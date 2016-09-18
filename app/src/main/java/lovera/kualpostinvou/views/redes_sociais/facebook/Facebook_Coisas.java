@@ -1,10 +1,8 @@
 package lovera.kualpostinvou.views.redes_sociais.facebook;
 
-import android.app.Activity;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -14,24 +12,19 @@ import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
-import com.facebook.GraphRequestAsyncTask;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.modelos.Pessoa;
-import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao;
-import lovera.kualpostinvou.views.fragments.FragRedesSociais;
+import lovera.kualpostinvou.views.redes_sociais.PessoaLogada;
 
 public class Facebook_Coisas {
 
@@ -101,7 +94,7 @@ public class Facebook_Coisas {
                         e.printStackTrace();
                     }
                 }
-                Aplicacao.getPessoaLogada().inicializarPessoa();
+                Aplicacao.getPessoaLogada().inicializarPessoa(PessoaLogada.FACEBOOK);
             }
         });
         request.setParameters(gerarBundleParamsCamposExtras());
@@ -115,7 +108,7 @@ public class Facebook_Coisas {
     }
 
     public void onLogoutFeito(){
-        Aplicacao.getPessoaLogada().inicializarPessoa();
+        Aplicacao.getPessoaLogada().inicializarPessoa(PessoaLogada.NAO_LOGADO);
     }
 
     public void getPessoaLogada(){
@@ -123,7 +116,6 @@ public class Facebook_Coisas {
 
         if(profile != null){
             Pessoa pessoa = Aplicacao.getPessoaLogada().getPessoa();
-            Log.i("FacebookCoisas", "entrou");
             pessoa.setNomeCompleto(profile.getName());
             pessoa.setUriImgPerfil(profile.getProfilePictureUri(160, 160));
             pessoa.setEmail(this.campoEmail);

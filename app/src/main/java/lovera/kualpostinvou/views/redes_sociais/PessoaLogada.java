@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.navigationdrawer;
+package lovera.kualpostinvou.views.redes_sociais;
 
 import android.graphics.Bitmap;
 import android.widget.ImageView;
@@ -9,12 +9,12 @@ import lovera.kualpostinvou.conexao.ConexaoPessoa;
 import lovera.kualpostinvou.conexao.contratos.MsgFromPessoa;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.views.contratos.MsgToViewHolderHeader;
-import lovera.kualpostinvou.views.redes_sociais.facebook.Facebook_Coisas;
 
 public class PessoaLogada implements MsgFromPessoa{
 
-    private static int NAO_LOGADO = 0;
-    private static int FACEBOOK = 1;
+    public static int NAO_LOGADO = 0;
+    public static int FACEBOOK = 1;
+    public static int GOOGLE = 2;
 
     private final Pessoa pessoa;
     private int statusLog;
@@ -26,10 +26,16 @@ public class PessoaLogada implements MsgFromPessoa{
         this.pessoa = new Pessoa();
     }
 
-    public void inicializarPessoa(){
+    public void inicializarPessoa(int redeSocial){
         resetPessoa();
-        Aplicacao.getFaceCoisas().getPessoaLogada();
-        this.statusLog = FACEBOOK;
+        this.statusLog = redeSocial;
+        if(redeSocial == GOOGLE){
+            Aplicacao.getGoogleCoisas().getPessoaLogada();
+
+        }
+        else if(redeSocial == FACEBOOK){
+            Aplicacao.getFaceCoisas().getPessoaLogada();
+        }
 
         if(this.pessoa.getNomeCompleto().equals("Não Logado")){
            this.statusLog = NAO_LOGADO;
@@ -55,8 +61,7 @@ public class PessoaLogada implements MsgFromPessoa{
             imgView.setImageResource(this.pessoa.getIntImgPerfil());
             imgView.invalidate();
         }
-        else if(this.statusLog == FACEBOOK){
-
+        else{
             this.espacoParaImg = imgView;
             ConexaoPessoa conexaoPessoa = new ConexaoPessoa(this);
             conexaoPessoa.download(this.pessoa.getUriImgPerfil());

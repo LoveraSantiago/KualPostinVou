@@ -10,7 +10,6 @@ import java.io.IOException;
 
 import lovera.kualpostinvou.conexao.contratos.MsgFromPessoa;
 import lovera.kualpostinvou.conexao.endpoints.EndPointsPessoa;
-import retrofit.Call;
 import retrofit.Callback;
 import retrofit.GsonConverterFactory;
 import retrofit.Response;

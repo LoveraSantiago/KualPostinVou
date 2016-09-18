@@ -3,6 +3,7 @@ package lovera.kualpostinvou.views.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,15 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.SignInButton;
 
 import java.util.Arrays;
 
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
-import lovera.kualpostinvou.views.redes_sociais.facebook.Facebook_Coisas;
 
 public class FragRedesSociais extends FragmentMenu {
 
@@ -30,6 +34,9 @@ public class FragRedesSociais extends FragmentMenu {
     public static int ICONE = R.drawable.icn3;
 
     private LoginButton loginButton;
+
+    private SignInButton signInButton;
+    private static final int RC_SIGN_IN = 9001;
 
     @Nullable
     @Override
@@ -41,11 +48,18 @@ public class FragRedesSociais extends FragmentMenu {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         inicializarBtnFacebook();
+        inicializarBtnGoogle();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Aplicacao.getFaceCoisas().getCallbackManager().onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RC_SIGN_IN){
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            Aplicacao.getGoogleCoisas().onLoginFeito(result);
+        }
+        else{
+            Aplicacao.getFaceCoisas().getCallbackManager().onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     private void inicializarBtnFacebook(){
@@ -83,6 +97,19 @@ public class FragRedesSociais extends FragmentMenu {
                     }
                 });
     }
+
+    private void inicializarBtnGoogle(){
+        this.signInButton = (SignInButton) getView().findViewById(R.id.f3_google_loginbutton);
+        this.signInButton.setScopes(Aplicacao.getGoogleCoisas().getGso().getScopeArray());
+        this.signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(Aplicacao.getGoogleCoisas().getmGoogleApiClient());
+                getActivity().startActivityForResult(signInIntent, RC_SIGN_IN);
+            }
+        });
+    }
+
 
     public void setTextToLabel(String texto, int id){
         TextView lblCodigo = (TextView) getView().findViewById(id);
