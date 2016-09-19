@@ -59,7 +59,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         inicializarFragmentMap();
         inicializarNavigationDrawer();
 
-        Aplicacao.getPessoaLogada().inicializarPessoa(PessoaLogada.FACEBOOK);
         selectItem(0);
     }
 
@@ -103,6 +102,8 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     @Override
     protected void onStart() {
         Aplicacao.getGoogleCoisas().connect();
+
+        Aplicacao.getPessoaLogada().inicializarPessoa();
         super.onStart();
     }
 

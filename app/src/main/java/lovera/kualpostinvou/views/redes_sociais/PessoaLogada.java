@@ -12,12 +12,7 @@ import lovera.kualpostinvou.views.contratos.MsgToViewHolderHeader;
 
 public class PessoaLogada implements MsgFromPessoa{
 
-    public static int NAO_LOGADO = 0;
-    public static int FACEBOOK = 1;
-    public static int GOOGLE = 2;
-
     private final Pessoa pessoa;
-    private int statusLog;
     private ImageView espacoParaImg;
 
     private MsgToViewHolderHeader receptorMsg;
@@ -26,27 +21,18 @@ public class PessoaLogada implements MsgFromPessoa{
         this.pessoa = new Pessoa();
     }
 
-    public void inicializarPessoa(int redeSocial){
+    public void inicializarPessoa(){
         resetPessoa();
-        this.statusLog = redeSocial;
-        if(redeSocial == GOOGLE){
-            Aplicacao.getGoogleCoisas().getPessoaLogada();
 
-        }
-        else if(redeSocial == FACEBOOK){
-            Aplicacao.getFaceCoisas().getPessoaLogada();
-        }
+        Aplicacao.getGoogleCoisas().getPessoaLogada();
+        Aplicacao.getFaceCoisas().getPessoaLogada();
 
-        if(this.pessoa.getNomeCompleto().equals("Não Logado")){
-           this.statusLog = NAO_LOGADO;
-        }
         if(this.receptorMsg != null){
             this.receptorMsg.headerAlterado();
         }
     }
 
     public void resetPessoa(){
-        this.statusLog = NAO_LOGADO;
         this.pessoa.setNomeCompleto("Não Logado");
         this.pessoa.setIntImgPerfil(R.drawable.icon_people_128);
         this.pessoa.setEmail("temp@temp");
@@ -57,7 +43,7 @@ public class PessoaLogada implements MsgFromPessoa{
     }
 
     public void getImgPessoa(ImageView imgView){
-        if(this.statusLog == NAO_LOGADO){
+        if(this.pessoa.getNomeCompleto() == "Não Logado"){
             imgView.setImageResource(this.pessoa.getIntImgPerfil());
             imgView.invalidate();
         }

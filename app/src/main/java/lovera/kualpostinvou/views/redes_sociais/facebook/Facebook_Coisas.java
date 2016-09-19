@@ -16,6 +16,7 @@ import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,9 +26,10 @@ import java.security.NoSuchAlgorithmException;
 
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.modelos.Pessoa;
-import lovera.kualpostinvou.views.redes_sociais.PessoaLogada;
 
 public class Facebook_Coisas {
+
+    private boolean estouLogado;
 
     private final Aplicacao aplicacao;
     private CallbackManager callbackManager;
@@ -53,9 +55,6 @@ public class Facebook_Coisas {
         this.accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-//                if(currentAccessToken != null){
-//                    inicializarCamposExtras();
-//                }
                 if(currentAccessToken == null){
                     onLogoutFeito();
                 }
@@ -81,6 +80,7 @@ public class Facebook_Coisas {
                 if (object.has("email")) {
                     try {
                         campoEmail = object.getString("email");
+                        estouLogado = true;
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -106,11 +106,14 @@ public class Facebook_Coisas {
                         e.printStackTrace();
                     }
                 }
-                Aplicacao.getPessoaLogada().inicializarPessoa(PessoaLogada.FACEBOOK);
+                Aplicacao.getPessoaLogada().inicializarPessoa();
             }
         });
         request.setParameters(gerarBundleParamsCamposExtras());
         request.executeAsync();
+        this.estouLogado = true;
+
+        Aplicacao.getGoogleCoisas().realizarLogout();
     }
 
     private Bundle gerarBundleParamsCamposExtras(){
@@ -119,18 +122,26 @@ public class Facebook_Coisas {
         return params;
     }
 
+    public void realizarLogout(){
+        if(this.estouLogado){
+            LoginManager.getInstance().logOut();
+            this.estouLogado = false;
+        }
+    }
+
     public void onLogoutFeito(){
-        Aplicacao.getPessoaLogada().inicializarPessoa(PessoaLogada.NAO_LOGADO);
+        Aplicacao.getPessoaLogada().inicializarPessoa();
     }
 
     public void getPessoaLogada(){
-        Profile profile = Profile.getCurrentProfile();
-
-        if(profile != null){
-            Pessoa pessoa = Aplicacao.getPessoaLogada().getPessoa();
-            pessoa.setNomeCompleto(profile.getName());
-            pessoa.setUriImgPerfil(profile.getProfilePictureUri(160, 160));
-            pessoa.setEmail(this.campoEmail);
+        if(this.estouLogado){
+            Profile profile = Profile.getCurrentProfile();
+            if(profile != null){
+                Pessoa pessoa = Aplicacao.getPessoaLogada().getPessoa();
+                pessoa.setNomeCompleto(profile.getName());
+                pessoa.setUriImgPerfil(profile.getProfilePictureUri(160, 160));
+                pessoa.setEmail(this.campoEmail);
+            }
         }
     }
 
