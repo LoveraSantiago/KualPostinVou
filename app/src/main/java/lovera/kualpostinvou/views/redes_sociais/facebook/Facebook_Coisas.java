@@ -14,6 +14,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.appevents.AppEventsLogger;
 
 import org.json.JSONException;
@@ -45,21 +46,32 @@ public class Facebook_Coisas {
 
         this.callbackManager = CallbackManager.Factory.create();
         inicializarAccessTokenTracker();
+        inicializarProfileTracker();
     }
 
     private void inicializarAccessTokenTracker(){
         this.accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-                if(currentAccessToken != null){
-                    inicializarCamposExtras();
-                }
+//                if(currentAccessToken != null){
+//                    inicializarCamposExtras();
+//                }
                 if(currentAccessToken == null){
                     onLogoutFeito();
                 }
             }
         };
         this.accessTokenTracker.startTracking();
+    }
+
+    private void inicializarProfileTracker(){
+        new ProfileTracker(){
+            @Override
+            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                inicializarCamposExtras();
+                this.stopTracking();
+            }
+        };
     }
 
     private void inicializarCamposExtras(){
