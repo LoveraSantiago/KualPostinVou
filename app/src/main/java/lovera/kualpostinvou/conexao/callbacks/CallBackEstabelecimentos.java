@@ -4,9 +4,9 @@ import java.util.List;
 
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
 import lovera.kualpostinvou.modelos.Estabelecimento;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CallBackEstabelecimentos implements Callback<List<Estabelecimento>> {
 
@@ -17,12 +17,12 @@ public class CallBackEstabelecimentos implements Callback<List<Estabelecimento>>
     }
 
     @Override
-    public void onResponse(Response<List<Estabelecimento>> response, Retrofit retrofit) {
-        msg.passarListaDeEstabelecimentos(response.body());
+    public void onResponse(Call<List<Estabelecimento>> call, Response<List<Estabelecimento>> response) {
+        this.msg.passarListaDeEstabelecimentos(response.body());
     }
 
     @Override
-    public void onFailure(Throwable t) {
+    public void onFailure(Call<List<Estabelecimento>> call, Throwable t) {
         t.printStackTrace();
     }
 }

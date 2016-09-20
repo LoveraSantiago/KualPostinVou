@@ -8,16 +8,16 @@ import lovera.kualpostinvou.conexao.callbacks.CallBackEstabelecimento;
 import lovera.kualpostinvou.conexao.callbacks.CallBackEstabelecimentos;
 import lovera.kualpostinvou.conexao.callbacks.CallBackProfissionais;
 import lovera.kualpostinvou.conexao.callbacks.CallBackServicos;
-import lovera.kualpostinvou.conexao.endpoints.EndPointsSaude;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
+import lovera.kualpostinvou.conexao.endpoints.EndPointsSaude;
+import lovera.kualpostinvou.conexao.utils.Factory;
 import lovera.kualpostinvou.conexao.utils.HelperParams_EndPSaude;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.modelos.Servicos;
-import retrofit.Call;
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Retrofit;
 
 public class ConexaoSaude {
 
@@ -27,19 +27,16 @@ public class ConexaoSaude {
 
     private final HelperParams_EndPSaude helper;
 
+    private static String URL_BASE = "http://mobile-aceite.tcu.gov.br/mapa-da-saude/";
+
     public ConexaoSaude(MsgFromConexao msg) {
         this.msg = msg;
 
-        Retrofit retrofit = new Retrofit.Builder()
-                                        .baseUrl(URL_BASE)
-                                        .addConverterFactory(GsonConverterFactory.create())
-                                        .build();
-        this. endpointSaude = retrofit.create(EndPointsSaude.class);
+        Retrofit retrofit = Factory.factoryRetrofit(URL_BASE);
+        this.endpointSaude = retrofit.create(EndPointsSaude.class);
 
         this.helper = new HelperParams_EndPSaude();
     }
-
-    private static String URL_BASE = "http://mobile-aceite.tcu.gov.br/mapa-da-saude/";
 
     public void getEstabelelecimento(String codUnidade){
         Call<Estabelecimento> call = this.endpointSaude.getEstabelecimento(codUnidade);
@@ -61,7 +58,6 @@ public class ConexaoSaude {
      * @param raio * Obrigatório
      */
     public void getEstabelecimentos(double latitude, double longitude, float raio, String texto, String categoria, String campos, int pagina, int quantidade){
-//        String infLongLatRaio = helper.factoryString_LongLatRaio(latitude, longitude, raio);
         Map<String, String> mapParams = helper.factoryMap_EndP_Estabelecimentos(texto, categoria, campos, pagina, quantidade);
 
         Call<List<Estabelecimento>> call = this.endpointSaude.getEstabelecimentos(String.valueOf(latitude), String.valueOf(longitude), String.valueOf(raio) , mapParams);

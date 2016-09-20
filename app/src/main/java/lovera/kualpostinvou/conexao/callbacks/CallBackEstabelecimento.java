@@ -2,11 +2,11 @@ package lovera.kualpostinvou.conexao.callbacks;
 
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
 import lovera.kualpostinvou.modelos.Estabelecimento;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class CallBackEstabelecimento implements Callback<Estabelecimento>{
+public class CallBackEstabelecimento implements Callback<Estabelecimento> {
 
     private final MsgFromConexao msg;
 
@@ -15,12 +15,12 @@ public class CallBackEstabelecimento implements Callback<Estabelecimento>{
     }
 
     @Override
-    public void onResponse(Response<Estabelecimento> response, Retrofit retrofit) {
+    public void onResponse(Call<Estabelecimento> call, Response<Estabelecimento> response) {
         this.msg.passarEstabelecimento(response.body());
     }
 
     @Override
-    public void onFailure(Throwable t) {
+    public void onFailure(Call<Estabelecimento> call, Throwable t) {
         t.printStackTrace();
     }
 }

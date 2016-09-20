@@ -1,14 +1,19 @@
 package lovera.kualpostinvou.conexao.endpoints;
 
-import com.squareup.okhttp.ResponseBody;
 
-import retrofit.Call;
-import retrofit.http.GET;
-import retrofit.http.Url;
+import lovera.kualpostinvou.modelos.Pessoa;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Url;
 
 public interface EndPointsPessoa {
 
     @GET
-    public Call<ResponseBody> downloadImgFace(@Url String url);
+    Call<ResponseBody> downloadImageNaUrl(@Url String url);
 
+    @POST("/rest/pessoas")
+    Call<ResponseBody> cadastrarPessoa(@Body Pessoa pessoa);
 }
