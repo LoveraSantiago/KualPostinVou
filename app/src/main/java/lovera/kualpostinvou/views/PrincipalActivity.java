@@ -44,6 +44,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     private FragmentManager fragmentManager;
     private FragBuscaEstabelecimentos frag1;
     private FragBuscaEstabGeoLocalizacao frag2;
+    private FragRedesSociais frag3;
     private FragmentMenu fragAtiva;
 
     @Override
@@ -72,9 +73,10 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     private void inicializarFragmentMap(){
         this.frag1 = new FragBuscaEstabelecimentos();
         this.frag2 = new FragBuscaEstabGeoLocalizacao();
+        this.frag3 = new FragRedesSociais();
 
         this.mapFragments = new HashMap<>();
-        this.mapFragments.put(FragRedesSociais.ID_FRAGMENT, new FragRedesSociais());
+        this.mapFragments.put(FragRedesSociais.ID_FRAGMENT, this.frag3);
         this.mapFragments.put(FragBuscaEstabelecimentos.ID_FRAGMENT, this.frag1);
         this.mapFragments.put(FragBuscaEstabGeoLocalizacao.ID_FRAGMENT, this.frag2);
     }
@@ -156,6 +158,10 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     public void consumirEstabelecimentosGeolocalizacao(View view){
         this.frag2.consumirEstabelecimentosGeolocalizacao();
+    }
+
+    public void cadastrarPerfilTeste(View view){
+        this.frag3.cadastrarPerfilTeste();
     }
 
     public String getTitulo() {
