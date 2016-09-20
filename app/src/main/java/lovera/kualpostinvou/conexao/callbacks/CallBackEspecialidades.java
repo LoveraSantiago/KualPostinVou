@@ -4,11 +4,11 @@ import java.util.List;
 
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
 import lovera.kualpostinvou.modelos.Especialidade;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class CallBackEspecialidades implements Callback<List<Especialidade>>{
+public class CallBackEspecialidades implements Callback<List<Especialidade>> {
 
     private final MsgFromConexao msg;
 
@@ -17,12 +17,12 @@ public class CallBackEspecialidades implements Callback<List<Especialidade>>{
     }
 
     @Override
-    public void onResponse(Response<List<Especialidade>> response, Retrofit retrofit) {
+    public void onResponse(Call<List<Especialidade>> call, Response<List<Especialidade>> response) {
         this.msg.passarListaDeEspecialidades(response.body());
     }
 
     @Override
-    public void onFailure(Throwable t) {
-        t.printStackTrace();
+    public void onFailure(Call<List<Especialidade>> call, Throwable throwable) {
+        throwable.printStackTrace();
     }
 }
