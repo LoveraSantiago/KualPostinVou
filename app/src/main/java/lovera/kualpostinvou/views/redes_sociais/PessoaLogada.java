@@ -11,7 +11,7 @@ import lovera.kualpostinvou.views.contratos.MsgToViewHolderHeader;
 
 public class PessoaLogada{
 
-    private String token
+    private String token;
 
     private final Pessoa pessoa;
     private ImageView espacoParaImg;

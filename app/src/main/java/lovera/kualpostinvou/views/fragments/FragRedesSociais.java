@@ -29,7 +29,7 @@ import lovera.kualpostinvou.conexao.ConexaoPessoa;
 import lovera.kualpostinvou.modelos.Link;
 import lovera.kualpostinvou.modelos.Pessoa;
 
-public class FragRedesSociais extends FragmentMenu implements MsgFromPessoa{
+public class FragRedesSociais extends FragmentMenu {
 
     public static String TITULO_FRAGMENT = "Redes Sociais";
     public static int ID_FRAGMENT = 3;
@@ -155,10 +155,7 @@ public class FragRedesSociais extends FragmentMenu implements MsgFromPessoa{
         pessoa.setTokenFacebook("IDFACETESTE");
         pessoa.setTokenGoogle("IDGOOGLETESTE");
 
-        ConexaoPessoa conexao = new ConexaoPessoa(this);
+        ConexaoPessoa conexao = new ConexaoPessoa();
         conexao.cadastrarPessoa(pessoa);
     }
-
-    @Override
-    public void passarBitmapImg(Bitmap bitmap) {}
 }
