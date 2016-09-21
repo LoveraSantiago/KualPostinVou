@@ -7,6 +7,7 @@ import android.util.Log;
 import java.io.IOException;
 import java.util.List;
 
+import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarPessoa;
 import lovera.kualpostinvou.conexao.callbacks.CallBackImgPerfil;
 import lovera.kualpostinvou.conexao.contratos.MsgFromPessoa;
 import lovera.kualpostinvou.conexao.endpoints.EndPointsPessoa;
@@ -44,37 +45,7 @@ public class ConexaoPessoa {
 
     public void cadastrarPessoa(Pessoa pessoa){
         Call<ResponseBody> call = this.endpointPessoa.cadastrarPessoa(pessoa);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.isSuccessful()){
-                    String location = response.headers().get("location");
-                    Log.i("Location", location);
-                }
-                else{
-                    try{
-                        if(response.errorBody().string().toString().equals("Usuário já cadastrado ou desativado")){
-                            Log.i("Cadastro", "Usuário já cadastrado ou desativado");
-                            return;
-                        }
-                    }
-                    catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    ErrorObj errorObj = ErrorUtils.parseError(retrofit, response);
-                    List<MsgErrorObj> mensagens = errorObj.getMensagens();
-                    for(MsgErrorObj error : mensagens){
-                        Log.i("Cadastro", error.getTexto());
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable throwable) {
-
-            }
-        });
+        call.enqueue(new CallBackCadastrarPessoa(this.retrofit));
     }
 
 }

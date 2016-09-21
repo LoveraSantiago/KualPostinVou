@@ -7,6 +7,9 @@ import java.util.List;
 
 public class Pessoa {
 
+    //Talvez quebre o insert de pessoa por mandar valor 0
+    private int codigo;
+
     private double latitude;
     private double longitude;
 
@@ -160,5 +163,13 @@ public class Pessoa {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 }

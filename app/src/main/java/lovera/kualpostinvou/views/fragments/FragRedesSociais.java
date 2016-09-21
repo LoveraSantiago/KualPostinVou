@@ -135,6 +135,8 @@ public class FragRedesSociais extends FragmentMenu implements MsgFromPessoa{
     }
 
     public void cadastrarPerfilTeste(){
+
+        //IGNORA COMPLETAMENTE ESSE CARA
         Link link = new Link();
         link.setHref("https://scontent.xx.fbcdn.net/v/t1.0-1/p160x160/14330154_1381541598540623_4482186030160339709_n.jpg?oh=78004da10af591005cc424de8a5ebf27&oe=5884C3B4");
         link.setRel("nome imagem");
