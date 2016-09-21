@@ -3,6 +3,8 @@ package lovera.kualpostinvou.views.redes_sociais;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
+import java.util.Arrays;
+
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoPessoa;
@@ -28,9 +30,26 @@ public class PessoaLogada{
         Aplicacao.getGoogleCoisas().getPessoaLogada();
         Aplicacao.getFaceCoisas().getPessoaLogada();
 
+        factoryTestePessoa();
+
         if(this.receptorMsg != null){
             this.receptorMsg.headerAlterado();
         }
+    }
+
+    public void factoryTestePessoa(){
+        String numero = "0";
+        pessoa.setCEP("05172-030");
+        pessoa.setBiografia("biografiatemp");
+        pessoa.setDataNascimento("1981-06-25");
+        pessoa.setEmail("santuga@gmail" + numero);
+        pessoa.setLatitude(20.20);
+        pessoa.setLongitude(19.19);
+        pessoa.setNomeCompleto("Santuga Lovera" + numero);
+        pessoa.setNomeUsuario("Santuga" + numero);
+        pessoa.setSexo("M");
+        pessoa.setTokenFacebook("IDFACETESTE" + numero);
+        pessoa.setTokenGoogle("IDGOOGLETESTE" + numero);
     }
 
     public void resetPessoa(){
@@ -44,7 +63,7 @@ public class PessoaLogada{
     }
 
     public void getImgPessoa(ImageView imgView){
-        if(this.pessoa.getNomeCompleto() == "Não Logado"){
+        if(isPessoaLogado()){
             imgView.setImageResource(this.pessoa.getIntImgPerfil());
             imgView.invalidate();
         }
@@ -62,6 +81,14 @@ public class PessoaLogada{
 
     public void setReceptorMsg(MsgToViewHolderHeader receptorMsg) {
         this.receptorMsg = receptorMsg;
+    }
+
+    public boolean isPessoaLogado(){
+        return this.pessoa.getNomeCompleto().equals("Não Logado");
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
 

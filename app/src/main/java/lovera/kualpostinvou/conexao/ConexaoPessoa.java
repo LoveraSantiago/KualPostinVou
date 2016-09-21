@@ -3,6 +3,7 @@ package lovera.kualpostinvou.conexao;
 import android.net.Uri;
 
 
+import java.io.IOException;
 import java.util.Map;
 
 import lovera.kualpostinvou.conexao.callbacks.CallBackAutenticar;
@@ -11,9 +12,11 @@ import lovera.kualpostinvou.conexao.callbacks.CallBackImgPerfil;
 import lovera.kualpostinvou.conexao.endpoints.EndPointsPessoa;
 import lovera.kualpostinvou.conexao.utils.Factory;
 import lovera.kualpostinvou.conexao.utils.HelperParams_EndPessoa;
+import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Pessoa;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class ConexaoPessoa {
@@ -44,9 +47,22 @@ public class ConexaoPessoa {
         call.enqueue(new CallBackCadastrarPessoa(this.retrofit));
     }
 
+    //TODO:Candidato a ser removido 21/09/2016
     public void autenticar(Pessoa pessoa){
         Map<String, String> mapParams = this.helper.factoryMap_EndP_Autenticar(null, pessoa.getEmail(), null, pessoa.getTokenFacebook(), pessoa.getTokenGoogle(), pessoa.getTokenTwitter());
         Call<ResponseBody> call = this.endpointPessoa.autenticar(mapParams);
         call.enqueue(new CallBackAutenticar(this.retrofit));
+    }
+
+    public void autenticar(Pessoa pessoa, StringBuilder token, ErrorObj error){
+        Map<String, String> mapParams = this.helper.factoryMap_EndP_Autenticar(null, pessoa.getEmail(), null, pessoa.getTokenFacebook(), pessoa.getTokenGoogle(), pessoa.getTokenTwitter());
+        Call<ResponseBody> call = this.endpointPessoa.autenticar(mapParams);
+        try {
+            Response<ResponseBody> response = call.execute();
+            CallBackAutenticar callBackAutenticar = new CallBackAutenticar(this.retrofit);
+            callBackAutenticar.procedimentoSincrono(response, token, error);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

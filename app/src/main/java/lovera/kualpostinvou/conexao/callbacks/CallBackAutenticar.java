@@ -23,21 +23,31 @@ public class CallBackAutenticar implements Callback<ResponseBody> {
 
     @Override
     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-        if(response.isSuccessful()){
-            String token = response.headers().get("apptoken");
-
-        }
-        else{
-            ErrorObj errorObj = ErrorUtils.parseError(retrofit, response);
-            List<MsgErrorObj> mensagens = errorObj.getMensagens();
-            for(MsgErrorObj error : mensagens){
-                Log.i("Cadastro", error.getTexto());
-            }
-        }
+        procedimentoComum(response, new StringBuilder(), new ErrorObj());
     }
 
     @Override
     public void onFailure(Call<ResponseBody> call, Throwable t) {
         t.printStackTrace();
+    }
+
+    public void procedimentoSincrono(Response<ResponseBody> response, StringBuilder token, ErrorObj error){
+        procedimentoComum(response, token, error);
+    }
+
+    private void procedimentoComum(Response<ResponseBody> response, StringBuilder token, ErrorObj error){
+        token.setLength(0);
+
+        if(response.isSuccessful()){
+            token.append(response.headers().get("apptoken"));
+        }
+        else{
+            ErrorObj errorObj = ErrorUtils.parseError(this.retrofit, response);
+            List<MsgErrorObj> mensagens = errorObj.getMensagens();
+            for(MsgErrorObj errorIt : mensagens){
+                Log.i("Cadastro", errorIt.getTexto());
+            }
+            ErrorUtils.cloneErrorObjeto(error, errorObj);
+        }
     }
 }

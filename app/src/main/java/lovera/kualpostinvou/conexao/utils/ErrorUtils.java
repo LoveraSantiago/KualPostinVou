@@ -24,4 +24,14 @@ public class ErrorUtils {
         return errorObj;
     }
 
+    public static ErrorObj cloneErrorObjeto(ErrorObj retorno, ErrorObj modelo){
+        retorno.setDadosTecnicos(modelo.getDadosTecnicos());
+        retorno.setMensagens(modelo.getMensagens());
+        retorno.setReasonPhrase(modelo.getReasonPhrase());
+        retorno.setStatusCode(modelo.getStatusCode());
+        retorno.setUrl(modelo.getUrl());
+        retorno.setSiglaErro(modelo.getSiglaErro());
+        return retorno;
+    }
+
 }
