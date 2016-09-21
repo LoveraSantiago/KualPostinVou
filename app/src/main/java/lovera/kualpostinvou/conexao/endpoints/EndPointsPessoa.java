@@ -21,5 +21,5 @@ public interface EndPointsPessoa {
     Call<ResponseBody> cadastrarPessoa(@Body Pessoa pessoa);
 
     @GET("appCivicoRS/rest/pessoas/autenticar")
-    Call<Pessoa> autenticar(@QueryMap Map<String, String> params);
+    Call<ResponseBody> autenticar(@QueryMap Map<String, String> params);
 }

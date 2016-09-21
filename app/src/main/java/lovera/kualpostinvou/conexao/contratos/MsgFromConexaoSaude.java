@@ -7,7 +7,7 @@ import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.modelos.Servicos;
 
-public interface MsgFromConexao {
+public interface MsgFromConexaoSaude {
 
     void passarListaDeEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos);
     void passarEstabelecimento(Estabelecimento estabelecimento);

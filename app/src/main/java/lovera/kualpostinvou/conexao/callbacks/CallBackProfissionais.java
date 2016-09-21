@@ -2,7 +2,7 @@ package lovera.kualpostinvou.conexao.callbacks;
 
 import java.util.List;
 
-import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
+import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoSaude;
 import lovera.kualpostinvou.modelos.Profissional;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -10,9 +10,9 @@ import retrofit2.Response;
 
 public class CallBackProfissionais implements Callback<List<Profissional>> {
 
-    private final MsgFromConexao msg;
+    private final MsgFromConexaoSaude msg;
 
-    public CallBackProfissionais(MsgFromConexao msg) {
+    public CallBackProfissionais(MsgFromConexaoSaude msg) {
         this.msg = msg;
     }
 

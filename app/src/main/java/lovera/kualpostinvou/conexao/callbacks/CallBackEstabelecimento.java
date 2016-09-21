@@ -1,6 +1,6 @@
 package lovera.kualpostinvou.conexao.callbacks;
 
-import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
+import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoSaude;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -8,9 +8,9 @@ import retrofit2.Response;
 
 public class CallBackEstabelecimento implements Callback<Estabelecimento> {
 
-    private final MsgFromConexao msg;
+    private final MsgFromConexaoSaude msg;
 
-    public CallBackEstabelecimento(MsgFromConexao msg) {
+    public CallBackEstabelecimento(MsgFromConexaoSaude msg) {
         this.msg = msg;
     }
 

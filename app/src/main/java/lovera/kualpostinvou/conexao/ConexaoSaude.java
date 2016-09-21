@@ -8,7 +8,7 @@ import lovera.kualpostinvou.conexao.callbacks.CallBackEstabelecimento;
 import lovera.kualpostinvou.conexao.callbacks.CallBackEstabelecimentos;
 import lovera.kualpostinvou.conexao.callbacks.CallBackProfissionais;
 import lovera.kualpostinvou.conexao.callbacks.CallBackServicos;
-import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
+import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoSaude;
 import lovera.kualpostinvou.conexao.endpoints.EndPointsSaude;
 import lovera.kualpostinvou.conexao.utils.Factory;
 import lovera.kualpostinvou.conexao.utils.HelperParams_EndPSaude;
@@ -21,7 +21,7 @@ import retrofit2.Retrofit;
 
 public class ConexaoSaude {
 
-    private final MsgFromConexao msg;
+    private final MsgFromConexaoSaude msg;
 
     private final EndPointsSaude endpointSaude;
 
@@ -29,7 +29,7 @@ public class ConexaoSaude {
 
     private static String URL_BASE = "http://mobile-aceite.tcu.gov.br/mapa-da-saude/";
 
-    public ConexaoSaude(MsgFromConexao msg) {
+    public ConexaoSaude(MsgFromConexaoSaude msg) {
         this.msg = msg;
 
         Retrofit retrofit = Factory.factoryRetrofit(URL_BASE);

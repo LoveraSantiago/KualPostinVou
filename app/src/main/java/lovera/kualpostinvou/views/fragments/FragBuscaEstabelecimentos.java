@@ -15,7 +15,7 @@ import java.util.List;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
-import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
+import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoSaude;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Profissional;
@@ -23,7 +23,7 @@ import lovera.kualpostinvou.modelos.Servicos;
 import lovera.kualpostinvou.modelos.constantes.Especialidades;
 import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
 
-public class FragBuscaEstabelecimentos extends FragmentMenu implements MsgFromConexao{
+public class FragBuscaEstabelecimentos extends FragmentMenu implements MsgFromConexaoSaude {
 
     public static String TITULO_FRAGMENT = "Estabelecimentos";
     public static int ID_FRAGMENT = 1;

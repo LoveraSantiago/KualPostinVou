@@ -17,7 +17,7 @@ import java.util.List;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
-import lovera.kualpostinvou.conexao.contratos.MsgFromConexao;
+import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoSaude;
 import lovera.kualpostinvou.modelos.Servicos;
 import lovera.kualpostinvou.modelos.constantes.Categoria;
 import lovera.kualpostinvou.modelos.Especialidade;
@@ -28,7 +28,7 @@ import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 import lovera.kualpostinvou.views.services.LocalizacaoService;
 
-public class FragBuscaEstabGeoLocalizacao extends FragmentMenu implements MsgFromConexao {
+public class FragBuscaEstabGeoLocalizacao extends FragmentMenu implements MsgFromConexaoSaude {
 
     public static String TITULO_FRAGMENT = "Estabelecimentos por GPS";
     public static int ID_FRAGMENT = 2;

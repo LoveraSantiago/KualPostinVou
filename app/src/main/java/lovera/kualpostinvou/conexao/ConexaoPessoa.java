@@ -6,13 +6,16 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
+import lovera.kualpostinvou.conexao.callbacks.CallBackAutenticar;
 import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarPessoa;
 import lovera.kualpostinvou.conexao.callbacks.CallBackImgPerfil;
 import lovera.kualpostinvou.conexao.contratos.MsgFromPessoa;
 import lovera.kualpostinvou.conexao.endpoints.EndPointsPessoa;
 import lovera.kualpostinvou.conexao.utils.ErrorUtils;
 import lovera.kualpostinvou.conexao.utils.Factory;
+import lovera.kualpostinvou.conexao.utils.HelperParams_EndPessoa;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.modelos.constantes.MsgErrorObj;
@@ -27,12 +30,16 @@ public class ConexaoPessoa {
     private static String URL_BASE = "http://mobile-aceite.tcu.gov.br";
 
     private final Retrofit retrofit;
+
     private final EndPointsPessoa endpointPessoa;
+
+    private final HelperParams_EndPessoa helper;
 
     private MsgFromPessoa msg;
 
     public ConexaoPessoa(MsgFromPessoa msg) {
         this.msg = msg;
+        this.helper = new HelperParams_EndPessoa();
 
         this.retrofit = Factory.factoryRetrofit(URL_BASE);
         this.endpointPessoa = retrofit.create(EndPointsPessoa.class);
@@ -48,9 +55,9 @@ public class ConexaoPessoa {
         call.enqueue(new CallBackCadastrarPessoa(this.retrofit));
     }
 
-    public void autenticar(){
-
+    public void autenticar(Pessoa pessoa){
+        Map<String, String> mapParams = this.helper.factoryMap_EndP_Autenticar(null, pessoa.getEmail(), null, pessoa.getTokenFacebook(), pessoa.getTokenGoogle(), pessoa.getTokenTwitter());
+        Call<ResponseBody> call = this.endpointPessoa.autenticar(mapParams);
+        call.enqueue(new CallBackAutenticar(this.retrofit));
     }
-
-
 }
