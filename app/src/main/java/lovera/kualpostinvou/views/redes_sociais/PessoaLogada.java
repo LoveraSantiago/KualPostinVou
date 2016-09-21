@@ -6,11 +6,10 @@ import android.widget.ImageView;
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoPessoa;
-import lovera.kualpostinvou.conexao.contratos.MsgFromPessoa;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.views.contratos.MsgToViewHolderHeader;
 
-public class PessoaLogada implements MsgFromPessoa{
+public class PessoaLogada{
 
     private final Pessoa pessoa;
     private ImageView espacoParaImg;
@@ -49,12 +48,11 @@ public class PessoaLogada implements MsgFromPessoa{
         }
         else{
             this.espacoParaImg = imgView;
-            ConexaoPessoa conexaoPessoa = new ConexaoPessoa(this);
+            ConexaoPessoa conexaoPessoa = new ConexaoPessoa();
             conexaoPessoa.downloadImageNaUrl(this.pessoa.getUriImgPerfil());
         }
     }
 
-    @Override
     public void passarBitmapImg(Bitmap bitmap) {
         this.espacoParaImg.setImageBitmap(bitmap);
         this.espacoParaImg.invalidate();

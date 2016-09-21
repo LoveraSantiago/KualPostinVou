@@ -26,7 +26,6 @@ import java.util.Arrays;
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoPessoa;
-import lovera.kualpostinvou.conexao.contratos.MsgFromPessoa;
 import lovera.kualpostinvou.modelos.Link;
 import lovera.kualpostinvou.modelos.Pessoa;
 

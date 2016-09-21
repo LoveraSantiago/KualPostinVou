@@ -1,28 +1,19 @@
 package lovera.kualpostinvou.conexao;
 
 import android.net.Uri;
-import android.util.Log;
 
 
-import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import lovera.kualpostinvou.conexao.callbacks.CallBackAutenticar;
 import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarPessoa;
 import lovera.kualpostinvou.conexao.callbacks.CallBackImgPerfil;
-import lovera.kualpostinvou.conexao.contratos.MsgFromPessoa;
 import lovera.kualpostinvou.conexao.endpoints.EndPointsPessoa;
-import lovera.kualpostinvou.conexao.utils.ErrorUtils;
 import lovera.kualpostinvou.conexao.utils.Factory;
 import lovera.kualpostinvou.conexao.utils.HelperParams_EndPessoa;
-import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Pessoa;
-import lovera.kualpostinvou.modelos.constantes.MsgErrorObj;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class ConexaoPessoa {
@@ -35,10 +26,8 @@ public class ConexaoPessoa {
 
     private final HelperParams_EndPessoa helper;
 
-    private MsgFromPessoa msg;
 
-    public ConexaoPessoa(MsgFromPessoa msg) {
-        this.msg = msg;
+    public ConexaoPessoa() {
         this.helper = new HelperParams_EndPessoa();
 
         this.retrofit = Factory.factoryRetrofit(URL_BASE);
@@ -47,7 +36,7 @@ public class ConexaoPessoa {
 
     public void downloadImageNaUrl(Uri uri){
         this.endpointPessoa.downloadImageNaUrl(uri.toString())
-                      .enqueue(new CallBackImgPerfil(this.msg));
+                      .enqueue(new CallBackImgPerfil());
     }
 
     public void cadastrarPessoa(Pessoa pessoa){
