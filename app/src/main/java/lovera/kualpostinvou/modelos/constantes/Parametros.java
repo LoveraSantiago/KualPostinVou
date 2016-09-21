@@ -9,7 +9,14 @@ public enum Parametros {
     QUANTIDADE("quantidade"),
     TEXTO("texto"),
     CATEGORIA("categoria"),
-    ESPECIALIDADE("especialidade");
+    ESPECIALIDADE("especialidade"),
+
+    APPIDENTIFIER("appIdentifier"),
+    EMAIL("email"),
+    SENHA("senha"),
+    FACEBOOKTOKEN("facebookToken"),
+    GOOGLETOKEN("googleToken"),
+    TWITTERTOKEN("twitterToken");
 
     private String texto;
 

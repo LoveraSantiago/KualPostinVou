@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import static lovera.kualpostinvou.modelos.constantes.Parametros.*;
+import static lovera.kualpostinvou.conexao.utils.HelperParamsUtils.*;
 
 public class HelperParams_EndPSaude {
 
@@ -57,28 +58,4 @@ public class HelperParams_EndPSaude {
         }
         return map;
     }
-
-    public String factoryString_LongLatRaio(double latitude, double longitude, int raio){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("latitude/" + String.valueOf(latitude) + "/")
-                     .append("longitude/" + String.valueOf(longitude) + "/")
-                     .append("raio/" + String.valueOf(raio));
-        return stringBuilder.toString();
-    }
-
-    private boolean isStringNotNullOrEmpty(String texto){
-        if(texto == null || texto.isEmpty()) return false;
-        return true;
-    }
-
-    private boolean isListNotNullOrEmpty(List lista){
-        if(lista == null || lista.size() <= 0) return false;
-        return true;
-    }
-
-    private boolean isNumberMaiorQueZero(int numero){
-        if(numero > 0) return true;
-        return false;
-    }
-
 }

@@ -48,4 +48,9 @@ public class ConexaoPessoa {
         call.enqueue(new CallBackCadastrarPessoa(this.retrofit));
     }
 
+    public void autenticar(){
+
+    }
+
+
 }
