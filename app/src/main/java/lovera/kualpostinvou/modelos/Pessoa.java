@@ -23,7 +23,7 @@ public class Pessoa {
     private String email;
 
     private Uri uriImgPerfil;
-    private int intImgPerfil;
+    private transient int intImgPerfil;
 
     private List<Link> links;
 
@@ -52,8 +52,9 @@ public class Pessoa {
         return CEP;
     }
 
+    //TODO: validação de ate oito digitos
     public void setCEP(String CEP) {
-        this.CEP = CEP;
+        this.CEP = CEP.replace("-", "");
     }
 
     public String getBiografia() {
@@ -68,8 +69,9 @@ public class Pessoa {
         return dataNascimento;
     }
 
+    //TODO: data de nascimento 1981-06-25
     public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
+        this.dataNascimento = dataNascimento.replace("/", "-");
     }
 
     public String getNomeCompleto() {

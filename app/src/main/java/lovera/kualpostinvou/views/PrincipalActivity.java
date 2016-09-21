@@ -124,6 +124,9 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     @Override
     public void selectItem(int position) {
         if(position == 0) return;
+
+        this.mDrawerLayout.closeDrawer(this.mRecyclerView);
+
         FragmentMenu fragment = this.mapFragments.get(position);
 
         this.fragmentManager.beginTransaction()
@@ -132,7 +135,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
                             .commit();
 
         setTitle(fragment.getFragmentTitulo());
-        this.mDrawerLayout.closeDrawer(this.mRecyclerView);
         this.fragAtiva = fragment;
     }
 

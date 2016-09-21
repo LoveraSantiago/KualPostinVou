@@ -18,7 +18,7 @@ public class HelperParams_EndPSaude {
         if(isStringNotNullOrEmpty(uf)){
             map.put(UF.getTexto(), uf);
         }
-        if(isStringNotNullOrEmpty(especialidade)){
+        if(isStringNotNullOrEmpty(especialidade) && !especialidade.equals("todas")){
             map.put(ESPECIALIDADE.getTexto(), especialidade);
         }
         if(isListNotNullOrEmpty(campos)){
@@ -43,7 +43,7 @@ public class HelperParams_EndPSaude {
         if(isStringNotNullOrEmpty(texto)){
             map.put(TEXTO.getTexto(), texto);
         }
-        if(isStringNotNullOrEmpty(categoria)){
+        if(isStringNotNullOrEmpty(categoria) && !categoria.equals("todas")){
             map.put(CATEGORIA.getTexto(), categoria);
         }
         if(isStringNotNullOrEmpty(campos)){

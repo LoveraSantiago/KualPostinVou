@@ -50,7 +50,7 @@ public class PessoaLogada implements MsgFromPessoa{
         else{
             this.espacoParaImg = imgView;
             ConexaoPessoa conexaoPessoa = new ConexaoPessoa(this);
-            conexaoPessoa.download(this.pessoa.getUriImgPerfil());
+            conexaoPessoa.downloadImageNaUrl(this.pessoa.getUriImgPerfil());
         }
     }
 

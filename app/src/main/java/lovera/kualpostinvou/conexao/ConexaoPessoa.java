@@ -4,6 +4,9 @@ import android.net.Uri;
 import android.util.Log;
 
 
+import java.io.IOException;
+import java.util.List;
+
 import lovera.kualpostinvou.conexao.callbacks.CallBackImgPerfil;
 import lovera.kualpostinvou.conexao.contratos.MsgFromPessoa;
 import lovera.kualpostinvou.conexao.endpoints.EndPointsPessoa;
@@ -11,6 +14,7 @@ import lovera.kualpostinvou.conexao.utils.ErrorUtils;
 import lovera.kualpostinvou.conexao.utils.Factory;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Pessoa;
+import lovera.kualpostinvou.modelos.constantes.MsgErrorObj;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,7 +23,7 @@ import retrofit2.Retrofit;
 
 public class ConexaoPessoa {
 
-    private static String URL_BASE = "http://mobile-aceite.tcu.gov.br/mapa-da-saude/";
+    private static String URL_BASE = "http://mobile-aceite.tcu.gov.br";
 
     private final Retrofit retrofit;
     private final EndPointsPessoa endpointPessoa;
@@ -33,10 +37,8 @@ public class ConexaoPessoa {
         this.endpointPessoa = retrofit.create(EndPointsPessoa.class);
     }
 
-    public void download(Uri uri){
-        Retrofit retrofit = Factory.factoryRetrofit(uri.toString());
-        EndPointsPessoa endPointPessoa_outraurlbase = retrofit.create(EndPointsPessoa.class);
-        endPointPessoa_outraurlbase.downloadImageNaUrl(uri.toString())
+    public void downloadImageNaUrl(Uri uri){
+        this.endpointPessoa.downloadImageNaUrl(uri.toString())
                       .enqueue(new CallBackImgPerfil(this.msg));
     }
 
@@ -50,7 +52,21 @@ public class ConexaoPessoa {
                     Log.i("Location", location);
                 }
                 else{
+                    try{
+                        if(response.errorBody().string().toString().equals("Usuário já cadastrado ou desativado")){
+                            Log.i("Cadastro", "Usuário já cadastrado ou desativado");
+                            return;
+                        }
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                     ErrorObj errorObj = ErrorUtils.parseError(retrofit, response);
+                    List<MsgErrorObj> mensagens = errorObj.getMensagens();
+                    for(MsgErrorObj error : mensagens){
+                        Log.i("Cadastro", error.getTexto());
+                    }
                 }
             }
 

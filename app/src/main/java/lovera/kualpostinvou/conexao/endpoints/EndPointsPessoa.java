@@ -14,6 +14,6 @@ public interface EndPointsPessoa {
     @GET
     Call<ResponseBody> downloadImageNaUrl(@Url String url);
 
-    @POST("/rest/pessoas")
+    @POST("appCivicoRS/rest/pessoas")
     Call<ResponseBody> cadastrarPessoa(@Body Pessoa pessoa);
 }

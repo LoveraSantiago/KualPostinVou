@@ -54,7 +54,6 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
     @Override
     public void headerAlterado() {
         Pessoa pessoa = Aplicacao.getPessoaLogada().getPessoa();
-        Log.i("pessoalog", pessoa.toString());
         this.Name.setText(pessoa.getNomeCompleto());
         this.email.setText(pessoa.getEmail());
         Aplicacao.getPessoaLogada().getImgPessoa(this.profile);
