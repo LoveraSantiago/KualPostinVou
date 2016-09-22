@@ -19,7 +19,7 @@ import lovera.kualpostinvou.modelos.Servicos;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 
-public class ConexaoSaude {
+public class ConexaoMetaModelo {
 
     private final MsgFromConexaoSaude msg;
 
@@ -29,7 +29,7 @@ public class ConexaoSaude {
 
     private static String URL_BASE = "http://mobile-aceite.tcu.gov.br/mapa-da-saude/";
 
-    public ConexaoSaude(MsgFromConexaoSaude msg) {
+    public ConexaoMetaModelo(MsgFromConexaoSaude msg) {
         this.msg = msg;
 
         Retrofit retrofit = Factory.factoryRetrofit(URL_BASE);

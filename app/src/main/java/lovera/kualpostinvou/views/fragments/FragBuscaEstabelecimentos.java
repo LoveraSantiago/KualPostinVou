@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import lovera.kualpostinvou.R;
-import lovera.kualpostinvou.conexao.ConexaoSaude;
+import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoSaude;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
@@ -56,8 +56,8 @@ public class FragBuscaEstabelecimentos extends FragmentMenu implements MsgFromCo
         int qtdd = Integer.parseInt(getStringFromIptText(R.id.f1_edtQtd));
         String especialidade = this.spinner.getSelectedItem().toString();
 
-        ConexaoSaude conexaoSaude = new ConexaoSaude(this);
-        conexaoSaude.getEstabelecimentos(municipio, uf, null, especialidade, paginas, qtdd);
+        ConexaoMetaModelo conexaoMetaModelo = new ConexaoMetaModelo(this);
+        conexaoMetaModelo.getEstabelecimentos(municipio, uf, null, especialidade, paginas, qtdd);
     }
 
     public String getStringFromIptText(int id) {
