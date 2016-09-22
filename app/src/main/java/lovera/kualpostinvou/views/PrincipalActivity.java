@@ -17,6 +17,7 @@ import java.util.Map;
 
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
+import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabelecimentos;
@@ -25,8 +26,13 @@ import lovera.kualpostinvou.views.fragments.FragmentMenu;
 import lovera.kualpostinvou.views.navigationdrawer.ActionBarDrawerToggleImpl;
 import lovera.kualpostinvou.views.navigationdrawer.RecyclerViewAdapterImpl;
 import lovera.kualpostinvou.views.redes_sociais.PessoaLogada;
+import lovera.kualpostinvou.views.services.LocalizacaoService;
+import lovera.kualpostinvou.views.services.LoginService;
 
 public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer{
+
+    private static String CHAVE_TOKEN = "token";
+    private static String CHAVE_PESSOA = "pessoa";
 
     private String titulo;
     private String tituloOriginal;
@@ -61,6 +67,8 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         inicializarNavigationDrawer();
 
         selectItem(0);
+
+        recuperarObjetosSalvos(savedInstanceState);
     }
 
     private void inicializarToolbar(){
@@ -101,12 +109,33 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         });
     }
 
+    private void recuperarObjetosSalvos(Bundle bundle){
+        if(bundle != null){
+            Aplicacao.getPessoaLogada().setToken(bundle.getString(CHAVE_TOKEN));
+            Aplicacao.getPessoaLogada().setPessoa((Pessoa) bundle.getSerializable(CHAVE_PESSOA));
+        }
+    }
+
     @Override
     protected void onStart() {
         Aplicacao.getGoogleCoisas().connect();
 
-        Aplicacao.getPessoaLogada().inicializarPessoa();
+        if(!Aplicacao.getPessoaLogada().isPessoaLogado()){
+            Aplicacao.getPessoaLogada().inicializarPessoa();
+        }
+
+        if(!Aplicacao.getPessoaLogada().hasToken()){
+            Intent intent = new Intent(this, LoginService.class);
+            startService(intent);
+        }
         super.onStart();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString(CHAVE_TOKEN, Aplicacao.getPessoaLogada().getToken());
+        outState.putSerializable(CHAVE_PESSOA, Aplicacao.getPessoaLogada().getPessoa());
+        super.onSaveInstanceState(outState);
     }
 
     @Override

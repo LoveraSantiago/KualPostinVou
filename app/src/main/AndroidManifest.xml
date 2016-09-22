@@ -27,6 +27,7 @@
         <activity android:name=".views.PrincipalActivity"/>
 
         <service android:name="lovera.kualpostinvou.views.services.LocalizacaoService"/>
+        <service android:name="lovera.kualpostinvou.views.services.LoginService"/>
     </application>
 
 </manifest>

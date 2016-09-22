@@ -42,9 +42,21 @@ public class ConexaoPessoa {
                       .enqueue(new CallBackImgPerfil());
     }
 
+    //TODO:Candidato a ser removido 21/09/2016
     public void cadastrarPessoa(Pessoa pessoa){
         Call<ResponseBody> call = this.endpointPessoa.cadastrarPessoa(pessoa);
         call.enqueue(new CallBackCadastrarPessoa(this.retrofit));
+    }
+
+    public void cadastrarPessoa(Pessoa pessoa, StringBuilder location, ErrorObj error){
+        Call<ResponseBody> call = this.endpointPessoa.cadastrarPessoa(pessoa);
+        try {
+            Response<ResponseBody> response = call.execute();
+            CallBackCadastrarPessoa callBackCadastrarPessoa = new CallBackCadastrarPessoa(this.retrofit);
+            callBackCadastrarPessoa.procedimentoSincrono(response, location, error);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //TODO:Candidato a ser removido 21/09/2016

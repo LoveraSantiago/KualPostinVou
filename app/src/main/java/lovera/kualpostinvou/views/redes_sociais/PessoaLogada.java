@@ -15,13 +15,14 @@ public class PessoaLogada{
 
     private String token;
 
-    private final Pessoa pessoa;
+    private Pessoa pessoa;
     private ImageView espacoParaImg;
 
     private MsgToViewHolderHeader receptorMsg;
 
     public PessoaLogada() {
         this.pessoa = new Pessoa();
+        resetPessoa();
     }
 
     public void inicializarPessoa(){
@@ -38,7 +39,7 @@ public class PessoaLogada{
     }
 
     public void factoryTestePessoa(){
-        String numero = "0";
+        String numero = "1";
         pessoa.setCEP("05172-030");
         pessoa.setBiografia("biografiatemp");
         pessoa.setDataNascimento("1981-06-25");
@@ -60,6 +61,10 @@ public class PessoaLogada{
 
     public Pessoa getPessoa() {
         return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     public void getImgPessoa(ImageView imgView){
@@ -84,11 +89,19 @@ public class PessoaLogada{
     }
 
     public boolean isPessoaLogado(){
-        return this.pessoa.getNomeCompleto().equals("Não Logado");
+        return !this.pessoa.getNomeCompleto().equals("Não Logado");
     }
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public boolean hasToken(){
+        return (this.token == null || this.token.equals("")) ? false : true;
+    }
+
+    public String getToken() {
+        return token;
     }
 }
 

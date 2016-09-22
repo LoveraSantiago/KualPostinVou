@@ -35,7 +35,7 @@ public class LoginService extends Service{
 
         @Override
         public void run() {
-            if(!Aplicacao.getPessoaLogada().isPessoaLogado()) stopSelf(this.startId);
+            if(!Aplicacao.getPessoaLogada().hasToken()) stopSelf(this.startId);
 
             Pessoa pessoa = Aplicacao.getPessoaLogada().getPessoa();
             StringBuilder stringBuilder = new StringBuilder();
@@ -47,9 +47,17 @@ public class LoginService extends Service{
             if(stringBuilder.length() > 0){
                 Aplicacao.getPessoaLogada().setToken(stringBuilder.toString());
             }
-            else{
-                //TODO: procedimento de erros
+            else if(errorObj.getReasonPhrase().equals("Unauthorized")){
+                conexao.cadastrarPessoa(pessoa, stringBuilder, errorObj);
+                if(stringBuilder.length() > 0){
+                    conexao.autenticar(pessoa, stringBuilder, errorObj);
+
+                    if(stringBuilder.length() > 0){
+                        Aplicacao.getPessoaLogada().setToken(stringBuilder.toString());
+                    }
+                }
             }
+            stopSelf(this.startId);
         }
     }
 }

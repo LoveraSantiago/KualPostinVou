@@ -24,9 +24,24 @@ public class CallBackCadastrarPessoa implements Callback<ResponseBody>{
 
     @Override
     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+        procedimentoComum(response, new StringBuilder(), new ErrorObj());
+    }
+
+    @Override
+    public void onFailure(Call<ResponseBody> call, Throwable t) {
+        t.printStackTrace();
+    }
+
+    public void procedimentoSincrono(Response<ResponseBody> response, StringBuilder token, ErrorObj error){
+        procedimentoComum(response, token, error);
+    }
+
+    private void procedimentoComum(Response<ResponseBody> response, StringBuilder location, ErrorObj error){
+        location.setLength(0);
+
         if(response.isSuccessful()){
-            String location = response.headers().get("location");
-            Log.i("Location", location);
+            location.append(response.headers().get("location"));
+            Log.i("Location", location.toString());
         }
         else{
             try{
@@ -39,16 +54,11 @@ public class CallBackCadastrarPessoa implements Callback<ResponseBody>{
                 e.printStackTrace();
             }
 
-            ErrorObj errorObj = ErrorUtils.parseError(retrofit, response);
+            ErrorObj errorObj = ErrorUtils.parseError(this.retrofit, response);
             List<MsgErrorObj> mensagens = errorObj.getMensagens();
-            for(MsgErrorObj error : mensagens){
-                Log.i("Cadastro", error.getTexto());
+            for(MsgErrorObj errorIt : mensagens){
+                Log.i("Cadastro", errorIt.getTexto());
             }
         }
-    }
-
-    @Override
-    public void onFailure(Call<ResponseBody> call, Throwable t) {
-        t.printStackTrace();
     }
 }

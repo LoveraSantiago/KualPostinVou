@@ -2,13 +2,14 @@ package lovera.kualpostinvou.modelos;
 
 import android.net.Uri;
 
+import java.io.Serializable;
 import java.net.URI;
 import java.util.List;
 
-public class Pessoa {
+public class Pessoa implements Serializable{
 
     //Talvez quebre o insert de pessoa por mandar valor 0
-    private int codigo;
+    private transient int codigo;
 
     private double latitude;
     private double longitude;
@@ -25,7 +26,7 @@ public class Pessoa {
     private String tokenTwitter;
     private String email;
 
-    private Uri uriImgPerfil;
+    private transient Uri uriImgPerfil;
     private transient int intImgPerfil;
 
     private List<Link> links;
