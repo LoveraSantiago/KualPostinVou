@@ -14,20 +14,22 @@ public class HelperParams_EndPessoa {
         if(isStringNotNullOrEmpty(appIdentifier)){
             map.put(APPIDENTIFIER.getTexto(), appIdentifier);
         }
-        if(isStringNotNullOrEmpty(email)){
+        if(isStringNotNullOrEmpty(email) && isStringNotNullOrEmpty(senha)){
             map.put(EMAIL.getTexto(), email);
-        }
-        if(isStringNotNullOrEmpty(senha)){
             map.put(SENHA.getTexto(), senha);
-        }
-        if(isStringNotNullOrEmpty(faceToken)){
-            map.put(FACEBOOKTOKEN.getTexto(), faceToken);
+            return map;
         }
         if(isStringNotNullOrEmpty(googleToken)){
             map.put(GOOGLETOKEN.getTexto(), googleToken);
+            return map;
+        }
+        if(isStringNotNullOrEmpty(faceToken)){
+            map.put(FACEBOOKTOKEN.getTexto(), faceToken);
+            return map;
         }
         if(isStringNotNullOrEmpty(twitterToken)){
             map.put(TWITTERTOKEN.getTexto(), twitterToken);
+            return map;
         }
         return map;
     }

@@ -42,15 +42,17 @@ public class LoginService extends Service{
             ErrorObj errorObj = new ErrorObj();
 
             ConexaoPessoa conexao = new ConexaoPessoa();
-            conexao.autenticar(pessoa, stringBuilder, errorObj);
+            conexao.autenticar(pessoa, stringBuilder, errorObj);//Tenta pegar o token
 
             if(stringBuilder.length() > 0){
                 Aplicacao.getPessoaLogada().setToken(stringBuilder.toString());
             }
             else if(errorObj.getReasonPhrase().equals("Unauthorized")){
-                conexao.cadastrarPessoa(pessoa, stringBuilder, errorObj);
+
+                conexao.cadastrarPessoa(pessoa, stringBuilder, errorObj); //Tenta o cadastro
+
                 if(stringBuilder.length() > 0){
-                    conexao.autenticar(pessoa, stringBuilder, errorObj);
+                    conexao.autenticar(pessoa, stringBuilder, errorObj);//Tenta pegar o Token novamente
 
                     if(stringBuilder.length() > 0){
                         Aplicacao.getPessoaLogada().setToken(stringBuilder.toString());

@@ -39,7 +39,7 @@ public class PessoaLogada{
     }
 
     public void factoryTestePessoa(){
-        String numero = "1";
+        String numero = "2";
         pessoa.setCEP("05172-030");
         pessoa.setBiografia("biografiatemp");
         pessoa.setDataNascimento("1981-06-25");
