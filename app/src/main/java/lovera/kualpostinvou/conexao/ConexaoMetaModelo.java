@@ -1,81 +1,94 @@
 package lovera.kualpostinvou.conexao;
 
-import java.util.List;
+import android.net.Uri;
+
+
+import java.io.IOException;
 import java.util.Map;
 
-import lovera.kualpostinvou.conexao.callbacks.CallBackEspecialidades;
-import lovera.kualpostinvou.conexao.callbacks.CallBackEstabelecimento;
-import lovera.kualpostinvou.conexao.callbacks.CallBackEstabelecimentos;
-import lovera.kualpostinvou.conexao.callbacks.CallBackProfissionais;
-import lovera.kualpostinvou.conexao.callbacks.CallBackServicos;
-import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoSaude;
-import lovera.kualpostinvou.conexao.endpoints.EndPointsSaude;
+import lovera.kualpostinvou.conexao.callbacks.CallBackAutenticar;
+import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarInstalacao;
+import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarPessoa;
+import lovera.kualpostinvou.conexao.callbacks.CallBackImgPerfil;
+import lovera.kualpostinvou.conexao.endpoints.EndPointsMetaModelo;
 import lovera.kualpostinvou.conexao.utils.Factory;
-import lovera.kualpostinvou.conexao.utils.HelperParams_EndPSaude;
-import lovera.kualpostinvou.modelos.Especialidade;
-import lovera.kualpostinvou.modelos.Estabelecimento;
-import lovera.kualpostinvou.modelos.Profissional;
-import lovera.kualpostinvou.modelos.Servicos;
+import lovera.kualpostinvou.conexao.utils.HelperParams_EndPessoa;
+import lovera.kualpostinvou.modelos.ErrorObj;
+import lovera.kualpostinvou.modelos.Pessoa;
+import lovera.kualpostinvou.modelos.Instalacao;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class ConexaoMetaModelo {
 
-    private final MsgFromConexaoSaude msg;
+    private static String URL_BASE = "http://mobile-aceite.tcu.gov.br";
 
-    private final EndPointsSaude endpointSaude;
+    private final Retrofit retrofit;
 
-    private final HelperParams_EndPSaude helper;
+    private final EndPointsMetaModelo endpointMetaModelo;
 
-    private static String URL_BASE = "http://mobile-aceite.tcu.gov.br/mapa-da-saude/";
+    private final HelperParams_EndPessoa helper;
 
-    public ConexaoMetaModelo(MsgFromConexaoSaude msg) {
-        this.msg = msg;
 
-        Retrofit retrofit = Factory.factoryRetrofit(URL_BASE);
-        this.endpointSaude = retrofit.create(EndPointsSaude.class);
+    public ConexaoMetaModelo() {
+        this.helper = new HelperParams_EndPessoa();
 
-        this.helper = new HelperParams_EndPSaude();
+        this.retrofit = Factory.factoryRetrofit(URL_BASE);
+        this.endpointMetaModelo = retrofit.create(EndPointsMetaModelo.class);
     }
 
-    public void getEstabelelecimento(String codUnidade){
-        Call<Estabelecimento> call = this.endpointSaude.getEstabelecimento(codUnidade);
-        call.enqueue(new CallBackEstabelecimento(this.msg));
+    public void downloadImageNaUrl(Uri uri){
+        this.endpointMetaModelo.downloadImageNaUrl(uri.toString())
+                      .enqueue(new CallBackImgPerfil());
     }
 
-    public void getEstabelecimentos(String municipio, String uf, List<String> campos, String especialidade, int pagina, int quantidade){
+    //TODO:Candidato a ser removido 21/09/2016
+//    public void autenticar(Pessoa pessoa){
+//        Map<String, String> mapParams = this.helper.factoryMap_EndP_Autenticar(null, pessoa.getEmail(), null, pessoa.getTokenFacebook(), pessoa.getTokenGoogle(), pessoa.getTokenTwitter());
+//        Call<ResponseBody> call = this.endpointMetaModelo.autenticar(mapParams);
+//        call.enqueue(new CallBackAutenticar(this.retrofit));
+//    }
 
-        Map<String, String> mapParams = helper.factoryMap_EndP_Estabelecimentos(municipio, uf, campos, especialidade, pagina, quantidade);
-
-        Call<List<Estabelecimento>> call = this.endpointSaude.getEstabelecimentos(mapParams);
-        call.enqueue(new CallBackEstabelecimentos(this.msg));
+    public void autenticar(Pessoa pessoa, StringBuilder token, ErrorObj error){
+        Map<String, String> mapParams = this.helper.factoryMap_EndP_Autenticar(null, pessoa.getEmail(), null, pessoa.getTokenFacebook(), pessoa.getTokenGoogle(), pessoa.getTokenTwitter());
+        Call<Pessoa> call = this.endpointMetaModelo.autenticar(mapParams);
+        try {
+            Response<Pessoa> response = call.execute();
+            CallBackAutenticar callBackAutenticar = new CallBackAutenticar(this.retrofit);
+            callBackAutenticar.procedimentoSincrono(response, pessoa, token, error);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    /**
-     *
-     * @param latitude * Obrigatório
-     * @param longitude * Obrigatóriov
-     * @param raio * Obrigatório
-     */
-    public void getEstabelecimentos(double latitude, double longitude, float raio, String texto, String categoria, String campos, int pagina, int quantidade){
-        Map<String, String> mapParams = helper.factoryMap_EndP_Estabelecimentos(texto, categoria, campos, pagina, quantidade);
 
-        Call<List<Estabelecimento>> call = this.endpointSaude.getEstabelecimentos(String.valueOf(latitude), String.valueOf(longitude), String.valueOf(raio) , mapParams);
-        call.enqueue(new CallBackEstabelecimentos(this.msg));
+    public void cadastrarInstalacao(String appToken, Instalacao instalacao, StringBuilder result, ErrorObj error){
+        Call<ResponseBody> call = this.endpointMetaModelo.cadastrarInstalacao(appToken, instalacao);
+        try {
+            Response<ResponseBody> response = call.execute();
+            CallBackCadastrarInstalacao callBackCadastrarInstalacao = new CallBackCadastrarInstalacao(this.retrofit);
+            callBackCadastrarInstalacao.procedimentoSincrono(response, result, error);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void getEspecialidades(String codUnidade){
-        Call<List<Especialidade>> call = this.endpointSaude.getEspecialidades(codUnidade);
-        call.enqueue(new CallBackEspecialidades(this.msg));
+    //TODO:Candidato a ser removido 21/09/2016
+    public void cadastrarPessoa(Pessoa pessoa){
+        Call<ResponseBody> call = this.endpointMetaModelo.cadastrarPessoa(pessoa);
+        call.enqueue(new CallBackCadastrarPessoa(this.retrofit));
     }
 
-    public void getProfissionais(String codUnidade){
-        Call<List<Profissional>> call = this.endpointSaude.getProfissionais(codUnidade);
-        call.enqueue(new CallBackProfissionais(this.msg));
-    }
-
-    public void getServicos(String codUnidade){
-        Call<List<Servicos>> call = this.endpointSaude.getServicos(codUnidade);
-        call.enqueue(new CallBackServicos(this.msg));
+    public void cadastrarPessoa(Pessoa pessoa, StringBuilder location, ErrorObj error){
+        Call<ResponseBody> call = this.endpointMetaModelo.cadastrarPessoa(pessoa);
+        try {
+            Response<ResponseBody> response = call.execute();
+            CallBackCadastrarPessoa callBackCadastrarPessoa = new CallBackCadastrarPessoa(this.retrofit);
+            callBackCadastrarPessoa.procedimentoSincrono(response, location, error);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

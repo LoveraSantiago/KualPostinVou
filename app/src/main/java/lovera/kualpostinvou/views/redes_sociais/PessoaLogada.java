@@ -3,11 +3,9 @@ package lovera.kualpostinvou.views.redes_sociais;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
-import java.util.Arrays;
-
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
-import lovera.kualpostinvou.conexao.ConexaoPessoa;
+import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.views.contratos.MsgToViewHolderHeader;
 
@@ -74,8 +72,8 @@ public class PessoaLogada{
         }
         else{
             this.espacoParaImg = imgView;
-            ConexaoPessoa conexaoPessoa = new ConexaoPessoa();
-            conexaoPessoa.downloadImageNaUrl(this.pessoa.getUriImgPerfil());
+            ConexaoMetaModelo conexaoMetaModelo = new ConexaoMetaModelo();
+            conexaoMetaModelo.downloadImageNaUrl(this.pessoa.getUriImgPerfil());
         }
     }
 

@@ -16,7 +16,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import lovera.kualpostinvou.R;
-import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
+import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoSaude;
 import lovera.kualpostinvou.modelos.Servicos;
 import lovera.kualpostinvou.modelos.constantes.Categoria;
@@ -121,8 +121,8 @@ public class FragBuscaEstabGeoLocalizacao extends FragmentMenu implements MsgFro
         float raio = Float.parseFloat(getStringFromTextView(R.id.f2_lblseekbar));
         String categoria = this.spinner.getSelectedItem().toString();
 
-        ConexaoMetaModelo conexaoMetaModelo = new ConexaoMetaModelo(this);
-        conexaoMetaModelo.getEstabelecimentos(latitude, longitude, raio, null, categoria, null, paginas, qtdd);
+        ConexaoSaude conexaoSaude = new ConexaoSaude(this);
+        conexaoSaude.getEstabelecimentos(latitude, longitude, raio, null, categoria, null, paginas, qtdd);
     }
 
     public String getStringFromIptText(int id) {

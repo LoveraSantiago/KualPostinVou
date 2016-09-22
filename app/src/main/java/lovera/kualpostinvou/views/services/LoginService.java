@@ -5,9 +5,13 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import lovera.kualpostinvou.Aplicacao;
-import lovera.kualpostinvou.conexao.ConexaoPessoa;
+import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
 import lovera.kualpostinvou.modelos.ErrorObj;
+import lovera.kualpostinvou.modelos.Instalacao;
 import lovera.kualpostinvou.modelos.Pessoa;
 
 public class LoginService extends Service{
@@ -41,23 +45,33 @@ public class LoginService extends Service{
             StringBuilder stringBuilder = new StringBuilder();
             ErrorObj errorObj = new ErrorObj();
 
-            ConexaoPessoa conexao = new ConexaoPessoa();
-            conexao.autenticar(pessoa, stringBuilder, errorObj);//Tenta pegar o token
+            ConexaoMetaModelo conexao = new ConexaoMetaModelo();
 
-            if(stringBuilder.length() > 0){
-                Aplicacao.getPessoaLogada().setToken(stringBuilder.toString());
+            conexao.autenticar(pessoa, stringBuilder, errorObj);//Tenta pegar o token
+            if(stringBuilder.length() > 0){//resultado token
+                Aplicacao.getPessoaLogada().setToken(stringBuilder.toString());//Conseguiu pegar o token
             }
-            else if(errorObj.getReasonPhrase().equals("Unauthorized")){
+            else if(errorObj.getReasonPhrase().equals("Unauthorized")){//Não conseguiu pegar o token e aponta que o erro foi de unauthorized
 
                 conexao.cadastrarPessoa(pessoa, stringBuilder, errorObj); //Tenta o cadastro
+                if(stringBuilder.length() > 0){//resultado cadastro
 
-                if(stringBuilder.length() > 0){
                     conexao.autenticar(pessoa, stringBuilder, errorObj);//Tenta pegar o Token novamente
-
-                    if(stringBuilder.length() > 0){
-                        Aplicacao.getPessoaLogada().setToken(stringBuilder.toString());
+                    if(stringBuilder.length() > 0){//resultado token
+                        Aplicacao.getPessoaLogada().setToken(stringBuilder.toString());//Conseguiu pegar o token
+                    }
+                    else{
+                        throw new RuntimeException("Problema pegar token");
                     }
                 }
+                else{
+                    throw new RuntimeException("Problema ao cadastrar");
+                }
+
+                Instalacao instalacao = new Instalacao();
+                instalacao.setCodUsuario(pessoa.getCodigo());
+                instalacao.setDataHora(Calendar.getInstance().getTime().toString());
+                conexao.cadastrarInstalacao(Aplicacao.getPessoaLogada().getToken(), instalacao, stringBuilder, errorObj);
             }
             stopSelf(this.startId);
         }

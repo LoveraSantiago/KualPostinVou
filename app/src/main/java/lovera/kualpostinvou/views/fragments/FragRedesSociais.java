@@ -1,7 +1,6 @@
 package lovera.kualpostinvou.views.fragments;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -25,7 +24,7 @@ import java.util.Arrays;
 
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
-import lovera.kualpostinvou.conexao.ConexaoPessoa;
+import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
 import lovera.kualpostinvou.modelos.Link;
 import lovera.kualpostinvou.modelos.Pessoa;
 
@@ -155,7 +154,7 @@ public class FragRedesSociais extends FragmentMenu {
         pessoa.setTokenFacebook("IDFACETESTE");
         pessoa.setTokenGoogle("IDGOOGLETESTE");
 
-        ConexaoPessoa conexao = new ConexaoPessoa();
+        ConexaoMetaModelo conexao = new ConexaoMetaModelo();
         conexao.cadastrarPessoa(pessoa);
     }
 }

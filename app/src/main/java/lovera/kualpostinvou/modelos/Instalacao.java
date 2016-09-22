@@ -1,11 +1,11 @@
-package lovera.kualpostinvou.modelos.constantes;
+package lovera.kualpostinvou.modelos;
 
 public class Instalacao {
 
-    private int codApp;
+    private int codApp = 263;
     private int codUsuario;
     private String dataHora;
-    private String deviceOS;
+    private String deviceOS = "android";
     private String deviceToken;
 
     public int getCodApp() {
