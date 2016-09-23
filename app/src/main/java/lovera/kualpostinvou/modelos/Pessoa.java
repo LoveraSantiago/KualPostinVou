@@ -8,8 +8,8 @@ import java.util.List;
 
 public class Pessoa implements Serializable{
 
-    //Talvez quebre o insert de pessoa por mandar valor 0
-    private transient int codigo;
+
+    private int cod = 0;
 
     private double latitude;
     private double longitude;
@@ -166,11 +166,11 @@ public class Pessoa implements Serializable{
         this.email = email;
     }
 
-    public int getCodigo() {
-        return codigo;
+    public void setCod(int cod) {
+        this.cod = cod;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public int getCod() {
+        return cod;
     }
 }

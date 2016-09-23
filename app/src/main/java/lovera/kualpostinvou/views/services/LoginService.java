@@ -13,6 +13,7 @@ import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Instalacao;
 import lovera.kualpostinvou.modelos.Pessoa;
+import lovera.kualpostinvou.views.utils.Utils;
 
 public class LoginService extends Service{
 
@@ -52,7 +53,6 @@ public class LoginService extends Service{
                 Aplicacao.getPessoaLogada().setToken(stringBuilder.toString());//Conseguiu pegar o token
             }
             else if(errorObj.getReasonPhrase().equals("Unauthorized")){//Não conseguiu pegar o token e aponta que o erro foi de unauthorized
-
                 conexao.cadastrarPessoa(pessoa, stringBuilder, errorObj); //Tenta o cadastro
                 if(stringBuilder.length() > 0){//resultado cadastro
 
@@ -63,15 +63,23 @@ public class LoginService extends Service{
                     else{
                         throw new RuntimeException("Problema pegar token");
                     }
+
+                    Instalacao instalacao = new Instalacao();
+                    instalacao.setCodUsuario(pessoa.getCod());
+                    instalacao.setDataHora(Utils.dateToString(Calendar.getInstance().getTime()));
+                    instalacao.setDeviceToken(Aplicacao.getAplicacaoInstancia().getAndroidId());
+                    conexao.cadastrarInstalacao(Aplicacao.getPessoaLogada().getToken(), instalacao, stringBuilder, errorObj);
+                    if(stringBuilder.length() > 0){
+
+                    }
+                    else{
+                        throw new RuntimeException("Problema ao cadastrar instalacao");
+                    }
                 }
                 else{
                     throw new RuntimeException("Problema ao cadastrar");
                 }
 
-                Instalacao instalacao = new Instalacao();
-                instalacao.setCodUsuario(pessoa.getCodigo());
-                instalacao.setDataHora(Calendar.getInstance().getTime().toString());
-                conexao.cadastrarInstalacao(Aplicacao.getPessoaLogada().getToken(), instalacao, stringBuilder, errorObj);
             }
             stopSelf(this.startId);
         }

@@ -32,8 +32,8 @@ public class CallBackCadastrarInstalacao {
             Log.i("Location", location.toString());
         }
         else{
-            ErrorObj errorObj = ErrorUtils.parseError(this.retrofit, response);
-            List<MsgErrorObj> mensagens = errorObj.getMensagens();
+            error = ErrorUtils.parseError(this.retrofit, response);
+            List<MsgErrorObj> mensagens = error.getMensagens();
             for(MsgErrorObj errorIt : mensagens){
                 Log.i("Cadastro", errorIt.getTexto());
             }

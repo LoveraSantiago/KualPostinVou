@@ -1,12 +1,16 @@
 package lovera.kualpostinvou;
 
 import android.app.Application;
+import android.content.Context;
+import android.provider.Settings;
 
 import lovera.kualpostinvou.views.redes_sociais.PessoaLogada;
 import lovera.kualpostinvou.views.redes_sociais.facebook.Facebook_Coisas;
 import lovera.kualpostinvou.views.redes_sociais.google.Google_Coisas;
 
 public class Aplicacao extends Application{
+
+    private static Aplicacao instancia;
 
     private static PessoaLogada pessoaLogada;
     private static Google_Coisas googleCoisas;
@@ -20,10 +24,16 @@ public class Aplicacao extends Application{
         faceCoisas = new Facebook_Coisas(this);
 //        faceCoisas.printHashKey();
         pessoaLogada = new PessoaLogada();
+
+        instancia = this;
     }
 
     public static PessoaLogada getPessoaLogada() {
         return pessoaLogada;
+    }
+
+    public String getAndroidId(){
+        return Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
     public static Facebook_Coisas getFaceCoisas() {
@@ -32,5 +42,9 @@ public class Aplicacao extends Application{
 
     public static Google_Coisas getGoogleCoisas() {
         return googleCoisas;
+    }
+
+    public static Aplicacao getAplicacaoInstancia() {
+        return instancia;
     }
 }

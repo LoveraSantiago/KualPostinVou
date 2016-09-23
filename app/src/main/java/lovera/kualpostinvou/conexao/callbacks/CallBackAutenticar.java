@@ -44,7 +44,7 @@ public class CallBackAutenticar implements Callback<ResponseBody> {
             token.append(response.headers().get("apptoken"));
 
             Pessoa pessoaTemp = response.body();
-            pessoa.setCodigo(pessoaTemp.getCodigo());
+            pessoa.setCod(pessoaTemp.getCod());
         }
         else{
             ErrorObj errorObj = ErrorUtils.parseError(this.retrofit, response);
