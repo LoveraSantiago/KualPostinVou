@@ -30,7 +30,7 @@ import lovera.kualpostinvou.views.services.LocalizacaoService;
 
 public class FragBuscaEstabGeoLocalizacao extends FragmentMenu implements MsgFromConexaoSaude {
 
-    public static String TITULO_FRAGMENT = "Estabelecimentos por GPS";
+    public static String TITULO_FRAGMENT = "Estabelecimentos proximos";
     public static int ID_FRAGMENT = 2;
     public static int ICONE = R.drawable.icn2;
 
