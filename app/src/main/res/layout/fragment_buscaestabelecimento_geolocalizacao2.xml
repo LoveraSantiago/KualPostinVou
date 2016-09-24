@@ -400,12 +400,12 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
-                        android:tag="Apoio à saúde"/>
+                        android:tag="Todos"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Apoio à saúde"/>
+                        android:text="Todos"/>
 
                 </LinearLayout>
 

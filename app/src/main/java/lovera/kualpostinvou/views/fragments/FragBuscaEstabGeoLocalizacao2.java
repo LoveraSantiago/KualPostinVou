@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.io.Serializable;
 import java.util.List;
 
+import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.Estabelecimento;
@@ -19,6 +20,7 @@ import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
 import lovera.kualpostinvou.views.adapters.FragBuscaEstabGeoLocalizacaoAdapter;
 import lovera.kualpostinvou.views.components.SeekBarChangeListenerImpl;
+import lovera.kualpostinvou.views.contratos.MsgFromGpsService;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 import lovera.kualpostinvou.views.services.LocalizacaoService;
 
@@ -59,8 +61,9 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == HelperGeolocalizacao.USUARIO_ESCOLHENDO_OPCAO){
             if(resultCode == getActivity().RESULT_OK){
+                Aplicacao.setMensageiroGps(this.adapterMgs);
+
                 Intent intent = new Intent(getActivity(), LocalizacaoService.class);
-                intent.putExtra("MSG", this.adapterMgs);
                 getActivity().startService(intent);
             }
             else if(resultCode == getActivity().RESULT_CANCELED){
@@ -102,6 +105,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
     }
 
     public void gpsEnconstradoPeloService(){
+        Aplicacao.setMensageiroGps(null);
         procedimentoConsumoEstabelecimentoEmComum();
     }
 

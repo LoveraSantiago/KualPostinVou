@@ -11,7 +11,7 @@ import lovera.kualpostinvou.modelos.Servicos;
 import lovera.kualpostinvou.views.contratos.MsgFromGpsService;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao2;
 
-public class FragBuscaEstabGeoLocalizacaoAdapter implements MsgFromConexaoSaude, MsgFromGpsService, Serializable{
+public class FragBuscaEstabGeoLocalizacaoAdapter implements MsgFromConexaoSaude, MsgFromGpsService{
 
     private FragBuscaEstabGeoLocalizacao2 fragment;
 
@@ -46,6 +46,6 @@ public class FragBuscaEstabGeoLocalizacaoAdapter implements MsgFromConexaoSaude,
 
     @Override
     public void localizacaoEncontrada() {
-
+        this.fragment.gpsEnconstradoPeloService();
     }
 }

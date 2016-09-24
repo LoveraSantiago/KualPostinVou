@@ -1,6 +1,6 @@
 package lovera.kualpostinvou.views.contratos;
 
-public interface MsgFromGpsService {
+public interface MsgFromGpsService{
 
     void localizacaoEncontrada();
 }
