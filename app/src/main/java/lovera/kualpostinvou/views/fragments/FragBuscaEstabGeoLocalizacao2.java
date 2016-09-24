@@ -1,5 +1,6 @@
 package lovera.kualpostinvou.views.fragments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
 import lovera.kualpostinvou.views.adapters.FragBuscaEstabGeoLocalizacaoAdapter;
 import lovera.kualpostinvou.views.components.SeekBarChangeListenerImpl;
 import lovera.kualpostinvou.views.contratos.MsgFromGpsService;
+import lovera.kualpostinvou.views.dialogs.DialogGpsCancelado;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 import lovera.kualpostinvou.views.services.LocalizacaoService;
 
@@ -57,6 +59,13 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
         inicializarComponentes();
     }
 
+    private void inicializarComponentes(){
+        this.lblSeekBar = (TextView) getView().findViewById(R.id.f2_lblseekbar);
+
+        this.seekBar = (SeekBar) getView().findViewById(R.id.f2_seekbar);
+        this.seekBar.setOnSeekBarChangeListener(new SeekBarChangeListenerImpl(this.lblSeekBar));
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == HelperGeolocalizacao.USUARIO_ESCOLHENDO_OPCAO){
@@ -67,16 +76,14 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
                 getActivity().startService(intent);
             }
             else if(resultCode == getActivity().RESULT_CANCELED){
-             //TODO implementar comunicacao informando que gps e necessario
+                dialogGpsCancelado();
             }
         }
     }
 
-    private void inicializarComponentes(){
-        this.lblSeekBar = (TextView) getView().findViewById(R.id.f2_lblseekbar);
-
-        this.seekBar = (SeekBar) getView().findViewById(R.id.f2_seekbar);
-        this.seekBar.setOnSeekBarChangeListener(new SeekBarChangeListenerImpl(this.lblSeekBar));
+    private void dialogGpsCancelado(){
+        DialogGpsCancelado dialog = new DialogGpsCancelado(getActivity());
+        dialog.show();
     }
 
     public void incrementarDistancia(){
