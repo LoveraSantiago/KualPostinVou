@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/f2_ui_status"
+        android:background="#b2cce5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/f2_lblstatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="msgStatus"/>
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar" />
+
+
+    </RelativeLayout>
 
     <LinearLayout
         android:background="#b2cce5"
@@ -38,7 +67,6 @@
                         android:text="Distância"/>
 
                 </LinearLayout>
-
 
                 <RelativeLayout
                     android:background="#CCC2FF"
@@ -95,6 +123,7 @@
                 android:text="Km"/>
 
         </LinearLayout>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -441,5 +470,4 @@
         </ScrollView>
 
     </LinearLayout>
-
 </LinearLayout>
