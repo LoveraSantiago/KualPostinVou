@@ -6,9 +6,13 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import lovera.kualpostinvou.Aplicacao;
+import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoSaude;
+import lovera.kualpostinvou.views.contratos.MsgFromGpsService;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 
 public class LocalizacaoService extends Service{
+
+    private MsgFromGpsService msg;
 
     @Override
     public void onCreate() {
@@ -17,6 +21,8 @@ public class LocalizacaoService extends Service{
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        this.msg = (MsgFromGpsService) intent.getSerializableExtra("MSG");
+
         Worker worker = new Worker(startId);
         worker.start();
         return super.onStartCommand(intent, flags, startId);
@@ -53,7 +59,7 @@ public class LocalizacaoService extends Service{
                 count++;
             }
             if(helper.temLastLocation()){
-                helper.passarLocalizacao();
+                msg.localizacaoEncontrada();
             }
             else{
             }

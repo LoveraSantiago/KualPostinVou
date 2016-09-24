@@ -12,7 +12,7 @@ import java.util.List;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 
-public class EstabelecimentoAdapter extends BaseAdapter{
+public class EstabelecimentoAdapter extends BaseAdapter {
 
     private Context context;
     private List<Estabelecimento> listaEstabelecimentos;

@@ -19,14 +19,12 @@ import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
-import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao;
+import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao2;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabelecimentos;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 import lovera.kualpostinvou.views.fragments.FragmentMenu;
 import lovera.kualpostinvou.views.navigationdrawer.ActionBarDrawerToggleImpl;
 import lovera.kualpostinvou.views.navigationdrawer.RecyclerViewAdapterImpl;
-import lovera.kualpostinvou.views.redes_sociais.PessoaLogada;
-import lovera.kualpostinvou.views.services.LocalizacaoService;
 import lovera.kualpostinvou.views.services.LoginService;
 
 public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer{
@@ -49,7 +47,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     private Map<Integer, FragmentMenu> mapFragments;
     private FragmentManager fragmentManager;
     private FragBuscaEstabelecimentos frag1;
-    private FragBuscaEstabGeoLocalizacao frag2;
+    private FragBuscaEstabGeoLocalizacao2 frag2;
     private FragRedesSociais frag3;
     private FragmentMenu fragAtiva;
 
@@ -80,13 +78,13 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     private void inicializarFragmentMap(){
         this.frag1 = new FragBuscaEstabelecimentos();
-        this.frag2 = new FragBuscaEstabGeoLocalizacao();
+        this.frag2 = new FragBuscaEstabGeoLocalizacao2();
         this.frag3 = new FragRedesSociais();
 
         this.mapFragments = new HashMap<>();
         this.mapFragments.put(FragRedesSociais.ID_FRAGMENT, this.frag3);
         this.mapFragments.put(FragBuscaEstabelecimentos.ID_FRAGMENT, this.frag1);
-        this.mapFragments.put(FragBuscaEstabGeoLocalizacao.ID_FRAGMENT, this.frag2);
+        this.mapFragments.put(FragBuscaEstabGeoLocalizacao2.ID_FRAGMENT, this.frag2);
     }
 
     private void inicializarNavigationDrawer(){
@@ -187,10 +185,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         this.frag1.consumirEstabelecimentos();
     }
 
-    public void consumirEstabelecimentosGeolocalizacao(View view){
-        this.frag2.consumirEstabelecimentosGeolocalizacao();
-    }
-
     public void cadastrarPerfilTeste(View view){
         this.frag3.cadastrarPerfilTeste();
     }
@@ -202,4 +196,16 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     public String getTituloOriginal() {
         return tituloOriginal;
     }
+
+    //ACOES DO FRAGMENT 2
+    public void incrementarDistancia(View view){
+        this.frag2.incrementarDistancia();
+    }
+
+    public void decrementarDistancia(View view){ this.frag2.decrementarDistancia(); }
+
+    public void consumirEstabelecimentosGeolocalizacao(View view){
+        this.frag2.consumirEstabelecimentosGeolocalizacao(view.getTag().toString());
+    }
+
 }

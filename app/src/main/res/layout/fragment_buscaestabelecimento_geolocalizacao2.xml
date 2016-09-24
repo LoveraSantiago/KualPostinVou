@@ -8,10 +8,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingBottom="16dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="16dp">
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,16 +51,18 @@
                         style="?android:attr/buttonStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:onClick="decrementarDistancia"
                         android:text="-"/>
 
                     <SeekBar
+                        android:id="@id/f2_seekbar"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/menos"
                         android:layout_toLeftOf="@+id/mais"
                         android:background="#FFFF00"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:max="50"/>
+                        android:max="49"/>
 
                     <Button
                         android:id="@+id/mais"
@@ -68,6 +70,7 @@
                         style="?android:attr/buttonStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:onClick="incrementarDistancia"
                         android:text="+"/>
 
                 </RelativeLayout>
@@ -75,6 +78,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/f2_lblseekbar"
                 android:background="#b3ccff"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -94,6 +98,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <RelativeLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -112,7 +117,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:onClick="consumirEstabelecimentosGeolocalizacao"
+                        android:tag="Hospital"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -135,7 +142,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:onClick="consumirEstabelecimentosGeolocalizacao"
+                        android:tag="Posto De Saúde"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -157,7 +166,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:onClick="consumirEstabelecimentosGeolocalizacao"
+                        android:tag="Urgência"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -182,7 +193,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:onClick="consumirEstabelecimentosGeolocalizacao"
+                        android:tag="Farmácia"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -206,7 +219,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:onClick="consumirEstabelecimentosGeolocalizacao"
+                        android:tag="Samu"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -229,7 +244,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:onClick="consumirEstabelecimentosGeolocalizacao"
+                        android:tag="Clínica"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -253,7 +270,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:onClick="consumirEstabelecimentosGeolocalizacao"
+                        android:tag="Laboratório"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -277,7 +296,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:onClick="consumirEstabelecimentosGeolocalizacao"
+                        android:tag="Consultório"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -300,7 +321,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:onClick="consumirEstabelecimentosGeolocalizacao"
+                        android:tag="Apoio à saúde"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -324,7 +347,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:onClick="consumirEstabelecimentosGeolocalizacao"
+                        android:tag="Laboratório"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -348,7 +373,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:onClick="consumirEstabelecimentosGeolocalizacao"
+                        android:tag="Consultório"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -371,7 +398,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:onClick="consumirEstabelecimentosGeolocalizacao"
+                        android:tag="Apoio à saúde"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -395,9 +424,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:onClick="consumirEstabelecimentosGeolocalizacao"
+                        android:tag="Atendimento Domiciliar"/>
 
                     <TextView
+                        android:layout_marginBottom="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Atendimento Domiciliar"/>
