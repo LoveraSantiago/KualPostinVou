@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -91,321 +91,323 @@
                 android:text="Km"/>
 
         </LinearLayout>
-
-        <RelativeLayout
-            android:layout_marginTop="10dp"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:id="@+id/num2"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageButton
-                    android:src="@drawable/hospital_peq"
+                <LinearLayout
+                    android:id="@+id/num2"
+                    android:orientation="vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hospital"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/num1"
-                android:layout_toLeftOf="@+id/num2"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageButton
-                    android:src="@drawable/hospital_peq"
                     android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:src="@drawable/hospital_peq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hospital"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/num1"
+                    android:layout_toLeftOf="@+id/num2"
+                    android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_height="wrap_content">
 
-                <TextView
+                    <ImageButton
+                        android:src="@drawable/hospital_peq"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Posto De Saúde"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/num3"
+                    android:layout_toRightOf="@+id/num2"
+                    android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Posto De Saúde"/>
+                    android:layout_height="wrap_content">
 
-            </LinearLayout>
+                    <ImageButton
+                        android:src="@drawable/hospital_peq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"/>
 
-            <LinearLayout
-                android:id="@+id/num3"
-                android:layout_toRightOf="@+id/num2"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Urgência"/>
 
-                <ImageButton
-                    android:src="@drawable/hospital_peq"
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/num5"
+                    android:layout_below="@id/num2"
+                    android:orientation="vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Urgência"/>
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/num5"
-                android:layout_below="@id/num2"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:paddingTop="15dp"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:layout_height="wrap_content">
-
-                <ImageButton
-                    android:src="@drawable/hospital_peq"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Farmácia"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/num4"
-                android:layout_toLeftOf="@+id/num5"
-                android:layout_alignBottom="@id/num5"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageButton
-                    android:src="@drawable/hospital_peq"
+                    android:paddingTop="15dp"
                     android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:src="@drawable/hospital_peq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Farmácia"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/num4"
+                    android:layout_toLeftOf="@+id/num5"
+                    android:layout_alignBottom="@id/num5"
+                    android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_height="wrap_content">
 
-                <TextView
+                    <ImageButton
+                        android:src="@drawable/hospital_peq"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Samu"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/num6"
+                    android:layout_toRightOf="@+id/num5"
+                    android:layout_alignBottom="@id/num5"
+                    android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Samu"/>
+                    android:layout_height="wrap_content">
 
-            </LinearLayout>
+                    <ImageButton
+                        android:src="@drawable/hospital_peq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"/>
 
-            <LinearLayout
-                android:id="@+id/num6"
-                android:layout_toRightOf="@+id/num5"
-                android:layout_alignBottom="@id/num5"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Clínica"/>
 
-                <ImageButton
-                    android:src="@drawable/hospital_peq"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/num8"
+                    android:layout_below="@id/num5"
+                    android:orientation="vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Clínica"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/num8"
-                android:layout_below="@id/num5"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:paddingTop="15dp"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:layout_height="wrap_content">
-
-                <ImageButton
-                    android:src="@drawable/hospital_peq"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Laboratório"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/num7"
-                android:layout_toLeftOf="@+id/num8"
-                android:layout_alignBottom="@id/num8"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageButton
-                    android:src="@drawable/hospital_peq"
+                    android:paddingTop="15dp"
                     android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:src="@drawable/hospital_peq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Laboratório"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/num7"
+                    android:layout_toLeftOf="@+id/num8"
+                    android:layout_alignBottom="@id/num8"
+                    android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_height="wrap_content">
 
-                <TextView
+                    <ImageButton
+                        android:src="@drawable/hospital_peq"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Consultório"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/num9"
+                    android:layout_toRightOf="@+id/num8"
+                    android:layout_alignBottom="@id/num8"
+                    android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Consultório"/>
+                    android:layout_height="wrap_content">
 
-            </LinearLayout>
+                    <ImageButton
+                        android:src="@drawable/hospital_peq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"/>
 
-            <LinearLayout
-                android:id="@+id/num9"
-                android:layout_toRightOf="@+id/num8"
-                android:layout_alignBottom="@id/num8"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Apoio à saúde"/>
 
-                <ImageButton
-                    android:src="@drawable/hospital_peq"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/num11"
+                    android:layout_below="@id/num8"
+                    android:orientation="vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Apoio à saúde"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/num11"
-                android:layout_below="@id/num8"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:paddingTop="15dp"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:layout_height="wrap_content">
-
-                <ImageButton
-                    android:src="@drawable/hospital_peq"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Laboratório"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/num10"
-                android:layout_toLeftOf="@+id/num11"
-                android:layout_alignBottom="@id/num11"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageButton
-                    android:src="@drawable/hospital_peq"
+                    android:paddingTop="15dp"
                     android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:src="@drawable/hospital_peq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Laboratório"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/num10"
+                    android:layout_toLeftOf="@+id/num11"
+                    android:layout_alignBottom="@id/num11"
+                    android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_height="wrap_content">
 
-                <TextView
+                    <ImageButton
+                        android:src="@drawable/hospital_peq"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Consultório"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/num12"
+                    android:layout_toRightOf="@+id/num11"
+                    android:layout_alignBottom="@id/num11"
+                    android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Consultório"/>
+                    android:layout_height="wrap_content">
 
-            </LinearLayout>
+                    <ImageButton
+                        android:src="@drawable/hospital_peq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"/>
 
-            <LinearLayout
-                android:id="@+id/num12"
-                android:layout_toRightOf="@+id/num11"
-                android:layout_alignBottom="@id/num11"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Apoio à saúde"/>
 
-                <ImageButton
-                    android:src="@drawable/hospital_peq"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/num13"
+                    android:layout_below="@id/num11"
+                    android:orientation="vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+                    android:paddingTop="15dp"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Apoio à saúde"/>
+                    <ImageButton
+                        android:src="@drawable/hospital_peq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"/>
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Atendimento Domiciliar"/>
 
-            <LinearLayout
-                android:id="@+id/num13"
-                android:layout_below="@id/num11"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:paddingTop="15dp"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:layout_height="wrap_content">
-
-                <ImageButton
-                    android:src="@drawable/hospital_peq"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Atendimento Domiciliar"/>
-
-            </LinearLayout>
+                </LinearLayout>
 
 
-        </RelativeLayout>
-
+            </RelativeLayout>
+        </ScrollView>
 
     </LinearLayout>
 
-</ScrollView>
+</LinearLayout>
