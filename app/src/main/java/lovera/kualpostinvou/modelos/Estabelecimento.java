@@ -34,6 +34,7 @@ public class Estabelecimento implements Serializable{
     private String turnoAtendimento;
     private double lat;
     private double longi;
+    private double distancia;
 
     public String getCnpj() {
         return cnpj;
@@ -273,6 +274,14 @@ public class Estabelecimento implements Serializable{
 
     public void setLongi(double longi) {
         this.longi = longi;
+    }
+
+    public double getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(double distancia) {
+        this.distancia = distancia;
     }
 }
 

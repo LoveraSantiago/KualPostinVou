@@ -17,6 +17,7 @@ import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
+import lovera.kualpostinvou.modelos.utils.Distancia;
 import lovera.kualpostinvou.views.adapters.FragBuscaEstabGeoLocalizacaoAdapter;
 import lovera.kualpostinvou.views.components.SeekBarChangeListenerImpl;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
@@ -134,19 +135,20 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
     }
 
     public void receberListaDeEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos){
-        this.msgActivity.fecharProgresso();
-
         if(listaDeEstabelecimentos.size() == 0){
+            this.msgActivity.fecharProgresso();
             showDialogListaVazia();
             return;
         }
+        else{
+            calcularDistanciaDosEstabelecimentos(listaDeEstabelecimentos);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("LISTAESTABELECIMENTOS", (Serializable) listaDeEstabelecimentos);
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("LISTAESTABELECIMENTOS", (Serializable) listaDeEstabelecimentos);
-
-        FragListaEstabelecimentos fragLista = new FragListaEstabelecimentos();
-        fragLista.setArguments(bundle);
-        this.msgActivity.setarFragment(fragLista);
+            FragListaEstabelecimentos fragLista = new FragListaEstabelecimentos();
+            fragLista.setArguments(bundle);
+            this.msgActivity.setarFragment(fragLista);
+        }
     }
 
     private void showDialogListaVazia(){
@@ -154,6 +156,12 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
         dialog.setTitle("Nenhum Resultado");
         dialog.setMessage("Não foi encontrado estabelecimentos. Tente aumentar o raio da busca.");
         dialog.show();
+    }
+
+    private void calcularDistanciaDosEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos){
+        this.msgActivity.setarTextoProgresso("Calculando distâncias");
+        Distancia.calcularKmDistancia(listaDeEstabelecimentos, this.localizacao);
+        this.msgActivity.fecharProgresso();
     }
 
     //Metodos sobrescritos herdados da classe pai FragmentMenu

@@ -51,10 +51,10 @@ public class EstabelecimentoAdapter extends BaseAdapter {
             layout = convertView;
         }
 
-        setTextToLabel(estabelecimento.getNomeFantasia(), R.id.l1_valNomeEstab, layout);
-        setTextToLabel(estabelecimento.getCidade()      , R.id.l1_valueCidade , layout);
-        setTextToLabel(estabelecimento.getBairro()      , R.id.l1_valueBairro , layout);
-
+        setTextToLabel(estabelecimento.getNomeFantasia()                       , R.id.l1_valNomeEstab, layout);
+        setTextToLabel(estabelecimento.getCidade()                             , R.id.l1_valueCidade , layout);
+        setTextToLabel(estabelecimento.getBairro()                             , R.id.l1_valueBairro , layout);
+        setTextToLabel(String.format("%.1f", estabelecimento.getDistancia())   , R.id.l1_km          , layout);
         return layout;
     }
 
