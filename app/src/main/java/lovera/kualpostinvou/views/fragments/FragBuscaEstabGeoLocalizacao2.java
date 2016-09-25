@@ -17,11 +17,10 @@ import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
-import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
 import lovera.kualpostinvou.views.adapters.FragBuscaEstabGeoLocalizacaoAdapter;
 import lovera.kualpostinvou.views.components.SeekBarChangeListenerImpl;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
-import lovera.kualpostinvou.views.dialogs.DialogGpsCancelado;
+import lovera.kualpostinvou.views.dialogs.DismissDialog;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 import lovera.kualpostinvou.views.services.LocalizacaoService;
 
@@ -76,13 +75,15 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
             }
             else if(resultCode == getActivity().RESULT_CANCELED){
                 this.msgActivity.fecharProgresso();
-                dialogGpsCancelado();
+                showDialogGpsCancelado();
             }
         }
     }
 
-    private void dialogGpsCancelado(){
-        DialogGpsCancelado dialog = new DialogGpsCancelado(getActivity());
+    private void showDialogGpsCancelado(){
+        DismissDialog dialog = new DismissDialog(getActivity());
+        dialog.setTitle("Localização Requerida");
+        dialog.setMessage("Para realizar a busca por estabelecimentos é necessario autorizar o gps");
         dialog.show();
     }
 
@@ -135,12 +136,24 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
     public void receberListaDeEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos){
         this.msgActivity.fecharProgresso();
 
+        if(listaDeEstabelecimentos.size() == 0){
+            showDialogGpsCancelado();
+            return;
+        }
+
         Bundle bundle = new Bundle();
         bundle.putSerializable("LISTAESTABELECIMENTOS", (Serializable) listaDeEstabelecimentos);
 
         FragListaEstabelecimentos fragLista = new FragListaEstabelecimentos();
         fragLista.setArguments(bundle);
         this.msgActivity.setarFragment(fragLista);
+    }
+
+    private void showDialogListaVazia(){
+        DismissDialog dialog = new DismissDialog(getActivity());
+        dialog.setTitle("Nenhum Resultado");
+        dialog.setMessage("Não foi encontrado estabelecimentos. Tente aumentar o raio da busca.");
+        dialog.show();
     }
 
     //Metodos sobrescritos herdados da classe pai FragmentMenu
