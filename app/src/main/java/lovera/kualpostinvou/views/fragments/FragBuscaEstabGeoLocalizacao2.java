@@ -127,7 +127,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
         ConexaoSaude conexaoSaude = new ConexaoSaude(this.adapterMgs);
         conexaoSaude.getEstabelecimentos(localizacao.getLatitude(), localizacao.getLongitude(),
                 Float.parseFloat(this.lblSeekBar.getText().toString()),
-                null, this.paramCategoria, "nomeFantasia,bairro,cidade,lat,long", 0, 200);
+                null, this.paramCategoria, "codUnidade,nomeFantasia,bairro,cidade,lat,long", 0, 200);
     }
 
     public void receberLocalizacao(Localizacao localizacao){
@@ -165,7 +165,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
         this.msgActivity.fecharProgresso();
     }
 
-    //Metodos sobrescritos herdados da classe pai FragmentMenu
+    //Metodos sobrescritos herdados da classe pai FragMenu
     @Override
     public int getFragmentId() {
         return ID_FRAGMENT;
