@@ -127,7 +127,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
         ConexaoSaude conexaoSaude = new ConexaoSaude(this.adapterMgs);
         conexaoSaude.getEstabelecimentos(localizacao.getLatitude(), localizacao.getLongitude(),
                 Float.parseFloat(this.lblSeekBar.getText().toString()),
-                null, this.paramCategoria, null, 0, 200);
+                null, this.paramCategoria, "nomeFantasia,bairro,cidade,lat,long", 0, 200);
     }
 
     public void receberLocalizacao(Localizacao localizacao){
