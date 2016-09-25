@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +20,7 @@ import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
+import lovera.kualpostinvou.views.contratos.MsgToProgresso;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao2;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabelecimentos;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;
@@ -27,7 +29,7 @@ import lovera.kualpostinvou.views.navigationdrawer.ActionBarDrawerToggleImpl;
 import lovera.kualpostinvou.views.navigationdrawer.RecyclerViewAdapterImpl;
 import lovera.kualpostinvou.views.services.LoginService;
 
-public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer{
+public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer, MsgToProgresso{
 
     private static String CHAVE_TOKEN = "token";
     private static String CHAVE_PESSOA = "pessoa";
@@ -51,22 +53,29 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     private FragRedesSociais frag3;
     private FragmentMenu fragAtiva;
 
+    //Componentes progresso
+    private TextView lblStatus;
+    private View uiStatus;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         this.tituloOriginal = getTitle().toString();
-
         this.fragmentManager = getFragmentManager();
 
         setContentView(R.layout.activity_principal);
-        inicializarToolbar();
-        inicializarFragmentMap();
-        inicializarNavigationDrawer();
-
+        inicializarComponentes();
         selectItem(0);
 
         recuperarObjetosSalvos(savedInstanceState);
+    }
+
+    private void inicializarComponentes(){
+        inicializarToolbar();
+        inicializarFragmentMap();
+        inicializarNavigationDrawer();
+        inicializarComponentesProgresso();
     }
 
     private void inicializarToolbar(){
@@ -105,6 +114,11 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
                 mDrawerToggle.syncState();
             }
         });
+    }
+
+    private void inicializarComponentesProgresso(){
+        this.uiStatus    = findViewById(R.id.a1_ui_status);
+        this.lblStatus   = (TextView) findViewById(R.id.a1_lblstatus);
     }
 
     private void recuperarObjetosSalvos(Bundle bundle){
@@ -174,6 +188,27 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         this.fragAtiva.onActivityResult(requestCode, resultCode, data);
+    }
+
+    //Comunicacao com progresso
+    @Override
+    public void abrirProgresso(){
+        this.uiStatus.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void fecharProgresso(){
+        this.uiStatus.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void setarTextoProgresso(final String texto){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                lblStatus.setText(texto);
+            }
+        });
     }
 
     @Override

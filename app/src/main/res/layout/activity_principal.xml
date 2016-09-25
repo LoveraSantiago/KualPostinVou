@@ -11,8 +11,35 @@
 
         <include android:id="@+id/app_bar" layout="@layout/app_bar"/>
 
+        <RelativeLayout
+            android:layout_below="@+id/app_bar"
+            android:visibility="gone"
+            android:id="@+id/a1_ui_status"
+            android:background="#b2cce5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/a1_lblstatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="msgStatus"/>
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar" />
+        </RelativeLayout>
+
         <FrameLayout
-            android:layout_below="@id/app_bar"
+            android:layout_below="@id/a1_ui_status"
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

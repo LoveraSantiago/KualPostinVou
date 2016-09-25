@@ -1,6 +1,5 @@
 package lovera.kualpostinvou.views.fragments;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,7 +20,7 @@ import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
 import lovera.kualpostinvou.views.adapters.FragBuscaEstabGeoLocalizacaoAdapter;
 import lovera.kualpostinvou.views.components.SeekBarChangeListenerImpl;
-import lovera.kualpostinvou.views.contratos.MsgFromGpsService;
+import lovera.kualpostinvou.views.contratos.MsgToProgresso;
 import lovera.kualpostinvou.views.dialogs.DialogGpsCancelado;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 import lovera.kualpostinvou.views.services.LocalizacaoService;
@@ -37,12 +34,11 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
 
     private HelperGeolocalizacao helperGps;
     private FragBuscaEstabGeoLocalizacaoAdapter adapterMgs;
+    private MsgToProgresso msgProgresso;
 
     //Componentes da tela
     private SeekBar seekBar;
     private TextView lblSeekBar;
-    private TextView lblStatus;
-    private View uiStatus;
 
     //Parametros
     private String paramCategoria;
@@ -64,10 +60,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
     }
 
     private void inicializarComponentes(){
-        this.uiStatus    = getView().findViewById(R.id.f2_ui_status);
-        this.lblStatus   = (TextView) getView().findViewById(R.id.f2_lblstatus);
         this.lblSeekBar  = (TextView) getView().findViewById(R.id.f2_lblseekbar);
-
         this.seekBar = (SeekBar) getView().findViewById(R.id.f2_seekbar);
         this.seekBar.setOnSeekBarChangeListener(new SeekBarChangeListenerImpl(this.lblSeekBar));
     }
@@ -82,7 +75,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
                 getActivity().startService(intent);
             }
             else if(resultCode == getActivity().RESULT_CANCELED){
-                fecharProgresso();
+                this.msgProgresso.fecharProgresso();
                 dialogGpsCancelado();
             }
         }
@@ -108,8 +101,8 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
     }
 
     public void consumirEstabelecimentosGeolocalizacao(String categoria){
-        abrirProgresso();
-        setarTextoProgresso("Procurando sua localização.");
+        this.msgProgresso.abrirProgresso();
+        this.msgProgresso.setarTextoProgresso("Procurando sua localização.");
         this.paramCategoria = categoria;
 
         if(this.helperGps.temLastLocation()){
@@ -127,7 +120,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
 
     private void procedimentoConsumoEstabelecimentoEmComum(){
         receberLocalizacao(this.helperGps.getLocalizacao());
-        setarTextoProgresso("Buscando dados.");
+        this.msgProgresso.setarTextoProgresso("Buscando dados.");
 
         ConexaoSaude conexaoSaude = new ConexaoSaude(this.adapterMgs);
         conexaoSaude.getEstabelecimentos(localizacao.getLatitude(), localizacao.getLongitude(),
@@ -140,29 +133,11 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
     }
 
     public void receberListaDeEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos){
-        fecharProgresso();
+        this.msgProgresso.fecharProgresso();
 
         Intent intent = new Intent(getActivity(), ListaEstabelecimentosActivity.class);
         intent.putExtra("LISTAESTABELECIMENTOS", (Serializable) listaDeEstabelecimentos);
         startActivity(intent);
-    }
-
-    //Metodos que comunicam com progresso
-    private void abrirProgresso(){
-        this.uiStatus.setVisibility(View.VISIBLE);
-    }
-
-    private void fecharProgresso(){
-        this.uiStatus.setVisibility(View.GONE);
-    }
-
-    private void setarTextoProgresso(final String texto){
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                lblStatus.setText(texto);
-            }
-        });
     }
 
     //Metodos sobrescritos herdados da classe pai FragmentMenu
