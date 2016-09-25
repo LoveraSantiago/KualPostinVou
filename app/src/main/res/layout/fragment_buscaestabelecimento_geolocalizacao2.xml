@@ -84,8 +84,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="45dp"
-                android:text="01"/>
+                android:textSize="50dp"
+                android:text="1"/>
 
             <TextView
                 android:background="#FF6666"

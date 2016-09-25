@@ -55,6 +55,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
         this.helperGps = new HelperGeolocalizacao(this);
         this.adapterMgs = new FragBuscaEstabGeoLocalizacaoAdapter(this);
 
+        this.msgActivity = (MsgToActivity) getActivity();
         inicializarComponentes();
     }
 
