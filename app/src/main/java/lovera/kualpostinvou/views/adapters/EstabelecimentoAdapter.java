@@ -51,15 +51,19 @@ public class EstabelecimentoAdapter extends BaseAdapter {
             layout = convertView;
         }
 
-        setTextToLabel(estabelecimento.getNomeFantasia()                       , R.id.l1_valNomeEstab, layout);
-        setTextToLabel(estabelecimento.getCidade()                             , R.id.l1_valueCidade , layout);
-        setTextToLabel(estabelecimento.getBairro()                             , R.id.l1_valueBairro , layout);
-        setTextToLabel(String.format("%.1f", estabelecimento.getDistancia())   , R.id.l1_km          , layout);
+        setTextToLabel(tamanhoDaStringNome(estabelecimento.getNomeFantasia())        , R.id.l1_valNomeEstab, layout);
+        setTextToLabel(estabelecimento.getCidade()                                   , R.id.l1_valueCidade , layout);
+        setTextToLabel(estabelecimento.getBairro()                                   , R.id.l1_valueBairro , layout);
+        setTextToLabel((String.format("%.1f", estabelecimento.getDistancia())+" km") , R.id.l1_km          , layout);
         return layout;
     }
 
-    public void setTextToLabel(int texto, int id, View layout){
-        setTextToLabel(String.valueOf(texto), id, layout);
+    private String tamanhoDaStringNome(String texto){
+        String textoNome = texto;
+        if(textoNome.length() > 35){
+            textoNome = textoNome.substring(0, 33) + "...";
+        }
+        return textoNome;
     }
 
     public void setTextToLabel(String texto, int id, View layout){

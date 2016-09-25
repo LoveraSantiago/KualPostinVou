@@ -62,17 +62,17 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content">
 
-       <TextView
+       <ImageView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:text="KM"/>
+           android:src="@drawable/ic_room_black_24dp"/>
 
        <TextView
            android:id="@+id/l1_km"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:textSize="20dp"
-           android:text="10,0"/>
+           android:textSize="15dp"
+           android:text="10,0 KM"/>
 
    </LinearLayout>
 

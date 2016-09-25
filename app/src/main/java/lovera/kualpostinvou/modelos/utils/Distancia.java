@@ -7,8 +7,6 @@ import lovera.kualpostinvou.modelos.Localizacao;
 
 public class Distancia {
 
-    private static double RAIO_TERRA = 6371;
-
     public double calcularKmDistancia(Localizacao origem, Estabelecimento estabelecimento) {
 
         final int R = 6371; // Radius of the earth
