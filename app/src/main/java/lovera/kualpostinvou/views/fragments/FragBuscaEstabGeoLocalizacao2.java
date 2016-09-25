@@ -137,7 +137,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
         this.msgActivity.fecharProgresso();
 
         if(listaDeEstabelecimentos.size() == 0){
-            showDialogGpsCancelado();
+            showDialogListaVazia();
             return;
         }
 
