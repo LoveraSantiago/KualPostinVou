@@ -20,7 +20,7 @@ import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
 import lovera.kualpostinvou.views.adapters.FragBuscaEstabGeoLocalizacaoAdapter;
 import lovera.kualpostinvou.views.components.SeekBarChangeListenerImpl;
-import lovera.kualpostinvou.views.contratos.MsgToProgresso;
+import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.dialogs.DialogGpsCancelado;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 import lovera.kualpostinvou.views.services.LocalizacaoService;
@@ -34,8 +34,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
 
     private HelperGeolocalizacao helperGps;
     private FragBuscaEstabGeoLocalizacaoAdapter adapterMgs;
-    private MsgToProgresso msgProgresso;
-
+    private MsgToActivity msgActivity;
     //Componentes da tela
     private SeekBar seekBar;
     private TextView lblSeekBar;
@@ -75,7 +74,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
                 getActivity().startService(intent);
             }
             else if(resultCode == getActivity().RESULT_CANCELED){
-                this.msgProgresso.fecharProgresso();
+                this.msgActivity.fecharProgresso();
                 dialogGpsCancelado();
             }
         }
@@ -101,8 +100,8 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
     }
 
     public void consumirEstabelecimentosGeolocalizacao(String categoria){
-        this.msgProgresso.abrirProgresso();
-        this.msgProgresso.setarTextoProgresso("Procurando sua localização.");
+        this.msgActivity.abrirProgresso();
+        this.msgActivity.setarTextoProgresso("Procurando sua localização.");
         this.paramCategoria = categoria;
 
         if(this.helperGps.temLastLocation()){
@@ -120,7 +119,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
 
     private void procedimentoConsumoEstabelecimentoEmComum(){
         receberLocalizacao(this.helperGps.getLocalizacao());
-        this.msgProgresso.setarTextoProgresso("Buscando dados.");
+        this.msgActivity.setarTextoProgresso("Buscando dados.");
 
         ConexaoSaude conexaoSaude = new ConexaoSaude(this.adapterMgs);
         conexaoSaude.getEstabelecimentos(localizacao.getLatitude(), localizacao.getLongitude(),
@@ -133,11 +132,14 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
     }
 
     public void receberListaDeEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos){
-        this.msgProgresso.fecharProgresso();
+        this.msgActivity.fecharProgresso();
 
-        Intent intent = new Intent(getActivity(), ListaEstabelecimentosActivity.class);
-        intent.putExtra("LISTAESTABELECIMENTOS", (Serializable) listaDeEstabelecimentos);
-        startActivity(intent);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("LISTAESTABELECIMENTOS", (Serializable) listaDeEstabelecimentos);
+
+        FragListaEstabelecimentos fragLista = new FragListaEstabelecimentos();
+        fragLista.setArguments(bundle);
+        this.msgActivity.setarFragment(fragLista);
     }
 
     //Metodos sobrescritos herdados da classe pai FragmentMenu

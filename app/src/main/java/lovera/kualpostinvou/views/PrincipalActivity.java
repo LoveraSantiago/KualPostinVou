@@ -1,5 +1,6 @@
 package lovera.kualpostinvou.views;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +21,7 @@ import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
-import lovera.kualpostinvou.views.contratos.MsgToProgresso;
+import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao2;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabelecimentos;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;
@@ -29,7 +30,7 @@ import lovera.kualpostinvou.views.navigationdrawer.ActionBarDrawerToggleImpl;
 import lovera.kualpostinvou.views.navigationdrawer.RecyclerViewAdapterImpl;
 import lovera.kualpostinvou.views.services.LoginService;
 
-public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer, MsgToProgresso{
+public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer, MsgToActivity {
 
     private static String CHAVE_TOKEN = "token";
     private static String CHAVE_PESSOA = "pessoa";
@@ -51,7 +52,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     private FragBuscaEstabelecimentos frag1;
     private FragBuscaEstabGeoLocalizacao2 frag2;
     private FragRedesSociais frag3;
-    private FragmentMenu fragAtiva;
+    private Fragment fragAtiva;
 
     //Componentes progresso
     private TextView lblStatus;
@@ -169,14 +170,8 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         this.mDrawerLayout.closeDrawer(this.mRecyclerView);
 
         FragmentMenu fragment = this.mapFragments.get(position);
-
-        this.fragmentManager.beginTransaction()
-                            .replace(R.id.content_frame, fragment)
-                            .addToBackStack("")
-                            .commit();
-
+        setarFragment(fragment);
         setTitle(fragment.getFragmentTitulo());
-        this.fragAtiva = fragment;
     }
 
     @Override
@@ -190,7 +185,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         this.fragAtiva.onActivityResult(requestCode, resultCode, data);
     }
 
-    //Comunicacao com progresso
+    //Comunicacao entre Activity e Fragments
     @Override
     public void abrirProgresso(){
         this.uiStatus.setVisibility(View.VISIBLE);
@@ -209,6 +204,15 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
                 lblStatus.setText(texto);
             }
         });
+    }
+
+    @Override
+    public void setarFragment(Fragment fragment) {
+        this.fragmentManager.beginTransaction()
+                            .replace(R.id.content_frame, fragment)
+                            .addToBackStack("")
+                            .commit();
+        this.fragAtiva = fragment;
     }
 
     @Override
