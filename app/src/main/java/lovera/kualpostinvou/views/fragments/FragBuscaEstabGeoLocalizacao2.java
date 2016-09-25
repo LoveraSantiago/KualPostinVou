@@ -160,7 +160,8 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
 
     private void calcularDistanciaDosEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos){
         this.msgActivity.setarTextoProgresso("Calculando distâncias");
-        Distancia.calcularKmDistancia(listaDeEstabelecimentos, this.localizacao);
+        Distancia distancia = new Distancia();
+        distancia.calcularKmDistancia(listaDeEstabelecimentos, this.localizacao);
         this.msgActivity.fecharProgresso();
     }
 
