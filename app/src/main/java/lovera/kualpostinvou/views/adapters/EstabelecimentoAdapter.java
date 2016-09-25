@@ -51,19 +51,10 @@ public class EstabelecimentoAdapter extends BaseAdapter {
             layout = convertView;
         }
 
-        setTextToLabel(estabelecimento.getCodUnidade(), R.id.lblCodigo, layout);
-        setTextToLabel(estabelecimento.getNomeFantasia(), R.id.lblNomeFantasia, layout);
-        setTextToLabel(estabelecimento.getCodCnes(), R.id.lblCodCnes, layout);
-        setTextToLabel(estabelecimento.getNatureza(), R.id.lblNatureza, layout);
-        setTextToLabel(estabelecimento.getTipoUnidade(), R.id.lblTipoUnidade, layout);
-        setTextToLabel(estabelecimento.getEsferaAdministrativa(), R.id.lblEsferaAdm, layout);
-        setTextToLabel(estabelecimento.getVinculoSus(), R.id.lblVincSus, layout);
-        setTextToLabel(estabelecimento.getRetencao(), R.id.lblRetencao, layout);
-        setTextToLabel(estabelecimento.getFluxoClientela(), R.id.lblFlxClientela, layout);
-        setTextToLabel(estabelecimento.getOrigemGeografica(), R.id.lblOrigGeograf, layout);
-        setTextToLabel(estabelecimento.getTemAtendimentoAmbulatorial(), R.id.lblAtendAmbulat, layout);
-        setTextToLabel(estabelecimento.getTemAtendimentoUrgencia(), R.id.lblAtendEmgc, layout);
-        setTextToLabel(estabelecimento.getTemCentroCirurgico(), R.id.lblCCirurg, layout);
+        setTextToLabel(estabelecimento.getNomeFantasia(), R.id.l1_valNomeEstab, layout);
+        setTextToLabel(estabelecimento.getCidade()      , R.id.l1_valueCidade , layout);
+        setTextToLabel(estabelecimento.getBairro()      , R.id.l1_valueBairro , layout);
+
         return layout;
     }
 
