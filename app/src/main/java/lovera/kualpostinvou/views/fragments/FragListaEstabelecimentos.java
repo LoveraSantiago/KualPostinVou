@@ -42,6 +42,7 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.msgToActivity = (MsgToActivity) getActivity();
+        this.adapterMsg = new FragListaEstabelecimentosAdapter(this);
 
         ListView lv = (ListView) getActivity().findViewById(R.id.listaEstabelecimentos);
         lv.setAdapter(new EstabelecimentoAdapter(getActivity(), this.listaEstabelecimentos));
@@ -56,16 +57,16 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Estabelecimento estabSelecionado = new Estabelecimento();
-        ConexaoSaude conexao = new ConexaoSaude(adapterMsg);
+        Estabelecimento estabSelecionado = this.listaEstabelecimentos.get(position);
+        ConexaoSaude conexao = new ConexaoSaude(this.adapterMsg);
         conexao.getEstabelelecimento(estabSelecionado.getCodUnidade());
     }
 
     public void receberEstabelecimento(Estabelecimento estabelecimento){
         Bundle bundle = new Bundle();
         bundle.putSerializable("ESTABELECIMENTO", estabelecimento);
-        FragEstabelecimento fragEstabelecimento = new FragEstabeleciento();
-        fragEstabelecimento.setArguments(estabelecimento);
+        FragEstabelecimento fragEstabelecimento = new FragEstabelecimento();
+        fragEstabelecimento.setArguments(bundle);
         this.msgToActivity.setarFragment(fragEstabelecimento);
     }
 

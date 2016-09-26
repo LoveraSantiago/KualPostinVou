@@ -29,7 +29,7 @@ public class FragEstabelecimento extends FragmentMenu{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        
+        setarCampos();
     }
 
     @Override
