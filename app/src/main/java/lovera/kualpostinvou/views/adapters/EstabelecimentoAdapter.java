@@ -5,12 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import java.util.List;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
+
+import static lovera.kualpostinvou.views.utils.Utils.setTextToLabel;
 
 public class EstabelecimentoAdapter extends BaseAdapter {
 
@@ -65,11 +66,4 @@ public class EstabelecimentoAdapter extends BaseAdapter {
         }
         return textoNome;
     }
-
-    public void setTextToLabel(String texto, int id, View layout){
-        TextView lblCodigo = (TextView) layout.findViewById(id);
-        lblCodigo.setText(texto);
-    }
-
-
 }
