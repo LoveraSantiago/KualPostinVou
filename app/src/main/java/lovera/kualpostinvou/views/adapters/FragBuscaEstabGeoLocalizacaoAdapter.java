@@ -25,19 +25,13 @@ public class FragBuscaEstabGeoLocalizacaoAdapter implements MsgFromConexaoSaude,
     }
 
     @Override
-    public void passarEstabelecimento(Estabelecimento estabelecimento) {
-
-    }
+    public void passarEstabelecimento(Estabelecimento estabelecimento) {}
 
     @Override
-    public void passarListaDeEspecialidades(List<Especialidade> especialidades) {
-
-    }
+    public void passarListaDeEspecialidades(List<Especialidade> especialidades) {}
 
     @Override
-    public void passarListaDeProfissionais(List<Profissional> profissionais) {
-
-    }
+    public void passarListaDeProfissionais(List<Profissional> profissionais) {}
 
     @Override
     public void passarListaDeServicos(List<Servicos> servicos) {
