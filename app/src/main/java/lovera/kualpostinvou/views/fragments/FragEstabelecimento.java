@@ -1,6 +1,7 @@
 package lovera.kualpostinvou.views.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +16,13 @@ import com.google.android.gms.maps.model.LatLng;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
+import lovera.kualpostinvou.modelos.Localizacao;
+import lovera.kualpostinvou.views.receivers.NomeGeoLocalizacaoReceiver;
 
 import static lovera.kualpostinvou.R.id.streetviewpanorama;
 import static lovera.kualpostinvou.views.utils.Utils.setTextToLabel;
 
-public class FragEstabelecimento extends FragmentMenu{
+public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocalizacaoReceiver.Receiver{
 
     //Campos relativos a FragmentMenu
     public static String TITULO_FRAGMENT = "Estabelecimento";
@@ -28,33 +31,24 @@ public class FragEstabelecimento extends FragmentMenu{
 
     private Estabelecimento estabelecimento;
 
+    private NomeGeoLocalizacaoReceiver receiver;
+
+    private Bundle savedInstanceState;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        this.receiver = new NomeGeoLocalizacaoReceiver(new Handler());
+        this.receiver.setReceiver(this);
+
         return inflater.inflate(R.layout.fragment_estabelecimento, container, false);
     }
 
     @Override
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        this.savedInstanceState = savedInstanceState;
         setarCampos();
-//http://stackoverflow.com/questions/32287209/android-using-streetviewpanoramaview-in-xml
-        final LatLng latLng = new LatLng(this.estabelecimento.getLat(), this.estabelecimento.getLongi());
-        StreetViewPanoramaView streetViewPanoramaFragment = (StreetViewPanoramaView) getActivity().findViewById(R.id.streetviewpanorama);
-        streetViewPanoramaFragment.onCreate(savedInstanceState);
-        streetViewPanoramaFragment.getStreetViewPanoramaAsync(
-                new OnStreetViewPanoramaReadyCallback() {
-                    @Override
-                    public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
-                        // Only set the panorama to SYDNEY on startup (when no panoramas have been
-                        // loaded which is when the savedInstanceState is null).
-
-//                        panorama.setPanningGesturesEnabled(false);
-                        panorama.setPosition(latLng);
-                    }
-                });
-        streetViewPanoramaFragment.onResume();
     }
 
     @Override
@@ -110,5 +104,31 @@ public class FragEstabelecimento extends FragmentMenu{
     @Override
     public int getIcone() {
         return ICONE;
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        Localizacao localizacao = (Localizacao) resultData.getSerializable("LOCALIZACAO");
+
+        //http://stackoverflow.com/questions/32287209/android-using-streetviewpanoramaview-in-xml
+        final LatLng latLng = new LatLng(this.estabelecimento.getLat(), this.estabelecimento.getLongi());
+        StreetViewPanoramaView streetViewPanoramaFragment = (StreetViewPanoramaView) getActivity().findViewById(R.id.streetviewpanorama);
+        streetViewPanoramaFragment.onCreate(this.savedInstanceState);
+        streetViewPanoramaFragment.getStreetViewPanoramaAsync(
+                new OnStreetViewPanoramaReadyCallback() {
+                    @Override
+                    public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
+                        // Only set the panorama to SYDNEY on startup (when no panoramas have been
+                        // loaded which is when the savedInstanceState is null).
+
+//                        panorama.setPanningGesturesEnabled(false);
+                        panorama.setPosition(latLng);
+                    }
+                });
+        streetViewPanoramaFragment.onResume();
+    }
+
+    public NomeGeoLocalizacaoReceiver getReceiver() {
+        return receiver;
     }
 }

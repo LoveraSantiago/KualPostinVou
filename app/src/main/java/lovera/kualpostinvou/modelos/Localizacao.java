@@ -1,6 +1,8 @@
 package lovera.kualpostinvou.modelos;
 
-public class Localizacao {
+import java.io.Serializable;
+
+public class Localizacao implements Serializable{
 
     private Double latitude;
     private Double longitude;

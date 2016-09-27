@@ -33,9 +33,10 @@ import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 import lovera.kualpostinvou.views.fragments.FragmentMenu;
 import lovera.kualpostinvou.views.navigationdrawer.ActionBarDrawerToggleImpl;
 import lovera.kualpostinvou.views.navigationdrawer.RecyclerViewAdapterImpl;
+import lovera.kualpostinvou.views.receivers.NomeGeoLocalizacaoReceiver;
 import lovera.kualpostinvou.views.services.LoginService;
 
-public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer, MsgToActivity {
+public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer, MsgToActivity{
 
     private static String CHAVE_TOKEN = "token";
     private static String CHAVE_PESSOA = "pessoa";
@@ -266,5 +267,4 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     public void consumirEstabelecimentosGeolocalizacao(View view){
         this.frag2.consumirEstabelecimentosGeolocalizacao(view.getTag().toString());
     }
-
 }

@@ -1,6 +1,8 @@
 package lovera.kualpostinvou.views.fragments;
 
 import android.app.Fragment;
+import android.app.IntentService;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.views.adapters.EstabelecimentoAdapter;
 import lovera.kualpostinvou.views.adapters.FragListaEstabelecimentosAdapter;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
+import lovera.kualpostinvou.views.services.NomeGeolocalizacaoService;
 
 public class FragListaEstabelecimentos extends FragmentMenu implements AdapterView.OnItemClickListener{
 
@@ -67,6 +70,12 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
         bundle.putSerializable("ESTABELECIMENTO", estabelecimento);
         FragEstabelecimento fragEstabelecimento = new FragEstabelecimento();
         fragEstabelecimento.setArguments(bundle);
+
+        Intent intent = new Intent(getActivity(), NomeGeolocalizacaoService.class);
+        intent.putExtra("ESTABELECIMENTO", estabelecimento);
+        intent.putExtra("RECEIVER", fragEstabelecimento.getReceiver());
+        getActivity().startService(intent);
+
         this.msgToActivity.setarFragment(fragEstabelecimento);
     }
 
