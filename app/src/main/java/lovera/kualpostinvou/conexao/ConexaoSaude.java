@@ -44,8 +44,8 @@ public class ConexaoSaude {
 //        Call<Estabelecimento> call = this.endpointSaude.getEstabelecimento(codUnidade);
 //        call.enqueue(new CallBackEstabelecimento(this.msg));
 
-        Call<List<Estabelecimento>> call = this.endpointSaude.getEstabelecimento(codUnidade);
-        call.enqueue(new CallBackEstabelecimentos(this.msg));
+        Call<ResponseBody> call = this.endpointSaude.getEstabelecimento(codUnidade);
+        call.enqueue(new CallBackEstabelecimentos2(this.msg));
     }
 
     public void getEstabelecimentos(String municipio, String uf, List<String> campos, String especialidade, int pagina, int quantidade){

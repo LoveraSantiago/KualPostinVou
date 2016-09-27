@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme">
 
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAhQrEzajFDVTMqWt_JpF4BWY7HI8ImgHo"/>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyATDGq2yz2Ax7woxGsOwk9DBRfKarIwYVY"/>
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 
         <activity android:name=".MainActivity"
@@ -29,8 +29,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".views.ListaEstabelecimentosActivity"/>
         <activity android:name=".views.PrincipalActivity"/>
+        <activity android:name=".views.ListaEstabelecimentosActivity"/>
+        <activity android:name=".views.StreetViewPanoramaBasicDemoActivity"/>
 
         <service android:name="lovera.kualpostinvou.views.services.LocalizacaoService"/>
         <service android:name="lovera.kualpostinvou.views.services.LoginService"/>

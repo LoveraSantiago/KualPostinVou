@@ -6,9 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
+import com.google.android.gms.maps.StreetViewPanorama;
+import com.google.android.gms.maps.StreetViewPanoramaFragment;
+import com.google.android.gms.maps.StreetViewPanoramaView;
+import com.google.android.gms.maps.SupportStreetViewPanoramaFragment;
+import com.google.android.gms.maps.model.LatLng;
+
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 
+import static lovera.kualpostinvou.R.id.streetviewpanorama;
 import static lovera.kualpostinvou.views.utils.Utils.setTextToLabel;
 
 public class FragEstabelecimento extends FragmentMenu{
@@ -27,9 +35,26 @@ public class FragEstabelecimento extends FragmentMenu{
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         setarCampos();
+//http://stackoverflow.com/questions/32287209/android-using-streetviewpanoramaview-in-xml
+        final LatLng latLng = new LatLng(this.estabelecimento.getLat(), this.estabelecimento.getLongi());
+        StreetViewPanoramaView streetViewPanoramaFragment = (StreetViewPanoramaView) getActivity().findViewById(R.id.streetviewpanorama);
+        streetViewPanoramaFragment.onCreate(savedInstanceState);
+        streetViewPanoramaFragment.getStreetViewPanoramaAsync(
+                new OnStreetViewPanoramaReadyCallback() {
+                    @Override
+                    public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
+                        // Only set the panorama to SYDNEY on startup (when no panoramas have been
+                        // loaded which is when the savedInstanceState is null).
+
+//                        panorama.setPanningGesturesEnabled(false);
+                        panorama.setPosition(latLng);
+                    }
+                });
+        streetViewPanoramaFragment.onResume();
     }
 
     @Override

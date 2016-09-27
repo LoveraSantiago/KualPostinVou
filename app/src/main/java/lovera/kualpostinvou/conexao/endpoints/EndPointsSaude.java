@@ -34,8 +34,11 @@ public interface EndPointsSaude {
 //    @GET("rest/estabelecimentos/unidade/{codUnidade}")
 //    Call<Estabelecimento> getEstabelecimento(@Path("codUnidade") String codUnidade);
 
+//    @GET("rest/estabelecimentos/unidade/{codUnidade}")
+//    Call<List<Estabelecimento>> getEstabelecimento(@Path("codUnidade") String codUnidade);
+
     @GET("rest/estabelecimentos/unidade/{codUnidade}")
-    Call<List<Estabelecimento>> getEstabelecimento(@Path("codUnidade") String codUnidade);
+    Call<ResponseBody> getEstabelecimento(@Path("codUnidade") String codUnidade);
 
     @GET("rest/especialidades/unidade/{codUnidade}")
     Call<List<Especialidade>> getEspecialidades(@Path("codUnidade") String codUnidade);

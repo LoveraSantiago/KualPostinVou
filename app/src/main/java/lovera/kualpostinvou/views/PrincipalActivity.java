@@ -14,6 +14,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
+import com.google.android.gms.maps.StreetViewPanorama;
+import com.google.android.gms.maps.StreetViewPanoramaView;
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -70,6 +75,21 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         selectItem(0);
 
         recuperarObjetosSalvos(savedInstanceState);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
     }
 
     private void inicializarComponentes(){
