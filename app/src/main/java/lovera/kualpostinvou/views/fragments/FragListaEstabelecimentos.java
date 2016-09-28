@@ -60,12 +60,16 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        this.msgToActivity.abrirProgresso();
+        this.msgToActivity.setarTextoProgresso("Consultando estabelecimento.");
+
         Estabelecimento estabSelecionado = this.listaEstabelecimentos.get(position);
         ConexaoSaude conexao = new ConexaoSaude(this.adapterMsg);
         conexao.getEstabelelecimento(estabSelecionado.getCodUnidade());
     }
 
     public void receberEstabelecimento(Estabelecimento estabelecimento){
+        this.msgToActivity.setarTextoProgresso("Estabelecimento localizado.");
         Bundle bundle = new Bundle();
         bundle.putSerializable("ESTABELECIMENTO", estabelecimento);
         FragEstabelecimento fragEstabelecimento = new FragEstabelecimento();

@@ -17,6 +17,7 @@ import com.google.android.gms.maps.model.LatLng;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
+import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.receivers.NomeGeoLocalizacaoReceiver;
 
 import static lovera.kualpostinvou.R.id.streetviewpanorama;
@@ -35,7 +36,9 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
 
     private Bundle savedInstanceState;
 
-    StreetViewPanoramaView streetViewPanoramaView;
+    private StreetViewPanoramaView streetViewPanoramaView;
+
+    private MsgToActivity msgToActivity;
 
     public FragEstabelecimento() {
         this.receiver = new NomeGeoLocalizacaoReceiver(new Handler());
@@ -51,8 +54,11 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
     @Override
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        this.msgToActivity = (MsgToActivity) getActivity();
+
         this.savedInstanceState = savedInstanceState;
         setarCampos();
+        this.msgToActivity.setarTextoProgresso("Localizando fotos do estabelecimento");
     }
 
     @Override
@@ -170,6 +176,7 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
                 new OnStreetViewPanoramaReadyCallback() {
                     @Override
                     public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
+                        msgToActivity.fecharProgresso();
                         panorama.setPosition(latLng);
                     }
                 });
