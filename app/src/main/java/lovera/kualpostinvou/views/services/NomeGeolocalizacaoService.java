@@ -57,9 +57,9 @@ public class NomeGeolocalizacaoService extends IntentService{
     private String montarStringQuery(Estabelecimento estabelecimento){
         StringBuilder result = new StringBuilder();
         result.append(estabelecimento.getLogradouro())
-              .append(" ")
+              .append(", ")
               .append(estabelecimento.getNumero())
-              .append(" ")
+              .append(", ")
               .append(estabelecimento.getBairro());
         return result.toString();
     }
