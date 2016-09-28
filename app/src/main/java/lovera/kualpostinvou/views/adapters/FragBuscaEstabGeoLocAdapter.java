@@ -11,11 +11,11 @@ import lovera.kualpostinvou.modelos.Servicos;
 import lovera.kualpostinvou.views.contratos.MsgFromGpsService;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao2;
 
-public class FragBuscaEstabGeoLocalizacaoAdapter implements MsgFromConexaoSaude, MsgFromGpsService{
+public class FragBuscaEstabGeoLocAdapter implements MsgFromConexaoSaude, MsgFromGpsService{
 
     private FragBuscaEstabGeoLocalizacao2 fragment;
 
-    public FragBuscaEstabGeoLocalizacaoAdapter(FragBuscaEstabGeoLocalizacao2 fragment) {
+    public FragBuscaEstabGeoLocAdapter(FragBuscaEstabGeoLocalizacao2 fragment) {
         this.fragment = fragment;
     }
 

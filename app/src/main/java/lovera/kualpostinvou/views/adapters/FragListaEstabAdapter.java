@@ -9,12 +9,12 @@ import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.modelos.Servicos;
 import lovera.kualpostinvou.views.fragments.FragListaEstabelecimentos;
 
-public class FragListaEstabelecimentosAdapter implements MsgFromConexaoSaude {
+public class FragListaEstabAdapter implements MsgFromConexaoSaude {
 
     private FragListaEstabelecimentos fragment;
 
 
-    public FragListaEstabelecimentosAdapter(FragListaEstabelecimentos fragment) {
+    public FragListaEstabAdapter(FragListaEstabelecimentos fragment) {
         this.fragment = fragment;
     }
 

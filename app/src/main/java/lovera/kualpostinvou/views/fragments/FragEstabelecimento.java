@@ -1,26 +1,29 @@
 package lovera.kualpostinvou.views.fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.StreetViewPanorama;
-import com.google.android.gms.maps.StreetViewPanoramaFragment;
 import com.google.android.gms.maps.StreetViewPanoramaView;
-import com.google.android.gms.maps.SupportStreetViewPanoramaFragment;
 import com.google.android.gms.maps.model.LatLng;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
+import lovera.kualpostinvou.views.adapters.ViewPagerEstabAdapter;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.receivers.NomeGeoLocalizacaoReceiver;
 
-import static lovera.kualpostinvou.R.id.streetviewpanorama;
 import static lovera.kualpostinvou.views.utils.Utils.setTextToLabel;
 
 public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocalizacaoReceiver.Receiver{
@@ -32,17 +35,34 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
 
     private Estabelecimento estabelecimento;
 
-    private NomeGeoLocalizacaoReceiver receiver;
-
+    private ViewPager viewPager;
     private Bundle savedInstanceState;
-
     private StreetViewPanoramaView streetViewPanoramaView;
 
+    private NomeGeoLocalizacaoReceiver receiver;
     private MsgToActivity msgToActivity;
 
+    private FragEstabelecimento_Filho1 fragFilho1;
+    private FragEstabelecimento_Filho2 fragFilho2;
+
     public FragEstabelecimento() {
+        inicializarReceivers();
+        inicializarFragFilhos();
+    }
+
+    private void inicializarReceivers(){
         this.receiver = new NomeGeoLocalizacaoReceiver(new Handler());
         this.receiver.setReceiver(this);
+    }
+
+    private void inicializarFragFilhos(){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ESTABELECIMENTO", estabelecimento);
+
+        this.fragFilho1 = new FragEstabelecimento_Filho1();
+        this.fragFilho1.setArguments(bundle);
+        this.fragFilho2 = new FragEstabelecimento_Filho2();
+        this.fragFilho2.setArguments(bundle);
     }
 
     @Nullable
@@ -54,11 +74,52 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
     @Override
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.msgToActivity = (MsgToActivity) getActivity();
 
+        this.msgToActivity = (MsgToActivity) getActivity();
         this.savedInstanceState = savedInstanceState;
-        setarCampos();
+
+        inicializarComponentes();
+
         this.msgToActivity.setarTextoProgresso("Localizando fotos do estabelecimento");
+    }
+
+    private void inicializarComponentes(){
+        inicializarViewPager();
+        inicializarTabLayout();
+    }
+
+    private void inicializarViewPager(){
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        this.viewPager = (ViewPager) getActivity().findViewById(R.id.f5_viewpager);
+
+        ViewPagerEstabAdapter adapter = new ViewPagerEstabAdapter(activity.getSupportFragmentManager());
+        adapter.addFrag(this.fragFilho1, "filho1");
+        adapter.addFrag(this.fragFilho2, "filho2");
+        this.viewPager.setAdapter(adapter);
+    }
+
+    private void inicializarTabLayout(){
+        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.f5_tablayout);
+        tabLayout.setupWithViewPager(this.viewPager);
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
+
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(tab.getPosition() == 1){
+//                    fragFilho1.fazerAlgo();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     @Override
@@ -95,39 +156,6 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
     public void setArguments(Bundle args) {
         super.setArguments(args);
         this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
-    }
-
-    private void setarCampos(){
-        setTextToLabel(estabelecimento.getCodCnes(), R.id.lblCodCnes, getView());
-        setTextToLabel(estabelecimento.getCnpj(), R.id.lblCnpj, getView());
-        setTextToLabel(estabelecimento.getCodUnidade(), R.id.lblCodigo, getView());
-        setTextToLabel(estabelecimento.getNomeFantasia(), R.id.lblNomeFantasia, getView());
-        setTextToLabel(estabelecimento.getNatureza(), R.id.lblNatureza, getView());
-        setTextToLabel(estabelecimento.getTipoUnidade(), R.id.lblTipoUnidade, getView());
-        setTextToLabel(estabelecimento.getEsferaAdministrativa(), R.id.lblEsferaAdm, getView());
-        setTextToLabel(estabelecimento.getVinculoSus(), R.id.lblVincSus, getView());
-        setTextToLabel(estabelecimento.getRetencao(), R.id.lblRetencao, getView());
-        setTextToLabel(estabelecimento.getFluxoClientela(),             R.id.lblFlxClientela, getView());
-        setTextToLabel(estabelecimento.getOrigemGeografica(),           R.id.lblOrigGeograf, getView());
-        setTextToLabel(estabelecimento.getTemAtendimentoUrgencia(),     R.id.lblAtendEmgc, getView());
-        setTextToLabel(estabelecimento.getTemAtendimentoAmbulatorial(), R.id.lblAtendAmbulat, getView());
-        setTextToLabel(estabelecimento.getTemCentroCirurgico(), R.id.lblCCirurg, getView());
-        setTextToLabel(estabelecimento.getTemObstetra(), R.id.lblObstetra, getView());
-        setTextToLabel(estabelecimento.getTemNeoNatal(), R.id.lblNeonatal, getView());
-        setTextToLabel(estabelecimento.getTemDialise(), R.id.lblDialise, getView());
-        setTextToLabel(estabelecimento.getDescricaoCompleta(), R.id.lblDescompl, getView());
-        setTextToLabel(estabelecimento.getTipoUnidadeCnes(), R.id.lblCategUnid, getView());
-        setTextToLabel(estabelecimento.getLogradouro(), R.id.lblLogradouro, getView());
-        setTextToLabel(estabelecimento.getNumero(), R.id.lblNumero, getView());
-        setTextToLabel(estabelecimento.getBairro(), R.id.lblBairro, getView());
-        setTextToLabel(estabelecimento.getCidade(), R.id.lblCidade, getView());
-        setTextToLabel(estabelecimento.getUf(), R.id.lblUf, getView());
-        setTextToLabel(estabelecimento.getCep(), R.id.lblCep, getView());
-        setTextToLabel(estabelecimento.getTelefone(), R.id.lblTelefone, getView());
-        setTextToLabel(estabelecimento.getTurnoAtendimento(), R.id.lblTurnoAtend, getView());
-        setTextToLabel(estabelecimento.getLat(), R.id.lblLatitude, getView());
-        setTextToLabel(estabelecimento.getLongi(), R.id.lblLongitude, getView());
-        setTextToLabel(estabelecimento.getDistancia(), R.id.lblDistancia, getView());
     }
 
     //Metodos sobrescritos herdados da classe pai FragMenu
@@ -170,7 +198,7 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
     }
 
     private void inicializarStreetView(final LatLng latLng){
-        this.streetViewPanoramaView = (StreetViewPanoramaView) getActivity().findViewById(R.id.streetviewpanorama);
+        this.streetViewPanoramaView = (StreetViewPanoramaView) getActivity().findViewById(R.id.f5_streetviewpanorama);
         this.streetViewPanoramaView.onCreate(this.savedInstanceState);
         this.streetViewPanoramaView.getStreetViewPanoramaAsync(
                 new OnStreetViewPanoramaReadyCallback() {

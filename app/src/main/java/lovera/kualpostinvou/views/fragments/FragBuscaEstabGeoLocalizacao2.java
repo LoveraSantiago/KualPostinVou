@@ -18,7 +18,7 @@ import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.utils.Distancia;
-import lovera.kualpostinvou.views.adapters.FragBuscaEstabGeoLocalizacaoAdapter;
+import lovera.kualpostinvou.views.adapters.FragBuscaEstabGeoLocAdapter;
 import lovera.kualpostinvou.views.components.SeekBarChangeListenerImpl;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.dialogs.DismissDialog;
@@ -33,7 +33,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
     public static int ICONE = R.drawable.icn2;
 
     private HelperGeolocalizacao helperGps;
-    private FragBuscaEstabGeoLocalizacaoAdapter adapterMgs;
+    private FragBuscaEstabGeoLocAdapter adapterMgs;
     private MsgToActivity msgActivity;
     //Componentes da tela
     private SeekBar seekBar;
@@ -53,7 +53,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.helperGps = new HelperGeolocalizacao(this);
-        this.adapterMgs = new FragBuscaEstabGeoLocalizacaoAdapter(this);
+        this.adapterMgs = new FragBuscaEstabGeoLocAdapter(this);
 
         this.msgActivity = (MsgToActivity) getActivity();
         inicializarComponentes();

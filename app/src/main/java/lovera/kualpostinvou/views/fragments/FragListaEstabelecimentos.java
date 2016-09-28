@@ -1,7 +1,5 @@
 package lovera.kualpostinvou.views.fragments;
 
-import android.app.Fragment;
-import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import java.util.List;
@@ -18,7 +15,7 @@ import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.views.adapters.EstabelecimentoAdapter;
-import lovera.kualpostinvou.views.adapters.FragListaEstabelecimentosAdapter;
+import lovera.kualpostinvou.views.adapters.FragListaEstabAdapter;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.services.NomeGeolocalizacaoService;
 
@@ -29,7 +26,7 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
     public static int ID_FRAGMENT = 4;
     public static int ICONE = R.drawable.icn2;
 
-    private FragListaEstabelecimentosAdapter adapterMsg;
+    private FragListaEstabAdapter adapterMsg;
 
     private List<Estabelecimento> listaEstabelecimentos;
 
@@ -45,7 +42,7 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.msgToActivity = (MsgToActivity) getActivity();
-        this.adapterMsg = new FragListaEstabelecimentosAdapter(this);
+        this.adapterMsg = new FragListaEstabAdapter(this);
 
         ListView lv = (ListView) getActivity().findViewById(R.id.listaEstabelecimentos);
         lv.setAdapter(new EstabelecimentoAdapter(getActivity(), this.listaEstabelecimentos));

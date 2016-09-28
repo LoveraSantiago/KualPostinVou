@@ -1,10 +1,8 @@
 package lovera.kualpostinvou;
 
 import android.app.Application;
-import android.content.Context;
 import android.provider.Settings;
 
-import lovera.kualpostinvou.views.adapters.FragBuscaEstabGeoLocalizacaoAdapter;
 import lovera.kualpostinvou.views.contratos.MsgFromGpsService;
 import lovera.kualpostinvou.views.redes_sociais.PessoaLogada;
 import lovera.kualpostinvou.views.redes_sociais.facebook.Facebook_Coisas;
