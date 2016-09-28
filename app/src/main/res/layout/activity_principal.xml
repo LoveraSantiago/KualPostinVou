@@ -39,7 +39,7 @@
         </RelativeLayout>
 
         <FrameLayout
-            android:layout_below="@id/a1_ui_status"
+            android:layout_below="@id/app_bar"
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
