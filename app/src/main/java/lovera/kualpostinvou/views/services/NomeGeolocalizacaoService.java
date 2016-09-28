@@ -32,23 +32,20 @@ public class NomeGeolocalizacaoService extends IntentService{
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         List<Address> listAddress = null;
         try {
-            listAddress = geocoder.getFromLocationName(estabelecimento.getNomeFantasia(), 1,
-                    estabelecimento.getLat() - 10, estabelecimento.getLongi() - 10,
-                    estabelecimento.getLat() + 10, estabelecimento.getLongi() + 10);
+            listAddress = geocoder.getFromLocationName(estabelecimento.getLogradouro() + " " + estabelecimento.getNumero() + " " + estabelecimento.getBairro(), 1);
         }
         catch (IOException e) {
             e.printStackTrace();
         }
+        Bundle bundle = new Bundle();
         if(listAddress != null && listAddress.size() > 0){
             Address address = listAddress.get(0);
             Localizacao localizacao = new Localizacao();
             localizacao.setLatitude(address.getLatitude());
             localizacao.setLongitude(address.getLongitude());
 
-            Bundle bundle = new Bundle();
             bundle.putSerializable("LOCALIZACAO", localizacao);
-
-            resultReceiver.send(0, bundle);
         }
+        resultReceiver.send(0, bundle);
     }
 }

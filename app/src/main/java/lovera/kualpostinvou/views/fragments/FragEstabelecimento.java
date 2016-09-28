@@ -35,12 +35,14 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
 
     private Bundle savedInstanceState;
 
+    public FragEstabelecimento() {
+        this.receiver = new NomeGeoLocalizacaoReceiver(new Handler());
+        this.receiver.setReceiver(this);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.receiver = new NomeGeoLocalizacaoReceiver(new Handler());
-        this.receiver.setReceiver(this);
-
         return inflater.inflate(R.layout.fragment_estabelecimento, container, false);
     }
 
@@ -111,7 +113,12 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
         Localizacao localizacao = (Localizacao) resultData.getSerializable("LOCALIZACAO");
 
         //http://stackoverflow.com/questions/32287209/android-using-streetviewpanoramaview-in-xml
-        final LatLng latLng = new LatLng(this.estabelecimento.getLat(), this.estabelecimento.getLongi());
+        if(localizacao == null){
+            localizacao = new Localizacao();
+            localizacao.setLatitude(this.estabelecimento.getLat());
+            localizacao.setLongitude(this.estabelecimento.getLongi());
+        }
+        final LatLng latLng = new LatLng(localizacao.getLatitude(), localizacao.getLongitude());
         StreetViewPanoramaView streetViewPanoramaFragment = (StreetViewPanoramaView) getActivity().findViewById(R.id.streetviewpanorama);
         streetViewPanoramaFragment.onCreate(this.savedInstanceState);
         streetViewPanoramaFragment.getStreetViewPanoramaAsync(
