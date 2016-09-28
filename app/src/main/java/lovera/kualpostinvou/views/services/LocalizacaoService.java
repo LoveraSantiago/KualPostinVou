@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 
+//TODO inserir ResultReceiver para retornar o resultado da operacao
 public class LocalizacaoService extends Service{
 
     @Override
