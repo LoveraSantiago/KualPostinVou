@@ -41,15 +41,11 @@ public class ConexaoSaude {
     }
 
     public void getEstabelelecimento(String codUnidade){
-//        Call<Estabelecimento> call = this.endpointSaude.getEstabelecimento(codUnidade);
-//        call.enqueue(new CallBackEstabelecimento(this.msg));
-
         Call<ResponseBody> call = this.endpointSaude.getEstabelecimento(codUnidade);
         call.enqueue(new CallBackEstabelecimentos2(this.msg));
     }
 
     public void getEstabelecimentos(String municipio, String uf, List<String> campos, String especialidade, int pagina, int quantidade){
-
         Map<String, String> mapParams = helper.factoryMap_EndP_Estabelecimentos(municipio, uf, campos, especialidade, pagina, quantidade);
 
         Call<List<Estabelecimento>> call = this.endpointSaude.getEstabelecimentos(mapParams);
@@ -65,8 +61,6 @@ public class ConexaoSaude {
     public void getEstabelecimentos(double latitude, double longitude, float raio, String texto, String categoria, String campos, int pagina, int quantidade){
         Map<String, String> mapParams = helper.factoryMap_EndP_Estabelecimentos(texto, categoria, campos, pagina, quantidade);
 
-//        Call<List<Estabelecimento>> call = this.endpointSaude.getEstabelecimentos(String.valueOf(latitude), String.valueOf(longitude), String.valueOf(raio) , mapParams);
-//        call.enqueue(new CallBackEstabelecimentos(this.msg));
         Call<ResponseBody> call = this.endpointSaude.getEstabelecimentos(String.valueOf(latitude), String.valueOf(longitude), String.valueOf(raio) , mapParams);
         call.enqueue(new CallBackEstabelecimentos2(this.msg));
     }

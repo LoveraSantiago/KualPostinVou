@@ -32,7 +32,6 @@
         <activity android:name=".views.PrincipalActivity"
                   android:screenOrientation="portrait"/>
         <activity android:name=".views.ListaEstabelecimentosActivity"/>
-        <activity android:name=".views.StreetViewPanoramaBasicDemoActivity"/>
 
         <service android:name="lovera.kualpostinvou.views.services.LocalizacaoService"/>
         <service android:name="lovera.kualpostinvou.views.services.LoginService"/>

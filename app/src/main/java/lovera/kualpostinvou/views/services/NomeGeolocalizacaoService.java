@@ -27,19 +27,24 @@ public class NomeGeolocalizacaoService extends IntentService{
     @Override
     protected void onHandleIntent(Intent intent) {
         Estabelecimento estabelecimento = (Estabelecimento) intent.getSerializableExtra("ESTABELECIMENTO");
+        String stringQuery = montarStringQuery(estabelecimento);
+
         ResultReceiver resultReceiver = intent.getParcelableExtra("RECEIVER");
 
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         List<Address> listAddress = null;
         try {
-            listAddress = geocoder.getFromLocationName(estabelecimento.getLogradouro() + " " + estabelecimento.getNumero() + " " + estabelecimento.getBairro(), 1);
+            listAddress = geocoder.getFromLocationName(stringQuery, 1);
         }
         catch (IOException e) {
             e.printStackTrace();
         }
+
         Bundle bundle = new Bundle();
+
         if(listAddress != null && listAddress.size() > 0){
             Address address = listAddress.get(0);
+
             Localizacao localizacao = new Localizacao();
             localizacao.setLatitude(address.getLatitude());
             localizacao.setLongitude(address.getLongitude());
@@ -47,5 +52,15 @@ public class NomeGeolocalizacaoService extends IntentService{
             bundle.putSerializable("LOCALIZACAO", localizacao);
         }
         resultReceiver.send(0, bundle);
+    }
+
+    private String montarStringQuery(Estabelecimento estabelecimento){
+        StringBuilder result = new StringBuilder();
+        result.append(estabelecimento.getLogradouro())
+              .append(" ")
+              .append(estabelecimento.getNumero())
+              .append(" ")
+              .append(estabelecimento.getBairro());
+        return result.toString();
     }
 }

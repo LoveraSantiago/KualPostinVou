@@ -35,6 +35,8 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
 
     private Bundle savedInstanceState;
 
+    StreetViewPanoramaView streetViewPanoramaView;
+
     public FragEstabelecimento() {
         this.receiver = new NomeGeoLocalizacaoReceiver(new Handler());
         this.receiver.setReceiver(this);
@@ -54,6 +56,36 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if(this.streetViewPanoramaView != null) this.streetViewPanoramaView.onResume();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        if(this.streetViewPanoramaView != null) this.streetViewPanoramaView.onLowMemory();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(this.streetViewPanoramaView != null) this.streetViewPanoramaView.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(this.streetViewPanoramaView != null) this.streetViewPanoramaView.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(this.streetViewPanoramaView != null) this.streetViewPanoramaView.onDestroy();
+    }
+
+    @Override
     public void setArguments(Bundle args) {
         super.setArguments(args);
         this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
@@ -69,9 +101,9 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
         setTextToLabel(estabelecimento.getEsferaAdministrativa(), R.id.lblEsferaAdm, getView());
         setTextToLabel(estabelecimento.getVinculoSus(), R.id.lblVincSus, getView());
         setTextToLabel(estabelecimento.getRetencao(), R.id.lblRetencao, getView());
-        setTextToLabel(estabelecimento.getFluxoClientela(), R.id.lblFlxClientela, getView());
-        setTextToLabel(estabelecimento.getOrigemGeografica(), R.id.lblOrigGeograf, getView());
-        setTextToLabel(estabelecimento.getTemAtendimentoUrgencia(), R.id.lblAtendEmgc, getView());
+        setTextToLabel(estabelecimento.getFluxoClientela(),             R.id.lblFlxClientela, getView());
+        setTextToLabel(estabelecimento.getOrigemGeografica(),           R.id.lblOrigGeograf, getView());
+        setTextToLabel(estabelecimento.getTemAtendimentoUrgencia(),     R.id.lblAtendEmgc, getView());
         setTextToLabel(estabelecimento.getTemAtendimentoAmbulatorial(), R.id.lblAtendAmbulat, getView());
         setTextToLabel(estabelecimento.getTemCentroCirurgico(), R.id.lblCCirurg, getView());
         setTextToLabel(estabelecimento.getTemObstetra(), R.id.lblObstetra, getView());
@@ -108,34 +140,39 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
         return ICONE;
     }
 
+    public NomeGeoLocalizacaoReceiver getReceiver() {
+        return receiver;
+    }
+
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
-        Localizacao localizacao = (Localizacao) resultData.getSerializable("LOCALIZACAO");
+        Localizacao localizacao = getLocalizacaoDoOnReceiveResult(resultData);
+        LatLng latLng = new LatLng(localizacao.getLatitude(), localizacao.getLongitude());
 
-        //http://stackoverflow.com/questions/32287209/android-using-streetviewpanoramaview-in-xml
-        if(localizacao == null){
-            localizacao = new Localizacao();
-            localizacao.setLatitude(this.estabelecimento.getLat());
-            localizacao.setLongitude(this.estabelecimento.getLongi());
+        inicializarStreetView(latLng);
+    }
+
+    private Localizacao getLocalizacaoDoOnReceiveResult(Bundle bundle){
+        Localizacao result = (Localizacao) bundle.getSerializable("LOCALIZACAO");
+
+        if(result == null){
+            result = new Localizacao();
+            result.setLatitude(this.estabelecimento.getLat());
+            result.setLongitude(this.estabelecimento.getLongi());
         }
-        final LatLng latLng = new LatLng(localizacao.getLatitude(), localizacao.getLongitude());
-        StreetViewPanoramaView streetViewPanoramaFragment = (StreetViewPanoramaView) getActivity().findViewById(R.id.streetviewpanorama);
-        streetViewPanoramaFragment.onCreate(this.savedInstanceState);
-        streetViewPanoramaFragment.getStreetViewPanoramaAsync(
+        return result;
+    }
+
+    private void inicializarStreetView(final LatLng latLng){
+        this.streetViewPanoramaView = (StreetViewPanoramaView) getActivity().findViewById(R.id.streetviewpanorama);
+        this.streetViewPanoramaView.onCreate(this.savedInstanceState);
+        this.streetViewPanoramaView.getStreetViewPanoramaAsync(
                 new OnStreetViewPanoramaReadyCallback() {
                     @Override
                     public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
-                        // Only set the panorama to SYDNEY on startup (when no panoramas have been
-                        // loaded which is when the savedInstanceState is null).
-
-//                        panorama.setPanningGesturesEnabled(false);
                         panorama.setPosition(latLng);
                     }
                 });
-        streetViewPanoramaFragment.onResume();
-    }
-
-    public NomeGeoLocalizacaoReceiver getReceiver() {
-        return receiver;
+        this.streetViewPanoramaView.onResume();
     }
 }
