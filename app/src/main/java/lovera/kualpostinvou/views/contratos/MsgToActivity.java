@@ -4,6 +4,7 @@ import android.app.Fragment;
 
 public interface MsgToActivity {
 
+    boolean isAbertoProgresso();
     void abrirProgresso();
     void fecharProgresso();
     void setarTextoProgresso(String texto);
