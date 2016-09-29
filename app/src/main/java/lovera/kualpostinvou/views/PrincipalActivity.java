@@ -206,6 +206,11 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         this.fragAtiva.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    public boolean isAbertoProgresso() {
+        return this.uiStatus.getVisibility() == View.VISIBLE;
+    }
+
     //Comunicacao entre Activity e Fragments
     @Override
     public void abrirProgresso(){
@@ -265,6 +270,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     public void decrementarDistancia(View view){ this.frag2.decrementarDistancia(); }
 
     public void consumirEstabelecimentosGeolocalizacao(View view){
+        if(isAbertoProgresso()) return;
         this.frag2.consumirEstabelecimentosGeolocalizacao(view.getTag().toString());
     }
 }
