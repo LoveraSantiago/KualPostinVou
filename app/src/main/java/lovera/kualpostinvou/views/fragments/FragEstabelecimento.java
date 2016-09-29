@@ -56,13 +56,9 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
     }
 
     private void inicializarFragFilhos(){
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("ESTABELECIMENTO", estabelecimento);
 
         this.fragFilho1 = new FragEstabelecimento_Filho1();
-        this.fragFilho1.setArguments(bundle);
         this.fragFilho2 = new FragEstabelecimento_Filho2();
-        this.fragFilho2.setArguments(bundle);
     }
 
     @Nullable
@@ -105,9 +101,7 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
 
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if(tab.getPosition() == 1){
-//                    fragFilho1.fazerAlgo();
-                }
+                viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
@@ -155,7 +149,11 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
     @Override
     public void setArguments(Bundle args) {
         super.setArguments(args);
+        this.fragFilho1.setArguments(args);
+        this.fragFilho2.setArguments(args);
+
         this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
+
     }
 
     //Metodos sobrescritos herdados da classe pai FragMenu
