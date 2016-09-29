@@ -12,9 +12,13 @@ import lovera.kualpostinvou.modelos.Estabelecimento;
 
 import static lovera.kualpostinvou.views.utils.Utils.setTextToLabel;
 
-public class FragEstabelecimento_Filho1 extends Fragment {
+public class FragEstabelecimento_Filho1 extends FragmentFilho {
 
     private Estabelecimento estabelecimento;
+
+    public static String TITULO_FRAGMENT = "Sem nome ainda";
+    public static int ID_FRAGMENT = 1;
+    public static int ICONE = R.drawable.icn2;
 
     @Nullable
     @Override
@@ -35,9 +39,6 @@ public class FragEstabelecimento_Filho1 extends Fragment {
     }
 
     private void setarCampos(){
-        setTextToLabel(this.estabelecimento.getCodCnes()                   , R.id.lblCodCnes     , getView());
-        setTextToLabel(this.estabelecimento.getCnpj()                      , R.id.lblCnpj        , getView());
-        setTextToLabel(this.estabelecimento.getCodUnidade()                , R.id.lblCodigo      , getView());
         setTextToLabel(this.estabelecimento.getNomeFantasia()              , R.id.lblNomeFantasia, getView());
         setTextToLabel(this.estabelecimento.getNatureza()                  , R.id.lblNatureza    , getView());
         setTextToLabel(this.estabelecimento.getTipoUnidade()               , R.id.lblTipoUnidade , getView());
@@ -45,7 +46,6 @@ public class FragEstabelecimento_Filho1 extends Fragment {
         setTextToLabel(this.estabelecimento.getVinculoSus()                , R.id.lblVincSus     , getView());
         setTextToLabel(this.estabelecimento.getRetencao()                  , R.id.lblRetencao    , getView());
         setTextToLabel(this.estabelecimento.getFluxoClientela()            , R.id.lblFlxClientela, getView());
-        setTextToLabel(this.estabelecimento.getOrigemGeografica()          , R.id.lblOrigGeograf , getView());
         setTextToLabel(this.estabelecimento.getTemAtendimentoUrgencia()    , R.id.lblAtendEmgc   , getView());
         setTextToLabel(this.estabelecimento.getTemAtendimentoAmbulatorial(), R.id.lblAtendAmbulat, getView());
         setTextToLabel(this.estabelecimento.getTemCentroCirurgico()        , R.id.lblCCirurg     , getView());
@@ -55,5 +55,20 @@ public class FragEstabelecimento_Filho1 extends Fragment {
         setTextToLabel(this.estabelecimento.getDescricaoCompleta()         , R.id.lblDescompl    , getView());
         setTextToLabel(this.estabelecimento.getTipoUnidadeCnes()           , R.id.lblCategUnid   , getView());
         setTextToLabel(this.estabelecimento.getTurnoAtendimento()          , R.id.lblTurnoAtend  , getView());
+    }
+
+    @Override
+    public int getFragmentId() {
+        return ID_FRAGMENT;
+    }
+
+    @Override
+    public String getFragmentTitulo() {
+        return TITULO_FRAGMENT;
+    }
+
+    @Override
+    public int getIcone() {
+        return ICONE;
     }
 }

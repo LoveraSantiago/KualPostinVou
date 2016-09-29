@@ -12,9 +12,13 @@ import lovera.kualpostinvou.modelos.Estabelecimento;
 
 import static lovera.kualpostinvou.views.utils.Utils.setTextToLabel;
 
-public class FragEstabFilho_Endereco extends Fragment {
+public class FragEstabFilho_Endereco extends FragmentFilho {
 
     private Estabelecimento estabelecimento;
+
+    public static String TITULO_FRAGMENT = "Enderecos";
+    public static int ID_FRAGMENT = 2;
+    public static int ICONE = R.drawable.ic_room_black_24dp;
 
     @Nullable
     @Override
@@ -46,5 +50,20 @@ public class FragEstabFilho_Endereco extends Fragment {
         setTextToLabel(this.estabelecimento.getLat()                       , R.id.lblLatitude    , getView());
         setTextToLabel(this.estabelecimento.getLongi()                     , R.id.lblLongitude   , getView());
         setTextToLabel(this.estabelecimento.getDistancia()                 , R.id.lblDistancia   , getView());
+    }
+
+    @Override
+    public int getFragmentId() {
+        return ID_FRAGMENT;
+    }
+
+    @Override
+    public String getFragmentTitulo() {
+        return TITULO_FRAGMENT;
+    }
+
+    @Override
+    public int getIcone() {
+        return ICONE;
     }
 }

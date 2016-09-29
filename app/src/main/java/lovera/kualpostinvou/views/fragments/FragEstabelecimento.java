@@ -41,7 +41,9 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
     private MsgToActivity msgToActivity;
 
     private FragEstabelecimento_Filho1 fragFilho1;
-    private FragEstabFilho_Endereco fragFilho2;
+    private FragEstabFilho_Info fragFilhoInfo;
+    private FragEstabFilho_Endereco fragFilhoEndereco;
+
 
     public FragEstabelecimento() {
         inicializarReceivers();
@@ -54,9 +56,9 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
     }
 
     private void inicializarFragFilhos(){
-
         this.fragFilho1 = new FragEstabelecimento_Filho1();
-        this.fragFilho2 = new FragEstabFilho_Endereco();
+        this.fragFilhoInfo = new FragEstabFilho_Info();
+        this.fragFilhoEndereco = new FragEstabFilho_Endereco();
     }
 
     @Nullable
@@ -88,14 +90,16 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
 
         ViewPagerEstabAdapter adapter = new ViewPagerEstabAdapter(activity.getSupportFragmentManager());
         adapter.addFrag(this.fragFilho1, "filho1");
-        adapter.addFrag(this.fragFilho2, "");
+        adapter.addFrag(this.fragFilhoInfo, "");
+        adapter.addFrag(this.fragFilhoEndereco, "");
         this.viewPager.setAdapter(adapter);
     }
 
     private void inicializarTabLayout(){
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.f5_tablayout);
         tabLayout.setupWithViewPager(this.viewPager);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_room_black_24dp);
+        tabLayout.getTabAt(this.fragFilhoInfo.getFragmentId()).setIcon(this.fragFilhoInfo.getIcone());
+        tabLayout.getTabAt(this.fragFilhoEndereco.getFragmentId()).setIcon(this.fragFilhoEndereco.getIcone());
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
 
             @Override
@@ -149,10 +153,10 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
     public void setArguments(Bundle args) {
         super.setArguments(args);
         this.fragFilho1.setArguments(args);
-        this.fragFilho2.setArguments(args);
+        this.fragFilhoInfo.setArguments(args);
+        this.fragFilhoEndereco.setArguments(args);
 
         this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
-
     }
 
     //Metodos sobrescritos herdados da classe pai FragMenu

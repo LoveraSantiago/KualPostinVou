@@ -2,10 +2,8 @@ package lovera.kualpostinvou.views.fragments;
 
 import android.app.Fragment;
 
-public abstract class FragmentMenu extends Fragment {
+import lovera.kualpostinvou.views.contratos.FragmentInfo;
 
-    public abstract int getFragmentId();
-    public abstract String getFragmentTitulo();
-    public abstract int getIcone();
+public abstract class FragmentMenu extends Fragment implements FragmentInfo{
 
 }

@@ -35,7 +35,7 @@ import lovera.kualpostinvou.views.navigationdrawer.ActionBarDrawerToggleImpl;
 import lovera.kualpostinvou.views.navigationdrawer.RecyclerViewAdapterImpl;
 import lovera.kualpostinvou.views.receivers.NomeGeoLocalizacaoReceiver;
 import lovera.kualpostinvou.views.services.LoginService;
-
+//TODO: colocar restauração dos estados das fragments principais ver => https://developer.android.com/training/basics/activity-lifecycle/recreating.html?hl=pt-br
 public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer, MsgToActivity{
 
     private static String CHAVE_TOKEN = "token";
