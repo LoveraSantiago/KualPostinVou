@@ -30,6 +30,7 @@ public class FragEstabFilho_Info extends FragmentFilho {
     public void setArguments(Bundle args) {
         super.setArguments(args);
         this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
+        setarCampos();
     }
 
     @Override
@@ -39,10 +40,15 @@ public class FragEstabFilho_Info extends FragmentFilho {
     }
 
     private void setarCampos(){
-        setTextToLabel(this.estabelecimento.getCodCnes()                   , R.id.lblCodCnes     , getView());
-        setTextToLabel(this.estabelecimento.getCnpj()                      , R.id.lblCnpj        , getView());
-        setTextToLabel(this.estabelecimento.getCodUnidade()                , R.id.lblCodigo      , getView());
-        setTextToLabel(this.estabelecimento.getOrigemGeografica()          , R.id.lblOrigGeograf , getView());
+        try{
+            setTextToLabel(this.estabelecimento.getCodCnes()                   , R.id.lblCodCnes     , getView());
+            setTextToLabel(this.estabelecimento.getCnpj()                      , R.id.lblCnpj        , getView());
+            setTextToLabel(this.estabelecimento.getCodUnidade()                , R.id.lblCodigo      , getView());
+            setTextToLabel(this.estabelecimento.getOrigemGeografica()          , R.id.lblOrigGeograf , getView());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

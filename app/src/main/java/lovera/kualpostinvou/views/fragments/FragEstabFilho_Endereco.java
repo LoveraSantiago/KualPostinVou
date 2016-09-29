@@ -31,6 +31,7 @@ public class FragEstabFilho_Endereco extends FragmentFilho {
     public void setArguments(Bundle args) {
         super.setArguments(args);
         this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
+        setarCampos();
     }
 
     @Override
@@ -40,16 +41,21 @@ public class FragEstabFilho_Endereco extends FragmentFilho {
     }
 
     private void setarCampos(){
-        setTextToLabel(this.estabelecimento.getLogradouro()                , R.id.lblLogradouro  , getView());
-        setTextToLabel(this.estabelecimento.getNumero()                    , R.id.lblNumero      , getView());
-        setTextToLabel(this.estabelecimento.getBairro()                    , R.id.lblBairro      , getView());
-        setTextToLabel(this.estabelecimento.getCidade()                    , R.id.lblCidade      , getView());
-        setTextToLabel(this.estabelecimento.getUf()                        , R.id.lblUf          , getView());
-        setTextToLabel(this.estabelecimento.getCep()                       , R.id.lblCep         , getView());
-        setTextToLabel(this.estabelecimento.getTelefone()                  , R.id.lblTelefone    , getView());
-        setTextToLabel(this.estabelecimento.getLat()                       , R.id.lblLatitude    , getView());
-        setTextToLabel(this.estabelecimento.getLongi()                     , R.id.lblLongitude   , getView());
-        setTextToLabel(this.estabelecimento.getDistancia()                 , R.id.lblDistancia   , getView());
+        try{
+            setTextToLabel(this.estabelecimento.getLogradouro()                , R.id.lblLogradouro  , getView());
+            setTextToLabel(this.estabelecimento.getNumero()                    , R.id.lblNumero      , getView());
+            setTextToLabel(this.estabelecimento.getBairro()                    , R.id.lblBairro      , getView());
+            setTextToLabel(this.estabelecimento.getCidade()                    , R.id.lblCidade      , getView());
+            setTextToLabel(this.estabelecimento.getUf()                        , R.id.lblUf          , getView());
+            setTextToLabel(this.estabelecimento.getCep()                       , R.id.lblCep         , getView());
+            setTextToLabel(this.estabelecimento.getTelefone()                  , R.id.lblTelefone    , getView());
+            setTextToLabel(this.estabelecimento.getLat()                       , R.id.lblLatitude    , getView());
+            setTextToLabel(this.estabelecimento.getLongi()                     , R.id.lblLongitude   , getView());
+            setTextToLabel(this.estabelecimento.getDistancia()                 , R.id.lblDistancia   , getView());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
