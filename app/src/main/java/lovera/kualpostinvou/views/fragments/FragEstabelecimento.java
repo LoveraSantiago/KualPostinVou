@@ -90,13 +90,14 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
 
         ViewPagerEstabAdapter adapter = new ViewPagerEstabAdapter(activity.getSupportFragmentManager());
         adapter.addFrag(this.fragFilho1, "filho1");
-        adapter.addFrag(this.fragFilho2, "filho2");
+        adapter.addFrag(this.fragFilho2, "");
         this.viewPager.setAdapter(adapter);
     }
 
     private void inicializarTabLayout(){
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.f5_tablayout);
         tabLayout.setupWithViewPager(this.viewPager);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_room_black_24dp);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
 
             @Override
