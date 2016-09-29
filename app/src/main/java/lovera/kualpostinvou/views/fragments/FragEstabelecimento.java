@@ -1,7 +1,5 @@
 package lovera.kualpostinvou.views.fragments;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -43,7 +41,7 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
     private MsgToActivity msgToActivity;
 
     private FragEstabelecimento_Filho1 fragFilho1;
-    private FragEstabelecimento_Filho2 fragFilho2;
+    private FragEstabFilho_Endereco fragFilho2;
 
     public FragEstabelecimento() {
         inicializarReceivers();
@@ -58,7 +56,7 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
     private void inicializarFragFilhos(){
 
         this.fragFilho1 = new FragEstabelecimento_Filho1();
-        this.fragFilho2 = new FragEstabelecimento_Filho2();
+        this.fragFilho2 = new FragEstabFilho_Endereco();
     }
 
     @Nullable
