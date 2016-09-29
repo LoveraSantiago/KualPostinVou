@@ -350,12 +350,12 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
-                        android:tag="Laboratório"/>
+                        android:tag="Todos"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Laboratório"/>
+                        android:text="Todos"/>
 
                 </LinearLayout>
 
@@ -376,12 +376,13 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
-                        android:tag="Consultório"/>
+                        android:tag="unidade administrativa"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Consultório"/>
+                        android:layout_gravity="center_horizontal"
+                        android:text="Administração"/>
 
                 </LinearLayout>
 
@@ -401,12 +402,12 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
-                        android:tag="Todos"/>
+                        android:tag="atenção específica"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Todos"/>
+                        android:text="Atenção Especifica"/>
 
                 </LinearLayout>
 
