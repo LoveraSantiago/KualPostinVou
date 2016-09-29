@@ -14,11 +14,11 @@ import static lovera.kualpostinvou.views.utils.Utils.setTextToLabel;
 
 public class FragEstabelecimento_Filho1 extends FragmentFilho {
 
-    private Estabelecimento estabelecimento;
-
     public static String TITULO_FRAGMENT = "Sem nome ainda";
     public static int ID_FRAGMENT = 1;
     public static int ICONE = R.drawable.icn2;
+
+    private Estabelecimento estabelecimento;
 
     @Nullable
     @Override

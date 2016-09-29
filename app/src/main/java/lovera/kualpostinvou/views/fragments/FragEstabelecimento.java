@@ -42,8 +42,8 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
 
     private FragEstabelecimento_Filho1 fragFilho1;
     private FragEstabFilho_Info fragFilhoInfo;
+    private FragEstabAvaliacao fragFilhoAvaliacao;
     private FragEstabFilho_Endereco fragFilhoEndereco;
-
 
     public FragEstabelecimento() {
         inicializarReceivers();
@@ -58,6 +58,7 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
     private void inicializarFragFilhos(){
         this.fragFilho1 = new FragEstabelecimento_Filho1();
         this.fragFilhoInfo = new FragEstabFilho_Info();
+        this.fragFilhoAvaliacao = new FragEstabAvaliacao();
         this.fragFilhoEndereco = new FragEstabFilho_Endereco();
     }
 
@@ -91,6 +92,7 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
         ViewPagerEstabAdapter adapter = new ViewPagerEstabAdapter(activity.getSupportFragmentManager());
         adapter.addFrag(this.fragFilho1, "filho1");
         adapter.addFrag(this.fragFilhoInfo, "");
+        adapter.addFrag(this.fragFilhoAvaliacao, "");
         adapter.addFrag(this.fragFilhoEndereco, "");
         this.viewPager.setAdapter(adapter);
     }
@@ -99,6 +101,7 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.f5_tablayout);
         tabLayout.setupWithViewPager(this.viewPager);
         tabLayout.getTabAt(this.fragFilhoInfo.getFragmentId()).setIcon(this.fragFilhoInfo.getIcone());
+        tabLayout.getTabAt(this.fragFilhoAvaliacao.getFragmentId()).setIcon(this.fragFilhoAvaliacao.getIcone());
         tabLayout.getTabAt(this.fragFilhoEndereco.getFragmentId()).setIcon(this.fragFilhoEndereco.getIcone());
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
 
