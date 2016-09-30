@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.fragments;
+package lovera.kualpostinvou.views.fragments.frag_filhos;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,12 +8,13 @@ import android.view.ViewGroup;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
+import lovera.kualpostinvou.views.fragments.FragmentFilho;
 
 import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
 
 public class FragEstabFilho_Desc extends FragmentFilho {
 
-    public static String TITULO_FRAGMENT = "Sem nome ainda";
+    public static String TITULO_FRAGMENT = "Descricao";
     public static int ID_FRAGMENT = 1;
     public static int ICONE = R.drawable.ic_description_black_24dp;
 

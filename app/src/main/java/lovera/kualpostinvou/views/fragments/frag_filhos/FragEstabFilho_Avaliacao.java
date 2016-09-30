@@ -12,7 +12,7 @@ import lovera.kualpostinvou.views.fragments.FragmentFilho;
 
 public class FragEstabFilho_Avaliacao extends FragmentFilho {
 
-    public static String TITULO_FRAGMENT = "Sem nome ainda";
+    public static String TITULO_FRAGMENT = "Avaliacao";
     public static int ID_FRAGMENT = 2;
     public static int ICONE = R.drawable.ic_grade_black_24dp;
 

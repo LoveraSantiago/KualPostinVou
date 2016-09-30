@@ -21,6 +21,7 @@ import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.views.adapters.ViewPagerEstabAdapter;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Avaliacao;
+import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Desc;
 import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Endereco;
 import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Info;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
