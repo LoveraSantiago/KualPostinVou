@@ -74,26 +74,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Esfera Administrativa"/>
-
-            <TextView
-                android:id="@+id/lblEsferaAdm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="-"
-                android:textSize="15dp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Vinculo Sus"/>
 
             <TextView
@@ -102,26 +82,6 @@
                 android:layout_height="wrap_content"
                 android:text="-"
                 android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Retencao"/>
-
-            <TextView
-                android:id="@+id/lblRetencao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="-"
                 android:textSize="15dp"/>
 
         </LinearLayout>
@@ -275,25 +235,6 @@
 
             <TextView
                 android:id="@+id/lblDescompl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tipo unidade cnes"/>
-
-            <TextView
-                android:id="@+id/lblUnidCnes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"

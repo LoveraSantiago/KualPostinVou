@@ -54,9 +54,7 @@ public class FragEstabFilho_Desc extends FragmentFilho {
         try{
             setTextToLabel(this.estabelecimento.getNomeFantasia()              , R.id.lblNomeFantasia, getView());
             setTextToLabel(this.estabelecimento.getTipoUnidade()               , R.id.lblTipoUnidade , getView());
-            setTextToLabel(this.estabelecimento.getEsferaAdministrativa()      , R.id.lblEsferaAdm   , getView());
             setTextToLabel(this.estabelecimento.getVinculoSus()                , R.id.lblVincSus     , getView());
-            setTextToLabel(this.estabelecimento.getRetencao()                  , R.id.lblRetencao    , getView());
             setTextToLabel(this.estabelecimento.getFluxoClientela()            , R.id.lblFlxClientela, getView());
             setTextToLabel(this.estabelecimento.getTemAtendimentoUrgencia()    , R.id.lblAtendEmgc   , getView());
             setTextToLabel(this.estabelecimento.getTemAtendimentoAmbulatorial(), R.id.lblAtendAmbulat, getView());
@@ -65,7 +63,6 @@ public class FragEstabFilho_Desc extends FragmentFilho {
             setTextToLabel(this.estabelecimento.getTemNeoNatal()               , R.id.lblNeonatal    , getView());
             setTextToLabel(this.estabelecimento.getTemDialise()                , R.id.lblDialise     , getView());
             setTextToLabel(this.estabelecimento.getDescricaoCompleta()         , R.id.lblDescompl    , getView());
-            setTextToLabel(this.estabelecimento.getTipoUnidadeCnes()           , R.id.lblCategUnid   , getView());
             setTextToLabel(this.estabelecimento.getTurnoAtendimento()          , R.id.lblTurnoAtend  , getView());
         }
         catch(Exception e){
