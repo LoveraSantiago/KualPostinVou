@@ -4,10 +4,11 @@ import android.util.Log;
 
 import java.util.List;
 
-import lovera.kualpostinvou.conexao.utils.ErrorUtils;
+import lovera.kualpostinvou.conexao.utils.ParserUtils;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.modelos.constantes.MsgErrorObj;
+import lovera.kualpostinvou.modelos.utils.Utils_Modelo;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,12 +48,13 @@ public class CallBackAutenticar implements Callback<ResponseBody> {
             pessoa.setCod(pessoaTemp.getCod());
         }
         else{
-            ErrorObj errorObj = ErrorUtils.parseError(this.retrofit, response);
+            ParserUtils parser = new ParserUtils();
+            ErrorObj errorObj = parser.parseError(this.retrofit, response);
             List<MsgErrorObj> mensagens = errorObj.getMensagens();
             for(MsgErrorObj errorIt : mensagens){
                 Log.i("Cadastro", errorIt.getTexto());
             }
-            ErrorUtils.cloneErrorObjeto(error, errorObj);
+            Utils_Modelo.cloneErrorObjeto(error, errorObj);
         }
     }
 }

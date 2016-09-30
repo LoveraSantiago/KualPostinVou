@@ -2,10 +2,9 @@ package lovera.kualpostinvou.conexao.callbacks;
 
 import android.util.Log;
 
-import java.io.IOException;
 import java.util.List;
 
-import lovera.kualpostinvou.conexao.utils.ErrorUtils;
+import lovera.kualpostinvou.conexao.utils.ParserUtils;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.constantes.MsgErrorObj;
 import okhttp3.ResponseBody;
@@ -32,7 +31,8 @@ public class CallBackCadastrarInstalacao {
             Log.i("Location", location.toString());
         }
         else{
-            error = ErrorUtils.parseError(this.retrofit, response);
+            ParserUtils parser = new ParserUtils();
+            error = parser.parseError(this.retrofit, response);
             List<MsgErrorObj> mensagens = error.getMensagens();
             for(MsgErrorObj errorIt : mensagens){
                 Log.i("Cadastro", errorIt.getTexto());

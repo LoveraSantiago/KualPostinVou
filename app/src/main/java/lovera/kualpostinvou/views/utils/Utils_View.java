@@ -7,7 +7,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Utils {
+public class Utils_View {
 
     private static DateFormat dateFormat;
 

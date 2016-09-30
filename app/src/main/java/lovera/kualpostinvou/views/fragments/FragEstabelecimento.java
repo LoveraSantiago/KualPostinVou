@@ -22,7 +22,7 @@ import lovera.kualpostinvou.views.adapters.ViewPagerEstabAdapter;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.receivers.NomeGeoLocalizacaoReceiver;
 
-import static lovera.kualpostinvou.views.utils.Utils.setTextToLabel;
+import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
 
 public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocalizacaoReceiver.Receiver{
 

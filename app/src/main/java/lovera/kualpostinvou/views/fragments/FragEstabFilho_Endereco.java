@@ -1,10 +1,7 @@
 package lovera.kualpostinvou.views.fragments;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +9,7 @@ import android.view.ViewGroup;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 
-import static lovera.kualpostinvou.views.utils.Utils.setTextToLabel;
+import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
 
 public class FragEstabFilho_Endereco extends FragmentFilho {
 

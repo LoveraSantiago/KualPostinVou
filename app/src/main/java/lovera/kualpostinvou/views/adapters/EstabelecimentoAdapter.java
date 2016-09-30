@@ -11,7 +11,7 @@ import java.util.List;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 
-import static lovera.kualpostinvou.views.utils.Utils.setTextToLabel;
+import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
 
 public class EstabelecimentoAdapter extends BaseAdapter {
 

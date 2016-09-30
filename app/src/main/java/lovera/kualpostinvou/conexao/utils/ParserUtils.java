@@ -9,9 +9,9 @@ import retrofit2.Converter;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class ErrorUtils {
+public class ParserUtils {
 
-    public static ErrorObj parseError(Retrofit retrofit, Response<?> response){
+    public ErrorObj parseError(Retrofit retrofit, Response<?> response){
         Converter<ResponseBody, ErrorObj> converter = retrofit.responseBodyConverter(ErrorObj.class, new Annotation[0]);
 
         ErrorObj errorObj = null;
@@ -22,16 +22,6 @@ public class ErrorUtils {
             e.printStackTrace();
         }
         return errorObj;
-    }
-
-    public static ErrorObj cloneErrorObjeto(ErrorObj retorno, ErrorObj modelo){
-        retorno.setDadosTecnicos(modelo.getDadosTecnicos());
-        retorno.setMensagens(modelo.getMensagens());
-        retorno.setReasonPhrase(modelo.getReasonPhrase());
-        retorno.setStatusCode(modelo.getStatusCode());
-        retorno.setUrl(modelo.getUrl());
-        retorno.setSiglaErro(modelo.getSiglaErro());
-        return retorno;
     }
 
 }

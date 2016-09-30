@@ -6,14 +6,13 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Instalacao;
 import lovera.kualpostinvou.modelos.Pessoa;
-import lovera.kualpostinvou.views.utils.Utils;
+import lovera.kualpostinvou.views.utils.Utils_View;
 
 public class LoginService extends Service{
 
@@ -66,7 +65,7 @@ public class LoginService extends Service{
 
                     Instalacao instalacao = new Instalacao();
                     instalacao.setCodUsuario(pessoa.getCod());
-                    instalacao.setDataHora(Utils.dateToString(Calendar.getInstance().getTime()));
+                    instalacao.setDataHora(Utils_View.dateToString(Calendar.getInstance().getTime()));
                     instalacao.setDeviceToken(Aplicacao.getAplicacaoInstancia().getAndroidId());
                     conexao.cadastrarInstalacao(Aplicacao.getPessoaLogada().getToken(), instalacao, stringBuilder, errorObj);
                     if(stringBuilder.length() > 0){
