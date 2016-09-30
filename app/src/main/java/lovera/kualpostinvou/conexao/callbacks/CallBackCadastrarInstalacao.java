@@ -19,11 +19,7 @@ public class CallBackCadastrarInstalacao {
         this.retrofit = retrofit;
     }
 
-    public void procedimentoSincrono(Response<ResponseBody> response, StringBuilder token, ErrorObj error){
-        procedimentoComum(response, token, error);
-    }
-
-    private void procedimentoComum(Response<ResponseBody> response, StringBuilder location, ErrorObj error){
+    public void procedimentoSincrono(Response<ResponseBody> response, StringBuilder location, ErrorObj error){
         location.setLength(0);
 
         if(response.isSuccessful()){
