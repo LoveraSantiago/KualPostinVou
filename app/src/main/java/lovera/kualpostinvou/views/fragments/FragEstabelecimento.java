@@ -20,11 +20,12 @@ import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.views.adapters.ViewPagerEstabAdapter;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
-import lovera.kualpostinvou.views.receivers.NomeGeoLocalizacaoReceiver;
+import lovera.kualpostinvou.views.receivers.CommonsReceiver;
+import lovera.kualpostinvou.views.services.ServicesNames;
 
 import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
 
-public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocalizacaoReceiver.Receiver{
+public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver.Receiver{
 
     //Campos relativos a FragmentMenu
     public static String TITULO_FRAGMENT = "Estabelecimento";
@@ -38,7 +39,7 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
 
     private StreetViewPanoramaView streetViewPanoramaView;
 
-    private NomeGeoLocalizacaoReceiver receiver;
+    private CommonsReceiver receiver;
     private MsgToActivity msgToActivity;
 
     private FragEstabelecimento_Filho1 fragFilho1;
@@ -52,7 +53,7 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
     }
 
     private void inicializarReceivers(){
-        this.receiver = new NomeGeoLocalizacaoReceiver(new Handler());
+        this.receiver = new CommonsReceiver(new Handler());
         this.receiver.setReceiver(this);
     }
 
@@ -181,16 +182,18 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
         return ICONE;
     }
 
-    public NomeGeoLocalizacaoReceiver getReceiver() {
+    public CommonsReceiver getReceiver() {
         return receiver;
     }
 
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
-        Localizacao localizacao = getLocalizacaoDoOnReceiveResult(resultData);
-        LatLng latLng = new LatLng(localizacao.getLatitude(), localizacao.getLongitude());
+        if(resultCode == ServicesNames.NOME_GEOLOCALIZACAO){
+            Localizacao localizacao = getLocalizacaoDoOnReceiveResult(resultData);
+            LatLng latLng = new LatLng(localizacao.getLatitude(), localizacao.getLongitude());
 
-        inicializarStreetView(latLng);
+            inicializarStreetView(latLng);
+        }
     }
 
     private Localizacao getLocalizacaoDoOnReceiveResult(Bundle bundle){

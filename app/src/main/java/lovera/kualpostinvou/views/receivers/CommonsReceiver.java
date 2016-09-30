@@ -6,11 +6,11 @@ import android.os.Handler;
 import android.os.ResultReceiver;
 
 @SuppressLint("ParcelCreator")
-public class NomeGeoLocalizacaoReceiver extends ResultReceiver {
+public class CommonsReceiver extends ResultReceiver {
 
     private Receiver receiver;
 
-    public NomeGeoLocalizacaoReceiver(Handler handler) {
+    public CommonsReceiver(Handler handler) {
         super(handler);
     }
 

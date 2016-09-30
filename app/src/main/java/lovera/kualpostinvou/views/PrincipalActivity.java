@@ -16,11 +16,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
-import com.google.android.gms.maps.StreetViewPanorama;
-import com.google.android.gms.maps.StreetViewPanoramaView;
-import com.google.android.gms.maps.model.LatLng;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +31,6 @@ import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 import lovera.kualpostinvou.views.fragments.FragmentMenu;
 import lovera.kualpostinvou.views.navigationdrawer.ActionBarDrawerToggleImpl;
 import lovera.kualpostinvou.views.navigationdrawer.RecyclerViewAdapterImpl;
-import lovera.kualpostinvou.views.receivers.NomeGeoLocalizacaoReceiver;
 import lovera.kualpostinvou.views.services.LoginService;
 //TODO: colocar restauração dos estados das fragments principais ver => https://developer.android.com/training/basics/activity-lifecycle/recreating.html?hl=pt-br
 public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer, MsgToActivity{

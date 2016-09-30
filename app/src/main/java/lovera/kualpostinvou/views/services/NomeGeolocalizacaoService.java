@@ -17,7 +17,7 @@ import lovera.kualpostinvou.modelos.Localizacao;
 public class NomeGeolocalizacaoService extends IntentService{
 
     public NomeGeolocalizacaoService(){
-        super("");
+        super("NomeGeolocalizacaoService");
     }
 
     public NomeGeolocalizacaoService(String name) {
@@ -41,7 +41,6 @@ public class NomeGeolocalizacaoService extends IntentService{
         }
 
         Bundle bundle = new Bundle();
-
         if(listAddress != null && listAddress.size() > 0){
             Address address = listAddress.get(0);
 
@@ -51,7 +50,7 @@ public class NomeGeolocalizacaoService extends IntentService{
 
             bundle.putSerializable("LOCALIZACAO", localizacao);
         }
-        resultReceiver.send(0, bundle);
+        resultReceiver.send(ServicesNames.NOME_GEOLOCALIZACAO, bundle);
     }
 
     private String montarStringQuery(Estabelecimento estabelecimento){
