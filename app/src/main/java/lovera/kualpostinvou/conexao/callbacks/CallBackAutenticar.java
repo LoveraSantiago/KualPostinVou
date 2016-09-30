@@ -9,13 +9,10 @@ import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.modelos.constantes.MsgErrorObj;
 import lovera.kualpostinvou.modelos.utils.Utils_Modelo;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class CallBackAutenticar implements Callback<ResponseBody> {
+public class CallBackAutenticar{
 
     private Retrofit retrofit;
 
@@ -23,22 +20,7 @@ public class CallBackAutenticar implements Callback<ResponseBody> {
         this.retrofit = retrofit;
     }
 
-    //TODO: candidato a ser apagado 22/09/2016
-    @Override
-    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//        procedimentoComum(null, new StringBuilder(), new ErrorObj());
-    }
-
-    @Override
-    public void onFailure(Call<ResponseBody> call, Throwable t) {
-        t.printStackTrace();
-    }
-
     public void procedimentoSincrono(Response<Pessoa> response, Pessoa pessoa, StringBuilder token, ErrorObj error){
-        procedimentoComum(response, pessoa, token, error);
-    }
-
-    private void procedimentoComum(Response<Pessoa> response, Pessoa pessoa, StringBuilder token, ErrorObj error){
         token.setLength(0);
 
         if(response.isSuccessful()){
