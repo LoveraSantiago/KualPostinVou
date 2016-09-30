@@ -13,12 +13,12 @@ import lovera.kualpostinvou.modelos.Estabelecimento;
 
 import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
 
-public class EstabelecimentoAdapter extends BaseAdapter {
+public class ListEstabAdapter extends BaseAdapter {
 
     private Context context;
     private List<Estabelecimento> listaEstabelecimentos;
 
-    public EstabelecimentoAdapter(Context context, List<Estabelecimento> listaEstabelecimentos) {
+    public ListEstabAdapter(Context context, List<Estabelecimento> listaEstabelecimentos) {
         this.context = context;
         this.listaEstabelecimentos = listaEstabelecimentos;
     }

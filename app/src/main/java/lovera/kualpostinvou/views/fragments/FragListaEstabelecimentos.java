@@ -14,7 +14,7 @@ import java.util.List;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.Estabelecimento;
-import lovera.kualpostinvou.views.adapters.EstabelecimentoAdapter;
+import lovera.kualpostinvou.views.adapters.ListEstabAdapter;
 import lovera.kualpostinvou.views.adapters.FragListaEstabAdapter;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.services.NomeGeolocalizacaoService;
@@ -48,7 +48,7 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
 
     private void inicializarListView(){
         ListView lv = (ListView) getActivity().findViewById(R.id.listaEstabelecimentos);
-        lv.setAdapter(new EstabelecimentoAdapter(getActivity(), this.listaEstabelecimentos));
+        lv.setAdapter(new ListEstabAdapter(getActivity(), this.listaEstabelecimentos));
         lv.setOnItemClickListener(this);
     }
 

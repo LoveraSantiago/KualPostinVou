@@ -11,7 +11,7 @@ import java.util.List;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
-import lovera.kualpostinvou.views.adapters.EstabelecimentoAdapter;
+import lovera.kualpostinvou.views.adapters.ListEstabAdapter;
 
 public class ListaEstabelecimentosActivity extends AppCompatActivity{
 
@@ -25,7 +25,7 @@ public class ListaEstabelecimentosActivity extends AppCompatActivity{
         List<Estabelecimento> listaDeEstabelecimentos = (List<Estabelecimento>) intent.getSerializableExtra("LISTAESTABELECIMENTOS");
 
         ListView lv = (ListView) findViewById(R.id.listaEstabelecimentos);
-        lv.setAdapter(new EstabelecimentoAdapter(this, listaDeEstabelecimentos));
+        lv.setAdapter(new ListEstabAdapter(this, listaDeEstabelecimentos));
     }
 
     public void fechar(View view){

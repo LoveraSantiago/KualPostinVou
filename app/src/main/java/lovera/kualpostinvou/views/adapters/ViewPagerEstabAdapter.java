@@ -27,6 +27,12 @@ public class ViewPagerEstabAdapter extends FragmentStatePagerAdapter{
         this.listaTitulos.add(titulo);
     }
 
+    public void addFrags(Fragment... fragments){
+        for(Fragment fragment : fragments){
+            addFrag(fragment, "");
+        }
+    }
+
     @Override
     public Fragment getItem(int position) {
         return this.listaFragments.get(position);

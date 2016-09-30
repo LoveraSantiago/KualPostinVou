@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.navigationdrawer;
+package lovera.kualpostinvou.views.components.navigationdrawer;
 
 import android.support.annotation.StringRes;
 import android.support.v4.widget.DrawerLayout;

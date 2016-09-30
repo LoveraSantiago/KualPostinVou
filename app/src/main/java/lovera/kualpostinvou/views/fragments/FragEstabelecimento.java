@@ -15,11 +15,18 @@ import com.google.android.gms.maps.StreetViewPanorama;
 import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.List;
+
 import lovera.kualpostinvou.R;
+import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
+import lovera.kualpostinvou.modelos.Profissional;
+import lovera.kualpostinvou.views.adapters.FragEstabAdapter;
 import lovera.kualpostinvou.views.adapters.ViewPagerEstabAdapter;
+import lovera.kualpostinvou.views.components.OnTabSelectedListenerImpl;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
+import lovera.kualpostinvou.views.contratos.MsgToFragFilhoInfo;
 import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Avaliacao;
 import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Desc;
 import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Endereco;
@@ -27,9 +34,7 @@ import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Info;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 import lovera.kualpostinvou.views.services.ServicesNames;
 
-import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
-
-public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver.Receiver{
+public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver.Receiver, MsgToFragFilhoInfo{
 
     //Campos relativos a FragmentMenu
     public static String TITULO_FRAGMENT = "Estabelecimento";
@@ -46,7 +51,12 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     private CommonsReceiver receiver;
     private MsgToActivity msgToActivity;
 
-    private FragEstabFilho_Desc fragFilho1;
+    //Objetos para as FragFilhas
+    private List<Profissional> listaDeProfissionais;
+    private FragEstabAdapter adapter;
+    private ConexaoSaude conexaoSaude;
+
+    private FragEstabFilho_Desc fragDescricao;
     private FragEstabFilho_Info fragFilhoInfo;
     private FragEstabFilho_Avaliacao fragFilhoAvaliacao;
     private FragEstabFilho_Endereco fragFilhoEndereco;
@@ -54,6 +64,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     public FragEstabelecimento() {
         inicializarReceivers();
         inicializarFragFilhos();
+        inicializarConexao();
     }
 
     private void inicializarReceivers(){
@@ -62,10 +73,16 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     }
 
     private void inicializarFragFilhos(){
-        this.fragFilho1 = new FragEstabFilho_Desc();
+        this.fragDescricao = new FragEstabFilho_Desc();
         this.fragFilhoInfo = new FragEstabFilho_Info();
+        this.fragFilhoInfo.setMsg(this);
         this.fragFilhoAvaliacao = new FragEstabFilho_Avaliacao();
         this.fragFilhoEndereco = new FragEstabFilho_Endereco();
+    }
+
+    private void inicializarConexao(){
+        this.adapter = new FragEstabAdapter(this);
+        this.conexaoSaude = new ConexaoSaude(this.adapter);
     }
 
     @Nullable
@@ -90,6 +107,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     private void inicializarComponentes(){
         inicializarViewPager();
         inicializarTabLayout();
+        inicializarRestConsumers();
     }
 
     private void inicializarViewPager(){
@@ -97,10 +115,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
         this.viewPager = (ViewPager) getActivity().findViewById(R.id.f5_viewpager);
 
         ViewPagerEstabAdapter adapter = new ViewPagerEstabAdapter(activity.getSupportFragmentManager());
-        adapter.addFrag(this.fragFilho1, "filho1");
-        adapter.addFrag(this.fragFilhoInfo, "");
-        adapter.addFrag(this.fragFilhoAvaliacao, "");
-        adapter.addFrag(this.fragFilhoEndereco, "");
+        adapter.addFrags(this.fragDescricao, this.fragFilhoInfo, this.fragFilhoAvaliacao, this.fragFilhoEndereco);
         this.viewPager.setAdapter(adapter);
     }
 
@@ -110,24 +125,17 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
         tabLayout.getTabAt(this.fragFilhoInfo.getFragmentId()).setIcon(this.fragFilhoInfo.getIcone());
         tabLayout.getTabAt(this.fragFilhoAvaliacao.getFragmentId()).setIcon(this.fragFilhoAvaliacao.getIcone());
         tabLayout.getTabAt(this.fragFilhoEndereco.getFragmentId()).setIcon(this.fragFilhoEndereco.getIcone());
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
+        tabLayout.setOnTabSelectedListener(new OnTabSelectedListenerImpl(this.viewPager));
+    }
 
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
+    private void inicializarRestConsumers(){
+        consumirProfissionais();
+    }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
+    private void consumirProfissionais(){
+        if(this.listaDeProfissionais == null){
+            this.conexaoSaude.getProfissionais(this.estabelecimento.getCodUnidade());
+        }
     }
 
     @Override
@@ -163,7 +171,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     @Override
     public void setArguments(Bundle args) {
         super.setArguments(args);
-        this.fragFilho1.setArguments(args);
+        this.fragDescricao.setArguments(args);
         this.fragFilhoInfo.setArguments(args);
         this.fragFilhoEndereco.setArguments(args);
 
@@ -223,5 +231,15 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
                     }
                 });
         this.streetViewPanoramaView.onResume();
+    }
+
+    @Override
+    public List<Profissional> getListaDeProfissionais() {
+        return listaDeProfissionais;
+    }
+
+    public void setListaDeProfissionais(List<Profissional> listaDeProfissionais) {
+        this.listaDeProfissionais = listaDeProfissionais;
+        this.fragFilhoInfo.setListaDeProfissionais(listaDeProfissionais);
     }
 }

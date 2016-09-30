@@ -20,4 +20,10 @@ public class Profissional {
     public void setQuantidadeProfissionais(int quantidadeProfissionais) {
         this.quantidadeProfissionais = quantidadeProfissionais;
     }
+
+    @Override
+    public String toString() {
+        return new StringBuilder().append(String.format("%3d", this.quantidadeProfissionais) + " - " + this.descricaoAtividadeProfissional )
+                                  .toString();
+    }
 }

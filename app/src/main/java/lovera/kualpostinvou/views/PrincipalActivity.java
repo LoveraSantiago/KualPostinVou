@@ -11,10 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,8 +27,8 @@ import lovera.kualpostinvou.views.fragments.FragBuscaEstabelecimentos;
 import lovera.kualpostinvou.views.fragments.FragEstabelecimento;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 import lovera.kualpostinvou.views.fragments.FragmentMenu;
-import lovera.kualpostinvou.views.navigationdrawer.ActionBarDrawerToggleImpl;
-import lovera.kualpostinvou.views.navigationdrawer.RecyclerViewAdapterImpl;
+import lovera.kualpostinvou.views.components.navigationdrawer.ActionBarDrawerToggleImpl;
+import lovera.kualpostinvou.views.components.navigationdrawer.RecyclerViewAdapterImpl;
 import lovera.kualpostinvou.views.services.LoginService;
 //TODO: colocar restauração dos estados das fragments principais ver => https://developer.android.com/training/basics/activity-lifecycle/recreating.html?hl=pt-br
 public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer, MsgToActivity{

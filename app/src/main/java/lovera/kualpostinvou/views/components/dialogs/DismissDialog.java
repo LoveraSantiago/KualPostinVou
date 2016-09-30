@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.dialogs;
+package lovera.kualpostinvou.views.components.dialogs;
 
 import android.app.AlertDialog;
 import android.content.Context;

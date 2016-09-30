@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.navigationdrawer;
+package lovera.kualpostinvou.views.components.navigationdrawer;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

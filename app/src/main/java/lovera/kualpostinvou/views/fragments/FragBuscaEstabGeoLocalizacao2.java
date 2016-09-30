@@ -21,7 +21,7 @@ import lovera.kualpostinvou.modelos.utils.Distancia;
 import lovera.kualpostinvou.views.adapters.FragBuscaEstabGeoLocAdapter;
 import lovera.kualpostinvou.views.components.SeekBarChangeListenerImpl;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
-import lovera.kualpostinvou.views.dialogs.DismissDialog;
+import lovera.kualpostinvou.views.components.dialogs.DismissDialog;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 import lovera.kualpostinvou.views.services.LocalizacaoService;
 
