@@ -35,6 +35,7 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
 
     private ViewPager viewPager;
     private Bundle savedInstanceState;
+
     private StreetViewPanoramaView streetViewPanoramaView;
 
     private NomeGeoLocalizacaoReceiver receiver;
@@ -42,7 +43,7 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
 
     private FragEstabelecimento_Filho1 fragFilho1;
     private FragEstabFilho_Info fragFilhoInfo;
-    private FragEstabAvaliacao fragFilhoAvaliacao;
+    private FragEstabFilho_Avaliacao fragFilhoAvaliacao;
     private FragEstabFilho_Endereco fragFilhoEndereco;
 
     public FragEstabelecimento() {
@@ -58,7 +59,7 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
     private void inicializarFragFilhos(){
         this.fragFilho1 = new FragEstabelecimento_Filho1();
         this.fragFilhoInfo = new FragEstabFilho_Info();
-        this.fragFilhoAvaliacao = new FragEstabAvaliacao();
+        this.fragFilhoAvaliacao = new FragEstabFilho_Avaliacao();
         this.fragFilhoEndereco = new FragEstabFilho_Endereco();
     }
 
@@ -67,6 +68,7 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_estabelecimento, container, false);
     }
+
 
     @Override
     public void onActivityCreated(final Bundle savedInstanceState) {
@@ -120,6 +122,7 @@ public class FragEstabelecimento extends FragmentMenu implements NomeGeoLocaliza
 
             }
         });
+
     }
 
     @Override

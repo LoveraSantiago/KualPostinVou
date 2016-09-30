@@ -1,5 +1,7 @@
 package lovera.kualpostinvou.views.fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -27,17 +29,15 @@ public class FragEstabelecimento_Filho1 extends FragmentFilho {
     }
 
     @Override
-    public void setArguments(Bundle args) {
-        super.setArguments(args);
-        this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
+    public void onStart() {
+        super.onStart();
         setarCampos();
     }
 
     @Override
-
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        setarCampos();
+    public void setArguments(Bundle args) {
+        super.setArguments(args);
+        this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
     }
 
     private void setarCampos(){

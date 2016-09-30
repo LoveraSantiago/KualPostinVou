@@ -1,13 +1,17 @@
 package lovera.kualpostinvou.views.adapters;
 
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewPagerEstabAdapter extends FragmentPagerAdapter{
+import lovera.kualpostinvou.views.fragments.FragmentFilho;
+
+public class ViewPagerEstabAdapter extends FragmentStatePagerAdapter{
 
     private final List<Fragment> listaFragments;
     private final List<String> listaTitulos;

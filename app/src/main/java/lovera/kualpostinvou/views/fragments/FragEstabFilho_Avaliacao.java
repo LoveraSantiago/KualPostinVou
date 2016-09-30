@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 
-public class FragEstabAvaliacao extends FragmentFilho{
+public class FragEstabFilho_Avaliacao extends FragmentFilho{
 
     public static String TITULO_FRAGMENT = "Sem nome ainda";
     public static int ID_FRAGMENT = 2;
@@ -24,10 +24,14 @@ public class FragEstabAvaliacao extends FragmentFilho{
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
     public void setArguments(Bundle args) {
         super.setArguments(args);
         this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
-//        setarCampos();
     }
 
     @Override

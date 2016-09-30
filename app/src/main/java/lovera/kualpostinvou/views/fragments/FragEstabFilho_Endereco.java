@@ -1,5 +1,7 @@
 package lovera.kualpostinvou.views.fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,21 +25,21 @@ public class FragEstabFilho_Endereco extends FragmentFilho {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tab_estabelecimento_endereco, container, false);
+        View inflate = inflater.inflate(R.layout.tab_estabelecimento_endereco, container, false);
+        setarCampos();
+        return inflate;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        setarCampos();
+    }
 
     @Override
     public void setArguments(Bundle args) {
         super.setArguments(args);
         this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
-        setarCampos();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        setarCampos();
     }
 
     private void setarCampos(){

@@ -27,7 +27,6 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
     public static int ICONE = R.drawable.icn2;
 
     private FragListaEstabAdapter adapterMsg;
-    FragEstabelecimento fragEstabelecimento;
 
     private List<Estabelecimento> listaEstabelecimentos;
 
@@ -44,8 +43,6 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
         super.onActivityCreated(savedInstanceState);
         this.msgToActivity = (MsgToActivity) getActivity();
         this.adapterMsg = new FragListaEstabAdapter(this);
-        this.fragEstabelecimento = new FragEstabelecimento();
-
         inicializarListView();
     }
 
@@ -73,16 +70,17 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
 
     public void receberEstabelecimento(Estabelecimento estabelecimento){
         this.msgToActivity.setarTextoProgresso("Estabelecimento localizado.");
+        FragEstabelecimento fragEstabelecimento = new FragEstabelecimento();
+        this.msgToActivity.setarFragment(fragEstabelecimento);
+
         Bundle bundle = new Bundle();
         bundle.putSerializable("ESTABELECIMENTO", estabelecimento);
-        this.fragEstabelecimento.setArguments(bundle);
+        fragEstabelecimento.setArguments(bundle);
 
         Intent intent = new Intent(getActivity(), NomeGeolocalizacaoService.class);
         intent.putExtra("ESTABELECIMENTO", estabelecimento);
-        intent.putExtra("RECEIVER", this.fragEstabelecimento.getReceiver());
+        intent.putExtra("RECEIVER", fragEstabelecimento.getReceiver());
         getActivity().startService(intent);
-
-        this.msgToActivity.setarFragment(this.fragEstabelecimento);
     }
 
     //Metodos sobrescritos herdados da classe pai FragmentMenu

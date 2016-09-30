@@ -29,6 +29,7 @@ import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao2;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabelecimentos;
+import lovera.kualpostinvou.views.fragments.FragEstabelecimento;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 import lovera.kualpostinvou.views.fragments.FragmentMenu;
 import lovera.kualpostinvou.views.navigationdrawer.ActionBarDrawerToggleImpl;
@@ -235,15 +236,20 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     @Override
     public void setarFragment(Fragment fragment) {
         this.fragmentManager.beginTransaction()
-                            .replace(R.id.content_frame, fragment)
-                            .addToBackStack("")
-                            .commit();
+                .replace(R.id.content_frame, fragment)
+                .addToBackStack("")
+                .commit();
         this.fragAtiva = fragment;
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        if(this.fragAtiva instanceof FragEstabelecimento){
+            this.fragmentManager.beginTransaction()
+                                .remove(this.fragAtiva)
+                                .commit();
+        }
     }
 
     public void consumirEstabelecimentos(View view) {
