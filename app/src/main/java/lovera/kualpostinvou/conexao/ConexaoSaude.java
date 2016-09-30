@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import lovera.kualpostinvou.conexao.callbacks.CallBackEspecialidades;
-import lovera.kualpostinvou.conexao.callbacks.CallBackEstabelecimento;
 import lovera.kualpostinvou.conexao.callbacks.CallBackEstabelecimentos;
 import lovera.kualpostinvou.conexao.callbacks.CallBackEstabelecimentos2;
 import lovera.kualpostinvou.conexao.callbacks.CallBackProfissionais;
