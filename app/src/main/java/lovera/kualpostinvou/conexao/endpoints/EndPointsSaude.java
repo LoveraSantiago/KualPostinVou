@@ -16,7 +16,7 @@ import retrofit2.http.QueryMap;
 public interface EndPointsSaude {
 
     @GET("rest/estabelecimentos")
-    Call<List<Estabelecimento>> getEstabelecimentos(@QueryMap Map<String, String> params);
+    Call<ResponseBody> getEstabelecimentos(@QueryMap Map<String, String> params);
 
     @GET("rest/estabelecimentos/latitude/{infLatitude}/longitude/{infLongitude}/raio/{infRaio}")
     Call<ResponseBody> getEstabelecimentos(@Path("infLatitude") String infLatitude,

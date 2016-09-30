@@ -25,6 +25,7 @@ import java.util.Arrays;
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
+import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Link;
 import lovera.kualpostinvou.modelos.Pessoa;
 
@@ -155,6 +156,6 @@ public class FragRedesSociais extends FragmentMenu {
         pessoa.setTokenGoogle("IDGOOGLETESTE");
 
         ConexaoMetaModelo conexao = new ConexaoMetaModelo();
-        conexao.cadastrarPessoa(pessoa);
+        conexao.cadastrarPessoa(pessoa, new StringBuilder(), new ErrorObj());
     }
 }

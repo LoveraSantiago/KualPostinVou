@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import lovera.kualpostinvou.conexao.callbacks.CallBackEspecialidades;
-import lovera.kualpostinvou.conexao.callbacks.CallBackEstabelecimentos;
 import lovera.kualpostinvou.conexao.callbacks.CallBackEstabelecimentos2;
 import lovera.kualpostinvou.conexao.callbacks.CallBackProfissionais;
 import lovera.kualpostinvou.conexao.callbacks.CallBackServicos;
@@ -13,7 +12,6 @@ import lovera.kualpostinvou.conexao.endpoints.EndPointsSaude;
 import lovera.kualpostinvou.conexao.utils.Factory;
 import lovera.kualpostinvou.conexao.utils.HelperParams_EndPSaude;
 import lovera.kualpostinvou.modelos.Especialidade;
-import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.modelos.Servicos;
 import okhttp3.ResponseBody;
@@ -47,8 +45,8 @@ public class ConexaoSaude {
     public void getEstabelecimentos(String municipio, String uf, List<String> campos, String especialidade, int pagina, int quantidade){
         Map<String, String> mapParams = helper.factoryMap_EndP_Estabelecimentos(municipio, uf, campos, especialidade, pagina, quantidade);
 
-        Call<List<Estabelecimento>> call = this.endpointSaude.getEstabelecimentos(mapParams);
-        call.enqueue(new CallBackEstabelecimentos(this.msg));
+        Call<ResponseBody> call = this.endpointSaude.getEstabelecimentos(mapParams);
+        call.enqueue(new CallBackEstabelecimentos2(this.msg));
     }
 
     /**
