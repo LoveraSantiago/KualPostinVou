@@ -44,7 +44,7 @@ public class HelperParams_EndPSaude {
         if(isStringNotNullOrEmpty(texto)){
             map.put(TEXTO.getTexto(), texto);
         }
-        if(isStringNotNullOrEmpty(categoria) && !categoria.equals("todas")){
+        if(isStringNotNullOrEmpty(categoria) && !categoria.equals("Todos")){
             map.put(CATEGORIA.getTexto(), categoria);
         }
         if(isStringNotNullOrEmpty(campos)){
