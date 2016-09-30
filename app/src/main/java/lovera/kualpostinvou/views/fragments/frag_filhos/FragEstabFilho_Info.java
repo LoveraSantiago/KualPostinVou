@@ -59,7 +59,8 @@ public class FragEstabFilho_Info extends FragmentFilho {
             setTextToLabel(this.estabelecimento.getNatureza()                  , R.id.lblNatureza    , getView());
             setTextToLabel(this.estabelecimento.getEsferaAdministrativa()      , R.id.lblEsferaAdm   , getView());
             setTextToLabel(this.estabelecimento.getRetencao()                  , R.id.lblRetencao    , getView());
-            setTextToLabel(this.estabelecimento.getTipoUnidadeCnes()           , R.id.lblCategUnid   , getView());
+            setTextToLabel(this.estabelecimento.getTipoUnidadeCnes()           , R.id.lblUnidCnes    , getView());
+            setTextToLabel(this.estabelecimento.getCategoriaUnidade()          , R.id.lblCategUnid   , getView());
         }
         catch (Exception e){
             e.printStackTrace();
