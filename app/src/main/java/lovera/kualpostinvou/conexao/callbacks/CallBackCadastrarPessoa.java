@@ -14,7 +14,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class CallBackCadastrarPessoa implements Callback<ResponseBody>{
+public class CallBackCadastrarPessoa {
 
     private Retrofit retrofit;
 
@@ -22,21 +22,7 @@ public class CallBackCadastrarPessoa implements Callback<ResponseBody>{
         this.retrofit = retrofit;
     }
 
-    @Override
-    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-        procedimentoComum(response, new StringBuilder(), new ErrorObj());
-    }
-
-    @Override
-    public void onFailure(Call<ResponseBody> call, Throwable t) {
-        t.printStackTrace();
-    }
-
-    public void procedimentoSincrono(Response<ResponseBody> response, StringBuilder token, ErrorObj error){
-        procedimentoComum(response, token, error);
-    }
-
-    private void procedimentoComum(Response<ResponseBody> response, StringBuilder location, ErrorObj error){
+    public void procedimentoSincrono(Response<ResponseBody> response, StringBuilder location, ErrorObj error){
         location.setLength(0);
 
         if(response.isSuccessful()){
@@ -55,11 +41,7 @@ public class CallBackCadastrarPessoa implements Callback<ResponseBody>{
             }
 
             ParserUtils parser = new ParserUtils();
-            ErrorObj errorObj = parser.parseError(this.retrofit, response);
-            List<MsgErrorObj> mensagens = errorObj.getMensagens();
-            for(MsgErrorObj errorIt : mensagens){
-                Log.i("Cadastro", errorIt.getTexto());
-            }
+            error = parser.parseError(this.retrofit, response);
         }
     }
 }

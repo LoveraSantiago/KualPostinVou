@@ -75,12 +75,6 @@ public class ConexaoMetaModelo {
         }
     }
 
-    //TODO:Candidato a ser removido 21/09/2016
-    public void cadastrarPessoa(Pessoa pessoa){
-        Call<ResponseBody> call = this.endpointMetaModelo.cadastrarPessoa(pessoa);
-        call.enqueue(new CallBackCadastrarPessoa(this.retrofit));
-    }
-
     public void cadastrarPessoa(Pessoa pessoa, StringBuilder location, ErrorObj error){
         Call<ResponseBody> call = this.endpointMetaModelo.cadastrarPessoa(pessoa);
         try {

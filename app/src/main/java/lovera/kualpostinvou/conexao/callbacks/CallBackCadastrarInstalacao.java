@@ -29,10 +29,6 @@ public class CallBackCadastrarInstalacao {
         else{
             ParserUtils parser = new ParserUtils();
             error = parser.parseError(this.retrofit, response);
-            List<MsgErrorObj> mensagens = error.getMensagens();
-            for(MsgErrorObj errorIt : mensagens){
-                Log.i("Cadastro", errorIt.getTexto());
-            }
         }
     }
 }

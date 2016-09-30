@@ -1,14 +1,8 @@
 package lovera.kualpostinvou.conexao.callbacks;
 
-import android.util.Log;
-
-import java.util.List;
-
 import lovera.kualpostinvou.conexao.utils.ParserUtils;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Pessoa;
-import lovera.kualpostinvou.modelos.constantes.MsgErrorObj;
-import lovera.kualpostinvou.modelos.utils.Utils_Modelo;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -31,12 +25,7 @@ public class CallBackAutenticar{
         }
         else{
             ParserUtils parser = new ParserUtils();
-            ErrorObj errorObj = parser.parseError(this.retrofit, response);
-            List<MsgErrorObj> mensagens = errorObj.getMensagens();
-            for(MsgErrorObj errorIt : mensagens){
-                Log.i("Cadastro", errorIt.getTexto());
-            }
-            Utils_Modelo.cloneErrorObjeto(error, errorObj);
+            error = parser.parseError(this.retrofit, response);
         }
     }
 }
