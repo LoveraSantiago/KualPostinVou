@@ -20,14 +20,14 @@ public class ActionBarDrawerToggleImpl extends ActionBarDrawerToggle {
     @Override
     public void onDrawerClosed(View drawerView) {
         super.onDrawerClosed(drawerView);
-        this.activity.getSupportActionBar().setTitle(this.activity.getTitulo());
+//        this.activity.getSupportActionBar().setTitle(this.activity.getTitulo());
         this.activity.invalidateOptionsMenu();
     }
 
     @Override
     public void onDrawerOpened(View drawerView) {
         super.onDrawerOpened(drawerView);
-        this.activity.getSupportActionBar().setTitle(this.activity.getTituloOriginal());
+//        this.activity.getSupportActionBar().setTitle(this.activity.getTituloOriginal());
         this.activity.invalidateOptionsMenu();
     }
 }

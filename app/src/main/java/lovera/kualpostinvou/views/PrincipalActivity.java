@@ -11,8 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.StreetViewPanorama;
@@ -79,21 +81,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         recuperarObjetosSalvos(savedInstanceState);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-    }
-
     private void inicializarComponentes(){
         inicializarToolbar();
         inicializarFragmentMap();
@@ -153,6 +140,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     @Override
     protected void onStart() {
+        Log.i("start", "onstart chamado");
         Aplicacao.getGoogleCoisas().connect();
 
         if(!Aplicacao.getPessoaLogada().isPessoaLogado()){
@@ -163,7 +151,16 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
             Intent intent = new Intent(this, LoginService.class);
             startService(intent);
         }
+        this.mDrawerLayout.openDrawer(this.mRecyclerView);
         super.onStart();
+        Toast.makeText(getApplicationContext(),"Now onStart() calls", Toast.LENGTH_LONG).show(); //onStart Called
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i("start", "onresume chamado");
+        Toast.makeText(getApplicationContext(),"Now onResume() calls", Toast.LENGTH_LONG).show(); //onStart Called
     }
 
     @Override
