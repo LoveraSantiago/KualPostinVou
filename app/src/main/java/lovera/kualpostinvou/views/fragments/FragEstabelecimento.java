@@ -34,7 +34,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     //Campos relativos a FragmentMenu
     public static String TITULO_FRAGMENT = "Estabelecimento";
     public static int ID_FRAGMENT = 5;
-    public static int ICONE = R.drawable.icn2;
+    public static int ICONE = 0;
 
     private Estabelecimento estabelecimento;
 

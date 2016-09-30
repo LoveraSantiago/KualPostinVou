@@ -24,7 +24,7 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
     //Campos relativos a FragmentMenu ACHO Q NÂO SERAO USADOS
     public static String TITULO_FRAGMENT = "Lista de Estabelecimentos";
     public static int ID_FRAGMENT = 4;
-    public static int ICONE = R.drawable.icn2;
+    public static int ICONE = 0;
 
     private FragListaEstabAdapter adapterMsg;
 
