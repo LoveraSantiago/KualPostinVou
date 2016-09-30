@@ -19,6 +19,7 @@ import java.util.List;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
+import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Profissional;
@@ -53,10 +54,11 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
 
     //Objetos para as FragFilhas
     private List<Profissional> listaDeProfissionais;
+    private List<Especialidade> listaDeEspecialidades;
     private FragEstabAdapter adapter;
     private ConexaoSaude conexaoSaude;
 
-    private FragEstabFilho_Desc fragDescricao;
+    private FragEstabFilho_Desc fragFilhoDescricao;
     private FragEstabFilho_Info fragFilhoInfo;
     private FragEstabFilho_Avaliacao fragFilhoAvaliacao;
     private FragEstabFilho_Endereco fragFilhoEndereco;
@@ -73,7 +75,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     }
 
     private void inicializarFragFilhos(){
-        this.fragDescricao = new FragEstabFilho_Desc();
+        this.fragFilhoDescricao = new FragEstabFilho_Desc();
         this.fragFilhoInfo = new FragEstabFilho_Info();
         this.fragFilhoInfo.setMsg(this);
         this.fragFilhoAvaliacao = new FragEstabFilho_Avaliacao();
@@ -115,7 +117,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
         this.viewPager = (ViewPager) getActivity().findViewById(R.id.f5_viewpager);
 
         ViewPagerEstabAdapter adapter = new ViewPagerEstabAdapter(activity.getSupportFragmentManager());
-        adapter.addFrags(this.fragDescricao, this.fragFilhoInfo, this.fragFilhoAvaliacao, this.fragFilhoEndereco);
+        adapter.addFrags(this.fragFilhoDescricao, this.fragFilhoInfo, this.fragFilhoAvaliacao, this.fragFilhoEndereco);
         this.viewPager.setAdapter(adapter);
     }
 
@@ -130,11 +132,18 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
 
     private void inicializarRestConsumers(){
         consumirProfissionais();
+        consumirEspecialidades();
     }
 
     private void consumirProfissionais(){
         if(this.listaDeProfissionais == null){
             this.conexaoSaude.getProfissionais(this.estabelecimento.getCodUnidade());
+        }
+    }
+
+    private void consumirEspecialidades(){
+        if(this.listaDeEspecialidades == null){
+            this.conexaoSaude.getEspecialidades(this.estabelecimento.getCodUnidade());
         }
     }
 
@@ -171,7 +180,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     @Override
     public void setArguments(Bundle args) {
         super.setArguments(args);
-        this.fragDescricao.setArguments(args);
+        this.fragFilhoDescricao.setArguments(args);
         this.fragFilhoInfo.setArguments(args);
         this.fragFilhoEndereco.setArguments(args);
 
@@ -241,5 +250,15 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     public void setListaDeProfissionais(List<Profissional> listaDeProfissionais) {
         this.listaDeProfissionais = listaDeProfissionais;
         this.fragFilhoInfo.setListaDeProfissionais(listaDeProfissionais);
+    }
+
+    @Override
+    public List<Especialidade> getListaDeEspecialidades() {
+        return listaDeEspecialidades;
+    }
+
+    public void setListaDeEspecialidades(List<Especialidade> listaDeEspecialidades) {
+        this.listaDeEspecialidades = listaDeEspecialidades;
+        this.fragFilhoDescricao.setListaEspecialidades(listaDeEspecialidades);
     }
 }

@@ -358,6 +358,41 @@
                 android:layout_marginLeft="10dp"
                 android:textSize="15dp"/>
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/f7_layoutEspecialidades"
+            android:layout_marginTop="6dp"
+            android:background="#cce6ff"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Especialidades"/>
+
+            <RelativeLayout
+                android:id="@+id/f7_progressoProfissionais"
+                android:background="#e6ccff"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Consultando profissionais..."/>
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

@@ -5,9 +5,15 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.List;
 
 import lovera.kualpostinvou.R;
+import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
+import lovera.kualpostinvou.views.contratos.MsgToFragFilhoInfo;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
 
 import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
@@ -20,6 +26,11 @@ public class FragEstabFilho_Desc extends FragmentFilho {
 
     private Estabelecimento estabelecimento;
 
+    private View progressoEstabelecimento;
+    private LinearLayout layoutEspecialidades;
+
+    private MsgToFragFilhoInfo msg;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,6 +40,7 @@ public class FragEstabFilho_Desc extends FragmentFilho {
     @Override
     public void onStart() {
         super.onStart();
+        inicializarProgressos();
         setarCampos();
     }
 
@@ -61,6 +73,47 @@ public class FragEstabFilho_Desc extends FragmentFilho {
             e.printStackTrace();
         }
     }
+
+    public void setListaEspecialidades(List<Especialidade> listaEspecialidades){
+        fecharProgressoProfissionais();
+        this.layoutEspecialidades = (LinearLayout) getActivity().findViewById(R.id.f7_layoutEspecialidades);
+
+        if(listaEspecialidades.size() > 0){
+            for(Especialidade especialidade : listaEspecialidades){
+                this.layoutEspecialidades.addView(gerarTxtViewPProgressProf(especialidade.getDescricaoGrupo()));
+                this.layoutEspecialidades.addView(gerarTxtViewPProgressProf(especialidade.getDescricaoHabilitacao()));
+                this.layoutEspecialidades.addView(gerarTxtViewPProgressProf(" - "));
+            }
+        }
+        else{
+            this.layoutEspecialidades.addView(gerarTxtViewPProgressProf("Não há especialidades registradas"));
+        }
+    }
+
+    private TextView gerarTxtViewPProgressProf(String texto){
+        TextView textView = new TextView(getActivity());
+        textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        textView.setPadding(5, 0, 0, 0);
+        textView.setText(texto);
+        return textView;
+    }
+
+    //Coisas relativas ao progresso de profissionais
+    private void inicializarProgressos(){
+        this.progressoEstabelecimento = getActivity().findViewById(R.id.f7_layoutEspecialidades);
+        if(this.msg.getListaDeProfissionais() != null){
+            setListaEspecialidades(this.msg.getListaDeEspecialidades());
+        }
+    }
+
+    private void fecharProgressoProfissionais(){
+        this.progressoEstabelecimento.setVisibility(View.GONE);
+    }
+
+    public void setMsg(MsgToFragFilhoInfo msg) {
+        this.msg = msg;
+    }
+
 
     @Override
     public int getFragmentId() {

@@ -29,7 +29,7 @@ public class FragEstabAdapter implements MsgFromConexaoSaude{
 
     @Override
     public void passarListaDeEspecialidades(List<Especialidade> especialidades) {
-
+        this.fragEstabelecimento.setListaDeEspecialidades(especialidades);
     }
 
     @Override
