@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.fragments;
+package lovera.kualpostinvou.views.fragments.frag_filhos;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,8 +8,9 @@ import android.view.ViewGroup;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
+import lovera.kualpostinvou.views.fragments.FragmentFilho;
 
-public class FragEstabFilho_Avaliacao extends FragmentFilho{
+public class FragEstabFilho_Avaliacao extends FragmentFilho {
 
     public static String TITULO_FRAGMENT = "Sem nome ainda";
     public static int ID_FRAGMENT = 2;

@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.fragments;
+package lovera.kualpostinvou.views.fragments.frag_filhos;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
+import lovera.kualpostinvou.views.fragments.FragmentFilho;
 
 import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
 

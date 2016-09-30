@@ -11,18 +11,18 @@ import lovera.kualpostinvou.modelos.Estabelecimento;
 
 import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
 
-public class FragEstabelecimento_Filho1 extends FragmentFilho {
+public class FragEstabFilho_Desc extends FragmentFilho {
 
     public static String TITULO_FRAGMENT = "Sem nome ainda";
     public static int ID_FRAGMENT = 1;
-    public static int ICONE = R.drawable.icn2;
+    public static int ICONE = R.drawable.ic_description_black_24dp;
 
     private Estabelecimento estabelecimento;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tab_estabelecimento_1, container, false);
+        return inflater.inflate(R.layout.tab_estabelecimento_descricao, container, false);
     }
 
     @Override

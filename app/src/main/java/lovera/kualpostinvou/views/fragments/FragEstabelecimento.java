@@ -20,6 +20,9 @@ import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.views.adapters.ViewPagerEstabAdapter;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
+import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Avaliacao;
+import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Endereco;
+import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Info;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 import lovera.kualpostinvou.views.services.ServicesNames;
 
@@ -42,7 +45,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     private CommonsReceiver receiver;
     private MsgToActivity msgToActivity;
 
-    private FragEstabelecimento_Filho1 fragFilho1;
+    private FragEstabFilho_Desc fragFilho1;
     private FragEstabFilho_Info fragFilhoInfo;
     private FragEstabFilho_Avaliacao fragFilhoAvaliacao;
     private FragEstabFilho_Endereco fragFilhoEndereco;
@@ -58,7 +61,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     }
 
     private void inicializarFragFilhos(){
-        this.fragFilho1 = new FragEstabelecimento_Filho1();
+        this.fragFilho1 = new FragEstabFilho_Desc();
         this.fragFilhoInfo = new FragEstabFilho_Info();
         this.fragFilhoAvaliacao = new FragEstabFilho_Avaliacao();
         this.fragFilhoEndereco = new FragEstabFilho_Endereco();
