@@ -65,13 +65,23 @@ public class FragEstabFilho_Info extends FragmentFilho {
     public void setListaDeProfissionais(List<Profissional> listaDeProfissionais){
         fecharProgressoProfissionais();
         this.layoutProfissionais = (LinearLayout) getActivity().findViewById(R.id.f6_layoutProfissionais);
-        for(Profissional profissional : listaDeProfissionais){
-            TextView textView = new TextView(getActivity());
-            textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            textView.setPadding(5, 0, 0, 0);
-            textView.setText(profissional.toString());
-            this.layoutProfissionais.addView(textView);
+
+        if(listaDeProfissionais.size() > 0){
+            for(Profissional profissional : listaDeProfissionais){
+                this.layoutProfissionais.addView(gerarTxtViewPProgressProf(profissional.toString()));
+            }
         }
+        else{
+            this.layoutProfissionais.addView(gerarTxtViewPProgressProf("Não há profissionais cadastrados."));
+        }
+    }
+
+    private TextView gerarTxtViewPProgressProf(String texto){
+        TextView textView = new TextView(getActivity());
+        textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        textView.setPadding(5, 0, 0, 0);
+        textView.setText(texto);
+        return textView;
     }
 
     //Coisas relativas ao progresso de profissionais
