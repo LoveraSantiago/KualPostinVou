@@ -56,6 +56,7 @@ public class FragEstabFilho_Info extends FragmentFilho {
             setTextToLabel(this.estabelecimento.getCnpj()                      , R.id.lblCnpj        , getView());
             setTextToLabel(this.estabelecimento.getCodUnidade()                , R.id.lblCodigo      , getView());
             setTextToLabel(this.estabelecimento.getOrigemGeografica()          , R.id.lblOrigGeograf , getView());
+            setTextToLabel(this.estabelecimento.getNatureza()                  , R.id.lblNatureza    , getView());
         }
         catch (Exception e){
             e.printStackTrace();

@@ -76,6 +76,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
 
     private void inicializarFragFilhos(){
         this.fragFilhoDescricao = new FragEstabFilho_Desc();
+        this.fragFilhoDescricao.setMsg(this);
         this.fragFilhoInfo = new FragEstabFilho_Info();
         this.fragFilhoInfo.setMsg(this);
         this.fragFilhoAvaliacao = new FragEstabFilho_Avaliacao();
@@ -124,6 +125,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     private void inicializarTabLayout(){
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.f5_tablayout);
         tabLayout.setupWithViewPager(this.viewPager);
+        tabLayout.getTabAt(this.fragFilhoDescricao.getFragmentId()).setIcon(this.fragFilhoDescricao.getIcone());
         tabLayout.getTabAt(this.fragFilhoInfo.getFragmentId()).setIcon(this.fragFilhoInfo.getIcone());
         tabLayout.getTabAt(this.fragFilhoAvaliacao.getFragmentId()).setIcon(this.fragFilhoAvaliacao.getIcone());
         tabLayout.getTabAt(this.fragFilhoEndereco.getFragmentId()).setIcon(this.fragFilhoEndereco.getIcone());

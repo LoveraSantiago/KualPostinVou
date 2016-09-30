@@ -21,12 +21,12 @@ import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
 public class FragEstabFilho_Desc extends FragmentFilho {
 
     public static String TITULO_FRAGMENT = "Descricao";
-    public static int ID_FRAGMENT = 1;
+    public static int ID_FRAGMENT = 0;
     public static int ICONE = R.drawable.ic_description_black_24dp;
 
     private Estabelecimento estabelecimento;
 
-    private View progressoEstabelecimento;
+    private View progressoEspecialidades;
     private LinearLayout layoutEspecialidades;
 
     private MsgToFragFilhoInfo msg;
@@ -53,7 +53,6 @@ public class FragEstabFilho_Desc extends FragmentFilho {
     private void setarCampos(){
         try{
             setTextToLabel(this.estabelecimento.getNomeFantasia()              , R.id.lblNomeFantasia, getView());
-            setTextToLabel(this.estabelecimento.getNatureza()                  , R.id.lblNatureza    , getView());
             setTextToLabel(this.estabelecimento.getTipoUnidade()               , R.id.lblTipoUnidade , getView());
             setTextToLabel(this.estabelecimento.getEsferaAdministrativa()      , R.id.lblEsferaAdm   , getView());
             setTextToLabel(this.estabelecimento.getVinculoSus()                , R.id.lblVincSus     , getView());
@@ -100,14 +99,14 @@ public class FragEstabFilho_Desc extends FragmentFilho {
 
     //Coisas relativas ao progresso de profissionais
     private void inicializarProgressos(){
-        this.progressoEstabelecimento = getActivity().findViewById(R.id.f7_layoutEspecialidades);
+        this.progressoEspecialidades = getActivity().findViewById(R.id.f7_progressoEspecialidades);
         if(this.msg.getListaDeProfissionais() != null){
             setListaEspecialidades(this.msg.getListaDeEspecialidades());
         }
     }
 
     private void fecharProgressoProfissionais(){
-        this.progressoEstabelecimento.setVisibility(View.GONE);
+        this.progressoEspecialidades.setVisibility(View.GONE);
     }
 
     public void setMsg(MsgToFragFilhoInfo msg) {
