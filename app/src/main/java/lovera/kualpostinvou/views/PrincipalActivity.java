@@ -134,7 +134,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     @Override
     protected void onStart() {
-        Log.i("start", "onstart chamado");
         Aplicacao.getGoogleCoisas().connect();
 
         if(!Aplicacao.getPessoaLogada().isPessoaLogado()){
@@ -147,14 +146,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         }
         this.mDrawerLayout.openDrawer(this.mRecyclerView);
         super.onStart();
-        Toast.makeText(getApplicationContext(),"Now onStart() calls", Toast.LENGTH_LONG).show(); //onStart Called
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i("start", "onresume chamado");
-        Toast.makeText(getApplicationContext(),"Now onResume() calls", Toast.LENGTH_LONG).show(); //onStart Called
     }
 
     @Override
