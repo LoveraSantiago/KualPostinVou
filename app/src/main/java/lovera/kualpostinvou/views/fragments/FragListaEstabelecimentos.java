@@ -17,6 +17,7 @@ import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.views.adapters.ListEstabAdapter;
 import lovera.kualpostinvou.views.adapters.FragListaEstabAdapter;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
+import lovera.kualpostinvou.views.receivers.ReceiversNames;
 import lovera.kualpostinvou.views.services.NomeGeolocalizacaoService;
 
 public class FragListaEstabelecimentos extends FragmentMenu implements AdapterView.OnItemClickListener{
@@ -79,7 +80,7 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
 
         Intent intent = new Intent(getActivity(), NomeGeolocalizacaoService.class);
         intent.putExtra("ESTABELECIMENTO", estabelecimento);
-        intent.putExtra("RECEIVER", fragEstabelecimento.getReceiver());
+        intent.putExtra(ReceiversNames.GEOLOCALIZACAO, fragEstabelecimento.getReceiver());
         getActivity().startService(intent);
     }
 

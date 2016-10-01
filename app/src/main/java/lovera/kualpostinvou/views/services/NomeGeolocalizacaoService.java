@@ -13,6 +13,7 @@ import java.util.Locale;
 
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
+import lovera.kualpostinvou.views.receivers.ReceiversNames;
 
 public class NomeGeolocalizacaoService extends IntentService{
 
@@ -29,7 +30,7 @@ public class NomeGeolocalizacaoService extends IntentService{
         Estabelecimento estabelecimento = (Estabelecimento) intent.getSerializableExtra("ESTABELECIMENTO");
         String stringQuery = montarStringQuery(estabelecimento);
 
-        ResultReceiver resultReceiver = intent.getParcelableExtra("RECEIVER");
+        ResultReceiver resultReceiver = intent.getParcelableExtra(ReceiversNames.GEOLOCALIZACAO);
 
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         List<Address> listAddress = null;

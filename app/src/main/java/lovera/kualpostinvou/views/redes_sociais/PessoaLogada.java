@@ -1,5 +1,7 @@
 package lovera.kualpostinvou.views.redes_sociais;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
@@ -8,7 +10,10 @@ import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Pessoa;
+import lovera.kualpostinvou.views.PrincipalActivity;
 import lovera.kualpostinvou.views.contratos.MsgToViewHolderHeader;
+import lovera.kualpostinvou.views.receivers.ReceiversNames;
+import lovera.kualpostinvou.views.services.AppCivicoTokenService;
 
 public class PessoaLogada{
 
@@ -34,6 +39,12 @@ public class PessoaLogada{
         if(this.receptorMsg != null){
             this.receptorMsg.headerAlterado();
         }
+    }
+
+    public void inicializarTokenAppCivico(Activity activit){
+        Intent intent = new Intent(activit, AppCivicoTokenService.class);
+        intent.putExtra(ReceiversNames.TOKENAPPCIVICO, ((PrincipalActivity) activit).getReceiver());
+        activit.startService(intent);
     }
 
     public void factoryTestePessoa(){

@@ -6,10 +6,9 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
 import android.widget.Toast;
 
-import com.facebook.AccessToken;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.Profile;
@@ -26,7 +25,6 @@ import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
 import lovera.kualpostinvou.modelos.ErrorObj;
-import lovera.kualpostinvou.modelos.Link;
 import lovera.kualpostinvou.modelos.Pessoa;
 
 public class FragRedesSociais extends FragmentMenu {
@@ -35,9 +33,10 @@ public class FragRedesSociais extends FragmentMenu {
     public static int ID_FRAGMENT = 3;
     public static int ICONE = R.drawable.ic_account_circle_black_24dp;
 
-    private LoginButton loginButton;
+    private LoginButton faceLoginButton;
 
-    private SignInButton signInButton;
+    private SignInButton googleSignInButton;
+
     private static final int RC_SIGN_IN = 9001;
 
     @Nullable
@@ -65,16 +64,9 @@ public class FragRedesSociais extends FragmentMenu {
     }
 
     private void inicializarBtnFacebook(){
-        if(AccessToken.getCurrentAccessToken() == null){
-            setTextToLabel("Não", R.id.f3_lblstatus_facelogado);
-        }
-        else{
-            setTextToLabel("Sim", R.id.f3_lblstatus_facelogado);
-        }
-
-        this.loginButton = (LoginButton) getView().findViewById(R.id.f3_face_loginbutton);
-        this.loginButton.setReadPermissions(Arrays.asList("email"));
-        this.loginButton.registerCallback(Aplicacao.getFaceCoisas().getCallbackManager(),
+        this.faceLoginButton = (LoginButton) getView().findViewById(R.id.f3_face_loginbutton);
+        this.faceLoginButton.setReadPermissions(Arrays.asList("email"));
+        this.faceLoginButton.registerCallback(Aplicacao.getFaceCoisas().getCallbackManager(),
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
@@ -85,7 +77,6 @@ public class FragRedesSociais extends FragmentMenu {
                                 this.stopTracking();
                             }
                         };
-                        setTextToLabel("Acabou de logar", R.id.f3_lblstatus_facelogado);
                     }
 
                     @Override
@@ -101,21 +92,15 @@ public class FragRedesSociais extends FragmentMenu {
     }
 
     private void inicializarBtnGoogle(){
-        this.signInButton = (SignInButton) getView().findViewById(R.id.f3_google_loginbutton);
-        this.signInButton.setScopes(Aplicacao.getGoogleCoisas().getGso().getScopeArray());
-        this.signInButton.setOnClickListener(new View.OnClickListener() {
+        this.googleSignInButton = (SignInButton) getView().findViewById(R.id.f3_google_loginbutton);
+        this.googleSignInButton.setScopes(Aplicacao.getGoogleCoisas().getGso().getScopeArray());
+        this.googleSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(Aplicacao.getGoogleCoisas().getmGoogleApiClient());
                 getActivity().startActivityForResult(signInIntent, RC_SIGN_IN);
             }
         });
-    }
-
-
-    public void setTextToLabel(String texto, int id){
-        TextView lblCodigo = (TextView) getView().findViewById(id);
-        lblCodigo.setText(texto);
     }
 
     @Override
@@ -134,13 +119,6 @@ public class FragRedesSociais extends FragmentMenu {
     }
 
     public void cadastrarPerfilTeste(){
-
-        //IGNORA COMPLETAMENTE ESSE CARA
-        Link link = new Link();
-        link.setHref("https://scontent.xx.fbcdn.net/v/t1.0-1/p160x160/14330154_1381541598540623_4482186030160339709_n.jpg?oh=78004da10af591005cc424de8a5ebf27&oe=5884C3B4");
-        link.setRel("nome imagem");
-
-
         Pessoa pessoa = new Pessoa();
         pessoa.setCEP("05172-030");
         pessoa.setBiografia("biografiatemp");
@@ -150,12 +128,29 @@ public class FragRedesSociais extends FragmentMenu {
         pessoa.setLongitude(19.19);
         pessoa.setNomeCompleto("Santuga Lovera");
         pessoa.setNomeUsuario("Santuga");
-        pessoa.setLinks(Arrays.asList(link));
         pessoa.setSexo("M");
         pessoa.setTokenFacebook("IDFACETESTE");
         pessoa.setTokenGoogle("IDGOOGLETESTE");
 
         ConexaoMetaModelo conexao = new ConexaoMetaModelo();
         conexao.cadastrarPessoa(pessoa, new StringBuilder(), new ErrorObj());
+    }
+
+    private void inicializarBtnLogouts(){
+        Button btn = (Button) getActivity().findViewById(R.id.tempForceLogouts);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    Aplicacao.getGoogleCoisas().realizarLogout();
+                }
+                catch (Exception e){}
+
+                try{
+                    Aplicacao.getFaceCoisas().realizarLogout();
+                }
+                catch (Exception e){}
+            }
+        });
     }
 }

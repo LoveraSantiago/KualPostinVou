@@ -34,7 +34,7 @@
         <activity android:name=".views.ListaEstabelecimentosActivity"/>
 
         <service android:name="lovera.kualpostinvou.views.services.LocalizacaoService"/>
-        <service android:name="lovera.kualpostinvou.views.services.LoginService"/>
+        <service android:name="lovera.kualpostinvou.views.services.AppCivicoTokenService" android:exported="false"/>
         <service android:name="lovera.kualpostinvou.views.services.NomeGeolocalizacaoService" android:exported="false"/>
     </application>
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
 
+//TODO refatoracao nas classes que usam esse receiver
 @SuppressLint("ParcelCreator")
 public class CommonsReceiver extends ResultReceiver {
 

@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,6 +21,8 @@ import java.util.Map;
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Pessoa;
+import lovera.kualpostinvou.views.components.navigationdrawer.ActionBarDrawerToggleImpl;
+import lovera.kualpostinvou.views.components.navigationdrawer.RecyclerViewAdapterImpl;
 import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao2;
@@ -27,11 +30,10 @@ import lovera.kualpostinvou.views.fragments.FragBuscaEstabelecimentos;
 import lovera.kualpostinvou.views.fragments.FragEstabelecimento;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 import lovera.kualpostinvou.views.fragments.FragmentMenu;
-import lovera.kualpostinvou.views.components.navigationdrawer.ActionBarDrawerToggleImpl;
-import lovera.kualpostinvou.views.components.navigationdrawer.RecyclerViewAdapterImpl;
-import lovera.kualpostinvou.views.services.LoginService;
+import lovera.kualpostinvou.views.receivers.CommonsReceiver;
+
 //TODO: colocar restauração dos estados das fragments principais ver => https://developer.android.com/training/basics/activity-lifecycle/recreating.html?hl=pt-br
-public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer, MsgToActivity{
+public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer, MsgToActivity, CommonsReceiver.Receiver{
 
     private static String CHAVE_TOKEN = "token";
     private static String CHAVE_PESSOA = "pessoa";
@@ -40,6 +42,8 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     private String tituloOriginal;
 
     private Toolbar toolbar;
+
+    private CommonsReceiver receiver;
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -78,6 +82,12 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         inicializarFragmentMap();
         inicializarNavigationDrawer();
         inicializarComponentesProgresso();
+        inicializarReceivers();
+    }
+
+    private void inicializarReceivers(){
+        this.receiver = new CommonsReceiver(new Handler());
+        this.receiver.setReceiver(this);
     }
 
     private void inicializarToolbar(){
@@ -138,10 +148,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 //            Aplicacao.getPessoaLogada().inicializarPessoa();
 //        }
 
-//        if(!Aplicacao.getPessoaLogada().hasToken()){
-//            Intent intent = new Intent(this, LoginService.class);
-//            startService(intent);
-//        }
         this.mDrawerLayout.openDrawer(this.mRecyclerView);
         super.onStart();
     }
@@ -188,6 +194,11 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     }
 
     @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+
+    }
+
+    @Override
     public boolean isAbertoProgresso() {
         return this.uiStatus.getVisibility() == View.VISIBLE;
     }
@@ -220,6 +231,10 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
                 .addToBackStack("")
                 .commit();
         this.fragAtiva = fragment;
+    }
+
+    public CommonsReceiver getReceiver() {
+        return receiver;
     }
 
     @Override
@@ -261,4 +276,5 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
             ((FragEstabelecimento)this.fragAtiva).cadastrarTempoDeAtendimento();
         }
     }
+
 }

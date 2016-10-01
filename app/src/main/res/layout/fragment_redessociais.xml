@@ -33,38 +33,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="status logado:"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:id="@+id/f3_lblstatus_facelogado"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Logout Face"
-            android:onClick="logoutFacebook"/>
-
-    </LinearLayout>
-
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
@@ -80,6 +48,12 @@
             android:layout_height="wrap_content"
             android:text="Botao Teste Cadastro"
             android:onClick="cadastrarPerfilTeste"/>
+
+        <Button
+            android:id="@+id/tempForceLogouts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forcar Logouts"/>
 
     </LinearLayout>
 
