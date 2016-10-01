@@ -259,4 +259,9 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         if(isAbertoProgresso()) return;
         this.frag2.consumirEstabelecimentosGeolocalizacao(view.getTag().toString());
     }
+
+    //ACOES DO FRAGMENT ESTABELECIMENTO
+    public void cadastrarTempoDeAtendimento(View view){
+        ((FragEstabelecimento)this.fragAtiva).cadastrarTempoDeAtendimento();
+    }
 }

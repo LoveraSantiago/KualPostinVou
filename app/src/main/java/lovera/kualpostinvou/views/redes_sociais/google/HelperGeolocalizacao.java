@@ -28,25 +28,29 @@ public class HelperGeolocalizacao{
     private final GoogleApiClient mGoogleApiClient;
     private final Fragment fragment;
 
-    private final Localizacao localizacao;
 
     public HelperGeolocalizacao(Fragment fragment) {
         this.fragment = fragment;
-        this.localizacao = new Localizacao();
         this.mGoogleApiClient = Aplicacao.getGoogleCoisas().getmGoogleApiClient();
 
         Aplicacao.getGoogleCoisas().setHelperGps(this);
     }
 
     public boolean temLastLocation(){
+        if(getLocalizacao() != null){
+            return true;
+        }
+
         if (ActivityCompat.checkSelfPermission(this.fragment.getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this.fragment.getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return false;
         }
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(this.mGoogleApiClient);
         if(mLastLocation != null){
-            this.localizacao.setLatitude(mLastLocation.getLatitude());
-            this.localizacao.setLongitude(mLastLocation.getLongitude());
+            Localizacao localizaoTemp = new Localizacao();
+            localizaoTemp.setLatitude(mLastLocation.getLatitude());
+            localizaoTemp.setLongitude(mLastLocation.getLongitude());
+            Aplicacao.getPessoaLogada().setLocalizacao(localizaoTemp);
             return true;
         }
         return false;
@@ -92,6 +96,6 @@ public class HelperGeolocalizacao{
     }
 
     public Localizacao getLocalizacao() {
-        return localizacao;
+        return Aplicacao.getPessoaLogada().getLocalizacao();
     }
 }

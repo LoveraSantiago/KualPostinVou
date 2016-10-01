@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
+import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.views.contratos.MsgToViewHolderHeader;
 
@@ -15,6 +16,7 @@ public class PessoaLogada{
 
     private Pessoa pessoa;
     private ImageView espacoParaImg;
+    private Localizacao localizacao;
 
     private MsgToViewHolderHeader receptorMsg;
 
@@ -100,6 +102,14 @@ public class PessoaLogada{
 
     public String getToken() {
         return token;
+    }
+
+    public Localizacao getLocalizacao() {
+        return localizacao;
+    }
+
+    public void setLocalizacao(Localizacao localizacao) {
+        this.localizacao = localizacao;
     }
 }
 

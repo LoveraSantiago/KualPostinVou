@@ -1,5 +1,6 @@
 package lovera.kualpostinvou.views.fragments;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -27,7 +28,7 @@ import lovera.kualpostinvou.views.adapters.FragEstabAdapter;
 import lovera.kualpostinvou.views.adapters.ViewPagerEstabAdapter;
 import lovera.kualpostinvou.views.components.OnTabSelectedListenerImpl;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
-import lovera.kualpostinvou.views.contratos.MsgToFragFilhoInfo;
+import lovera.kualpostinvou.views.contratos.MsgToFragFilhos;
 import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Avaliacao;
 import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Desc;
 import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Endereco;
@@ -35,7 +36,7 @@ import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Info;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 import lovera.kualpostinvou.views.services.ServicesNames;
 
-public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver.Receiver, MsgToFragFilhoInfo{
+public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver.Receiver, MsgToFragFilhos {
 
     //Campos relativos a FragmentMenu
     public static String TITULO_FRAGMENT = "Estabelecimento";
@@ -80,6 +81,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
         this.fragFilhoInfo = new FragEstabFilho_Info();
         this.fragFilhoInfo.setMsg(this);
         this.fragFilhoAvaliacao = new FragEstabFilho_Avaliacao();
+        this.fragFilhoAvaliacao.setMsg(this);
         this.fragFilhoEndereco = new FragEstabFilho_Endereco();
     }
 
@@ -259,8 +261,18 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
         return listaDeEspecialidades;
     }
 
+    @Override
+    public Fragment getPaiFragment() {
+        return this;
+    }
+
     public void setListaDeEspecialidades(List<Especialidade> listaDeEspecialidades) {
         this.listaDeEspecialidades = listaDeEspecialidades;
         this.fragFilhoDescricao.setListaEspecialidades(listaDeEspecialidades);
+    }
+
+    //Metodos do fragFilhoAvaliacao
+    public void cadastrarTempoDeAtendimento(){
+        this.fragFilhoAvaliacao.cadastrarTempoDeAtendimento();
     }
 }

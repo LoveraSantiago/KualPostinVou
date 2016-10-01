@@ -13,7 +13,7 @@ import java.util.List;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
-import lovera.kualpostinvou.views.contratos.MsgToFragFilhoInfo;
+import lovera.kualpostinvou.views.contratos.MsgToFragFilhos;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
 
 import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
@@ -29,7 +29,7 @@ public class FragEstabFilho_Desc extends FragmentFilho {
     private View progressoEspecialidades;
     private LinearLayout layoutEspecialidades;
 
-    private MsgToFragFilhoInfo msg;
+    private MsgToFragFilhos msg;
 
     @Nullable
     @Override
@@ -106,7 +106,7 @@ public class FragEstabFilho_Desc extends FragmentFilho {
         this.progressoEspecialidades.setVisibility(View.GONE);
     }
 
-    public void setMsg(MsgToFragFilhoInfo msg) {
+    public void setMsg(MsgToFragFilhos msg) {
         this.msg = msg;
     }
 

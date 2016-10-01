@@ -6,10 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
+import lovera.kualpostinvou.views.contratos.MsgToFragFilhos;
 import lovera.kualpostinvou.views.controllers.AvTempoController;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
+import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 
 public class FragEstabFilho_Avaliacao extends FragmentFilho {
 
@@ -21,6 +24,10 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho {
 
     private AvTempoController tempoController;
 
+    private HelperGeolocalizacao helperGPS;
+
+    private MsgToFragFilhos msg;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,6 +38,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.tempoController = new AvTempoController(getActivity());
+        this.helperGPS = new HelperGeolocalizacao(this.msg.getPaiFragment());
     }
 
     @Override
@@ -42,6 +50,15 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho {
     public void setArguments(Bundle args) {
         super.setArguments(args);
         this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
+    }
+
+    public void cadastrarTempoDeAtendimento(){
+        boolean temToken = Aplicacao.getPessoaLogada().hasToken();
+        boolean temLocalizacao = this.helperGPS.temLastLocation();
+    }
+
+    public void setMsg(MsgToFragFilhos msg) {
+        this.msg = msg;
     }
 
     @Override
