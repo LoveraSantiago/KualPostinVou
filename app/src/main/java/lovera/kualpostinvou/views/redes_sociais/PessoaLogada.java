@@ -31,8 +31,6 @@ public class PessoaLogada{
         Aplicacao.getGoogleCoisas().getPessoaLogada();
         Aplicacao.getFaceCoisas().getPessoaLogada();
 
-        factoryTestePessoa();
-
         if(this.receptorMsg != null){
             this.receptorMsg.headerAlterado();
         }
@@ -69,13 +67,13 @@ public class PessoaLogada{
 
     public void getImgPessoa(ImageView imgView){
         if(isPessoaLogado()){
-            imgView.setImageResource(this.pessoa.getIntImgPerfil());
-            imgView.invalidate();
-        }
-        else{
             this.espacoParaImg = imgView;
             ConexaoMetaModelo conexaoMetaModelo = new ConexaoMetaModelo();
             conexaoMetaModelo.downloadImageNaUrl(this.pessoa.getUriImgPerfil());
+        }
+        else{
+            imgView.setImageResource(this.pessoa.getIntImgPerfil());
+            imgView.invalidate();
         }
     }
 

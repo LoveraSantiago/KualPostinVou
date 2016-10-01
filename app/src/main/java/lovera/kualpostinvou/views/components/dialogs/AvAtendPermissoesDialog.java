@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import lovera.kualpostinvou.R;
+import lovera.kualpostinvou.views.PrincipalActivity;
+import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 
 public class AvAtendPermissoesDialog extends AlertDialog{
 
@@ -27,7 +29,7 @@ public class AvAtendPermissoesDialog extends AlertDialog{
     public AvAtendPermissoesDialog(Activity activity) {
         super(activity);
         View mainView = inflarDialogXML(activity);
-        inicializarComponentes(mainView);
+        inicializarComponentes(mainView, activity);
     }
 
     private View inflarDialogXML(Activity activity){
@@ -38,7 +40,7 @@ public class AvAtendPermissoesDialog extends AlertDialog{
         return mainView;
     }
 
-    private void inicializarComponentes(View mainView){
+    private void inicializarComponentes(View mainView, final Activity activity){
         this.linhaLogado = mainView.findViewById(R.id.d1_linhaLogado);
         this.linhaGpsLigado = mainView.findViewById(R.id.d1_linhaGpsLigado);
 
@@ -51,7 +53,7 @@ public class AvAtendPermissoesDialog extends AlertDialog{
         this.btnLogado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("dialogBtn", "e ai?");
+                ((PrincipalActivity) activity).selectItem(FragRedesSociais.ID_FRAGMENT);
                 dismiss();
             }
         });

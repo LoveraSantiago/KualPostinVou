@@ -54,7 +54,7 @@ public class FragEstabFilho_Endereco extends FragmentFilho {
             setTextToLabel(this.estabelecimento.getDistancia()                 , R.id.lblDistancia   , getView());
         }
         catch (Exception e){
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 

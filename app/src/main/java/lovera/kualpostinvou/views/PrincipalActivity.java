@@ -134,14 +134,14 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     protected void onStart() {
         Aplicacao.getGoogleCoisas().connect();
 
-        if(!Aplicacao.getPessoaLogada().isPessoaLogado()){
-            Aplicacao.getPessoaLogada().inicializarPessoa();
-        }
+//        if(!Aplicacao.getPessoaLogada().isPessoaLogado()){
+//            Aplicacao.getPessoaLogada().inicializarPessoa();
+//        }
 
-        if(!Aplicacao.getPessoaLogada().hasToken()){
-            Intent intent = new Intent(this, LoginService.class);
+//        if(!Aplicacao.getPessoaLogada().hasToken()){
+//            Intent intent = new Intent(this, LoginService.class);
 //            startService(intent);
-        }
+//        }
         this.mDrawerLayout.openDrawer(this.mRecyclerView);
         super.onStart();
     }
@@ -225,11 +225,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(this.fragAtiva instanceof FragEstabelecimento){
-            this.fragmentManager.beginTransaction()
-                                .remove(this.fragAtiva)
-                                .commit();
-        }
     }
 
     public void consumirEstabelecimentos(View view) {
@@ -262,6 +257,8 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     //ACOES DO FRAGMENT ESTABELECIMENTO
     public void cadastrarTempoDeAtendimento(View view){
-        ((FragEstabelecimento)this.fragAtiva).cadastrarTempoDeAtendimento();
+        if(this.fragAtiva instanceof FragEstabelecimento){
+            ((FragEstabelecimento)this.fragAtiva).cadastrarTempoDeAtendimento();
+        }
     }
 }

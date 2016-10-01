@@ -63,7 +63,7 @@ public class FragEstabFilho_Info extends FragmentFilho {
             setTextToLabel(this.estabelecimento.getCategoriaUnidade()          , R.id.lblCategUnid   , getView());
         }
         catch (Exception e){
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 

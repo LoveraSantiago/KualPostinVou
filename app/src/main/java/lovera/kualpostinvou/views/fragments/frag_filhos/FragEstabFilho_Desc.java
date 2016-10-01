@@ -66,7 +66,7 @@ public class FragEstabFilho_Desc extends FragmentFilho {
             setTextToLabel(this.estabelecimento.getTurnoAtendimento()          , R.id.lblTurnoAtend  , getView());
         }
         catch(Exception e){
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 
