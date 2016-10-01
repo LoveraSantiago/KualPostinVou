@@ -52,6 +52,7 @@ public class AvAtendPermissoesDialog extends AlertDialog{
             @Override
             public void onClick(View v) {
                 Log.i("dialogBtn", "e ai?");
+                dismiss();
             }
         });
 
@@ -59,6 +60,7 @@ public class AvAtendPermissoesDialog extends AlertDialog{
             @Override
             public void onClick(View v) {
                 Log.i("dialogBtn", "e ai 2?");
+                dismiss();
             }
         });
     }

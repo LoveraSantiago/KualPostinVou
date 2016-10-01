@@ -72,9 +72,16 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho {
             if(!temToken){
                 dialog.configurarLinhaLogado(true, false);
             }
+            else{
+                dialog.configurarLinhaLogado(true, true);
+            }
             if(!temLocalizacao){
                 dialog.configurarLinhaGps(true, false);
             }
+            else{
+                dialog.configurarLinhaGps(true, true);
+            }
+            dialog.show();
             return false;
         }
     }

@@ -83,13 +83,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Registrar meu tempo de atendimento"
-            android:id="@+id/f8_btnRegistrarAtend" />
+            android:id="@+id/f8_btnRegistrarAtend"
+            android:onClick="cadastrarTempoDeAtendimento"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Editar meu tempo de atendimento"
-            android:id="@+id/f8_btnEditarAtend"
-            android:onClick="cadastrarTempoDeAtendimento"/>
+            android:id="@+id/f8_btnEditarAtend"/>
     </LinearLayout>
 </ScrollView>

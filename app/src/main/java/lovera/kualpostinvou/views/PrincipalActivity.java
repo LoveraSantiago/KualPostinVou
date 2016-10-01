@@ -140,7 +140,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
         if(!Aplicacao.getPessoaLogada().hasToken()){
             Intent intent = new Intent(this, LoginService.class);
-            startService(intent);
+//            startService(intent);
         }
         this.mDrawerLayout.openDrawer(this.mRecyclerView);
         super.onStart();
