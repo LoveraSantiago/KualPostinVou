@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
+import lovera.kualpostinvou.views.controllers.AvTempoController;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
 
 public class FragEstabFilho_Avaliacao extends FragmentFilho {
@@ -18,10 +19,18 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho {
 
     private Estabelecimento estabelecimento;
 
+    private AvTempoController tempoController;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.tab_estabelecimento_avaliacao, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        this.tempoController = new AvTempoController(getActivity());
     }
 
     @Override

@@ -65,7 +65,7 @@ public class LoginService extends Service{
 
                     Instalacao instalacao = new Instalacao();
                     instalacao.setCodUsuario(pessoa.getCod());
-                    instalacao.setDataHora(Utils_View.dateToString(Calendar.getInstance().getTime()));
+                    instalacao.setDataHora(Utils_View.dateToString(Calendar.getInstance().getTime(), "yyyy-MM-dd"));
                     instalacao.setDeviceToken(Aplicacao.getAplicacaoInstancia().getAndroidId());
                     conexao.cadastrarInstalacao(Aplicacao.getPessoaLogada().getToken(), instalacao, stringBuilder, errorObj);
                     if(stringBuilder.length() > 0){

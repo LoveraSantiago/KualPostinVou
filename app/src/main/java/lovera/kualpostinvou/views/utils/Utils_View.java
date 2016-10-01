@@ -9,13 +9,10 @@ import java.util.Date;
 
 public class Utils_View {
 
-    private static DateFormat dateFormat;
 
-    static{
-        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    }
 
-    public static String dateToString(Date date){
+    public static String dateToString(Date date, String formato){
+        DateFormat dateFormat = new SimpleDateFormat(formato);
         return dateFormat.format(date);
     }
 

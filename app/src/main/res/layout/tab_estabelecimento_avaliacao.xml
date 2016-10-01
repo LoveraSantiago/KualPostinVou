@@ -41,7 +41,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DD/MM/YYYY"/>
+                android:text="DD/MM/YYYY"
+                android:id="@+id/f8_lbldia" />
         </LinearLayout>
 
         <TextView
@@ -49,10 +50,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="00h 00m"
-            android:textSize="60dp"/>
+            android:textSize="60dp"
+            android:id="@+id/f8_lblHora" />
 
         <RelativeLayout
-            android:id="@+id/f7_progressoEspecialidades"
+            android:id="@+id/f8_progressoTempoAtend"
             android:background="#e6ccff"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -74,16 +76,19 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Não há registros de atendimento hoje."/>
+            android:text="Não há registros de atendimento hoje."
+            android:id="@+id/f8_semRegistrosAtend" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Registrar meu tempo de atendimento"/>
+            android:text="Registrar meu tempo de atendimento"
+            android:id="@+id/f8_btnRegistrarAtend" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Editar meu tempo de atendimento"/>
+            android:text="Editar meu tempo de atendimento"
+            android:id="@+id/f8_btnEditarAtend" />
     </LinearLayout>
 </ScrollView>
