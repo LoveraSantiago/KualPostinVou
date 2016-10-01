@@ -31,6 +31,7 @@ import lovera.kualpostinvou.views.fragments.FragEstabelecimento;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 import lovera.kualpostinvou.views.fragments.FragmentMenu;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
+import lovera.kualpostinvou.views.services.ServicesNames;
 
 //TODO: colocar restauração dos estados das fragments principais ver => https://developer.android.com/training/basics/activity-lifecycle/recreating.html?hl=pt-br
 public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer, MsgToActivity, CommonsReceiver.Receiver{
@@ -195,7 +196,12 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
-
+        if(resultCode == ServicesNames.TOKEN_APPCIVICO){
+            if(resultData.getBoolean("RESULTADO")){
+                fecharProgresso();
+                Aplicacao.getPessoaLogada().setServiceTokenEmAndamento(false);
+            }
+        }
     }
 
     @Override

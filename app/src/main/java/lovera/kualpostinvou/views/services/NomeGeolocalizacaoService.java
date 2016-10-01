@@ -27,10 +27,10 @@ public class NomeGeolocalizacaoService extends IntentService{
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Estabelecimento estabelecimento = (Estabelecimento) intent.getSerializableExtra("ESTABELECIMENTO");
-        String stringQuery = montarStringQuery(estabelecimento);
-
         ResultReceiver resultReceiver = intent.getParcelableExtra(ReceiversNames.GEOLOCALIZACAO);
+        Estabelecimento estabelecimento = (Estabelecimento) intent.getSerializableExtra("ESTABELECIMENTO");
+
+        String stringQuery = montarStringQuery(estabelecimento);
 
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         List<Address> listAddress = null;

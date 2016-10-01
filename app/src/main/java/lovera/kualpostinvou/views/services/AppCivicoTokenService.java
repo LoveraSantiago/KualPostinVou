@@ -3,7 +3,9 @@ package lovera.kualpostinvou.views.services;
 import android.app.IntentService;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.IBinder;
+import android.os.ResultReceiver;
 import android.support.annotation.Nullable;
 
 import java.util.Calendar;
@@ -13,6 +15,7 @@ import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Instalacao;
 import lovera.kualpostinvou.modelos.Pessoa;
+import lovera.kualpostinvou.views.receivers.ReceiversNames;
 import lovera.kualpostinvou.views.utils.Utils_View;
 
 public class AppCivicoTokenService extends IntentService{
@@ -27,14 +30,13 @@ public class AppCivicoTokenService extends IntentService{
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        if(!Aplicacao.getPessoaLogada().hasToken()) stopSelf();
+        ResultReceiver resultReceiver = intent.getParcelableExtra(ReceiversNames.TOKENAPPCIVICO);
 
         Pessoa pessoa = Aplicacao.getPessoaLogada().getPessoa();
         StringBuilder stringBuilder = new StringBuilder();
         ErrorObj errorObj = new ErrorObj();
 
         ConexaoMetaModelo conexao = new ConexaoMetaModelo();
-
         conexao.autenticar(pessoa, stringBuilder, errorObj);//Tenta pegar o token
         if(stringBuilder.length() > 0){//resultado token
             Aplicacao.getPessoaLogada().setToken(stringBuilder.toString());//Conseguiu pegar o token
@@ -66,8 +68,10 @@ public class AppCivicoTokenService extends IntentService{
             else{
                 throw new RuntimeException("Problema ao cadastrar");
             }
-
         }
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("RESULTADO", true);
+        resultReceiver.send(ServicesNames.TOKEN_APPCIVICO, bundle);
         stopSelf();
     }
 }

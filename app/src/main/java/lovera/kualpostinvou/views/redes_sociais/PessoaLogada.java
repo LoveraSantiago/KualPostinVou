@@ -18,6 +18,7 @@ import lovera.kualpostinvou.views.services.AppCivicoTokenService;
 public class PessoaLogada{
 
     private String token;
+    private boolean serviceTokenEmAndamento;
 
     private Pessoa pessoa;
     private ImageView espacoParaImg;
@@ -42,8 +43,16 @@ public class PessoaLogada{
     }
 
     public void inicializarTokenAppCivico(Activity activit){
+        if(hasToken()) return;
+
+        this.serviceTokenEmAndamento = true;
+
+        PrincipalActivity principalActivity = (PrincipalActivity) activit;
+        principalActivity.abrirProgresso();
+        principalActivity.setarTextoProgresso("Efetuando Login");
+
         Intent intent = new Intent(activit, AppCivicoTokenService.class);
-        intent.putExtra(ReceiversNames.TOKENAPPCIVICO, ((PrincipalActivity) activit).getReceiver());
+        intent.putExtra(ReceiversNames.TOKENAPPCIVICO, principalActivity.getReceiver());
         activit.startService(intent);
     }
 
@@ -119,6 +128,14 @@ public class PessoaLogada{
 
     public void setLocalizacao(Localizacao localizacao) {
         this.localizacao = localizacao;
+    }
+
+    public boolean isServiceTokenEmAndamento() {
+        return serviceTokenEmAndamento;
+    }
+
+    public void setServiceTokenEmAndamento(boolean serviceTokenEmAndamento) {
+        this.serviceTokenEmAndamento = serviceTokenEmAndamento;
     }
 }
 

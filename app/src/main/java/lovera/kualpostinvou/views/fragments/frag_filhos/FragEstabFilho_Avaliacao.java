@@ -11,6 +11,7 @@ import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.views.components.dialogs.AvAtendPermissoesDialog;
+import lovera.kualpostinvou.views.components.dialogs.DismissDialog;
 import lovera.kualpostinvou.views.contratos.MsgToFragFilhos;
 import lovera.kualpostinvou.views.controllers.AvTempoController;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
@@ -68,21 +69,31 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho {
             return true;
         }
         else{
-            AvAtendPermissoesDialog dialog = new AvAtendPermissoesDialog(getActivity());
-            if(!temToken){
-                dialog.configurarLinhaLogado(true, false);
+            if(Aplicacao.getPessoaLogada().isServiceTokenEmAndamento()){
+                DismissDialog dialog = new DismissDialog(getActivity());
+                dialog.setTitle("Login em Andamento");
+                dialog.setMessage("Aguarde um instante, login em andamento");
+                dialog.show();
+                return false;
             }
             else{
-                dialog.configurarLinhaLogado(true, true);
+
+                AvAtendPermissoesDialog dialog = new AvAtendPermissoesDialog(getActivity());
+                if(!temToken){
+                    dialog.configurarLinhaLogado(true, false);
+                }
+                else{
+                    dialog.configurarLinhaLogado(true, true);
+                }
+                if(!temLocalizacao){
+                    dialog.configurarLinhaGps(true, false);
+                }
+                else{
+                    dialog.configurarLinhaGps(true, true);
+                }
+                dialog.show();
+                return false;
             }
-            if(!temLocalizacao){
-                dialog.configurarLinhaGps(true, false);
-            }
-            else{
-                dialog.configurarLinhaGps(true, true);
-            }
-            dialog.show();
-            return false;
         }
     }
 
