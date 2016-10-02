@@ -1,9 +1,7 @@
 package lovera.kualpostinvou.views.adapters;
 
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
@@ -18,9 +16,21 @@ public class ViewPagerEstabAdapter extends FragmentStatePagerAdapter{
 
     public ViewPagerEstabAdapter(FragmentManager fm) {
         super(fm);
+//        resetarFragmentManager(fm);
+
         this.listaFragments = new ArrayList<>();
         this.listaTitulos = new ArrayList<>();
     }
+
+//    private void resetarFragmentManager(FragmentManager fm){
+//        List<Fragment> fragments = fm.getFragments();
+//        if(fragments == null) return;
+//        for(Fragment fragment : fragments){
+//            if(fragment instanceof FragmentFilho){
+//                fm.beginTransaction().remove(fragment).commit();
+//            }
+//        }
+//    }
 
     public void addFrag(Fragment fragment, String titulo){
         this.listaFragments.add(fragment);

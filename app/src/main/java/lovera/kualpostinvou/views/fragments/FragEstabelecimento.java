@@ -4,31 +4,22 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
-import com.google.android.gms.maps.StreetViewPanorama;
-import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
-import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
-import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.views.adapters.FragEstabAdapter;
-import lovera.kualpostinvou.views.adapters.ViewPagerEstabAdapter;
-import lovera.kualpostinvou.views.components.OnTabSelectedListenerImpl;
+import lovera.kualpostinvou.views.components.helpers.FragEstabelecimentoComponents;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.contratos.MsgToFragFilhos;
 import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Avaliacao;
@@ -45,14 +36,11 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     public static int ID_FRAGMENT = 5;
     public static int ICONE = 0;
 
+    private FragEstabelecimentoComponents components;
+
     private Estabelecimento estabelecimento;
 
-    private ViewPager viewPager;
-    private Bundle savedInstanceState;
-
     private LatLng latLng;
-    private StreetViewPanoramaView streetViewPanoramaView;
-    StreetViewPanorama panorama;
 
     private CommonsReceiver receiver;
     private MsgToActivity msgToActivity;
@@ -106,38 +94,11 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
         super.onActivityCreated(savedInstanceState);
 
         this.msgToActivity = (MsgToActivity) getActivity();
-        this.savedInstanceState = savedInstanceState;
+        this.components = new FragEstabelecimentoComponents(getActivity(), savedInstanceState, this.fragFilhoDescricao, this.fragFilhoInfo, this.fragFilhoAvaliacao, this.fragFilhoEndereco);
 
-        inicializarComponentes();
-
+        inicializarRestConsumers();
         this.msgToActivity.setarTextoProgresso("Localizando fotos do estabelecimento");
         recuperarObjetosSalvos(savedInstanceState);
-    }
-
-    private void inicializarComponentes(){
-        inicializarViewPager();
-        inicializarTabLayout();
-        inicializarRestConsumers();
-        inicializarStreetView();
-    }
-
-    private void inicializarViewPager(){
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        this.viewPager = (ViewPager) getActivity().findViewById(R.id.f5_viewpager);
-
-        ViewPagerEstabAdapter adapter = new ViewPagerEstabAdapter(activity.getSupportFragmentManager());
-        adapter.addFrags(this.fragFilhoDescricao, this.fragFilhoInfo, this.fragFilhoAvaliacao, this.fragFilhoEndereco);
-        this.viewPager.setAdapter(adapter);
-    }
-
-    private void inicializarTabLayout(){
-        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.f5_tablayout);
-        tabLayout.setupWithViewPager(this.viewPager);
-        tabLayout.getTabAt(this.fragFilhoDescricao.getFragmentId()).setIcon(this.fragFilhoDescricao.getIcone());
-        tabLayout.getTabAt(this.fragFilhoInfo.getFragmentId()).setIcon(this.fragFilhoInfo.getIcone());
-        tabLayout.getTabAt(this.fragFilhoAvaliacao.getFragmentId()).setIcon(this.fragFilhoAvaliacao.getIcone());
-        tabLayout.getTabAt(this.fragFilhoEndereco.getFragmentId()).setIcon(this.fragFilhoEndereco.getIcone());
-        tabLayout.setOnTabSelectedListener(new OnTabSelectedListenerImpl(this.viewPager));
     }
 
     private void inicializarRestConsumers(){
@@ -161,26 +122,26 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
         if(bundle != null){
             Localizacao localizacao = (Localizacao) bundle.getSerializable("LOCALIZACAO");
             this.latLng = new LatLng(localizacao.getLatitude(), localizacao.getLongitude());
-            setarPosicaoToPanorama();
+            this.components.setarPosicaoToPanorama(this.latLng);
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(this.streetViewPanoramaView != null) this.streetViewPanoramaView.onResume();
+        this.components.onResume();
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        if(this.streetViewPanoramaView != null) this.streetViewPanoramaView.onLowMemory();
+        this.components.onLowMemory();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(this.streetViewPanoramaView != null) this.streetViewPanoramaView.onSaveInstanceState(outState);
+        this.components.onSaveInstanceState(outState);
 
         Localizacao localizacao = new Localizacao();
         localizacao.setLatitude(this.latLng.latitude);
@@ -191,13 +152,13 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     @Override
     public void onPause() {
         super.onPause();
-        if(this.streetViewPanoramaView != null) this.streetViewPanoramaView.onPause();
+        this.components.onPause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(this.streetViewPanoramaView != null) this.streetViewPanoramaView.onDestroy();
+       this.components.onDestroy();
     }
 
     @Override
@@ -235,7 +196,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
         if(resultCode == ServicesNames.NOME_GEOLOCALIZACAO){
             Localizacao localizacao = getLocalizacaoDoOnReceiveResult(resultData);
             this.latLng = new LatLng(localizacao.getLatitude(), localizacao.getLongitude());
-            setarPosicaoToPanorama();
+            this.components.setarPosicaoToPanorama(this.latLng);
         }
     }
 
@@ -248,26 +209,6 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
             result.setLongitude(this.estabelecimento.getLongi());
         }
         return result;
-    }
-
-    private void inicializarStreetView(){
-        try{
-            this.streetViewPanoramaView = (StreetViewPanoramaView) getActivity().findViewById(R.id.f5_streetviewpanorama);
-            this.streetViewPanoramaView.onCreate(this.savedInstanceState);
-            this.streetViewPanoramaView.getStreetViewPanoramaAsync(
-                    new OnStreetViewPanoramaReadyCallback() {
-                        @Override
-                        public void onStreetViewPanoramaReady(StreetViewPanorama panoramaCallBack) {
-                            panorama = panoramaCallBack;
-                        }
-                    });
-            this.streetViewPanoramaView.onResume();
-        }catch (Exception e){}
-    }
-
-    private void setarPosicaoToPanorama(){
-        this.msgToActivity.fecharProgresso();
-        this.panorama.setPosition(this.latLng);
     }
 
     @Override

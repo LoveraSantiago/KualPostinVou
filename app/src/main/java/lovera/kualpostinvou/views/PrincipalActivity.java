@@ -144,11 +144,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     @Override
     protected void onStart() {
         Aplicacao.getGoogleCoisas().connect();
-
-//        if(!Aplicacao.getPessoaLogada().isPessoaLogado()){
-//            Aplicacao.getPessoaLogada().inicializarPessoa();
-//        }
-
         this.mDrawerLayout.openDrawer(this.mRecyclerView);
         super.onStart();
     }
@@ -234,7 +229,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     public void setarFragment(Fragment fragment) {
         this.fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragment)
-                .addToBackStack("")
+                .addToBackStack(null)
                 .commit();
         this.fragAtiva = fragment;
     }
