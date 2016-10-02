@@ -50,6 +50,8 @@ public class FragRedesSociais extends FragmentMenu {
         super.onActivityCreated(savedInstanceState);
         inicializarBtnFacebook();
         inicializarBtnGoogle();
+
+        inicializarBtnLogouts();
     }
 
     @Override
@@ -57,6 +59,7 @@ public class FragRedesSociais extends FragmentMenu {
         if(requestCode == RC_SIGN_IN){
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             Aplicacao.getGoogleCoisas().onLoginFeito(result);
+            procedimentoPegarTokenAppCivico();
         }
         else{
             Aplicacao.getFaceCoisas().getCallbackManager().onActivityResult(requestCode, resultCode, data);
@@ -74,6 +77,7 @@ public class FragRedesSociais extends FragmentMenu {
                             @Override
                             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
                                 Aplicacao.getFaceCoisas().onLoginFeito();
+                                procedimentoPegarTokenAppCivico();
                                 this.stopTracking();
                             }
                         };
@@ -97,10 +101,16 @@ public class FragRedesSociais extends FragmentMenu {
         this.googleSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(Aplicacao.getGoogleCoisas().getmGoogleApiClient());
-                getActivity().startActivityForResult(signInIntent, RC_SIGN_IN);
+                if(!Aplicacao.getGoogleCoisas().isEstouLogado()){
+                    Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(Aplicacao.getGoogleCoisas().getmGoogleApiClient());
+                    getActivity().startActivityForResult(signInIntent, RC_SIGN_IN);
+                }
             }
         });
+    }
+
+    private void procedimentoPegarTokenAppCivico(){
+        Aplicacao.getPessoaLogada().inicializarTokenAppCivico(getActivity());
     }
 
     @Override
@@ -142,6 +152,8 @@ public class FragRedesSociais extends FragmentMenu {
             @Override
             public void onClick(View v) {
                 try{
+                    Aplicacao.getPessoaLogada().setToken(null);
+                    Aplicacao.getPessoaLogada().inicializarPessoa();
                     Aplicacao.getGoogleCoisas().realizarLogout();
                 }
                 catch (Exception e){}

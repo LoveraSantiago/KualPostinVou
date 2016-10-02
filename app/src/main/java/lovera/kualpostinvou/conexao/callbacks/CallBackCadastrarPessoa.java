@@ -31,17 +31,20 @@ public class CallBackCadastrarPessoa {
         }
         else{
             try{
-                if(response.errorBody().string().toString().equals("Usuário já cadastrado ou desativado")){
-                    Log.i("Cadastro", "Usuário já cadastrado ou desativado");
+                String result = response.errorBody().string().toString();
+                if(result.equals("Usuário já cadastrado ou desativado")){
+                    error.setReasonPhrase(result);
                     return;
+                }
+                else{
+                    ParserUtils parser = new ParserUtils();
+                    ErrorObj errorResult = parser.parseError(this.retrofit, response);
+                    ErrorObj.cloneErrorObjeto(error, errorResult);
                 }
             }
             catch (IOException e) {
                 e.printStackTrace();
             }
-
-            ParserUtils parser = new ParserUtils();
-            error = parser.parseError(this.retrofit, response);
         }
     }
 }

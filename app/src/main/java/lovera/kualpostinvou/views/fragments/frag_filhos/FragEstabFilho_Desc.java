@@ -27,7 +27,6 @@ public class FragEstabFilho_Desc extends FragmentFilho {
     private Estabelecimento estabelecimento;
 
     private View progressoEspecialidades;
-    private LinearLayout layoutEspecialidades;
 
     private MsgToFragFilhos msg;
 
@@ -71,19 +70,21 @@ public class FragEstabFilho_Desc extends FragmentFilho {
     }
 
     public void setListaEspecialidades(List<Especialidade> listaEspecialidades){
-        fecharProgressoProfissionais();
-        this.layoutEspecialidades = (LinearLayout) getActivity().findViewById(R.id.f7_layoutEspecialidades);
+        try{
+            fecharProgressoProfissionais();
+            LinearLayout layoutEspecialidades = (LinearLayout) getActivity().findViewById(R.id.f7_layoutEspecialidades);
 
-        if(listaEspecialidades.size() > 0){
-            for(Especialidade especialidade : listaEspecialidades){
-                this.layoutEspecialidades.addView(gerarTxtViewPProgressProf(especialidade.getDescricaoGrupo()));
-                this.layoutEspecialidades.addView(gerarTxtViewPProgressProf(especialidade.getDescricaoHabilitacao()));
-                this.layoutEspecialidades.addView(gerarTxtViewPProgressProf(" - "));
+            if(listaEspecialidades.size() > 0){
+                for(Especialidade especialidade : listaEspecialidades){
+                    layoutEspecialidades.addView(gerarTxtViewPProgressProf(especialidade.getDescricaoGrupo()));
+                    layoutEspecialidades.addView(gerarTxtViewPProgressProf(especialidade.getDescricaoHabilitacao()));
+                    layoutEspecialidades.addView(gerarTxtViewPProgressProf(" - "));
+                }
             }
-        }
-        else{
-            this.layoutEspecialidades.addView(gerarTxtViewPProgressProf("Não há especialidades registradas"));
-        }
+            else{
+                layoutEspecialidades.addView(gerarTxtViewPProgressProf("Não há especialidades registradas"));
+            }
+        }catch (Exception e){}
     }
 
     private TextView gerarTxtViewPProgressProf(String texto){

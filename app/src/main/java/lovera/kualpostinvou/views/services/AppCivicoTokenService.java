@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.ResultReceiver;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -40,6 +41,7 @@ public class AppCivicoTokenService extends IntentService{
         conexao.autenticar(pessoa, stringBuilder, errorObj);//Tenta pegar o token
         if(stringBuilder.length() > 0){//resultado token
             Aplicacao.getPessoaLogada().setToken(stringBuilder.toString());//Conseguiu pegar o token
+            procedimentoSucesso(resultReceiver);
         }
         else if(errorObj.getReasonPhrase().equals("Unauthorized")){//Não conseguiu pegar o token e aponta que o erro foi de unauthorized
             conexao.cadastrarPessoa(pessoa, stringBuilder, errorObj); //Tenta o cadastro
@@ -48,9 +50,10 @@ public class AppCivicoTokenService extends IntentService{
                 conexao.autenticar(pessoa, stringBuilder, errorObj);//Tenta pegar o Token novamente
                 if(stringBuilder.length() > 0){//resultado token
                     Aplicacao.getPessoaLogada().setToken(stringBuilder.toString());//Conseguiu pegar o token
+                    procedimentoSucesso(resultReceiver);
                 }
                 else{
-                    throw new RuntimeException("Problema pegar token");
+                    Log.e("AppCivicoTokenService", "Problema pegar token");
                 }
 
                 Instalacao instalacao = new Instalacao();
@@ -62,16 +65,19 @@ public class AppCivicoTokenService extends IntentService{
 
                 }
                 else{
-                    throw new RuntimeException("Problema ao cadastrar instalacao");
+                    Log.e("AppCivicoTokenService", "Problema ao cadastrar instalacao");
                 }
             }
             else{
-                throw new RuntimeException("Problema ao cadastrar");
+                Log.e("AppCivicoTokenService", "Problema ao cadastrar");
             }
         }
+        stopSelf();
+    }
+
+    private void procedimentoSucesso(ResultReceiver resultReceiver){
         Bundle bundle = new Bundle();
         bundle.putBoolean("RESULTADO", true);
         resultReceiver.send(ServicesNames.TOKEN_APPCIVICO, bundle);
-        stopSelf();
     }
 }

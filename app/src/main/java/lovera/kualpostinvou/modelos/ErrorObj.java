@@ -60,5 +60,17 @@ public class ErrorObj {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public static ErrorObj cloneErrorObjeto(ErrorObj retorno, ErrorObj modelo){
+        if(modelo != null){
+            retorno.setDadosTecnicos(modelo.getDadosTecnicos());
+            retorno.setMensagens(modelo.getMensagens());
+            retorno.setReasonPhrase(modelo.getReasonPhrase());
+            retorno.setStatusCode(modelo.getStatusCode());
+            retorno.setUrl(modelo.getUrl());
+            retorno.setSiglaErro(modelo.getSiglaErro());
+        }
+        return retorno;
+    }
 }
 

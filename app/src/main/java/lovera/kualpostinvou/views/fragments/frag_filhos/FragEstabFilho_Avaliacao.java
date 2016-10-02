@@ -77,7 +77,6 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho {
                 return false;
             }
             else{
-
                 AvAtendPermissoesDialog dialog = new AvAtendPermissoesDialog(getActivity());
                 if(!temToken){
                     dialog.configurarLinhaLogado(true, false);

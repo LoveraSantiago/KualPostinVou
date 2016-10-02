@@ -25,7 +25,8 @@ public class CallBackAutenticar{
         }
         else{
             ParserUtils parser = new ParserUtils();
-            error = parser.parseError(this.retrofit, response);
+            ErrorObj errorResult = parser.parseError(this.retrofit, response);
+            ErrorObj.cloneErrorObjeto(error, errorResult);
         }
     }
 }

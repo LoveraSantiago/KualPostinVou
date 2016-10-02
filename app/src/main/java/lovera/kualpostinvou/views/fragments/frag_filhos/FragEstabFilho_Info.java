@@ -61,24 +61,24 @@ public class FragEstabFilho_Info extends FragmentFilho {
             setTextToLabel(this.estabelecimento.getRetencao()                  , R.id.lblRetencao    , getView());
             setTextToLabel(this.estabelecimento.getTipoUnidadeCnes()           , R.id.lblUnidCnes    , getView());
             setTextToLabel(this.estabelecimento.getCategoriaUnidade()          , R.id.lblCategUnid   , getView());
-        }
-        catch (Exception e){
-//            e.printStackTrace();
-        }
+        }catch (Exception e){}
     }
 
     public void setListaDeProfissionais(List<Profissional> listaDeProfissionais){
-        fecharProgressoProfissionais();
-        this.layoutProfissionais = (LinearLayout) getActivity().findViewById(R.id.f6_layoutProfissionais);
+        try{
 
-        if(listaDeProfissionais.size() > 0){
-            for(Profissional profissional : listaDeProfissionais){
-                this.layoutProfissionais.addView(gerarTxtViewPProgressProf(profissional.toString()));
+            fecharProgressoProfissionais();
+            this.layoutProfissionais = (LinearLayout) getActivity().findViewById(R.id.f6_layoutProfissionais);
+
+            if(listaDeProfissionais.size() > 0){
+                for(Profissional profissional : listaDeProfissionais){
+                    this.layoutProfissionais.addView(gerarTxtViewPProgressProf(profissional.toString()));
+                }
             }
-        }
-        else{
-            this.layoutProfissionais.addView(gerarTxtViewPProgressProf("Não há profissionais cadastrados."));
-        }
+            else{
+                this.layoutProfissionais.addView(gerarTxtViewPProgressProf("Não há profissionais cadastrados."));
+            }
+        }catch (Exception e){}
     }
 
     private TextView gerarTxtViewPProgressProf(String texto){

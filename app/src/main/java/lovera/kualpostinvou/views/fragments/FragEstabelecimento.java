@@ -18,11 +18,13 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
+import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
+import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.views.adapters.FragEstabAdapter;
 import lovera.kualpostinvou.views.adapters.ViewPagerEstabAdapter;
@@ -48,7 +50,9 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     private ViewPager viewPager;
     private Bundle savedInstanceState;
 
+    private LatLng latLng;
     private StreetViewPanoramaView streetViewPanoramaView;
+    StreetViewPanorama panorama;
 
     private CommonsReceiver receiver;
     private MsgToActivity msgToActivity;
@@ -107,12 +111,14 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
         inicializarComponentes();
 
         this.msgToActivity.setarTextoProgresso("Localizando fotos do estabelecimento");
+        recuperarObjetosSalvos(savedInstanceState);
     }
 
     private void inicializarComponentes(){
         inicializarViewPager();
         inicializarTabLayout();
         inicializarRestConsumers();
+        inicializarStreetView();
     }
 
     private void inicializarViewPager(){
@@ -151,6 +157,14 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
         }
     }
 
+    private void recuperarObjetosSalvos(Bundle bundle){
+        if(bundle != null){
+            Localizacao localizacao = (Localizacao) bundle.getSerializable("LOCALIZACAO");
+            this.latLng = new LatLng(localizacao.getLatitude(), localizacao.getLongitude());
+            setarPosicaoToPanorama();
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -167,6 +181,11 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if(this.streetViewPanoramaView != null) this.streetViewPanoramaView.onSaveInstanceState(outState);
+
+        Localizacao localizacao = new Localizacao();
+        localizacao.setLatitude(this.latLng.latitude);
+        localizacao.setLongitude(this.latLng.longitude);
+        outState.putSerializable("LOCALIZACAO", localizacao);
     }
 
     @Override
@@ -215,9 +234,8 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     public void onReceiveResult(int resultCode, Bundle resultData) {
         if(resultCode == ServicesNames.NOME_GEOLOCALIZACAO){
             Localizacao localizacao = getLocalizacaoDoOnReceiveResult(resultData);
-            LatLng latLng = new LatLng(localizacao.getLatitude(), localizacao.getLongitude());
-
-            inicializarStreetView(latLng);
+            this.latLng = new LatLng(localizacao.getLatitude(), localizacao.getLongitude());
+            setarPosicaoToPanorama();
         }
     }
 
@@ -232,18 +250,24 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
         return result;
     }
 
-    private void inicializarStreetView(final LatLng latLng){
-        this.streetViewPanoramaView = (StreetViewPanoramaView) getActivity().findViewById(R.id.f5_streetviewpanorama);
-        this.streetViewPanoramaView.onCreate(this.savedInstanceState);
-        this.streetViewPanoramaView.getStreetViewPanoramaAsync(
-                new OnStreetViewPanoramaReadyCallback() {
-                    @Override
-                    public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
-                        msgToActivity.fecharProgresso();
-                        panorama.setPosition(latLng);
-                    }
-                });
-        this.streetViewPanoramaView.onResume();
+    private void inicializarStreetView(){
+        try{
+            this.streetViewPanoramaView = (StreetViewPanoramaView) getActivity().findViewById(R.id.f5_streetviewpanorama);
+            this.streetViewPanoramaView.onCreate(this.savedInstanceState);
+            this.streetViewPanoramaView.getStreetViewPanoramaAsync(
+                    new OnStreetViewPanoramaReadyCallback() {
+                        @Override
+                        public void onStreetViewPanoramaReady(StreetViewPanorama panoramaCallBack) {
+                            panorama = panoramaCallBack;
+                        }
+                    });
+            this.streetViewPanoramaView.onResume();
+        }catch (Exception e){}
+    }
+
+    private void setarPosicaoToPanorama(){
+        this.msgToActivity.fecharProgresso();
+        this.panorama.setPosition(this.latLng);
     }
 
     @Override

@@ -138,8 +138,10 @@ public class Facebook_Coisas {
             Profile profile = Profile.getCurrentProfile();
             if(profile != null){
                 Pessoa pessoa = Aplicacao.getPessoaLogada().getPessoa();
+                pessoa.setNomeUsuario(profile.getName());
                 pessoa.setNomeCompleto(profile.getName());
                 pessoa.setUriImgPerfil(profile.getProfilePictureUri(160, 160));
+                pessoa.setTokenFacebook(profile.getId());
                 pessoa.setEmail(this.campoEmail);
             }
         }

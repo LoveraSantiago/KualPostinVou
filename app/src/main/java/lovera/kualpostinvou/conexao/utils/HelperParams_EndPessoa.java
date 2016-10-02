@@ -17,7 +17,6 @@ public class HelperParams_EndPessoa {
         if(isStringNotNullOrEmpty(email) && isStringNotNullOrEmpty(senha)){
             map.put(EMAIL.getTexto(), email);
             map.put(SENHA.getTexto(), senha);
-            return map;
         }
         if(isStringNotNullOrEmpty(googleToken)){
             map.put(GOOGLETOKEN.getTexto(), googleToken);

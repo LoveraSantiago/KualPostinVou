@@ -68,9 +68,8 @@ public class Google_Coisas implements GoogleApiClient.ConnectionCallbacks, Googl
     public void onLoginFeito(GoogleSignInResult result){
         if(result.isSuccess()){
             this.acount = result.getSignInAccount();
-            Aplicacao.getPessoaLogada().inicializarPessoa();
-
             this.estouLogado = true;
+            Aplicacao.getPessoaLogada().inicializarPessoa();
             Aplicacao.getFaceCoisas().realizarLogout();
         }
     }
@@ -103,9 +102,11 @@ public class Google_Coisas implements GoogleApiClient.ConnectionCallbacks, Googl
     public void getPessoaLogada(){
         if(this.estouLogado){
             Pessoa pessoa = Aplicacao.getPessoaLogada().getPessoa();
+            pessoa.setNomeUsuario(this.acount.getDisplayName());
             pessoa.setNomeCompleto(this.acount.getDisplayName());
             pessoa.setEmail(this.acount.getEmail());
             pessoa.setUriImgPerfil(this.acount.getPhotoUrl());
+            pessoa.setTokenGoogle(this.acount.getId());
         }
     }
 
@@ -123,5 +124,9 @@ public class Google_Coisas implements GoogleApiClient.ConnectionCallbacks, Googl
 
     public GoogleSignInOptions getGso() {
         return gso;
+    }
+
+    public boolean isEstouLogado() {
+        return estouLogado;
     }
 }
