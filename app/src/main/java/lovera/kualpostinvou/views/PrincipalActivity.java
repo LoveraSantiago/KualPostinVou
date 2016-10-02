@@ -227,11 +227,22 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     @Override
     public void setarFragment(Fragment fragment) {
+        limpeza();
+
         this.fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragment)
                 .addToBackStack(null)
                 .commit();
         this.fragAtiva = fragment;
+    }
+
+    private void limpeza(){
+        if(this.fragAtiva instanceof FragEstabelecimento){
+            this.fragmentManager.beginTransaction()
+                    .remove(this.fragAtiva)
+                    .commit();
+            this.fragmentManager.popBackStack();
+        }
     }
 
     public CommonsReceiver getReceiver() {

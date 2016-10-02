@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,12 +44,14 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.i("ciclo", "FragEstabelecimento onCreateView");
         return inflater.inflate(R.layout.fragment_estabelecimento, container, false);
     }
 
     @Override
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.i("ciclo", "FragEstabelecimento onActivityCreated");
         this.components = new FragEstabelecimentoComponents(getActivity(), savedInstanceState, this.controller.getFragFilhos());
         this.controller.onActivityCreated(savedInstanceState);
         this.controller.recuperarObjetosSalvos(savedInstanceState);
@@ -57,18 +60,21 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     @Override
     public void onResume() {
         super.onResume();
+        Log.i("ciclo", "FragEstabelecimento onResume");
         this.components.onResume();
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
+        Log.i("ciclo", "FragEstabelecimento onLowMemory");
         this.components.onLowMemory();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        Log.i("ciclo", "FragEstabelecimento onSaveInstanceState");
         this.components.onSaveInstanceState(outState);
         this.controller.onSaveInstanceState(outState);
     }
@@ -76,18 +82,21 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     @Override
     public void onPause() {
         super.onPause();
+        Log.i("ciclo", "FragEstabelecimento onPause");
         this.components.onPause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.i("ciclo", "FragEstabelecimento onDestroy");
        this.components.onDestroy();
     }
 
     @Override
     public void setArguments(Bundle args) {
         super.setArguments(args);
+        Log.i("ciclo", "FragEstabelecimento setArguments");
         this.controller.setArguments(args);
     }
 
