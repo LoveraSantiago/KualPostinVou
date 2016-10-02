@@ -19,7 +19,7 @@ public class ListaEstabelecimentosActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.lista_estabelecimentos);
+        setContentView(R.layout.fragment_listaestabelecimentos);
 
         Intent intent = getIntent();
         List<Estabelecimento> listaDeEstabelecimentos = (List<Estabelecimento>) intent.getSerializableExtra("LISTAESTABELECIMENTOS");

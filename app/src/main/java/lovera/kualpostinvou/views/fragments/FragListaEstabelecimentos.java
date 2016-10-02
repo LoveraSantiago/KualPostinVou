@@ -3,6 +3,7 @@ package lovera.kualpostinvou.views.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
 
     private FragListaEstabAdapter adapterMsg;
 
+    private ListView listView;
     private List<Estabelecimento> listaEstabelecimentos;
 
     private MsgToActivity msgToActivity;
@@ -36,34 +38,38 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.lista_estabelecimentos, container, false);
+        Log.i("ciclo2", "FragListaEstabelecimentos onCreateView");
+        return inflater.inflate(R.layout.fragment_listaestabelecimentos, container, false);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.i("ciclo2", "FragListaEstabelecimentos onActivityCreated");
         this.msgToActivity = (MsgToActivity) getActivity();
         this.adapterMsg = new FragListaEstabAdapter(this);
         inicializarListView();
     }
 
     private void inicializarListView(){
-        ListView lv = (ListView) getActivity().findViewById(R.id.listaEstabelecimentos);
-        lv.setAdapter(new ListEstabAdapter(getActivity(), this.listaEstabelecimentos));
-        lv.setOnItemClickListener(this);
+        this.listView = (ListView) getActivity().findViewById(R.id.listaEstabelecimentos);
+        this.listView.setAdapter(new ListEstabAdapter(getActivity(), this.listaEstabelecimentos));
+        this.listView.setOnItemClickListener(this);
+
     }
 
     @Override
     public void setArguments(Bundle args) {
         super.setArguments(args);
+        Log.i("ciclo2", "FragListaEstabelecimentos setArguments");
         this.listaEstabelecimentos = (List<Estabelecimento>) args.get("LISTAESTABELECIMENTOS");
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if(this.msgToActivity.isAbertoProgresso()) return;
         this.msgToActivity.abrirProgresso();
         this.msgToActivity.setarTextoProgresso("Consultando estabelecimento.");
-
         Estabelecimento estabSelecionado = this.listaEstabelecimentos.get(position);
         ConexaoSaude conexao = new ConexaoSaude(this.adapterMsg);
         conexao.getEstabelelecimento(estabSelecionado.getCodUnidade());
