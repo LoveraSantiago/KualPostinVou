@@ -8,26 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import java.util.List;
 
 import lovera.kualpostinvou.R;
-import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.Especialidade;
-import lovera.kualpostinvou.modelos.Estabelecimento;
-import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Profissional;
-import lovera.kualpostinvou.views.adapters.FragEstabAdapter;
 import lovera.kualpostinvou.views.components.helpers.FragEstabelecimentoComponents;
-import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.contratos.MsgToFragFilhos;
-import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Avaliacao;
-import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Desc;
-import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Endereco;
-import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Info;
+import lovera.kualpostinvou.views.controllers.FragEstabelecimentoController;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
-import lovera.kualpostinvou.views.services.ServicesNames;
 
 public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver.Receiver, MsgToFragFilhos {
 
@@ -37,49 +26,18 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     public static int ICONE = 0;
 
     private FragEstabelecimentoComponents components;
-
-    private Estabelecimento estabelecimento;
-
-    private LatLng latLng;
+    private FragEstabelecimentoController controller;
 
     private CommonsReceiver receiver;
-    private MsgToActivity msgToActivity;
-
-    //Objetos para as FragFilhas
-    private List<Profissional> listaDeProfissionais;
-    private List<Especialidade> listaDeEspecialidades;
-    private FragEstabAdapter adapter;
-    private ConexaoSaude conexaoSaude;
-
-    private FragEstabFilho_Desc fragFilhoDescricao;
-    private FragEstabFilho_Info fragFilhoInfo;
-    private FragEstabFilho_Avaliacao fragFilhoAvaliacao;
-    private FragEstabFilho_Endereco fragFilhoEndereco;
 
     public FragEstabelecimento() {
         inicializarReceivers();
-        inicializarFragFilhos();
-        inicializarConexao();
+        this.controller = new FragEstabelecimentoController(this);
     }
 
     private void inicializarReceivers(){
         this.receiver = new CommonsReceiver(new Handler());
         this.receiver.setReceiver(this);
-    }
-
-    private void inicializarFragFilhos(){
-        this.fragFilhoDescricao = new FragEstabFilho_Desc();
-        this.fragFilhoDescricao.setMsg(this);
-        this.fragFilhoInfo = new FragEstabFilho_Info();
-        this.fragFilhoInfo.setMsg(this);
-        this.fragFilhoAvaliacao = new FragEstabFilho_Avaliacao();
-        this.fragFilhoAvaliacao.setMsg(this);
-        this.fragFilhoEndereco = new FragEstabFilho_Endereco();
-    }
-
-    private void inicializarConexao(){
-        this.adapter = new FragEstabAdapter(this);
-        this.conexaoSaude = new ConexaoSaude(this.adapter);
     }
 
     @Nullable
@@ -88,42 +46,12 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
         return inflater.inflate(R.layout.fragment_estabelecimento, container, false);
     }
 
-
     @Override
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        this.msgToActivity = (MsgToActivity) getActivity();
-        this.components = new FragEstabelecimentoComponents(getActivity(), savedInstanceState, this.fragFilhoDescricao, this.fragFilhoInfo, this.fragFilhoAvaliacao, this.fragFilhoEndereco);
-
-        inicializarRestConsumers();
-        this.msgToActivity.setarTextoProgresso("Localizando fotos do estabelecimento");
-        recuperarObjetosSalvos(savedInstanceState);
-    }
-
-    private void inicializarRestConsumers(){
-        consumirProfissionais();
-        consumirEspecialidades();
-    }
-
-    private void consumirProfissionais(){
-        if(this.listaDeProfissionais == null){
-            this.conexaoSaude.getProfissionais(this.estabelecimento.getCodUnidade());
-        }
-    }
-
-    private void consumirEspecialidades(){
-        if(this.listaDeEspecialidades == null){
-            this.conexaoSaude.getEspecialidades(this.estabelecimento.getCodUnidade());
-        }
-    }
-
-    private void recuperarObjetosSalvos(Bundle bundle){
-        if(bundle != null){
-            Localizacao localizacao = (Localizacao) bundle.getSerializable("LOCALIZACAO");
-            this.latLng = new LatLng(localizacao.getLatitude(), localizacao.getLongitude());
-            this.components.setarPosicaoToPanorama(this.latLng);
-        }
+        this.components = new FragEstabelecimentoComponents(getActivity(), savedInstanceState, this.controller.getFragFilhos());
+        this.controller.onActivityCreated(savedInstanceState);
+        this.controller.recuperarObjetosSalvos(savedInstanceState);
     }
 
     @Override
@@ -142,11 +70,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         this.components.onSaveInstanceState(outState);
-
-        Localizacao localizacao = new Localizacao();
-        localizacao.setLatitude(this.latLng.latitude);
-        localizacao.setLongitude(this.latLng.longitude);
-        outState.putSerializable("LOCALIZACAO", localizacao);
+        this.controller.onSaveInstanceState(outState);
     }
 
     @Override
@@ -164,11 +88,43 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     @Override
     public void setArguments(Bundle args) {
         super.setArguments(args);
-        this.fragFilhoDescricao.setArguments(args);
-        this.fragFilhoInfo.setArguments(args);
-        this.fragFilhoEndereco.setArguments(args);
+        this.controller.setArguments(args);
+    }
 
-        this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
+    public FragEstabelecimentoComponents getComponents() {
+        return components;
+    }
+
+    public CommonsReceiver getReceiver() {
+        return receiver;
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        this.controller.onReceiveResult(resultCode, resultData);
+    }
+
+    @Override
+    public List<Profissional> getListaDeProfissionais() {
+        return this.controller.getListaDeProfissionais();
+    }
+
+    public void setListaDeProfissionais(List<Profissional> listaDeProfissionais) {
+       this.controller.setListaDeProfissionais(listaDeProfissionais);
+    }
+
+    @Override
+    public List<Especialidade> getListaDeEspecialidades() {
+        return this.controller.getListaDeEspecialidades();
+    }
+
+    @Override
+    public Fragment getPaiFragment() {
+        return this;
+    }
+
+    public void setListaDeEspecialidades(List<Especialidade> listaDeEspecialidades) {
+        this.controller.setListaDeEspecialidades(listaDeEspecialidades);
     }
 
     //Metodos sobrescritos herdados da classe pai FragMenu
@@ -187,57 +143,8 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
         return ICONE;
     }
 
-    public CommonsReceiver getReceiver() {
-        return receiver;
-    }
-
-    @Override
-    public void onReceiveResult(int resultCode, Bundle resultData) {
-        if(resultCode == ServicesNames.NOME_GEOLOCALIZACAO){
-            Localizacao localizacao = getLocalizacaoDoOnReceiveResult(resultData);
-            this.latLng = new LatLng(localizacao.getLatitude(), localizacao.getLongitude());
-            this.components.setarPosicaoToPanorama(this.latLng);
-        }
-    }
-
-    private Localizacao getLocalizacaoDoOnReceiveResult(Bundle bundle){
-        Localizacao result = (Localizacao) bundle.getSerializable("LOCALIZACAO");
-
-        if(result == null){
-            result = new Localizacao();
-            result.setLatitude(this.estabelecimento.getLat());
-            result.setLongitude(this.estabelecimento.getLongi());
-        }
-        return result;
-    }
-
-    @Override
-    public List<Profissional> getListaDeProfissionais() {
-        return listaDeProfissionais;
-    }
-
-    public void setListaDeProfissionais(List<Profissional> listaDeProfissionais) {
-        this.listaDeProfissionais = listaDeProfissionais;
-        this.fragFilhoInfo.setListaDeProfissionais(listaDeProfissionais);
-    }
-
-    @Override
-    public List<Especialidade> getListaDeEspecialidades() {
-        return listaDeEspecialidades;
-    }
-
-    @Override
-    public Fragment getPaiFragment() {
-        return this;
-    }
-
-    public void setListaDeEspecialidades(List<Especialidade> listaDeEspecialidades) {
-        this.listaDeEspecialidades = listaDeEspecialidades;
-        this.fragFilhoDescricao.setListaEspecialidades(listaDeEspecialidades);
-    }
-
     //Metodos do fragFilhoAvaliacao
     public void cadastrarTempoDeAtendimento(){
-        this.fragFilhoAvaliacao.cadastrarTempoDeAtendimento();
+        this.controller.cadastrarTempoDeAtendimento();
     }
 }
