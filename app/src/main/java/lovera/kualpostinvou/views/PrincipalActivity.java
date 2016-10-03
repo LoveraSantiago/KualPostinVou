@@ -172,7 +172,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     @Override
     public void setarFragment(Fragment fragment) {
-        remocaoFragEstabelecimento();
+        remocaoFragEstabelecimento(true);
 
         this.fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragment, ((FragmentInfo) fragment).getFragmentTitulo())
@@ -181,12 +181,15 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         this.fragAtiva = fragment;
     }
 
-    private void remocaoFragEstabelecimento(){
+    private void remocaoFragEstabelecimento(boolean popUp){
         if(this.fragAtiva instanceof FragEstabelecimento){
             this.fragmentManager.beginTransaction()
                     .remove(this.fragAtiva)
                     .commit();
-//            this.fragmentManager.popBackStack();
+
+            if(popUp){
+                this.fragmentManager.popBackStack();
+            }
 
             Fragment fragLista = this.fragmentManager.findFragmentByTag(FragListaEstabelecimentos.TITULO_FRAGMENT);
             this.fragAtiva = fragLista;
@@ -202,7 +205,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     public void onBackPressed() {
         super.onBackPressed();
         if(fragAtiva instanceof FragEstabelecimento){
-            remocaoFragEstabelecimento();
+            remocaoFragEstabelecimento(false);
         }
     }
 

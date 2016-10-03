@@ -41,6 +41,7 @@ public class PrincipalActivityComponents {
     private void inicializarComponentes(PrincipalActivity activity, Map<Integer, FragmentMenu> mapFragments){
         inicializarToolbar(activity);
         inicializarNavigationDrawer(activity, mapFragments);
+        inicializarComponentesProgresso(activity);
     }
 
     private void inicializarToolbar(AppCompatActivity activity){
@@ -53,7 +54,7 @@ public class PrincipalActivityComponents {
     private void inicializarNavigationDrawer(PrincipalActivity activity, Map<Integer, FragmentMenu> mapFragments){
         this.mRecyclerView = (RecyclerView) activity.findViewById(R.id.recyclerView);
         this.mRecyclerView.setHasFixedSize(true);
-        this.mAdapter = new RecyclerViewAdapterImpl(mapFragments, (MsgFromNavigationDrawer) this);
+        this.mAdapter = new RecyclerViewAdapterImpl(mapFragments, activity);
         this.mRecyclerView.setAdapter(this.mAdapter);
         this.mLayoutManager = new LinearLayoutManager(activity);
         this.mRecyclerView.setLayoutManager(this.mLayoutManager);

@@ -70,6 +70,24 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        Log.i("ciclo2", "FragListaEstabelecimentos onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i("ciclo2", "FragListaEstabelecimentos onPause");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i("ciclo2", "FragListaEstabelecimentos onDestroy");
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(this.msgToActivity.isAbertoProgresso()) return;
         this.msgToActivity.abrirProgresso();
