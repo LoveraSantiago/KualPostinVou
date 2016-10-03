@@ -20,7 +20,7 @@ import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
 
 public class FragEstabFilho_Desc extends FragmentFilho {
 
-    public static String TITULO_FRAGMENT = "Descricao";
+    public static String TITULO_FRAGMENT = "Filho Descricao";
     public static int ID_FRAGMENT = 0;
     public static int ICONE = R.drawable.ic_description_black_24dp;
 

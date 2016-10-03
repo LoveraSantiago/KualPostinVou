@@ -23,11 +23,13 @@ import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.views.components.navigationdrawer.ActionBarDrawerToggleImpl;
 import lovera.kualpostinvou.views.components.navigationdrawer.RecyclerViewAdapterImpl;
+import lovera.kualpostinvou.views.contratos.FragmentInfo;
 import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao2;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabelecimentos;
 import lovera.kualpostinvou.views.fragments.FragEstabelecimento;
+import lovera.kualpostinvou.views.fragments.FragListaEstabelecimentos;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 import lovera.kualpostinvou.views.fragments.FragmentMenu;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
@@ -227,21 +229,25 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     @Override
     public void setarFragment(Fragment fragment) {
-        limpeza();
+        remocaoFragEstabelecimento();
 
         this.fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
+                .replace(R.id.content_frame, fragment, ((FragmentInfo) fragment).getFragmentTitulo())
                 .addToBackStack(null)
                 .commit();
         this.fragAtiva = fragment;
     }
 
-    private void limpeza(){
+    private void remocaoFragEstabelecimento(){
         if(this.fragAtiva instanceof FragEstabelecimento){
             this.fragmentManager.beginTransaction()
                     .remove(this.fragAtiva)
                     .commit();
-            this.fragmentManager.popBackStack();
+//            this.fragmentManager.popBackStack();
+
+            Fragment fragLista = this.fragmentManager.findFragmentByTag(FragListaEstabelecimentos.TITULO_FRAGMENT);
+            this.fragAtiva = fragLista;
+//            setarFragment(fragLista);
         }
     }
 
@@ -252,6 +258,9 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        if(fragAtiva instanceof FragEstabelecimento){
+            remocaoFragEstabelecimento();
+        }
     }
 
     public void consumirEstabelecimentos(View view) {
@@ -289,4 +298,8 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         }
     }
 
+
+    public Fragment getFragAtiva() {
+        return fragAtiva;
+    }
 }

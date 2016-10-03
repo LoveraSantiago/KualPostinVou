@@ -23,7 +23,6 @@ import lovera.kualpostinvou.views.services.NomeGeolocalizacaoService;
 
 public class FragListaEstabelecimentos extends FragmentMenu implements AdapterView.OnItemClickListener{
 
-    //Campos relativos a FragmentMenu ACHO Q NÂO SERAO USADOS
     public static String TITULO_FRAGMENT = "Lista de Estabelecimentos";
     public static int ID_FRAGMENT = 4;
     public static int ICONE = 0;
@@ -32,6 +31,7 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
 
     private ListView listView;
     private List<Estabelecimento> listaEstabelecimentos;
+    private Estabelecimento estabelecimento;
 
     private MsgToActivity msgToActivity;
 
@@ -49,6 +49,10 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
         this.msgToActivity = (MsgToActivity) getActivity();
         this.adapterMsg = new FragListaEstabAdapter(this);
         inicializarListView();
+
+        if(this.estabelecimento != null){
+            inicializarFragEstabelecimento(this.estabelecimento);
+        }
     }
 
     private void inicializarListView(){
@@ -63,6 +67,7 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
         super.setArguments(args);
         Log.i("ciclo2", "FragListaEstabelecimentos setArguments");
         this.listaEstabelecimentos = (List<Estabelecimento>) args.get("LISTAESTABELECIMENTOS");
+        this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTOSALVO");
     }
 
     @Override
@@ -76,18 +81,27 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
     }
 
     public void receberEstabelecimento(Estabelecimento estabelecimento){
-        this.msgToActivity.setarTextoProgresso("Estabelecimento localizado.");
         FragEstabelecimento fragEstabelecimento = new FragEstabelecimento();
-        this.msgToActivity.setarFragment(fragEstabelecimento);
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("ESTABELECIMENTO", estabelecimento);
-        fragEstabelecimento.setArguments(bundle);
+        procedimentoComumIniciarFragEstabelecimento(fragEstabelecimento, estabelecimento);
 
         Intent intent = new Intent(getActivity(), NomeGeolocalizacaoService.class);
         intent.putExtra("ESTABELECIMENTO", estabelecimento);
         intent.putExtra(ReceiversNames.GEOLOCALIZACAO, fragEstabelecimento.getReceiver());
         getActivity().startService(intent);
+    }
+
+    private void inicializarFragEstabelecimento(Estabelecimento estabelecimento){
+        FragEstabelecimento fragEstabelecimento = new FragEstabelecimento();
+        procedimentoComumIniciarFragEstabelecimento(fragEstabelecimento, estabelecimento);
+    }
+
+    private void procedimentoComumIniciarFragEstabelecimento(FragEstabelecimento fragEstabelecimento, Estabelecimento estabelecimento){
+        this.msgToActivity.setarTextoProgresso("Estabelecimento localizado.");
+        this.msgToActivity.setarFragment(fragEstabelecimento);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ESTABELECIMENTO", estabelecimento);
+        fragEstabelecimento.setArguments(bundle);
     }
 
     //Metodos sobrescritos herdados da classe pai FragmentMenu

@@ -19,7 +19,7 @@ import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 
 public class FragEstabFilho_Avaliacao extends FragmentFilho {
 
-    public static String TITULO_FRAGMENT = "Avaliacao";
+    public static String TITULO_FRAGMENT = "Filho Avaliacao";
     public static int ID_FRAGMENT = 2;
     public static int ICONE = R.drawable.ic_grade_black_24dp;
 

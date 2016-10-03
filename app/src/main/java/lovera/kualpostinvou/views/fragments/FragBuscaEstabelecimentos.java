@@ -25,7 +25,7 @@ import lovera.kualpostinvou.views.ListaEstabelecimentosActivity;
 
 public class FragBuscaEstabelecimentos extends FragmentMenu implements MsgFromConexaoSaude {
 
-    public static String TITULO_FRAGMENT = "Estabelecimentos";
+    public static String TITULO_FRAGMENT = "Estabelecimentos Busca";
     public static int ID_FRAGMENT = 1;
     public static int ICONE = R.drawable.icn1;
 

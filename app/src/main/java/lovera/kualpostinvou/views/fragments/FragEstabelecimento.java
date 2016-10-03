@@ -94,6 +94,11 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
     public void setArguments(Bundle args) {
         super.setArguments(args);
         Log.i("ciclo", "FragEstabelecimento setArguments");

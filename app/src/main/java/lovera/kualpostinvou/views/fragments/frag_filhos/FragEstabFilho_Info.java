@@ -22,7 +22,7 @@ public class FragEstabFilho_Info extends FragmentFilho {
 
     private Estabelecimento estabelecimento;
 
-    public static String TITULO_FRAGMENT = "Info";
+    public static String TITULO_FRAGMENT = "Filho Info";
     public static int ID_FRAGMENT = 1;
     public static int ICONE = R.drawable.ic_info_black_24dp;
 
