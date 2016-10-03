@@ -6,14 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,8 +15,7 @@ import java.util.Map;
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Pessoa;
-import lovera.kualpostinvou.views.components.navigationdrawer.ActionBarDrawerToggleImpl;
-import lovera.kualpostinvou.views.components.navigationdrawer.RecyclerViewAdapterImpl;
+import lovera.kualpostinvou.views.components.helpers.PrincipalActivityComponents;
 import lovera.kualpostinvou.views.contratos.FragmentInfo;
 import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
@@ -44,16 +37,9 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     private String titulo;
     private String tituloOriginal;
 
-    private Toolbar toolbar;
+    private PrincipalActivityComponents components;
 
     private CommonsReceiver receiver;
-
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mDrawerToggle;
-
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
 
     private Map<Integer, FragmentMenu> mapFragments;
     private FragmentManager fragmentManager;
@@ -61,10 +47,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     private FragBuscaEstabGeoLocalizacao2 frag2;
     private FragRedesSociais frag3;
     private Fragment fragAtiva;
-
-    //Componentes progresso
-    private TextView lblStatus;
-    private View uiStatus;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,29 +57,20 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
         setContentView(R.layout.activity_principal);
         inicializarComponentes();
+        this.components = new PrincipalActivityComponents(this, this.mapFragments);
         selectItem(0);
 
         recuperarObjetosSalvos(savedInstanceState);
     }
 
     private void inicializarComponentes(){
-        inicializarToolbar();
         inicializarFragmentMap();
-        inicializarNavigationDrawer();
-        inicializarComponentesProgresso();
         inicializarReceivers();
     }
 
     private void inicializarReceivers(){
         this.receiver = new CommonsReceiver(new Handler());
         this.receiver.setReceiver(this);
-    }
-
-    private void inicializarToolbar(){
-        this.toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(this.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     private void inicializarFragmentMap(){
@@ -111,31 +84,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         this.mapFragments.put(FragBuscaEstabGeoLocalizacao2.ID_FRAGMENT, this.frag2);
     }
 
-    private void inicializarNavigationDrawer(){
-        this.mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        this.mRecyclerView.setHasFixedSize(true);
-        this.mAdapter = new RecyclerViewAdapterImpl(this.mapFragments, this);
-        this.mRecyclerView.setAdapter(this.mAdapter);
-        this.mLayoutManager = new LinearLayoutManager(this);
-        this.mRecyclerView.setLayoutManager(this.mLayoutManager);
-
-        this.mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        this.mDrawerToggle = new ActionBarDrawerToggleImpl(this, this.mDrawerLayout, this.toolbar, R.string.drawer_open, R.string.drawer_close);
-        this.mDrawerLayout.addDrawerListener(this.mDrawerToggle);
-
-        this.mDrawerLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                mDrawerToggle.syncState();
-            }
-        });
-    }
-
-    private void inicializarComponentesProgresso(){
-        this.uiStatus    = findViewById(R.id.a1_ui_status);
-        this.lblStatus   = (TextView) findViewById(R.id.a1_lblstatus);
-    }
-
     private void recuperarObjetosSalvos(Bundle bundle){
         if(bundle != null){
             Aplicacao.getPessoaLogada().setToken(bundle.getString(CHAVE_TOKEN));
@@ -146,7 +94,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     @Override
     protected void onStart() {
         Aplicacao.getGoogleCoisas().connect();
-        this.mDrawerLayout.openDrawer(this.mRecyclerView);
+        this.components.abrirDrawer();
         super.onStart();
     }
 
@@ -173,7 +121,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     public void selectItem(int position) {
         if(position == 0) return;
 
-        this.mDrawerLayout.closeDrawer(this.mRecyclerView);
+        this.components.fecharDrawer();
 
         FragmentMenu fragment = this.mapFragments.get(position);
         setarFragment(fragment);
@@ -203,28 +151,23 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     @Override
     public boolean isAbertoProgresso() {
-        return this.uiStatus.getVisibility() == View.VISIBLE;
+        return this.components.isAbertoProgresso();
     }
 
     //Comunicacao entre Activity e Fragments
     @Override
     public void abrirProgresso(){
-        this.uiStatus.setVisibility(View.VISIBLE);
+        this.components.abrirProgresso();
     }
 
     @Override
     public void fecharProgresso(){
-        this.uiStatus.setVisibility(View.GONE);
+        this.components.fecharProgresso();
     }
 
     @Override
     public void setarTextoProgresso(final String texto){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                lblStatus.setText(texto);
-            }
-        });
+        this.components.setarTextoProgresso(this, texto);
     }
 
     @Override
@@ -297,7 +240,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
             ((FragEstabelecimento)this.fragAtiva).cadastrarTempoDeAtendimento();
         }
     }
-
 
     public Fragment getFragAtiva() {
         return fragAtiva;

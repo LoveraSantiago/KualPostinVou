@@ -59,7 +59,6 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
         this.listView = (ListView) getActivity().findViewById(R.id.listaEstabelecimentos);
         this.listView.setAdapter(new ListEstabAdapter(getActivity(), this.listaEstabelecimentos));
         this.listView.setOnItemClickListener(this);
-
     }
 
     @Override
