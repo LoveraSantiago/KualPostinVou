@@ -61,7 +61,7 @@ public class AvAtendPermissoesDialog extends AlertDialog{
         this.btnGpsLigado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("dialogBtn", "e ai 2?");
+
                 dismiss();
             }
         });

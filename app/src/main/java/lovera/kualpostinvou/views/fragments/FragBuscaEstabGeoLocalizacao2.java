@@ -3,6 +3,7 @@ package lovera.kualpostinvou.views.fragments;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,10 +25,11 @@ import lovera.kualpostinvou.views.adapters.FragBuscaEstabGeoLocAdapter;
 import lovera.kualpostinvou.views.components.SeekBarChangeListenerImpl;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.components.dialogs.DismissDialog;
+import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 import lovera.kualpostinvou.views.services.LocalizacaoService;
 
-public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
+public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements CommonsReceiver.Receiver{
 
     //Campos relativos a FragmentMenu
     public static String TITULO_FRAGMENT = "Estabelecimentos proximos";
@@ -43,6 +45,8 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
     private Localizacao localizacao;
 
     private TextView lblSeekBar;
+
+    private CommonsReceiver receiver;
 
     @Nullable
     @Override
@@ -91,23 +95,29 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
                 }
             }
         });
+        inicializarReceivers();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == HelperGeolocalizacao.USUARIO_ESCOLHENDO_OPCAO){
-            if(resultCode == getActivity().RESULT_OK){
-                Aplicacao.setMensageiroGps(this.adapterMgs);
-
-                Intent intent = new Intent(getActivity(), LocalizacaoService.class);
-                getActivity().startService(intent);
-            }
-            else if(resultCode == getActivity().RESULT_CANCELED){
-                this.msgActivity.fecharProgresso();
-                showDialogGpsCancelado();
-            }
-        }
+    private void inicializarReceivers(){
+        this.receiver = new CommonsReceiver(new Handler());
+        this.receiver.setReceiver(this);
     }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if(requestCode == HelperGeolocalizacao.USUARIO_ESCOLHENDO_OPCAO){
+//            if(resultCode == getActivity().RESULT_OK){
+//                Aplicacao.setMensageiroGps(this.adapterMgs);
+//
+//                Intent intent = new Intent(getActivity(), LocalizacaoService.class);
+//                getActivity().startService(intent);
+//            }
+//            else if(resultCode == getActivity().RESULT_CANCELED){
+//                this.msgActivity.fecharProgresso();
+//                showDialogGpsCancelado();
+//            }
+//        }
+//    }
 
     private void showDialogGpsCancelado(){
         DismissDialog dialog = new DismissDialog(getActivity());
@@ -193,5 +203,10 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
     @Override
     public int getIcone() {
         return ICONE;
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+
     }
 }

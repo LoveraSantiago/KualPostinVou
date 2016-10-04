@@ -27,6 +27,8 @@ import lovera.kualpostinvou.views.fragments.FragListaEstabelecimentos;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 import lovera.kualpostinvou.views.fragments.FragmentMenu;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
+import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
+import lovera.kualpostinvou.views.services.LocalizacaoService;
 import lovera.kualpostinvou.views.services.ServicesNames;
 
 //TODO: colocar restauração dos estados das fragments principais ver => https://developer.android.com/training/basics/activity-lifecycle/recreating.html?hl=pt-br
@@ -138,9 +140,25 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         getSupportActionBar().setTitle(this.titulo);
     }
 
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        this.fragAtiva.onActivityResult(requestCode, resultCode, data);
+//    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        this.fragAtiva.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == HelperGeolocalizacao.USUARIO_ESCOLHENDO_OPCAO){
+            if(resultCode == PrincipalActivity.RESULT_OK){
+                Aplicacao.setMensageiroGps(this.adapterMgs);
+
+                Intent intent = new Intent(this, LocalizacaoService.class);
+                startService(intent);
+            }
+            else if(resultCode == PrincipalActivity.RESULT_CANCELED){
+                fecharProgresso();
+                showDialogGpsCancelado();
+            }
+        }
     }
 
     @Override
