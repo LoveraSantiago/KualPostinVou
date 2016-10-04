@@ -1,6 +1,5 @@
 package lovera.kualpostinvou.views.adapters;
 
-import java.io.Serializable;
 import java.util.List;
 
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoSaude;
@@ -8,10 +7,9 @@ import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.modelos.Servicos;
-import lovera.kualpostinvou.views.contratos.MsgFromGpsService;
 import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao2;
 
-public class FragBuscaEstabGeoLocAdapter implements MsgFromConexaoSaude, MsgFromGpsService{
+public class FragBuscaEstabGeoLocAdapter implements MsgFromConexaoSaude{
 
     private FragBuscaEstabGeoLocalizacao2 fragment;
 
@@ -35,11 +33,5 @@ public class FragBuscaEstabGeoLocAdapter implements MsgFromConexaoSaude, MsgFrom
 
     @Override
     public void passarListaDeServicos(List<Servicos> servicos) {
-        this.fragment.gpsEnconstradoPeloService();
-    }
-
-    @Override
-    public void localizacaoEncontrada() {
-        this.fragment.gpsEnconstradoPeloService();
     }
 }

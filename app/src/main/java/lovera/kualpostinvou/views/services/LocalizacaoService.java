@@ -1,65 +1,43 @@
 package lovera.kualpostinvou.views.services;
 
-import android.app.Service;
+import android.app.IntentService;
 import android.content.Intent;
-import android.os.IBinder;
-import android.support.annotation.Nullable;
+import android.os.Bundle;
+import android.os.ResultReceiver;
 
 import lovera.kualpostinvou.Aplicacao;
+import lovera.kualpostinvou.views.receivers.ReceiversNames;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 
-//TODO inserir ResultReceiver para retornar o resultado da operacao
-public class LocalizacaoService extends Service{
+public class LocalizacaoService extends IntentService{
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
+    public LocalizacaoService(){
+        super("LocalizacaoService");
+    }
+
+    public LocalizacaoService(String name){
+        super(name);
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        Worker worker = new Worker(startId);
-        worker.start();
-        return super.onStartCommand(intent, flags, startId);
-    }
+    protected void onHandleIntent(Intent intent) {
+        ResultReceiver resultReceiver = intent.getParcelableExtra(ReceiversNames.GPSLOCALIZACAO);
 
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    class Worker extends Thread{
-
-        public int count = 0;
-        public int startId;
-
-        public Worker(int startId) {
-            this.startId = startId;
+        int count = 0;
+        final HelperGeolocalizacao helper = Aplicacao.getGoogleCoisas().getHelperGps();
+        while(!helper.temLastLocation() && count < 10){
+            try{
+                Thread.sleep(1500);
+            }
+            catch (InterruptedException e){}
+            count++;
         }
-
-        @Override
-        public void run() {
-            final HelperGeolocalizacao helper = Aplicacao.getGoogleCoisas().getHelperGps();
-            while(!helper.temLastLocation() && count < 10){
-                try{
-                    Thread.sleep(1500);
-                }
-                catch (InterruptedException e){}
-                count++;
-            }
-            if(helper.temLastLocation()){
-                Aplicacao.getMensageiroGps().localizacaoEncontrada();
-            }
-            else{
-                //TODO tratativa localização não encontrada
-            }
-            stopSelf(this.startId);
+        if(helper.temLastLocation()){
+            resultReceiver.send(ServicesNames.GPS_SERVICE, new Bundle());
         }
+        else{
+            //TODO tratativa localização não encontrada
+        }
+        stopSelf();
     }
 }

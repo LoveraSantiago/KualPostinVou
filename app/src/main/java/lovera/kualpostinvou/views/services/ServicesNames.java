@@ -4,4 +4,5 @@ public class ServicesNames {
 
     public static int NOME_GEOLOCALIZACAO = 0;
     public static int TOKEN_APPCIVICO = 1;
+    public static int GPS_SERVICE = 2;
 }

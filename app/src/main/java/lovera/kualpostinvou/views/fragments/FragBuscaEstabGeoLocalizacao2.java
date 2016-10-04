@@ -1,7 +1,5 @@
 package lovera.kualpostinvou.views.fragments;
 
-import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -15,7 +13,6 @@ import android.widget.TextView;
 import java.io.Serializable;
 import java.util.List;
 
-import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.Estabelecimento;
@@ -27,7 +24,7 @@ import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.components.dialogs.DismissDialog;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
-import lovera.kualpostinvou.views.services.LocalizacaoService;
+import lovera.kualpostinvou.views.services.ServicesNames;
 
 public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements CommonsReceiver.Receiver{
 
@@ -57,7 +54,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements Commo
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.helperGps = new HelperGeolocalizacao(this);
+        this.helperGps = new HelperGeolocalizacao(getActivity());
         this.adapterMgs = new FragBuscaEstabGeoLocAdapter(this);
 
         this.msgActivity = (MsgToActivity) getActivity();
@@ -103,22 +100,6 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements Commo
         this.receiver.setReceiver(this);
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if(requestCode == HelperGeolocalizacao.USUARIO_ESCOLHENDO_OPCAO){
-//            if(resultCode == getActivity().RESULT_OK){
-//                Aplicacao.setMensageiroGps(this.adapterMgs);
-//
-//                Intent intent = new Intent(getActivity(), LocalizacaoService.class);
-//                getActivity().startService(intent);
-//            }
-//            else if(resultCode == getActivity().RESULT_CANCELED){
-//                this.msgActivity.fecharProgresso();
-//                showDialogGpsCancelado();
-//            }
-//        }
-//    }
-
     private void showDialogGpsCancelado(){
         DismissDialog dialog = new DismissDialog(getActivity());
         dialog.setTitle("Localização Requerida");
@@ -132,19 +113,14 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements Commo
         this.paramCategoria = categoria;
 
         if(this.helperGps.temLastLocation()){
-            procedimentoConsumoEstabelecimentoEmComum();
+            consumirEstabelecimentos();
         }
         else{
-            this.helperGps.popupLigarGps();
+            this.helperGps.popupLigarGps(this.receiver);
         }
     }
 
-    public void gpsEnconstradoPeloService(){
-        Aplicacao.setMensageiroGps(null);
-        procedimentoConsumoEstabelecimentoEmComum();
-    }
-
-    private void procedimentoConsumoEstabelecimentoEmComum(){
+    private void consumirEstabelecimentos(){
         receberLocalizacao(this.helperGps.getLocalizacao());
         this.msgActivity.setarTextoProgresso("Buscando dados.");
 
@@ -207,6 +183,13 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements Commo
 
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
-
+        if(resultCode == ServicesNames.GPS_SERVICE){
+            if(resultData == null){
+                showDialogGpsCancelado();
+            }
+            else{
+                consumirEstabelecimentos();
+            }
+        }
     }
 }

@@ -3,7 +3,6 @@ package lovera.kualpostinvou;
 import android.app.Application;
 import android.provider.Settings;
 
-import lovera.kualpostinvou.views.contratos.MsgFromGpsService;
 import lovera.kualpostinvou.views.redes_sociais.PessoaLogada;
 import lovera.kualpostinvou.views.redes_sociais.facebook.Facebook_Coisas;
 import lovera.kualpostinvou.views.redes_sociais.google.Google_Coisas;
@@ -15,8 +14,6 @@ public class Aplicacao extends Application{
     private static PessoaLogada pessoaLogada;
     private static Google_Coisas googleCoisas;
     private static Facebook_Coisas faceCoisas;
-
-    private static MsgFromGpsService mensageiroGps;
 
     @Override
     public void onCreate() {
@@ -48,13 +45,5 @@ public class Aplicacao extends Application{
 
     public static Aplicacao getAplicacaoInstancia() {
         return instancia;
-    }
-
-    public static MsgFromGpsService getMensageiroGps() {
-        return mensageiroGps;
-    }
-
-    public static void setMensageiroGps(MsgFromGpsService mensageiroGps) {
-        Aplicacao.mensageiroGps = mensageiroGps;
     }
 }

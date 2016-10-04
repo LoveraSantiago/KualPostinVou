@@ -15,7 +15,6 @@ import java.util.Map;
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Pessoa;
-import lovera.kualpostinvou.views.components.dialogs.AvTempoDialog;
 import lovera.kualpostinvou.views.components.helpers.PrincipalActivityComponents;
 import lovera.kualpostinvou.views.contratos.FragmentInfo;
 import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
@@ -27,6 +26,7 @@ import lovera.kualpostinvou.views.fragments.FragListaEstabelecimentos;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 import lovera.kualpostinvou.views.fragments.FragmentMenu;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
+import lovera.kualpostinvou.views.receivers.ReceiversNames;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 import lovera.kualpostinvou.views.services.LocalizacaoService;
 import lovera.kualpostinvou.views.services.ServicesNames;
@@ -140,23 +140,20 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         getSupportActionBar().setTitle(this.titulo);
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        this.fragAtiva.onActivityResult(requestCode, resultCode, data);
-//    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == HelperGeolocalizacao.USUARIO_ESCOLHENDO_OPCAO){
+
+            CommonsReceiver receiver = (CommonsReceiver) data.getSerializableExtra(ReceiversNames.GPSLOCALIZACAO);
             if(resultCode == PrincipalActivity.RESULT_OK){
-                Aplicacao.setMensageiroGps(this.adapterMgs);
 
                 Intent intent = new Intent(this, LocalizacaoService.class);
+                intent.putExtra(ReceiversNames.GPSLOCALIZACAO, receiver);
                 startService(intent);
             }
             else if(resultCode == PrincipalActivity.RESULT_CANCELED){
                 fecharProgresso();
-                showDialogGpsCancelado();
+                receiver.send(ServicesNames.GPS_SERVICE, null);
             }
         }
     }
@@ -222,7 +219,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
             Fragment fragLista = this.fragmentManager.findFragmentByTag(FragListaEstabelecimentos.TITULO_FRAGMENT);
             this.fragAtiva = fragLista;
-//            setarFragment(fragLista);
         }
     }
 

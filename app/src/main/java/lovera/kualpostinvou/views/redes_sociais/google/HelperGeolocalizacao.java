@@ -1,6 +1,7 @@
 package lovera.kualpostinvou.views.redes_sociais.google;
 
-import android.app.Fragment;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -19,6 +20,8 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.modelos.Localizacao;
+import lovera.kualpostinvou.views.receivers.CommonsReceiver;
+import lovera.kualpostinvou.views.receivers.ReceiversNames;
 
 public class HelperGeolocalizacao{
 
@@ -26,11 +29,11 @@ public class HelperGeolocalizacao{
     public static int DISPOSITIVO_NAO_TEM_GPS  = 1;
 
     private final GoogleApiClient mGoogleApiClient;
-    private final Fragment fragment;
+    private final Activity activity;
 
 
-    public HelperGeolocalizacao(Fragment fragment) {
-        this.fragment = fragment;
+    public HelperGeolocalizacao(Activity activity) {
+        this.activity = activity;
         this.mGoogleApiClient = Aplicacao.getGoogleCoisas().getmGoogleApiClient();
 
         Aplicacao.getGoogleCoisas().setHelperGps(this);
@@ -41,8 +44,8 @@ public class HelperGeolocalizacao{
             return true;
         }
 
-        if (ActivityCompat.checkSelfPermission(this.fragment.getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this.fragment.getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this.activity, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this.activity, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return false;
         }
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(this.mGoogleApiClient);
@@ -57,7 +60,7 @@ public class HelperGeolocalizacao{
     }
 
     //TODO ver se tem alguma forma de desligar esse cara.
-    public void popupLigarGps(){
+    public void popupLigarGps(final CommonsReceiver receiver){
         LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(10000);
         mLocationRequest.setFastestInterval(5000);
@@ -76,16 +79,18 @@ public class HelperGeolocalizacao{
                 final Status status = locationSettingsResult.getStatus();
                 switch (status.getStatusCode()) {
                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-
                         try{
-                            status.startResolutionForResult(fragment.getActivity(), USUARIO_ESCOLHENDO_OPCAO);
+                            Intent intent = new Intent();
+                            intent.putExtra(ReceiversNames.GPSLOCALIZACAO, receiver);
+                            activity.startIntentSenderForResult(null, USUARIO_ESCOLHENDO_OPCAO, intent, 0,0,0 );
+//                            status.startResolutionForResult(fragment.getActivity(), USUARIO_ESCOLHENDO_OPCAO);
                         }
                         catch (IntentSender.SendIntentException e) {
                         }
                         break;
                     case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
                         try{
-                            status.startResolutionForResult(fragment.getActivity(), DISPOSITIVO_NAO_TEM_GPS);
+                            status.startResolutionForResult(activity, DISPOSITIVO_NAO_TEM_GPS);
                         }
                         catch (IntentSender.SendIntentException e) {
                         }

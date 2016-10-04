@@ -1,6 +1,7 @@
 package lovera.kualpostinvou.views.fragments.frag_filhos;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,15 +10,18 @@ import android.view.ViewGroup;
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
+import lovera.kualpostinvou.views.PrincipalActivity;
 import lovera.kualpostinvou.views.components.dialogs.AvAtendPermissoesDialog;
 import lovera.kualpostinvou.views.components.dialogs.DismissDialog;
 import lovera.kualpostinvou.views.components.dialogs.AvTempoDialog;
 import lovera.kualpostinvou.views.contratos.MsgToFragFilhos;
 import lovera.kualpostinvou.views.controllers.AvTempoController;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
+import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
+import lovera.kualpostinvou.views.services.ServicesNames;
 
-public class FragEstabFilho_Avaliacao extends FragmentFilho {
+public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsReceiver.Receiver{
 
     public static String TITULO_FRAGMENT = "Filho Avaliacao";
     public static int ID_FRAGMENT = 2;
@@ -31,6 +35,8 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho {
 
     private MsgToFragFilhos msg;
 
+    private CommonsReceiver receiver;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,7 +47,13 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.tempoController = new AvTempoController(getActivity());
-        this.helperGPS = new HelperGeolocalizacao(this.msg.getPaiFragment());
+        this.helperGPS = new HelperGeolocalizacao(getActivity());
+        inicializarReceivers();
+    }
+
+    private void inicializarReceivers(){
+        this.receiver = new CommonsReceiver(new Handler());
+        this.receiver.setReceiver(this);
     }
 
     @Override
@@ -82,7 +94,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho {
                 return false;
             }
             else{
-                AvAtendPermissoesDialog dialogAtend = new AvAtendPermissoesDialog(getActivity());
+                AvAtendPermissoesDialog dialogAtend = new AvAtendPermissoesDialog(this);
                 if(!temToken){
                     dialogAtend.configurarLinhaLogado(true, false);
                 }
@@ -99,6 +111,14 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho {
                 return false;
             }
         }
+    }
+
+    public void ligarGps(){
+        PrincipalActivity principalActivity = (PrincipalActivity) getActivity();
+        principalActivity.abrirProgresso();
+        principalActivity.setarTextoProgresso("Buscando localização.");
+
+        this.helperGPS.popupLigarGps(this.receiver);
     }
 
     public void setMsg(MsgToFragFilhos msg) {
@@ -118,5 +138,12 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho {
     @Override
     public int getIcone() {
         return ICONE;
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        if(resultCode == ServicesNames.GPS_SERVICE && resultData != null){
+            ((PrincipalActivity) getActivity()).fecharProgresso();
+        }
     }
 }
