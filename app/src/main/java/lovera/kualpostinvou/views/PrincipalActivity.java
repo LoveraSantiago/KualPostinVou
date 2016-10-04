@@ -243,12 +243,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     }
 
     //ACOES DO FRAGMENT 2
-    public void incrementarDistancia(View view){
-        this.frag2.incrementarDistancia();
-    }
-
-    public void decrementarDistancia(View view){ this.frag2.decrementarDistancia(); }
-
     public void consumirEstabelecimentosGeolocalizacao(View view){
         if(isAbertoProgresso()) return;
         this.frag2.consumirEstabelecimentosGeolocalizacao(view.getTag().toString());
@@ -259,11 +253,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         if(this.fragAtiva instanceof FragEstabelecimento){
             ((FragEstabelecimento)this.fragAtiva).showDialogCadastrarTempoDeAtendimento();
         }
-    }
-
-    public void chamarDialog(View view){
-        AvTempoDialog dialogTimer = new AvTempoDialog(this);
-        dialogTimer.show();
     }
 
     public Fragment getFragAtiva() {

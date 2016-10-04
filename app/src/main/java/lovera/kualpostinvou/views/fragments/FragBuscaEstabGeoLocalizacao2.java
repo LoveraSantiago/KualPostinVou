@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -36,13 +37,12 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
     private HelperGeolocalizacao helperGps;
     private FragBuscaEstabGeoLocAdapter adapterMgs;
     private MsgToActivity msgActivity;
-    //Componentes da tela
-    private SeekBar seekBar;
-    private TextView lblSeekBar;
 
     //Parametros
     private String paramCategoria;
     private Localizacao localizacao;
+
+    private TextView lblSeekBar;
 
     @Nullable
     @Override
@@ -66,9 +66,31 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
     }
 
     private void inicializarComponentes(){
-        this.lblSeekBar  = (TextView) getView().findViewById(R.id.f2_lblseekbar);
-        this.seekBar = (SeekBar) getView().findViewById(R.id.f2_seekbar);
-        this.seekBar.setOnSeekBarChangeListener(new SeekBarChangeListenerImpl(this.lblSeekBar));
+        lblSeekBar  = (TextView) getView().findViewById(R.id.f2_lblseekbar);
+        final SeekBar seekBar = (SeekBar) getView().findViewById(R.id.f2_seekbar);
+        seekBar.setOnSeekBarChangeListener(new SeekBarChangeListenerImpl(this.lblSeekBar));
+
+        Button btnDecremento = (Button) getView().findViewById(R.id.f2_menos);
+        btnDecremento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int result = Integer.parseInt(lblSeekBar.getText().toString()) - 2;
+                if(result >= 0){
+                    seekBar.setProgress(result);
+                }
+            }
+        });
+
+        Button btnIncremento = (Button) getView().findViewById(R.id.f2_mais);
+        btnIncremento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int result = Integer.parseInt(lblSeekBar.getText().toString());
+                if(result <= 50){
+                    seekBar.setProgress(result);
+                }
+            }
+        });
     }
 
     @Override
@@ -92,20 +114,6 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
         dialog.setTitle("Localização Requerida");
         dialog.setMessage("Para realizar a busca por estabelecimentos é necessario autorizar o gps");
         dialog.show();
-    }
-
-    public void incrementarDistancia(){
-        int result = Integer.parseInt(this.lblSeekBar.getText().toString());
-        if(result <= 50){
-            this.seekBar.setProgress(result);
-        }
-    }
-
-    public void decrementarDistancia(){
-        int result = Integer.parseInt(this.lblSeekBar.getText().toString()) - 2;
-        if(result >= 0){
-            this.seekBar.setProgress(result);
-        }
     }
 
     public void consumirEstabelecimentosGeolocalizacao(String categoria){
