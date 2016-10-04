@@ -8,6 +8,4 @@ import lovera.kualpostinvou.views.contratos.FragmentInfo;
 //Todo se todas as filhas tiverem interface msgToFragFilhos inclui-la aqui para fins de refatoração
 public abstract class FragmentFilho extends Fragment implements FragmentInfo{
 
-
-
 }

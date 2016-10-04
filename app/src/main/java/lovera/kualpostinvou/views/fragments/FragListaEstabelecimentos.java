@@ -1,7 +1,9 @@
 package lovera.kualpostinvou.views.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.print.PrintJobInfo;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import java.util.List;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.Estabelecimento;
+import lovera.kualpostinvou.views.PrincipalActivity;
 import lovera.kualpostinvou.views.adapters.ListEstabAdapter;
 import lovera.kualpostinvou.views.adapters.FragListaEstabAdapter;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
@@ -35,6 +38,8 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
 
     private MsgToActivity msgToActivity;
 
+    private boolean estouAtiva;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,10 +54,19 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
         this.msgToActivity = (MsgToActivity) getActivity();
         this.adapterMsg = new FragListaEstabAdapter(this);
         inicializarListView();
+        this.estouAtiva = true;
+    }
 
-        if(this.estabelecimento != null){
-            inicializarFragEstabelecimento(this.estabelecimento);
-        }
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.i("ciclo2", "FragListaEstabelecimentos onStart");
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.i("ciclo2", "FragListaEstabelecimentos onAtach");
     }
 
     private void inicializarListView(){
@@ -79,6 +93,7 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
     public void onPause() {
         super.onPause();
         Log.i("ciclo2", "FragListaEstabelecimentos onPause");
+        this.estouAtiva = false;
     }
 
     @Override
@@ -97,7 +112,12 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
         conexao.getEstabelelecimento(estabSelecionado.getCodUnidade());
     }
 
+    public void inicializarFragEstabelecimento(){
+        inicializarFragEstabelecimento(this.estabelecimento);
+    }
+
     public void receberEstabelecimento(Estabelecimento estabelecimento){
+        this.estabelecimento = estabelecimento;
         FragEstabelecimento fragEstabelecimento = new FragEstabelecimento();
         procedimentoComumIniciarFragEstabelecimento(fragEstabelecimento, estabelecimento);
 
@@ -121,6 +141,10 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
         fragEstabelecimento.setArguments(bundle);
     }
 
+    public void resetEstabelecimento(){
+        this.estabelecimento = null;
+    }
+
     //Metodos sobrescritos herdados da classe pai FragmentMenu
     @Override
     public int getFragmentId() {
@@ -135,5 +159,9 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
     @Override
     public int getIcone() {
         return ICONE;
+    }
+
+    public boolean isEstouAtiva() {
+        return estouAtiva;
     }
 }

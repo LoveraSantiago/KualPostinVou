@@ -48,6 +48,8 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     private FragRedesSociais frag3;
     private Fragment fragAtiva;
 
+    private boolean lancarFragEstabelecimento;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -172,6 +174,13 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     @Override
     public void setarFragment(Fragment fragment) {
+        if(fragment instanceof FragEstabelecimento && this.fragAtiva instanceof FragEstabelecimento){
+            this.lancarFragEstabelecimento = false;
+        }
+        else{
+            this.lancarFragEstabelecimento = true;
+        }
+
         remocaoFragEstabelecimento(true);
 
         this.fragmentManager.beginTransaction()
@@ -206,6 +215,12 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         super.onBackPressed();
         if(fragAtiva instanceof FragEstabelecimento){
             remocaoFragEstabelecimento(false);
+        }
+        else{
+            FragListaEstabelecimentos fragLista = (FragListaEstabelecimentos) this.fragmentManager.findFragmentByTag(FragListaEstabelecimentos.TITULO_FRAGMENT);
+            if(fragLista.isEstouAtiva()){
+                fragLista.inicializarFragEstabelecimento();
+            }
         }
     }
 
@@ -246,5 +261,13 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     public Fragment getFragAtiva() {
         return fragAtiva;
+    }
+
+    public void setFragAtiva(Fragment fragment){
+        this.fragAtiva = fragment;
+    }
+
+    public boolean isLancarFragEstabelecimento() {
+        return lancarFragEstabelecimento;
     }
 }

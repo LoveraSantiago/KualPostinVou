@@ -1,5 +1,6 @@
 package lovera.kualpostinvou.views.fragments;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -57,6 +58,11 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
 
         this.msgActivity = (MsgToActivity) getActivity();
         inicializarComponentes();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     private void inicializarComponentes(){
