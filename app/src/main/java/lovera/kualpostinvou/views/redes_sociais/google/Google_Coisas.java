@@ -1,5 +1,6 @@
 package lovera.kualpostinvou.views.redes_sociais.google;
 
+import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -49,28 +50,31 @@ public class Google_Coisas implements GoogleApiClient.ConnectionCallbacks, Googl
                 .build();
     }
 
-    public void connect(){
+    public void connect(Activity activity){
         this.mGoogleApiClient.connect();
-        verEstadoLogin();
+        verEstadoLogin(activity);
     }
 
     public void disconnect(){
         this.mGoogleApiClient.disconnect();
     }
 
-    private void verEstadoLogin(){
+    private void verEstadoLogin(Activity activity){
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(this.mGoogleApiClient);
         if(opr.isDone()){
-            onLoginFeito(opr.get());
+            if(!Aplicacao.getPessoaLogada().hasToken()){
+                onLoginFeito(activity, opr.get());
+            }
         }
     }
 
-    public void onLoginFeito(GoogleSignInResult result){
-        if(result.isSuccess()){
+    public void onLoginFeito(Activity activity, GoogleSignInResult result){
+        if(result.isSuccess()) {
             this.acount = result.getSignInAccount();
             this.estouLogado = true;
             Aplicacao.getPessoaLogada().inicializarPessoa();
             Aplicacao.getFaceCoisas().realizarLogout();
+            Aplicacao.getPessoaLogada().inicializarTokenAppCivico(activity);
         }
     }
 

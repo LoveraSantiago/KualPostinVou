@@ -58,8 +58,8 @@ public class FragRedesSociais extends FragmentMenu {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == RC_SIGN_IN){
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            Aplicacao.getGoogleCoisas().onLoginFeito(result);
-            procedimentoPegarTokenAppCivico();
+            Aplicacao.getGoogleCoisas().onLoginFeito(getActivity(), result);
+
         }
         else{
             Aplicacao.getFaceCoisas().getCallbackManager().onActivityResult(requestCode, resultCode, data);
@@ -76,8 +76,7 @@ public class FragRedesSociais extends FragmentMenu {
                         new ProfileTracker(){
                             @Override
                             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-                                Aplicacao.getFaceCoisas().onLoginFeito();
-                                procedimentoPegarTokenAppCivico();
+                                Aplicacao.getFaceCoisas().onLoginFeito(getActivity());
                                 this.stopTracking();
                             }
                         };
@@ -107,10 +106,6 @@ public class FragRedesSociais extends FragmentMenu {
                 }
             }
         });
-    }
-
-    private void procedimentoPegarTokenAppCivico(){
-        Aplicacao.getPessoaLogada().inicializarTokenAppCivico(getActivity());
     }
 
     @Override

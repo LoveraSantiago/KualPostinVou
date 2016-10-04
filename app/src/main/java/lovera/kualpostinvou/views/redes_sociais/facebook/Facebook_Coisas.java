@@ -1,5 +1,6 @@
 package lovera.kualpostinvou.views.redes_sociais.facebook;
 
+import android.app.Activity;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -31,7 +32,10 @@ public class Facebook_Coisas {
 
     private boolean estouLogado;
 
+    private Activity activity;
+
     private final Aplicacao aplicacao;
+
     private CallbackManager callbackManager;
     private AccessTokenTracker accessTokenTracker;
 
@@ -81,6 +85,9 @@ public class Facebook_Coisas {
                     try {
                         campoEmail = object.getString("email");
                         estouLogado = true;
+                        if(activity != null){
+                            Aplicacao.getPessoaLogada().inicializarTokenAppCivico(activity);
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -95,7 +102,7 @@ public class Facebook_Coisas {
         this.accessTokenTracker.stopTracking();
     }
 
-    public void onLoginFeito(){
+    public void onLoginFeito(final Activity activity){
         final GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
             @Override
             public void onCompleted(JSONObject object, GraphResponse response) {
@@ -107,6 +114,7 @@ public class Facebook_Coisas {
                     }
                 }
                 Aplicacao.getPessoaLogada().inicializarPessoa();
+                Aplicacao.getPessoaLogada().inicializarTokenAppCivico(activity);
             }
         });
         request.setParameters(gerarBundleParamsCamposExtras());
@@ -151,11 +159,19 @@ public class Facebook_Coisas {
         return callbackManager;
     }
 
+    public void onStart(Activity activity){
+        if(this.estouLogado){
+            Aplicacao.getPessoaLogada().inicializarTokenAppCivico(activity);
+        }
+        else{
+            this.activity = activity;
+        }
+    }
+
     public void printHashKey(){
         try{
-            PackageInfo info = this.aplicacao.getPackageManager().getPackageInfo(
-                    "lovera.kualpostinvou",
-                    PackageManager.GET_SIGNATURES);
+            PackageInfo info = this.aplicacao.getPackageManager().getPackageInfo("lovera.kualpostinvou", PackageManager.GET_SIGNATURES);
+
             for(Signature signature : info.signatures){
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());

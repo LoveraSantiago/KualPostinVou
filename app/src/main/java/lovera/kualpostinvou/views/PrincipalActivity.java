@@ -95,7 +95,8 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     @Override
     protected void onStart() {
-        Aplicacao.getGoogleCoisas().connect();
+        Aplicacao.getGoogleCoisas().connect(this);
+        Aplicacao.getFaceCoisas().onStart(this);
         this.components.abrirDrawer();
         super.onStart();
     }
