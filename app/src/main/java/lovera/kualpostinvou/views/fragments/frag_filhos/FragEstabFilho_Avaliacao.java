@@ -58,8 +58,8 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho {
 
     public void cadastrarTempoDeAtendimento(){
         if(validarPermissoesCadastroAtendimento()){
-            DialogFragment dialogTimer = new TimePickerDialogo();
-            dialogTimer.show(getActivity().getFragmentManager(), "timePicker");
+            TimePickerDialogo dialogTimer = new TimePickerDialogo(getActivity());
+            dialogTimer.show();
         }
     }
 
@@ -79,20 +79,20 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho {
                 return false;
             }
             else{
-                AvAtendPermissoesDialog dialog = new AvAtendPermissoesDialog(getActivity());
+                AvAtendPermissoesDialog dialogAtend = new AvAtendPermissoesDialog(getActivity());
                 if(!temToken){
-                    dialog.configurarLinhaLogado(true, false);
+                    dialogAtend.configurarLinhaLogado(true, false);
                 }
                 else{
-                    dialog.configurarLinhaLogado(true, true);
+                    dialogAtend.configurarLinhaLogado(true, true);
                 }
                 if(!temLocalizacao){
-                    dialog.configurarLinhaGps(true, false);
+                    dialogAtend.configurarLinhaGps(true, false);
                 }
                 else{
-                    dialog.configurarLinhaGps(true, true);
+                    dialogAtend.configurarLinhaGps(true, true);
                 }
-                dialog.show();
+                dialogAtend.show();
                 return false;
             }
         }
