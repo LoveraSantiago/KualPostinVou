@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:text="Registrar meu tempo de atendimento"
             android:id="@+id/f8_btnRegistrarAtend"
-            android:onClick="cadastrarTempoDeAtendimento"/>
+            android:onClick="showDialogCadastrarTempoDeAtendimento"/>
 
         <Button
             android:layout_width="match_parent"

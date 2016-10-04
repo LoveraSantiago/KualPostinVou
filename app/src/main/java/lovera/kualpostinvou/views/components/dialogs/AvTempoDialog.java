@@ -2,14 +2,16 @@ package lovera.kualpostinvou.views.components.dialogs;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
 import lovera.kualpostinvou.R;
+import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Avaliacao;
 
-public class TimePickerDialogo extends AlertDialog {
+public class AvTempoDialog extends AlertDialog {
 
     private NumberPicker pickerHora;
     private NumberPicker pickerMin;
@@ -17,10 +19,10 @@ public class TimePickerDialogo extends AlertDialog {
     private Button btnEnviar;
     private Button btnSair;
 
-    public TimePickerDialogo(Activity activity) {
-        super(activity);
-        View mainView = inflarDialogXML(activity);
-        inicializarComponentes(mainView);
+    public AvTempoDialog(FragEstabFilho_Avaliacao fragment) {
+        super(fragment.getActivity());
+        View mainView = inflarDialogXML(fragment.getActivity());
+        inicializarComponentes(fragment, mainView);
     }
 
     private View inflarDialogXML(Activity activity){
@@ -30,7 +32,7 @@ public class TimePickerDialogo extends AlertDialog {
         return mainView;
     }
 
-    private void inicializarComponentes(View mainView){
+    private void inicializarComponentes(final FragEstabFilho_Avaliacao fragment, View mainView){
         this.pickerHora = (NumberPicker) mainView.findViewById(R.id.d2_pickerhora);
         this.pickerHora.setMinValue(0);
         this.pickerHora.setMaxValue(8);
@@ -54,6 +56,7 @@ public class TimePickerDialogo extends AlertDialog {
             public void onClick(View v) {
                 int hora = pickerHora.getValue();
                 int min = pickerMin.getValue();
+                fragment.cadastrarTempoDeAtendimento(hora, min);
             }
         });
     }

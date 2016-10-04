@@ -1,6 +1,5 @@
 package lovera.kualpostinvou.views;
 
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -16,7 +15,7 @@ import java.util.Map;
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Pessoa;
-import lovera.kualpostinvou.views.components.dialogs.TimePickerDialogo;
+import lovera.kualpostinvou.views.components.dialogs.AvTempoDialog;
 import lovera.kualpostinvou.views.components.helpers.PrincipalActivityComponents;
 import lovera.kualpostinvou.views.contratos.FragmentInfo;
 import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
@@ -256,14 +255,14 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     }
 
     //ACOES DO FRAGMENT ESTABELECIMENTO
-    public void cadastrarTempoDeAtendimento(View view){
+    public void showDialogCadastrarTempoDeAtendimento(View view){
         if(this.fragAtiva instanceof FragEstabelecimento){
-            ((FragEstabelecimento)this.fragAtiva).cadastrarTempoDeAtendimento();
+            ((FragEstabelecimento)this.fragAtiva).showDialogCadastrarTempoDeAtendimento();
         }
     }
 
     public void chamarDialog(View view){
-        TimePickerDialogo dialogTimer = new TimePickerDialogo(this);
+        AvTempoDialog dialogTimer = new AvTempoDialog(this);
         dialogTimer.show();
     }
 

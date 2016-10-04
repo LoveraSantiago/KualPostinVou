@@ -1,6 +1,5 @@
 package lovera.kualpostinvou.views.fragments.frag_filhos;
 
-import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,7 +11,7 @@ import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.views.components.dialogs.AvAtendPermissoesDialog;
 import lovera.kualpostinvou.views.components.dialogs.DismissDialog;
-import lovera.kualpostinvou.views.components.dialogs.TimePickerDialogo;
+import lovera.kualpostinvou.views.components.dialogs.AvTempoDialog;
 import lovera.kualpostinvou.views.contratos.MsgToFragFilhos;
 import lovera.kualpostinvou.views.controllers.AvTempoController;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
@@ -56,11 +55,15 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho {
         this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
     }
 
-    public void cadastrarTempoDeAtendimento(){
+    public void showDialogCadastrarTempoDeAtendimento(){
         if(validarPermissoesCadastroAtendimento()){
-            TimePickerDialogo dialogTimer = new TimePickerDialogo(getActivity());
+            AvTempoDialog dialogTimer = new AvTempoDialog(this);
             dialogTimer.show();
         }
+    }
+
+    public void cadastrarTempoDeAtendimento(int hora, int minuto){
+
     }
 
     private boolean validarPermissoesCadastroAtendimento(){

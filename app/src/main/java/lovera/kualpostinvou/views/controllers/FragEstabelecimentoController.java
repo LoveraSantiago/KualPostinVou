@@ -153,7 +153,7 @@ public class FragEstabelecimentoController {
     }
 
     //Metodos do fragFilhoAvaliacao
-    public void cadastrarTempoDeAtendimento(){
-        this.fragFilhoAvaliacao.cadastrarTempoDeAtendimento();
+    public void showDialogCadastrarTempoDeAtendimento(){
+        this.fragFilhoAvaliacao.showDialogCadastrarTempoDeAtendimento();
     }
 }

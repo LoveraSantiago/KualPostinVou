@@ -158,7 +158,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     }
 
     //Metodos do fragFilhoAvaliacao
-    public void cadastrarTempoDeAtendimento(){
-        this.controller.cadastrarTempoDeAtendimento();
+    public void showDialogCadastrarTempoDeAtendimento(){
+        this.controller.showDialogCadastrarTempoDeAtendimento();
     }
 }

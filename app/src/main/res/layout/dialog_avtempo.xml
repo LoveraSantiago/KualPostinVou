@@ -21,6 +21,7 @@
         android:layout_height="wrap_content">
 
         <NumberPicker
+            android:orientation="horizontal"
             android:id="@+id/d2_pickerhora"
             android:layout_weight="1"
             android:layout_width="wrap_content"
@@ -51,6 +52,7 @@
     </LinearLayout>
     <RelativeLayout
         android:paddingRight="10dp"
+        android:paddingBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
