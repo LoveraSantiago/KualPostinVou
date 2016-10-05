@@ -13,6 +13,7 @@ import android.widget.TextView;
 import java.io.Serializable;
 import java.util.List;
 
+import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.Estabelecimento;
@@ -54,7 +55,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements Commo
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.helperGps = new HelperGeolocalizacao(getActivity());
+        this.helperGps = Aplicacao.getHelperGps();
         this.adapterMgs = new FragBuscaEstabGeoLocAdapter(this);
 
         this.msgActivity = (MsgToActivity) getActivity();

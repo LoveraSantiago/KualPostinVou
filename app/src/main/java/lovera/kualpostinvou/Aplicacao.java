@@ -6,6 +6,7 @@ import android.provider.Settings;
 import lovera.kualpostinvou.views.redes_sociais.PessoaLogada;
 import lovera.kualpostinvou.views.redes_sociais.facebook.Facebook_Coisas;
 import lovera.kualpostinvou.views.redes_sociais.google.Google_Coisas;
+import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 
 public class Aplicacao extends Application{
 
@@ -14,6 +15,7 @@ public class Aplicacao extends Application{
     private static PessoaLogada pessoaLogada;
     private static Google_Coisas googleCoisas;
     private static Facebook_Coisas faceCoisas;
+    private static HelperGeolocalizacao helperGps;
 
     @Override
     public void onCreate() {
@@ -45,5 +47,13 @@ public class Aplicacao extends Application{
 
     public static Aplicacao getAplicacaoInstancia() {
         return instancia;
+    }
+
+    public static HelperGeolocalizacao getHelperGps() {
+        return helperGps;
+    }
+
+    public static void setHelperGps(HelperGeolocalizacao helperGps) {
+        Aplicacao.helperGps = helperGps;
     }
 }

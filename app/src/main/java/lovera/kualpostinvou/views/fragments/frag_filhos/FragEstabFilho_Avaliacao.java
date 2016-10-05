@@ -47,7 +47,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.tempoController = new AvTempoController(getActivity());
-        this.helperGPS = new HelperGeolocalizacao(getActivity());
+        this.helperGPS = Aplicacao.getHelperGps();
         inicializarReceivers();
     }
 

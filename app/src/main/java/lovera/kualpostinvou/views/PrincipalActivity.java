@@ -72,6 +72,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     private void inicializarComponentes(){
         inicializarFragmentMap();
         inicializarReceivers();
+        inicializarHelperGps();
     }
 
     private void inicializarReceivers(){
@@ -88,6 +89,11 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         this.mapFragments.put(FragRedesSociais.ID_FRAGMENT, this.frag3);
         this.mapFragments.put(FragBuscaEstabelecimentos.ID_FRAGMENT, this.frag1);
         this.mapFragments.put(FragBuscaEstabGeoLocalizacao2.ID_FRAGMENT, this.frag2);
+    }
+
+    private void inicializarHelperGps(){
+        HelperGeolocalizacao helper = new HelperGeolocalizacao(this);
+        Aplicacao.setHelperGps(helper);
     }
 
     private void recuperarObjetosSalvos(Bundle bundle){
