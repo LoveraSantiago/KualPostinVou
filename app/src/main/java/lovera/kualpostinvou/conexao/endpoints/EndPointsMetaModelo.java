@@ -3,6 +3,7 @@ package lovera.kualpostinvou.conexao.endpoints;
 
 import java.util.Map;
 
+import lovera.kualpostinvou.modelos.Grupo;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.modelos.Instalacao;
 import okhttp3.ResponseBody;
@@ -27,4 +28,7 @@ public interface EndPointsMetaModelo {
 
     @GET
     Call<ResponseBody> downloadImageNaUrl(@Url String url);
+
+    Call<Grupo>
 }
+

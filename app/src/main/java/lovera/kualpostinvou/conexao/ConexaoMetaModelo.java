@@ -11,7 +11,7 @@ import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarInstalacao;
 import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarPessoa;
 import lovera.kualpostinvou.conexao.callbacks.CallBackImgPerfil;
 import lovera.kualpostinvou.conexao.endpoints.EndPointsMetaModelo;
-import lovera.kualpostinvou.conexao.utils.Factory;
+import lovera.kualpostinvou.conexao.utils.FactoryConexao;
 import lovera.kualpostinvou.conexao.utils.HelperParams_EndPessoa;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Pessoa;
@@ -35,7 +35,7 @@ public class ConexaoMetaModelo {
     public ConexaoMetaModelo() {
         this.helper = new HelperParams_EndPessoa();
 
-        this.retrofit = Factory.factoryRetrofit(URL_BASE);
+        this.retrofit = FactoryConexao.factoryRetrofit(URL_BASE);
         this.endpointMetaModelo = retrofit.create(EndPointsMetaModelo.class);
     }
 

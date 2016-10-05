@@ -1,8 +1,10 @@
 package lovera.kualpostinvou.modelos;
 
+import lovera.kualpostinvou.Aplicacao;
+
 public class Instalacao {
 
-    private int codApp = 263;
+    private int codApp = Aplicacao.COD_APLICACAO;
     private int codUsuario;
     private String dataHora;
     private String deviceOS = "android";

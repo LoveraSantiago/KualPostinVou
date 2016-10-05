@@ -10,6 +10,8 @@ import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 
 public class Aplicacao extends Application{
 
+    public static final int COD_APLICACAO = 263;
+
     private static Aplicacao instancia;
 
     private static PessoaLogada pessoaLogada;

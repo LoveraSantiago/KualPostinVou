@@ -9,7 +9,7 @@ import lovera.kualpostinvou.conexao.callbacks.CallBackProfissionais;
 import lovera.kualpostinvou.conexao.callbacks.CallBackServicos;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoSaude;
 import lovera.kualpostinvou.conexao.endpoints.EndPointsSaude;
-import lovera.kualpostinvou.conexao.utils.Factory;
+import lovera.kualpostinvou.conexao.utils.FactoryConexao;
 import lovera.kualpostinvou.conexao.utils.HelperParams_EndPSaude;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Profissional;
@@ -31,7 +31,7 @@ public class ConexaoSaude {
     public ConexaoSaude(MsgFromConexaoSaude msg) {
         this.msg = msg;
 
-        Retrofit retrofit = Factory.factoryRetrofit(URL_BASE);
+        Retrofit retrofit = FactoryConexao.factoryRetrofit(URL_BASE);
         this.endpointSaude = retrofit.create(EndPointsSaude.class);
 
         this.helper = new HelperParams_EndPSaude();

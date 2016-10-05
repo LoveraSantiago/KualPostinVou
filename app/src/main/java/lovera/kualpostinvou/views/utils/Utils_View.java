@@ -9,8 +9,6 @@ import java.util.Date;
 
 public class Utils_View {
 
-
-
     public static String dateToString(Date date, String formato){
         DateFormat dateFormat = new SimpleDateFormat(formato);
         return dateFormat.format(date);

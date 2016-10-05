@@ -83,6 +83,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         boolean temLocalizacao = this.helperGPS.temLastLocation();
 
         if(temToken && temLocalizacao){
+            this.helperGPS.ligarLocationUpdate();
             return true;
         }
         else{
