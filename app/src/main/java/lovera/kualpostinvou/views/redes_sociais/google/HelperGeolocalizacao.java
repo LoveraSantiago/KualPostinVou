@@ -20,6 +20,7 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.modelos.Localizacao;
+import lovera.kualpostinvou.views.PrincipalActivity;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 import lovera.kualpostinvou.views.receivers.ReceiversNames;
 
@@ -31,7 +32,6 @@ public class HelperGeolocalizacao{
     private final GoogleApiClient mGoogleApiClient;
     private final Activity activity;
 
-
     public HelperGeolocalizacao(Activity activity) {
         this.activity = activity;
         this.mGoogleApiClient = Aplicacao.getGoogleCoisas().getmGoogleApiClient();
@@ -40,9 +40,9 @@ public class HelperGeolocalizacao{
     }
 
     public boolean temLastLocation(){
-        if(getLocalizacao() != null){
-            return true;
-        }
+//        if(getLocalizacao() != null){
+//            return true;
+//        }
 
         if (ActivityCompat.checkSelfPermission(this.activity, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this.activity, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -61,6 +61,8 @@ public class HelperGeolocalizacao{
 
     //TODO ver se tem alguma forma de desligar esse cara.
     public void popupLigarGps(final CommonsReceiver receiver){
+        ((PrincipalActivity) this.activity).setReceiverGps(receiver);
+
         LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(10000);
         mLocationRequest.setFastestInterval(5000);
@@ -80,10 +82,7 @@ public class HelperGeolocalizacao{
                 switch (status.getStatusCode()) {
                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
                         try{
-                            Intent intent = new Intent();
-                            intent.putExtra(ReceiversNames.GPSLOCALIZACAO, receiver);
-                            activity.startIntentSenderForResult(null, USUARIO_ESCOLHENDO_OPCAO, intent, 0,0,0 );
-//                            status.startResolutionForResult(fragment.getActivity(), USUARIO_ESCOLHENDO_OPCAO);
+                            status.startResolutionForResult(activity, USUARIO_ESCOLHENDO_OPCAO);
                         }
                         catch (IntentSender.SendIntentException e) {
                         }

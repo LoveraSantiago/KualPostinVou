@@ -145,5 +145,15 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         if(resultCode == ServicesNames.GPS_SERVICE && resultData != null){
             ((PrincipalActivity) getActivity()).fecharProgresso();
         }
+        else{
+            showDialogGpsCancelado();
+        }
+    }
+
+    private void showDialogGpsCancelado(){
+        DismissDialog dialog = new DismissDialog(getActivity());
+        dialog.setTitle("Localização Requerida");
+        dialog.setMessage("Para realizar a avaliação de tempo do estabelecimento é necessario autorizar o gps");
+        dialog.show();
     }
 }

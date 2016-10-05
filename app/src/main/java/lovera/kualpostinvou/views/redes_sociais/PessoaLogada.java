@@ -52,7 +52,7 @@ public class PessoaLogada{
         principalActivity.setarTextoProgresso("Efetuando Login");
 
         Intent intent = new Intent(activit, AppCivicoTokenService.class);
-        intent.putExtra(ReceiversNames.TOKENAPPCIVICO, principalActivity.getReceiver());
+        intent.putExtra(ReceiversNames.TOKENAPPCIVICO, principalActivity.getReceiverToken());
         activit.startService(intent);
     }
 

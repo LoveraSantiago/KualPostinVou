@@ -42,7 +42,8 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     private PrincipalActivityComponents components;
 
-    private CommonsReceiver receiver;
+    private CommonsReceiver receiverToken;
+    private CommonsReceiver receiverGps;
 
     private Map<Integer, FragmentMenu> mapFragments;
     private FragmentManager fragmentManager;
@@ -74,8 +75,8 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     }
 
     private void inicializarReceivers(){
-        this.receiver = new CommonsReceiver(new Handler());
-        this.receiver.setReceiver(this);
+        this.receiverToken = new CommonsReceiver(new Handler());
+        this.receiverToken.setReceiver(this);
     }
 
     private void inicializarFragmentMap(){
@@ -143,17 +144,14 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == HelperGeolocalizacao.USUARIO_ESCOLHENDO_OPCAO){
-
-            CommonsReceiver receiver = (CommonsReceiver) data.getSerializableExtra(ReceiversNames.GPSLOCALIZACAO);
             if(resultCode == PrincipalActivity.RESULT_OK){
-
                 Intent intent = new Intent(this, LocalizacaoService.class);
-                intent.putExtra(ReceiversNames.GPSLOCALIZACAO, receiver);
+                intent.putExtra(ReceiversNames.GPSLOCALIZACAO, this.receiverGps);
                 startService(intent);
             }
             else if(resultCode == PrincipalActivity.RESULT_CANCELED){
                 fecharProgresso();
-                receiver.send(ServicesNames.GPS_SERVICE, null);
+                this.receiverGps.send(ServicesNames.GPS_SERVICE, null);
             }
         }
     }
@@ -222,8 +220,16 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         }
     }
 
-    public CommonsReceiver getReceiver() {
-        return receiver;
+    public CommonsReceiver getReceiverToken() {
+        return receiverToken;
+    }
+
+    public CommonsReceiver getReceiverGps() {
+        return receiverGps;
+    }
+
+    public void setReceiverGps(CommonsReceiver receiverGps) {
+        this.receiverGps = receiverGps;
     }
 
     @Override
