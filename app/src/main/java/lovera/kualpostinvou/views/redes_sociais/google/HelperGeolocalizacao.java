@@ -1,5 +1,6 @@
 package lovera.kualpostinvou.views.redes_sociais.google;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -12,6 +13,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
@@ -24,10 +26,14 @@ import lovera.kualpostinvou.views.PrincipalActivity;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 import lovera.kualpostinvou.views.receivers.ReceiversNames;
 
-public class HelperGeolocalizacao{
+public class HelperGeolocalizacao implements LocationListener {
+
+    private Localizacao localizacaoAtualizada;
 
     public static int USUARIO_ESCOLHENDO_OPCAO = 0;
-    public static int DISPOSITIVO_NAO_TEM_GPS  = 1;
+    public static int DISPOSITIVO_NAO_TEM_GPS = 1;
+
+    private LocationRequest mLocationRequest;
 
     private final GoogleApiClient mGoogleApiClient;
     private final Activity activity;
@@ -37,9 +43,20 @@ public class HelperGeolocalizacao{
         this.mGoogleApiClient = Aplicacao.getGoogleCoisas().getmGoogleApiClient();
 
         Aplicacao.getGoogleCoisas().setHelperGps(this);
+        this.localizacaoAtualizada = new Localizacao();
+
+        iniciarLocationRequest();
     }
 
-    public boolean temLastLocation(){
+    private void iniciarLocationRequest() {
+        this.mLocationRequest = new LocationRequest();
+        this.mLocationRequest.setInterval(10000);
+        this.mLocationRequest.setFastestInterval(5000);
+        this.mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        this.mLocationRequest.setExpirationDuration(50000);
+    }
+
+    public boolean temLastLocation() {
 //        if(getLocalizacao() != null){
 //            return true;
 //        }
@@ -49,7 +66,7 @@ public class HelperGeolocalizacao{
             return false;
         }
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(this.mGoogleApiClient);
-        if(mLastLocation != null){
+        if (mLastLocation != null) {
             Localizacao localizaoTemp = new Localizacao();
             localizaoTemp.setLatitude(mLastLocation.getLatitude());
             localizaoTemp.setLongitude(mLastLocation.getLongitude());
@@ -60,17 +77,12 @@ public class HelperGeolocalizacao{
     }
 
     //TODO ver se tem alguma forma de desligar esse cara.
-    public void popupLigarGps(final CommonsReceiver receiver){
+    public void popupLigarGps(final CommonsReceiver receiver) {
         ((PrincipalActivity) this.activity).setReceiverGps(receiver);
 
-        LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(5000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setExpirationDuration(50000);
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest
                 .Builder()
-                .addLocationRequest(mLocationRequest)
+                .addLocationRequest(this.mLocationRequest)
                 .setAlwaysShow(true);
 
         final PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(this.mGoogleApiClient, builder.build());
@@ -81,17 +93,15 @@ public class HelperGeolocalizacao{
                 final Status status = locationSettingsResult.getStatus();
                 switch (status.getStatusCode()) {
                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                        try{
+                        try {
                             status.startResolutionForResult(activity, USUARIO_ESCOLHENDO_OPCAO);
-                        }
-                        catch (IntentSender.SendIntentException e) {
+                        } catch (IntentSender.SendIntentException e) {
                         }
                         break;
                     case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                        try{
+                        try {
                             status.startResolutionForResult(activity, DISPOSITIVO_NAO_TEM_GPS);
-                        }
-                        catch (IntentSender.SendIntentException e) {
+                        } catch (IntentSender.SendIntentException e) {
                         }
                         break;
                 }
@@ -101,5 +111,23 @@ public class HelperGeolocalizacao{
 
     public Localizacao getLocalizacao() {
         return Aplicacao.getPessoaLogada().getLocalizacao();
+    }
+
+    public void ligarLocationUpdate() {
+        if (ActivityCompat.checkSelfPermission(this.activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this.activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(this.mGoogleApiClient, this.mLocationRequest, this);
+    }
+
+    public void desligarLocationUpdate(){
+        LocationServices.FusedLocationApi.removeLocationUpdates(this.mGoogleApiClient, this);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        this.localizacaoAtualizada.setLatitude(location.getLatitude());
+        this.localizacaoAtualizada.setLongitude(location.getLongitude());
     }
 }
