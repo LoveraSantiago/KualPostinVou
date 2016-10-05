@@ -87,27 +87,11 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         }
         else{
             if(Aplicacao.getPessoaLogada().isServiceTokenEmAndamento()){
-                DismissDialog dialog = new DismissDialog(getActivity());
-                dialog.setTitle("Login em Andamento");
-                dialog.setMessage("Aguarde um instante, login em andamento");
-                dialog.show();
+                showDialogAguardeLogin();
                 return false;
             }
             else{
-                AvAtendPermissoesDialog dialogAtend = new AvAtendPermissoesDialog(this);
-                if(!temToken){
-                    dialogAtend.configurarLinhaLogado(true, false);
-                }
-                else{
-                    dialogAtend.configurarLinhaLogado(true, true);
-                }
-                if(!temLocalizacao){
-                    dialogAtend.configurarLinhaGps(true, false);
-                }
-                else{
-                    dialogAtend.configurarLinhaGps(true, true);
-                }
-                dialogAtend.show();
+                showDialogPermissoes(temToken, temLocalizacao);
                 return false;
             }
         }
@@ -155,5 +139,29 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         dialog.setTitle("Localização Requerida");
         dialog.setMessage("Para realizar a avaliação de tempo do estabelecimento é necessario autorizar o gps");
         dialog.show();
+    }
+
+    private void showDialogAguardeLogin(){
+        DismissDialog dialog = new DismissDialog(getActivity());
+        dialog.setTitle("Login em Andamento");
+        dialog.setMessage("Aguarde um instante, login em andamento");
+        dialog.show();
+    }
+
+    private void showDialogPermissoes(boolean temToken, boolean temLocalizacao){
+        AvAtendPermissoesDialog dialogAtend = new AvAtendPermissoesDialog(this);
+        if(!temToken){
+            dialogAtend.configurarLinhaLogado(true, false);
+        }
+        else{
+            dialogAtend.configurarLinhaLogado(true, true);
+        }
+        if(!temLocalizacao){
+            dialogAtend.configurarLinhaGps(true, false);
+        }
+        else{
+            dialogAtend.configurarLinhaGps(true, true);
+        }
+        dialogAtend.show();
     }
 }
