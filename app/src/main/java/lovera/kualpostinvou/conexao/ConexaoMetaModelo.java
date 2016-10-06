@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.conexao.callbacks.CallBackAutenticar;
 import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarInstalacao;
 import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarPessoa;
@@ -15,7 +14,6 @@ import lovera.kualpostinvou.conexao.callbacks.CallBackGrupo;
 import lovera.kualpostinvou.conexao.callbacks.CallBackGrupos;
 import lovera.kualpostinvou.conexao.callbacks.CallBackImgPerfil;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoModelo;
-import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoSaude;
 import lovera.kualpostinvou.conexao.endpoints.EndPointsMetaModelo;
 import lovera.kualpostinvou.conexao.utils.FactoryConexao;
 import lovera.kualpostinvou.conexao.utils.HelperParams_EndPModelo;
@@ -96,6 +94,6 @@ public class ConexaoMetaModelo {
 
     public void cadastrarGrupo(String appToken, Grupo grupo){
         Call<ResponseBody> call = this.endpointMetaModelo.cadastrarGrupo(appToken, grupo);
-        call.enqueue(new CallBackGrupo(grupo));
+        call.enqueue(new CallBackGrupo(msg, grupo));
     }
 }

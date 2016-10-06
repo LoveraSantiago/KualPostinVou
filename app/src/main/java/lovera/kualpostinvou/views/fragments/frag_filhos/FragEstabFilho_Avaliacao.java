@@ -77,7 +77,6 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
 
     private void consumirAvTempoAtend(){
         if(Aplicacao.getPessoaLogada().hasToken()){
-
             if(algumacoisapostagem != null){
 
             }
@@ -95,7 +94,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     }
 
     private void cadastrarGrupo(Grupo grupo){
-
+        this.conexaoModelo.cadastrarGrupo(Aplicacao.getPessoaLogada().getToken(), grupo);
     }
 
     public void tratarErrorObjeto(ErrorObj error, int codigoErro){
