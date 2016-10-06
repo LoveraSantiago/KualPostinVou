@@ -5,6 +5,7 @@ import java.util.List;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoModelo;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Grupo;
+import lovera.kualpostinvou.modelos.Postagem;
 import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Avaliacao;
 
 public class FragEstabFilhoAvAdapter implements MsgFromConexaoModelo{
@@ -28,5 +29,10 @@ public class FragEstabFilhoAvAdapter implements MsgFromConexaoModelo{
     @Override
     public void passarErrorObjeto(ErrorObj errorObj, int codigoErro) {
         this.fragment.tratarErrorObjeto(errorObj, codigoErro);
+    }
+
+    @Override
+    public void passarPostagem(Postagem postagem) {
+        this.fragment.cadastrarTempoAtend_cadastrarConteudo(postagem);
     }
 }

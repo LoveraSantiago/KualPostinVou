@@ -2,6 +2,8 @@ package lovera.kualpostinvou.modelos;
 
 public class Tipo {
 
+    private int codTipoPostagem;
+
     public int getCodTipoPostagem() {
         return codTipoPostagem;
     }
@@ -9,6 +11,4 @@ public class Tipo {
     public void setCodTipoPostagem(int codTipoPostagem) {
         this.codTipoPostagem = codTipoPostagem;
     }
-
-    private int codTipoPostagem;
 }

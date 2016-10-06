@@ -4,6 +4,7 @@ import java.util.List;
 
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
+import lovera.kualpostinvou.modelos.Postagem;
 import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.modelos.Servicos;
 

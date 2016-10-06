@@ -7,6 +7,7 @@ import java.util.Map;
 import lovera.kualpostinvou.modelos.Grupo;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.modelos.Instalacao;
+import lovera.kualpostinvou.modelos.Postagem;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -36,5 +37,8 @@ public interface EndPointsMetaModelo {
 
     @POST("appCivicoRS/rest/grupos")
     Call<ResponseBody> cadastrarGrupo(@Header("appToken") String appToken, @Body Grupo grupo);
+
+    @POST("appCivicoRS/rest/postagens")
+    Call<ResponseBody> cadastrarPostagem(@Header("appIdentifier") String codApp, @Header("appToken") String appToken, @Body Postagem postagem);
 }
 

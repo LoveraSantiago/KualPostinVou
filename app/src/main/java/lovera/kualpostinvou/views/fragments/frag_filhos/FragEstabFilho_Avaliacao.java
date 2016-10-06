@@ -14,6 +14,7 @@ import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoModelo;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Grupo;
+import lovera.kualpostinvou.modelos.Postagem;
 import lovera.kualpostinvou.modelos.utils.FactoryModelos;
 import lovera.kualpostinvou.views.PrincipalActivity;
 import lovera.kualpostinvou.views.adapters.FragEstabFilhoAvAdapter;
@@ -91,6 +92,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     }
 
     public void consumirAvTempoAtend_receberGrupo(Grupo grupo){
+
     }
 
     private void cadastrarGrupo(Grupo grupo){
@@ -102,7 +104,6 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
             cadastrarGrupo(this.grupoTempoAtendimento);
         }
     }
-
 
     @Override
     public void setArguments(Bundle args) {
@@ -117,8 +118,17 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         }
     }
 
-    public void cadastrarTempoDeAtendimento(int hora, int minuto){
+    public void cadastrarTempoAtend(){
+        cadastrarTempoAtend_cadastrarPostagem();
+    }
 
+    private void cadastrarTempoAtend_cadastrarPostagem(){
+        Postagem postagem = FactoryModelos.geradorDePostagem(this.grupoTempoAtendimento.getCodGrupo());
+        conexaoModelo.cadastrarPostagem(Aplicacao.COD_APLICACAO , Aplicacao.getPessoaLogada().getToken(), postagem);
+    }
+
+    public void cadastrarTempoAtend_cadastrarConteudo(Postagem postagem){
+        
     }
 
     private boolean validarPermissoesCadastroAtendimento(){

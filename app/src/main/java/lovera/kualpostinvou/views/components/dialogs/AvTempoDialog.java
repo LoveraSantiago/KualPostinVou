@@ -2,7 +2,6 @@ package lovera.kualpostinvou.views.components.dialogs;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +17,9 @@ public class AvTempoDialog extends AlertDialog {
 
     private Button btnEnviar;
     private Button btnSair;
+
+    private int hora;
+    private int minuto;
 
     public AvTempoDialog(FragEstabFilho_Avaliacao fragment) {
         super(fragment.getActivity());
@@ -54,10 +56,18 @@ public class AvTempoDialog extends AlertDialog {
         this.btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int hora = pickerHora.getValue();
-                int min = pickerMin.getValue();
-                fragment.cadastrarTempoDeAtendimento(hora, min);
+                hora = pickerHora.getValue();
+                minuto = pickerMin.getValue();
+                fragment.cadastrarTempoAtend();
             }
         });
+    }
+
+    public int getHora() {
+        return hora;
+    }
+
+    public int getMinuto() {
+        return minuto;
     }
 }

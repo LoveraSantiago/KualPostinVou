@@ -4,6 +4,7 @@ import java.util.List;
 
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Grupo;
+import lovera.kualpostinvou.modelos.Postagem;
 
 public interface MsgFromConexaoModelo {
 
@@ -13,4 +14,5 @@ public interface MsgFromConexaoModelo {
     void passarGrupo(Grupo grupo);
     void passarListaDeGrupos(List<Grupo> listaDeGrupos);
     void passarErrorObjeto(ErrorObj errorObj, int codigoErro);
+    void passarPostagem(Postagem postagem);
 }

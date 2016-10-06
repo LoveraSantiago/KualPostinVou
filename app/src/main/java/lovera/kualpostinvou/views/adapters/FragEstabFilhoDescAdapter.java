@@ -2,7 +2,6 @@ package lovera.kualpostinvou.views.adapters;
 
 import java.util.List;
 
-import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoSaude;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;

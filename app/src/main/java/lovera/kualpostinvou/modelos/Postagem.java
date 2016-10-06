@@ -5,7 +5,8 @@ import lovera.kualpostinvou.modelos.utils.Autor;
 public class Postagem {
 
     private Autor autor;
-    private int intcodGrupoDestino;
+    private int codPostagem;
+    private int codGrupoDestino;
     private int codObjetoDestino;
     private int codPessoaDestino;
     private int codTipoObjetoDestino;
@@ -22,12 +23,20 @@ public class Postagem {
         this.autor = autor;
     }
 
-    public int getIntcodGrupoDestino() {
-        return intcodGrupoDestino;
+    public int getCodPostagem() {
+        return codPostagem;
     }
 
-    public void setIntcodGrupoDestino(int intcodGrupoDestino) {
-        this.intcodGrupoDestino = intcodGrupoDestino;
+    public void setCodPostagem(int codPostagem) {
+        this.codPostagem = codPostagem;
+    }
+
+    public int getCodGrupoDestino() {
+        return codGrupoDestino;
+    }
+
+    public void setCodGrupoDestino(int codGrupoDestino) {
+        this.codGrupoDestino = codGrupoDestino;
     }
 
     public int getCodObjetoDestino() {
