@@ -37,7 +37,7 @@ public class AppCivicoTokenService extends IntentService{
         StringBuilder stringBuilder = new StringBuilder();
         ErrorObj errorObj = new ErrorObj();
 
-        ConexaoMetaModelo conexao = new ConexaoMetaModelo();
+        ConexaoMetaModelo conexao = new ConexaoMetaModelo(null);
         conexao.autenticar(pessoa, stringBuilder, errorObj);//Tenta pegar o token
         if(stringBuilder.length() > 0){//resultado token
             Aplicacao.getPessoaLogada().setToken(stringBuilder.toString());//Conseguiu pegar o token

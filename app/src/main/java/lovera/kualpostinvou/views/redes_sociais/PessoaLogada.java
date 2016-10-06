@@ -88,7 +88,7 @@ public class PessoaLogada{
     public void getImgPessoa(ImageView imgView){
         if(isPessoaLogado()){
             this.espacoParaImg = imgView;
-            ConexaoMetaModelo conexaoMetaModelo = new ConexaoMetaModelo();
+            ConexaoMetaModelo conexaoMetaModelo = new ConexaoMetaModelo(null);
             conexaoMetaModelo.downloadImageNaUrl(this.pessoa.getUriImgPerfil());
         }
         else{

@@ -7,7 +7,7 @@ public class Grupo {
     private int codAplicativo = Aplicacao.COD_APLICACAO;
     private int codGrupoPai;
     private int codObjeto;
-    private int descricao;
+    private String descricao;
 
     public int getCodAplicativo() {
         return codAplicativo;
@@ -33,11 +33,11 @@ public class Grupo {
         this.codObjeto = codObjeto;
     }
 
-    public int getDescricao() {
+    public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(int descricao) {
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 }

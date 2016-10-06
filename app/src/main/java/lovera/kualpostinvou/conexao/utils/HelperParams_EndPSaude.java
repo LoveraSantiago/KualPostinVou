@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lovera.kualpostinvou.modelos.Grupo;
+
 import static lovera.kualpostinvou.modelos.constantes.Parametros.*;
 import static lovera.kualpostinvou.conexao.utils.HelperParamsUtils.*;
 
@@ -56,6 +58,14 @@ public class HelperParams_EndPSaude {
         if(isNumberMaiorQueZero(quantidade)){
             map.put(QUANTIDADE.getTexto(), String.valueOf(quantidade));
         }
+        return map;
+    }
+
+    public Map<String, String> factoryMap_EndPGrupos(Grupo grupo){
+        Map<String, String> map = new HashMap<>();
+
+        map.put(CODAPLICATIVO.getTexto(), String.valueOf(grupo.getCodAplicativo()));
+        map.put(DESC_GRUPO.getTexto(), grupo.getDescricao());
         return map;
     }
 }

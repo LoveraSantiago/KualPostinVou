@@ -4,16 +4,21 @@ import android.net.Uri;
 
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import lovera.kualpostinvou.conexao.callbacks.CallBackAutenticar;
 import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarInstalacao;
 import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarPessoa;
+import lovera.kualpostinvou.conexao.callbacks.CallBackGrupos;
 import lovera.kualpostinvou.conexao.callbacks.CallBackImgPerfil;
+import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoModelo;
+import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoSaude;
 import lovera.kualpostinvou.conexao.endpoints.EndPointsMetaModelo;
 import lovera.kualpostinvou.conexao.utils.FactoryConexao;
-import lovera.kualpostinvou.conexao.utils.HelperParams_EndPessoa;
+import lovera.kualpostinvou.conexao.utils.HelperParams_EndPModelo;
 import lovera.kualpostinvou.modelos.ErrorObj;
+import lovera.kualpostinvou.modelos.Grupo;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.modelos.Instalacao;
 import okhttp3.ResponseBody;
@@ -29,11 +34,13 @@ public class ConexaoMetaModelo {
 
     private final EndPointsMetaModelo endpointMetaModelo;
 
-    private final HelperParams_EndPessoa helper;
+    private final MsgFromConexaoModelo msg;
 
+    private final HelperParams_EndPModelo helper;
 
-    public ConexaoMetaModelo() {
-        this.helper = new HelperParams_EndPessoa();
+    public ConexaoMetaModelo(MsgFromConexaoModelo msg) {
+        this.msg = msg;
+        this.helper = new HelperParams_EndPModelo();
 
         this.retrofit = FactoryConexao.factoryRetrofit(URL_BASE);
         this.endpointMetaModelo = retrofit.create(EndPointsMetaModelo.class);
@@ -43,13 +50,6 @@ public class ConexaoMetaModelo {
         this.endpointMetaModelo.downloadImageNaUrl(uri.toString())
                       .enqueue(new CallBackImgPerfil());
     }
-
-    //TODO:Candidato a ser removido 21/09/2016
-//    public void autenticar(Pessoa pessoa){
-//        Map<String, String> mapParams = this.helper.factoryMap_EndP_Autenticar(null, pessoa.getEmail(), null, pessoa.getTokenFacebook(), pessoa.getTokenGoogle(), pessoa.getTokenTwitter());
-//        Call<ResponseBody> call = this.endpointMetaModelo.autenticar(mapParams);
-//        call.enqueue(new CallBackAutenticar(this.retrofit));
-//    }
 
     public void autenticar(Pessoa pessoa, StringBuilder token, ErrorObj error){
         Map<String, String> mapParams = this.helper.factoryMap_EndP_Autenticar(null, pessoa.getEmail(), null, pessoa.getTokenFacebook(), pessoa.getTokenGoogle(), pessoa.getTokenTwitter());
@@ -62,7 +62,6 @@ public class ConexaoMetaModelo {
             e.printStackTrace();
         }
     }
-
 
     public void cadastrarInstalacao(String appToken, Instalacao instalacao, StringBuilder result, ErrorObj error){
         Call<ResponseBody> call = this.endpointMetaModelo.cadastrarInstalacao(appToken, instalacao);
@@ -84,5 +83,12 @@ public class ConexaoMetaModelo {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void getGrupo(Grupo grupo){
+        Map<String, String> mapParams = this.helper.factoryMap_EndPGrupos(grupo);
+        Call<List<Grupo>> call = this.endpointMetaModelo.getGrupos(mapParams);
+        call.enqueue(new CallBackGrupos(this.msg, this.retrofit));
+
     }
 }

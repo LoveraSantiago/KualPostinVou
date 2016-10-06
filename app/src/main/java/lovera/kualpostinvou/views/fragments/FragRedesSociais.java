@@ -137,7 +137,7 @@ public class FragRedesSociais extends FragmentMenu {
         pessoa.setTokenFacebook("IDFACETESTE");
         pessoa.setTokenGoogle("IDGOOGLETESTE");
 
-        ConexaoMetaModelo conexao = new ConexaoMetaModelo();
+        ConexaoMetaModelo conexao = new ConexaoMetaModelo(null);
         conexao.cadastrarPessoa(pessoa, new StringBuilder(), new ErrorObj());
     }
 

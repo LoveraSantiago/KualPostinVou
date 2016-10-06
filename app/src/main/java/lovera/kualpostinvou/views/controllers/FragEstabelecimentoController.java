@@ -6,11 +6,15 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
+import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
+import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
+import lovera.kualpostinvou.modelos.Grupo;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Profissional;
+import lovera.kualpostinvou.modelos.utils.FactoryModelos;
 import lovera.kualpostinvou.views.adapters.FragEstabAdapter;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.fragments.FragEstabelecimento;
@@ -37,6 +41,7 @@ public class FragEstabelecimentoController {
     private FragEstabFilho_Endereco fragFilhoEndereco;
 
     private ConexaoSaude conexaoSaude;
+    private ConexaoMetaModelo conexaoModelo;
 
     private MsgToActivity msgToActivity;
 
@@ -45,12 +50,13 @@ public class FragEstabelecimentoController {
         this.msgToActivity = (MsgToActivity) fragment.getActivity();
 
         inicializarFragFilhos();
-        inicializarConexao();
+        inicializarConexoes();
     }
 
-    private void inicializarConexao(){
+    private void inicializarConexoes(){
         FragEstabAdapter adapter = new FragEstabAdapter(this.fragment);
-        this.conexaoSaude = new ConexaoSaude(adapter);
+        this.conexaoSaude  = new ConexaoSaude(adapter);
+        this.conexaoModelo = new ConexaoMetaModelo(adapter);
     }
 
     private void inicializarFragFilhos(){
@@ -108,6 +114,7 @@ public class FragEstabelecimentoController {
     private void inicializarRestConsumers(){
         consumirProfissionais();
         consumirEspecialidades();
+        getGrupoAvTempoAtend();
     }
 
     private void consumirProfissionais(){
@@ -120,6 +127,21 @@ public class FragEstabelecimentoController {
         if(this.listaDeEspecialidades == null){
             this.conexaoSaude.getEspecialidades(this.estabelecimento.getCodUnidade());
         }
+    }
+
+    private void getGrupoAvTempoAtend(){
+        Grupo grupoTempoAtend = FactoryModelos.geradorDeGrupo(this.estabelecimento.getCodUnidade());
+        this.conexaoModelo.getGrupo(grupoTempoAtend);
+    }
+
+    public void consumirAvaliacoesTempoAtendimento(Grupo grupo){
+        if(grupo == null){
+
+        }
+    }
+
+    public void errorConexaoModelo(ErrorObj errorObj, int codigo){
+
     }
 
     public List<Profissional> getListaDeProfissionais() {

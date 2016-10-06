@@ -2,6 +2,8 @@ package lovera.kualpostinvou.modelos.constantes;
 
 public enum Parametros {
 
+    CODAPLICATIVO("codAplicativo"),
+
     MUNICIPIO("municipio"),
     UF("uf"),
     CAMPOS("campos"),
@@ -16,7 +18,9 @@ public enum Parametros {
     SENHA("senha"),
     FACEBOOKTOKEN("facebookToken"),
     GOOGLETOKEN("googleToken"),
-    TWITTERTOKEN("twitterToken");
+    TWITTERTOKEN("twitterToken"),
+
+    DESC_GRUPO("descricao");
 
     private String texto;
 

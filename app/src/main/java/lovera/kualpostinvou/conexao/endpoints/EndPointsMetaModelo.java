@@ -1,6 +1,7 @@
 package lovera.kualpostinvou.conexao.endpoints;
 
 
+import java.util.List;
 import java.util.Map;
 
 import lovera.kualpostinvou.modelos.Grupo;
@@ -13,6 +14,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.POST;
+import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 
 public interface EndPointsMetaModelo {
@@ -29,6 +31,7 @@ public interface EndPointsMetaModelo {
     @GET
     Call<ResponseBody> downloadImageNaUrl(@Url String url);
 
-    Call<Grupo>
+    @GET("appCivicoRS/rest/grupos")
+    Call<List<Grupo>> getGrupos(@QueryMap Map<String, String> params);
 }
 

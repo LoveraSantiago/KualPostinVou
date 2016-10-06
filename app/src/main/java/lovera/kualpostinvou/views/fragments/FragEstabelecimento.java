@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import lovera.kualpostinvou.R;
+import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Especialidade;
+import lovera.kualpostinvou.modelos.Grupo;
 import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.views.components.helpers.FragEstabelecimentoComponents;
 import lovera.kualpostinvou.views.contratos.MsgToFragFilhos;
@@ -139,6 +141,14 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
 
     public void setListaDeEspecialidades(List<Especialidade> listaDeEspecialidades) {
         this.controller.setListaDeEspecialidades(listaDeEspecialidades);
+    }
+
+    public void consumirAvaliacoesTempoAtendimento(Grupo grupo){
+        this.controller.consumirAvaliacoesTempoAtendimento(grupo);
+    }
+
+    public void errorConexaoModelo(ErrorObj errorObj, int codigo){
+        this.controller.errorConexaoModelo(errorObj, codigo);
     }
 
     //Metodos sobrescritos herdados da classe pai FragMenu
