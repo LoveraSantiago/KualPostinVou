@@ -7,6 +7,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.Calendar;
 
 import lovera.kualpostinvou.Aplicacao;
+import lovera.kualpostinvou.modelos.ConteudoPostagem;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Grupo;
 import lovera.kualpostinvou.modelos.Localizacao;
@@ -34,6 +35,10 @@ public class FactoryModelos {
         return postagemResult;
     }
 
+    public static Postagem geradorDePostagem(Grupo grupo){
+        geradorDePostagem(grupo.getCodGrupo());
+    }
+
     public static Autor geradorDeAutor(){
         Autor autorResult = new Autor();
         autorResult.setCodPessoa(Aplicacao.getPessoaLogada().getPessoa().getCod());
@@ -57,5 +62,12 @@ public class FactoryModelos {
 
     public static Localizacao geradorLocalizacao(Address address){
         return geradorLocalizacao(address.getLatitude(), address.getLongitude());
+    }
+
+    public static ConteudoPostagem gerarConteudoPostagem(Postagem postagem, int tempo){
+        ConteudoPostagem conteudoResult = new ConteudoPostagem();
+        conteudoResult.setCodPostagem(postagem.getCodPostagem());
+        conteudoResult.setValor(tempo);
+        return conteudoResult;
     }
 }

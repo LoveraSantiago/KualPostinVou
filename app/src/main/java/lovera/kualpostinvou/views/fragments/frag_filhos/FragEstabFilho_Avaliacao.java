@@ -11,6 +11,7 @@ import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoModelo;
+import lovera.kualpostinvou.modelos.ConteudoPostagem;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Grupo;
@@ -28,6 +29,9 @@ import lovera.kualpostinvou.views.fragments.FragmentFilho;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 import lovera.kualpostinvou.views.services.ServicesNames;
+import lovera.kualpostinvou.views.utils.FactoryViews;
+
+import static lovera.kualpostinvou.views.utils.FactoryViews.factoryDismissDialog;
 
 public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsReceiver.Receiver{
 
@@ -36,7 +40,6 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     public static int ICONE = R.drawable.ic_grade_black_24dp;
 
     private Estabelecimento estabelecimento;
-
     private Grupo grupoTempoAtendimento;
 
     private AvTempoController tempoController;
@@ -46,6 +49,8 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     private ConexaoMetaModelo conexaoModelo;
 
     private CommonsReceiver receiver;
+
+    private AvTempoDialog dialogTimer;
 
     @Nullable
     @Override
@@ -60,6 +65,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         this.helperGPS = Aplicacao.getHelperGps();
         inicializarConexao();
         inicializarReceivers();
+        inicializarDialogAvTempo();
     }
 
     private void inicializarConexao(){
@@ -70,6 +76,10 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     private void inicializarReceivers(){
         this.receiver = new CommonsReceiver(new Handler());
         this.receiver.setReceiver(this);
+    }
+
+    private void inicializarDialogAvTempo() {
+        this.dialogTimer = new AvTempoDialog(this);
     }
 
     @Override
@@ -115,7 +125,6 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
 
     public void showDialogCadastrarTempoDeAtendimento(){
         if(validarPermissoesCadastroAtendimento()){
-            AvTempoDialog dialogTimer = new AvTempoDialog(this);
             dialogTimer.show();
         }
     }
@@ -125,7 +134,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     }
 
     private void cadastrarTempoAtend_cadastrarPostagem(){
-        Postagem postagem = FactoryModelos.geradorDePostagem(this.grupoTempoAtendimento.getCodGrupo());
+        Postagem postagem = FactoryModelos.geradorDePostagem(this.grupoTempoAtendimento);
         conexaoModelo.cadastrarPostagem(Aplicacao.COD_APLICACAO , Aplicacao.getPessoaLogada().getToken(), postagem);
     }
 
@@ -140,9 +149,21 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
             showDialogDistanteEstabelecimento();
         }
         else{
-
+            int minutos = this.dialogTimer.getMinutos();
+            if(minutos == 0){
+                showDialogTempoZerado();
+            }
+            else{
+                ConteudoPostagem conteudoPost = FactoryModelos.gerarConteudoPostagem(postagem, minutos);
+                this.conexaoModelo.cadastrarConteudoPostagem(Aplicacao.getPessoaLogada().getToken(), postagem.getCodPostagem(), conteudoPost);
+            }
         }
     }
+
+    public void passarConteudoPostagem(ConteudoPostagem conteudo) {
+    }
+
+
 
     private boolean validarPermissoesCadastroAtendimento(){
         boolean temToken = Aplicacao.getPessoaLogada().hasToken();
@@ -198,23 +219,26 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     }
 
     private void showDialogGpsCancelado(){
-        DismissDialog dialog = new DismissDialog(getActivity());
-        dialog.setTitle("Localização Requerida");
-        dialog.setMessage("Para realizar a avaliação de tempo do estabelecimento é necessario autorizar o gps");
+        DismissDialog dialog = factoryDismissDialog(getActivity(), "Localização Requerida",
+                "Para realizar a avaliação de tempo do estabelecimento é necessario autorizar o gps");
         dialog.show();
     }
 
     private void showDialogAguardeLogin(){
-        DismissDialog dialog = new DismissDialog(getActivity());
-        dialog.setTitle("Login em Andamento");
-        dialog.setMessage("Aguarde um instante, login em andamento");
+        DismissDialog dialog = factoryDismissDialog(getActivity(), "Login em Andamento",
+                "Aguarde um instante, login em andamento");
         dialog.show();
     }
 
     private void showDialogDistanteEstabelecimento(){
-        DismissDialog dialog = new DismissDialog(getActivity());
-        dialog.setTitle("Distante do Estabelecimento");
-        dialog.setMessage("Só é permitido registrar avaliação sobre um estabelecimento estando proximo dele.");
+        DismissDialog dialog = factoryDismissDialog(getActivity(),"Distante do Estabelecimento",
+                "Só é permitido registrar avaliação sobre um estabelecimento estando proximo dele.");
+        dialog.show();
+    }
+
+    private void showDialogTempoZerado(){
+        DismissDialog dialog = factoryDismissDialog(getActivity(),"Tempo inválido",
+                "O registro de tempo deve ser diferente de zero.");
         dialog.show();
     }
 

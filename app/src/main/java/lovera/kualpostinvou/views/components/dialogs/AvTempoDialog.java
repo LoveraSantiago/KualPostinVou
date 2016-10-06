@@ -63,11 +63,7 @@ public class AvTempoDialog extends AlertDialog {
         });
     }
 
-    public int getHora() {
-        return hora;
-    }
-
-    public int getMinuto() {
-        return minuto;
+    public int getMinutos() {
+        return (this.hora * 60) + minuto;
     }
 }

@@ -2,9 +2,18 @@ package lovera.kualpostinvou.modelos;
 
 public class ConteudoPostagem {
 
+    private int codPostagem;
     private String JSON;
     private String texto;
     private int valor;
+
+    public int getCodPostagem() {
+        return codPostagem;
+    }
+
+    public void setCodPostagem(int codPostagem) {
+        this.codPostagem = codPostagem;
+    }
 
     public String getJSON() {
         return JSON;

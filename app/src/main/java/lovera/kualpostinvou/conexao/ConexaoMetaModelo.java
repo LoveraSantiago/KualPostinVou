@@ -10,6 +10,7 @@ import java.util.Map;
 import lovera.kualpostinvou.conexao.callbacks.CallBackAutenticar;
 import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarInstalacao;
 import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarPessoa;
+import lovera.kualpostinvou.conexao.callbacks.CallBackConteudoPostagem;
 import lovera.kualpostinvou.conexao.callbacks.CallBackGrupo;
 import lovera.kualpostinvou.conexao.callbacks.CallBackGrupos;
 import lovera.kualpostinvou.conexao.callbacks.CallBackImgPerfil;
@@ -97,7 +98,7 @@ public class ConexaoMetaModelo {
 
     public void cadastrarGrupo(String appToken, Grupo grupo){
         Call<ResponseBody> call = this.endpointMetaModelo.cadastrarGrupo(appToken, grupo);
-        call.enqueue(new CallBackGrupo(msg, grupo));
+        call.enqueue(new CallBackGrupo(this.msg, grupo));
     }
 
     public void cadastrarPostagem(String codApp, String appToken, Postagem postagem){
@@ -111,6 +112,10 @@ public class ConexaoMetaModelo {
 
     public void cadastrarConteudoPostagem(String appToken, String codPostagem, ConteudoPostagem conteudoPostagem){
         Call<ResponseBody> call = this.endpointMetaModelo.cadastrarConteudoPostagem(appToken, codPostagem, conteudoPostagem);
-        call.enqueue()
+        call.enqueue(new CallBackConteudoPostagem(this.msg, conteudoPostagem));
+    }
+
+    public void cadastrarConteudoPostagem(String appToken, int codPostagem, ConteudoPostagem conteudoPostagem){
+        cadastrarConteudoPostagem(appToken, String.valueOf(codPostagem), conteudoPostagem);
     }
 }

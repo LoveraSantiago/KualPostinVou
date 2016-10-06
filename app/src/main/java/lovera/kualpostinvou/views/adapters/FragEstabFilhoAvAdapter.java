@@ -3,6 +3,7 @@ package lovera.kualpostinvou.views.adapters;
 import java.util.List;
 
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoModelo;
+import lovera.kualpostinvou.modelos.ConteudoPostagem;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Grupo;
 import lovera.kualpostinvou.modelos.Postagem;
@@ -34,5 +35,10 @@ public class FragEstabFilhoAvAdapter implements MsgFromConexaoModelo{
     @Override
     public void passarPostagem(Postagem postagem) {
         this.fragment.cadastrarTempoAtend_cadastrarConteudo(postagem);
+    }
+
+    @Override
+    public void passarConteudoPostagem(ConteudoPostagem conteudo) {
+        this.fragment.passarConteudoPostagem(conteudo);
     }
 }
