@@ -33,5 +33,8 @@ public interface EndPointsMetaModelo {
 
     @GET("appCivicoRS/rest/grupos")
     Call<List<Grupo>> getGrupos(@QueryMap Map<String, String> params);
+
+    @POST("appCivicoRS/rest/grupos")
+    Call<ResponseBody> cadastrarGrupo(@Header("appToken") String appToken, @Body Grupo grupo);
 }
 

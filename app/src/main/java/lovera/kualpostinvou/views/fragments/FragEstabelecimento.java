@@ -144,7 +144,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     }
 
     public void consumirAvaliacoesTempoAtendimento(Grupo grupo){
-        this.controller.consumirAvaliacoesTempoAtendimento(grupo);
+        this.controller.getAvTempoAtend_cadastrarGrupo(grupo);
     }
 
     public void errorConexaoModelo(ErrorObj errorObj, int codigo){

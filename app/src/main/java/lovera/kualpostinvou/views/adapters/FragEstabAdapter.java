@@ -46,6 +46,11 @@ public class FragEstabAdapter implements MsgFromConexaoSaude, MsgFromConexaoMode
     }
 
     @Override
+    public void passarGrupo(Grupo grupo) {
+
+    }
+
+    @Override
     public void passarListaDeGrupos(List<Grupo> listaDeGrupos) {
         this.fragEstabelecimento.consumirAvaliacoesTempoAtendimento(listaDeGrupos.get(0));
     }

@@ -6,6 +6,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
+import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.ErrorObj;
@@ -114,7 +115,7 @@ public class FragEstabelecimentoController {
     private void inicializarRestConsumers(){
         consumirProfissionais();
         consumirEspecialidades();
-        getGrupoAvTempoAtend();
+        getAvTempoAtend_getGrupo();
     }
 
     private void consumirProfissionais(){
@@ -129,14 +130,19 @@ public class FragEstabelecimentoController {
         }
     }
 
-    private void getGrupoAvTempoAtend(){
-        Grupo grupoTempoAtend = FactoryModelos.geradorDeGrupo(this.estabelecimento.getCodUnidade());
-        this.conexaoModelo.getGrupo(grupoTempoAtend);
+    private void getAvTempoAtend_getGrupo(){
+        if(Aplicacao.getPessoaLogada().hasToken()){
+            Grupo grupoTempoAtend = FactoryModelos.geradorDeGrupo(this.estabelecimento.getCodUnidade());
+            this.conexaoModelo.getGrupo(grupoTempoAtend);
+        }
+        else{
+            this.fragFilhoAvaliacao.realizarAcao(AvTempoController.NECESSARIO_LOGAR);
+        }
     }
 
-    public void consumirAvaliacoesTempoAtendimento(Grupo grupo){
+    public void getAvTempoAtend_cadastrarGrupo(Grupo grupo){
         if(grupo == null){
-
+            this.conexaoModelo.cadastrarGrupo(Aplicacao.getPessoaLogada().getToken(), grupo);
         }
     }
 

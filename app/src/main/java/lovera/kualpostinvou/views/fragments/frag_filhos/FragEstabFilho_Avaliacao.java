@@ -165,4 +165,8 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         }
         dialogAtend.show();
     }
+
+    public void realizarAcao(int codigo){
+        this.tempoController.realizarAcao(codigo);
+    }
 }

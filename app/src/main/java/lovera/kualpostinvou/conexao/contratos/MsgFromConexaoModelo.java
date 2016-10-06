@@ -9,6 +9,7 @@ public interface MsgFromConexaoModelo {
 
     int COD_ERRO_GRUPOS = 0;
 
+    void passarGrupo(Grupo grupo);
     void passarListaDeGrupos(List<Grupo> listaDeGrupos);
     void passarErrorObjeto(ErrorObj errorObj, int codigoErro);
 }
