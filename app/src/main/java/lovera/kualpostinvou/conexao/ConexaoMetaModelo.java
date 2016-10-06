@@ -18,6 +18,7 @@ import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoModelo;
 import lovera.kualpostinvou.conexao.endpoints.EndPointsMetaModelo;
 import lovera.kualpostinvou.conexao.utils.FactoryConexao;
 import lovera.kualpostinvou.conexao.utils.HelperParams_EndPModelo;
+import lovera.kualpostinvou.modelos.ConteudoPostagem;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Grupo;
 import lovera.kualpostinvou.modelos.Pessoa;
@@ -106,5 +107,10 @@ public class ConexaoMetaModelo {
 
     public void cadastrarPostagem(int codApp, String appToken, Postagem postagem){
         cadastrarPostagem(String.valueOf(codApp), appToken, postagem);
+    }
+
+    public void cadastrarConteudoPostagem(String appToken, String codPostagem, ConteudoPostagem conteudoPostagem){
+        Call<ResponseBody> call = this.endpointMetaModelo.cadastrarConteudoPostagem(appToken, codPostagem, conteudoPostagem);
+        call.enqueue()
     }
 }

@@ -13,6 +13,7 @@ import java.util.Locale;
 
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
+import lovera.kualpostinvou.modelos.utils.FactoryModelos;
 import lovera.kualpostinvou.views.receivers.ReceiversNames;
 
 public class NomeGeolocalizacaoService extends IntentService{
@@ -45,10 +46,7 @@ public class NomeGeolocalizacaoService extends IntentService{
         if(listAddress != null && listAddress.size() > 0){
             Address address = listAddress.get(0);
 
-            Localizacao localizacao = new Localizacao();
-            localizacao.setLatitude(address.getLatitude());
-            localizacao.setLongitude(address.getLongitude());
-
+            Localizacao localizacao = FactoryModelos.geradorLocalizacao(address);
             bundle.putSerializable("LOCALIZACAO", localizacao);
         }
         resultReceiver.send(ServicesNames.NOME_GEOLOCALIZACAO, bundle);

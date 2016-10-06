@@ -130,4 +130,8 @@ public class HelperGeolocalizacao implements LocationListener {
         this.localizacaoAtualizada.setLatitude(location.getLatitude());
         this.localizacaoAtualizada.setLongitude(location.getLongitude());
     }
+
+    public Localizacao getLocalizacaoAtualizada() {
+        return localizacaoAtualizada;
+    }
 }

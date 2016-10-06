@@ -14,7 +14,9 @@ import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoModelo;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Grupo;
+import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Postagem;
+import lovera.kualpostinvou.modelos.utils.Distancia;
 import lovera.kualpostinvou.modelos.utils.FactoryModelos;
 import lovera.kualpostinvou.views.PrincipalActivity;
 import lovera.kualpostinvou.views.adapters.FragEstabFilhoAvAdapter;
@@ -128,7 +130,18 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     }
 
     public void cadastrarTempoAtend_cadastrarConteudo(Postagem postagem){
-        
+
+        Localizacao localizacaoAtualizada = this.helperGPS.getLocalizacaoAtualizada();
+        this.helperGPS.desligarLocationUpdate();
+
+        Distancia distancia = new Distancia();
+        double distanciaLocal = distancia.calcularKmDistancia(localizacaoAtualizada, this.estabelecimento);
+        if(distanciaLocal > 5){
+            showDialogDistanteEstabelecimento();
+        }
+        else{
+
+        }
     }
 
     private boolean validarPermissoesCadastroAtendimento(){
@@ -195,6 +208,13 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         DismissDialog dialog = new DismissDialog(getActivity());
         dialog.setTitle("Login em Andamento");
         dialog.setMessage("Aguarde um instante, login em andamento");
+        dialog.show();
+    }
+
+    private void showDialogDistanteEstabelecimento(){
+        DismissDialog dialog = new DismissDialog(getActivity());
+        dialog.setTitle("Distante do Estabelecimento");
+        dialog.setMessage("Só é permitido registrar avaliação sobre um estabelecimento estando proximo dele.");
         dialog.show();
     }
 

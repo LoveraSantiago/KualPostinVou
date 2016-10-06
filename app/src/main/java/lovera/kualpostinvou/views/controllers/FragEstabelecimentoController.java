@@ -6,6 +6,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
+import lovera.kualpostinvou.modelos.utils.FactoryModelos;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.fragments.FragEstabelecimento;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
@@ -59,9 +60,7 @@ public class FragEstabelecimentoController {
     }
 
     public void onSaveInstanceState(Bundle outState) {
-        Localizacao localizacao = new Localizacao();
-        localizacao.setLatitude(this.latLng.latitude);
-        localizacao.setLongitude(this.latLng.longitude);
+        Localizacao localizacao = FactoryModelos.geradorLocalizacao(this.latLng);
         outState.putSerializable("LOCALIZACAO", localizacao);
     }
 
@@ -78,9 +77,7 @@ public class FragEstabelecimentoController {
         Localizacao result = (Localizacao) bundle.getSerializable("LOCALIZACAO");
 
         if(result == null){
-            result = new Localizacao();
-            result.setLatitude(this.estabelecimento.getLat());
-            result.setLongitude(this.estabelecimento.getLongi());
+            result = FactoryModelos.geradorLocalizacao(this.estabelecimento);
         }
         return result;
     }

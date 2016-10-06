@@ -4,6 +4,7 @@ package lovera.kualpostinvou.conexao.endpoints;
 import java.util.List;
 import java.util.Map;
 
+import lovera.kualpostinvou.modelos.ConteudoPostagem;
 import lovera.kualpostinvou.modelos.Grupo;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.modelos.Instalacao;
@@ -15,6 +16,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 
@@ -40,5 +42,8 @@ public interface EndPointsMetaModelo {
 
     @POST("appCivicoRS/rest/postagens")
     Call<ResponseBody> cadastrarPostagem(@Header("appIdentifier") String codApp, @Header("appToken") String appToken, @Body Postagem postagem);
+
+    @POST("appCivicoRS/rest/postagens/{codPostagem}/conteudos}")
+    Call<ResponseBody> cadastrarConteudoPostagem(@Header("appToken") String appToken, @Path("codPostagem") String codPostagem, ConteudoPostagem conteudoPostagem);
 }
 
