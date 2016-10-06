@@ -24,7 +24,15 @@ public class CallBackGrupos implements Callback<List<Grupo>>{
     @Override
     public void onResponse(Call<List<Grupo>> call, Response<List<Grupo>> response) {
         if(response.isSuccessful()){
-            this.msg.passarListaDeGrupos(response.body());
+            List<Grupo> listaGrupo = response.body();
+            if(listaGrupo.size() > 0){
+                this.msg.passarGrupo(listaGrupo.get(0));
+            }
+            else{
+                ErrorObj error = new ErrorObj();
+                error.setReasonPhrase("Grupo não criado");
+                this.msg.passarErrorObjeto(error, this.msg.COD_GRUPO_INEXISTENTE);
+            }
         }
         else{
             ParserUtils parser = new ParserUtils();

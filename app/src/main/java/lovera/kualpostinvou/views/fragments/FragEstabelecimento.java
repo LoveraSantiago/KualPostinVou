@@ -1,6 +1,5 @@
 package lovera.kualpostinvou.views.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -9,19 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
-
 import lovera.kualpostinvou.R;
-import lovera.kualpostinvou.modelos.ErrorObj;
-import lovera.kualpostinvou.modelos.Especialidade;
-import lovera.kualpostinvou.modelos.Grupo;
-import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.views.components.helpers.FragEstabelecimentoComponents;
-import lovera.kualpostinvou.views.contratos.MsgToFragFilhos;
 import lovera.kualpostinvou.views.controllers.FragEstabelecimentoController;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 
-public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver.Receiver, MsgToFragFilhos {
+public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver.Receiver{
 
     //Campos relativos a FragmentMenu
     public static String TITULO_FRAGMENT = "Estabelecimento";
@@ -118,37 +110,6 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         this.controller.onReceiveResult(resultCode, resultData);
-    }
-
-    @Override
-    public List<Profissional> getListaDeProfissionais() {
-        return this.controller.getListaDeProfissionais();
-    }
-
-    public void setListaDeProfissionais(List<Profissional> listaDeProfissionais) {
-       this.controller.setListaDeProfissionais(listaDeProfissionais);
-    }
-
-    @Override
-    public List<Especialidade> getListaDeEspecialidades() {
-        return this.controller.getListaDeEspecialidades();
-    }
-
-    @Override
-    public Fragment getPaiFragment() {
-        return this;
-    }
-
-    public void setListaDeEspecialidades(List<Especialidade> listaDeEspecialidades) {
-        this.controller.setListaDeEspecialidades(listaDeEspecialidades);
-    }
-
-    public void consumirAvaliacoesTempoAtendimento(Grupo grupo){
-        this.controller.getAvTempoAtend_cadastrarGrupo(grupo);
-    }
-
-    public void errorConexaoModelo(ErrorObj errorObj, int codigo){
-        this.controller.errorConexaoModelo(errorObj, codigo);
     }
 
     //Metodos sobrescritos herdados da classe pai FragMenu

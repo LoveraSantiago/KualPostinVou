@@ -4,19 +4,8 @@ import android.os.Bundle;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import java.util.List;
-
-import lovera.kualpostinvou.Aplicacao;
-import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
-import lovera.kualpostinvou.conexao.ConexaoSaude;
-import lovera.kualpostinvou.modelos.ErrorObj;
-import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
-import lovera.kualpostinvou.modelos.Grupo;
 import lovera.kualpostinvou.modelos.Localizacao;
-import lovera.kualpostinvou.modelos.Profissional;
-import lovera.kualpostinvou.modelos.utils.FactoryModelos;
-import lovera.kualpostinvou.views.adapters.FragEstabAdapter;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.fragments.FragEstabelecimento;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
@@ -31,7 +20,6 @@ public class FragEstabelecimentoController {
     private LatLng latLng;
 
     private Estabelecimento estabelecimento;
-    private List<Profissional> listaDeProfissionais;
 
     private final FragEstabelecimento fragment;
 
@@ -40,9 +28,6 @@ public class FragEstabelecimentoController {
     private FragEstabFilho_Avaliacao fragFilhoAvaliacao;
     private FragEstabFilho_Endereco fragFilhoEndereco;
 
-    private ConexaoSaude conexaoSaude;
-    private ConexaoMetaModelo conexaoModelo;
-
     private MsgToActivity msgToActivity;
 
     public FragEstabelecimentoController(FragEstabelecimento fragment) {
@@ -50,27 +35,17 @@ public class FragEstabelecimentoController {
         this.msgToActivity = (MsgToActivity) fragment.getActivity();
 
         inicializarFragFilhos();
-        inicializarConexoes();
-    }
-
-    private void inicializarConexoes(){
-        FragEstabAdapter adapter = new FragEstabAdapter(this.fragment);
-        this.conexaoSaude  = new ConexaoSaude(adapter);
-        this.conexaoModelo = new ConexaoMetaModelo(adapter);
     }
 
     private void inicializarFragFilhos(){
         this.fragFilhoDescricao = new FragEstabFilho_Desc();
-        this.fragFilhoInfo = new FragEstabFilho_Info();
-        this.fragFilhoInfo.setMsg(this.fragment);
+        this.fragFilhoInfo      = new FragEstabFilho_Info();
         this.fragFilhoAvaliacao = new FragEstabFilho_Avaliacao();
-        this.fragFilhoAvaliacao.setMsg(this.fragment);
-        this.fragFilhoEndereco = new FragEstabFilho_Endereco();
+        this.fragFilhoEndereco  = new FragEstabFilho_Endereco();
     }
 
     public void onActivityCreated(Bundle savedInstanceState){
         this.msgToActivity = (MsgToActivity) this.fragment.getActivity();
-        inicializarRestConsumers();
         this.msgToActivity.setarTextoProgresso("Localizando fotos do estabelecimento");
     }
 
@@ -108,53 +83,6 @@ public class FragEstabelecimentoController {
             result.setLongitude(this.estabelecimento.getLongi());
         }
         return result;
-    }
-
-    private void inicializarRestConsumers(){
-        consumirProfissionais();
-//        consumirEspecialidades();
-        getAvTempoAtend_getGrupo();
-    }
-
-    private void consumirProfissionais(){
-        if(this.listaDeProfissionais == null){
-            this.conexaoSaude.getProfissionais(this.estabelecimento.getCodUnidade());
-        }
-    }
-
-//    private void consumirEspecialidades(){
-//        if(this.listaDeEspecialidades == null){
-//            this.conexaoSaude.getEspecialidades(this.estabelecimento.getCodUnidade());
-//        }
-//    }
-
-    private void getAvTempoAtend_getGrupo(){
-        if(Aplicacao.getPessoaLogada().hasToken()){
-            Grupo grupoTempoAtend = FactoryModelos.geradorDeGrupo(this.estabelecimento.getCodUnidade());
-            this.conexaoModelo.getGrupo(grupoTempoAtend);
-        }
-        else{
-            this.fragFilhoAvaliacao.realizarAcao(AvTempoController.NECESSARIO_LOGAR);
-        }
-    }
-
-    public void getAvTempoAtend_cadastrarGrupo(Grupo grupo){
-        if(grupo == null){
-            this.conexaoModelo.cadastrarGrupo(Aplicacao.getPessoaLogada().getToken(), grupo);
-        }
-    }
-
-    public void errorConexaoModelo(ErrorObj errorObj, int codigo){
-
-    }
-
-    public List<Profissional> getListaDeProfissionais() {
-        return listaDeProfissionais;
-    }
-
-    public void setListaDeProfissionais(List<Profissional> listaDeProfissionais) {
-        this.listaDeProfissionais = listaDeProfissionais;
-        this.fragFilhoInfo.setListaDeProfissionais(listaDeProfissionais);
     }
 
     public void setArguments(Bundle args){

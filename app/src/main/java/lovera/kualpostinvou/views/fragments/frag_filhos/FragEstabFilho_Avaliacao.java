@@ -9,12 +9,17 @@ import android.view.ViewGroup;
 
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
+import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
+import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoModelo;
+import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Estabelecimento;
+import lovera.kualpostinvou.modelos.Grupo;
+import lovera.kualpostinvou.modelos.utils.FactoryModelos;
 import lovera.kualpostinvou.views.PrincipalActivity;
+import lovera.kualpostinvou.views.adapters.FragEstabFilhoAvAdapter;
 import lovera.kualpostinvou.views.components.dialogs.AvAtendPermissoesDialog;
 import lovera.kualpostinvou.views.components.dialogs.DismissDialog;
 import lovera.kualpostinvou.views.components.dialogs.AvTempoDialog;
-import lovera.kualpostinvou.views.contratos.MsgToFragFilhos;
 import lovera.kualpostinvou.views.controllers.AvTempoController;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
@@ -29,11 +34,13 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
 
     private Estabelecimento estabelecimento;
 
+    private Grupo grupoTempoAtendimento;
+
     private AvTempoController tempoController;
 
     private HelperGeolocalizacao helperGPS;
 
-    private MsgToFragFilhos msg;
+    private ConexaoMetaModelo conexaoModelo;
 
     private CommonsReceiver receiver;
 
@@ -48,7 +55,13 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         super.onActivityCreated(savedInstanceState);
         this.tempoController = new AvTempoController(getActivity());
         this.helperGPS = Aplicacao.getHelperGps();
+        inicializarConexao();
         inicializarReceivers();
+    }
+
+    private void inicializarConexao(){
+        FragEstabFilhoAvAdapter adapter = new FragEstabFilhoAvAdapter(this);
+        this.conexaoModelo = new ConexaoMetaModelo(adapter);
     }
 
     private void inicializarReceivers(){
@@ -59,7 +72,38 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     @Override
     public void onStart() {
         super.onStart();
+        consumirAvTempoAtend();
     }
+
+    private void consumirAvTempoAtend(){
+        if(Aplicacao.getPessoaLogada().hasToken()){
+
+            if(algumacoisapostagem != null){
+
+            }
+            else{
+                this.grupoTempoAtendimento = FactoryModelos.geradorDeGrupo(this.estabelecimento.getCodUnidade());
+                this.conexaoModelo.getGrupo(this.grupoTempoAtendimento);
+            }
+        }
+        else{
+            this.tempoController.realizarAcao(AvTempoController.NECESSARIO_LOGAR);
+        }
+    }
+
+    public void consumirAvTempoAtend_receberGrupo(Grupo grupo){
+    }
+
+    private void cadastrarGrupo(Grupo grupo){
+
+    }
+
+    public void tratarErrorObjeto(ErrorObj error, int codigoErro){
+        if(codigoErro == MsgFromConexaoModelo.COD_GRUPO_INEXISTENTE){
+            cadastrarGrupo(this.grupoTempoAtendimento);
+        }
+    }
+
 
     @Override
     public void setArguments(Bundle args) {
@@ -104,10 +148,6 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         principalActivity.setarTextoProgresso("Buscando localização.");
 
         this.helperGPS.popupLigarGps(this.receiver);
-    }
-
-    public void setMsg(MsgToFragFilhos msg) {
-        this.msg = msg;
     }
 
     @Override

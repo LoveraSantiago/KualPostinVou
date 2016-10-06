@@ -11,9 +11,10 @@ import android.widget.TextView;
 import java.util.List;
 
 import lovera.kualpostinvou.R;
+import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Profissional;
-import lovera.kualpostinvou.views.contratos.MsgToFragFilhos;
+import lovera.kualpostinvou.views.adapters.FragEstabFilhoInfoAdapter;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
 
 import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
@@ -30,8 +31,6 @@ public class FragEstabFilho_Info extends FragmentFilho {
     private LinearLayout layoutProfissionais;
 
     private List<Profissional> listaDeProfissionais;
-
-    private MsgToFragFilhos msg;
 
     @Nullable
     @Override
@@ -72,11 +71,14 @@ public class FragEstabFilho_Info extends FragmentFilho {
             setListaDeProfissionais(this.listaDeProfissionais);
         }
         else{
-
+            FragEstabFilhoInfoAdapter adapter = new FragEstabFilhoInfoAdapter(this);
+            ConexaoSaude conexaoSaude = new ConexaoSaude(adapter);
+            conexaoSaude.getEspecialidades(this.estabelecimento.getCodUnidade());
         }
     }
 
     public void setListaDeProfissionais(List<Profissional> listaDeProfissionais){
+        this.listaDeProfissionais = listaDeProfissionais;
         try{
 
             fecharProgressoProfissionais();
@@ -104,17 +106,10 @@ public class FragEstabFilho_Info extends FragmentFilho {
     //Coisas relativas ao progresso de profissionais
     private void inicializarProgressos(){
         this.progressoProfissionais = getActivity().findViewById(R.id.f6_progressoProfissionais);
-        if(this.msg.getListaDeProfissionais() != null){
-            setListaDeProfissionais(this.msg.getListaDeProfissionais());
-        }
     }
 
     private void fecharProgressoProfissionais(){
         this.progressoProfissionais.setVisibility(View.GONE);
-    }
-
-    public void setMsg(MsgToFragFilhos msg) {
-        this.msg = msg;
     }
 
     @Override

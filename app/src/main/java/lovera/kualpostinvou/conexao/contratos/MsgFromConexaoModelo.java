@@ -8,6 +8,7 @@ import lovera.kualpostinvou.modelos.Grupo;
 public interface MsgFromConexaoModelo {
 
     int COD_ERRO_GRUPOS = 0;
+    int COD_GRUPO_INEXISTENTE = 1;
 
     void passarGrupo(Grupo grupo);
     void passarListaDeGrupos(List<Grupo> listaDeGrupos);

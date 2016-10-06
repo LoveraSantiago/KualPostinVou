@@ -2,19 +2,18 @@ package lovera.kualpostinvou.views.adapters;
 
 import java.util.List;
 
-import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoSaude;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.modelos.Servicos;
-import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Desc;
+import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Info;
 
-public class FragEstabFilhoDescAdapter implements MsgFromConexaoSaude{
+public class FragEstabFilhoInfoAdapter implements MsgFromConexaoSaude{
 
-    private FragEstabFilho_Desc fragment;
+    private FragEstabFilho_Info fragment;
 
-    public FragEstabFilhoDescAdapter(FragEstabFilho_Desc fragment) {
+    public FragEstabFilhoInfoAdapter(FragEstabFilho_Info fragment) {
         this.fragment = fragment;
     }
 
@@ -30,12 +29,12 @@ public class FragEstabFilhoDescAdapter implements MsgFromConexaoSaude{
 
     @Override
     public void passarListaDeEspecialidades(List<Especialidade> especialidades) {
-        this.fragment.setListaEspecialidades(especialidades);
+
     }
 
     @Override
     public void passarListaDeProfissionais(List<Profissional> profissionais) {
-
+        this.fragment.setListaDeProfissionais(profissionais);
     }
 
     @Override
