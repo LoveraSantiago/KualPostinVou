@@ -11,8 +11,10 @@ import android.widget.TextView;
 import java.util.List;
 
 import lovera.kualpostinvou.R;
+import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
+import lovera.kualpostinvou.views.adapters.FragEstabFilhoDescAdapter;
 import lovera.kualpostinvou.views.contratos.MsgToFragFilhos;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
 
@@ -26,9 +28,9 @@ public class FragEstabFilho_Desc extends FragmentFilho {
 
     private Estabelecimento estabelecimento;
 
-    private View progressoEspecialidades;
+    private List<Especialidade> listaEspecialidades;
 
-    private MsgToFragFilhos msg;
+    private View progressoEspecialidades;
 
     @Nullable
     @Override
@@ -40,6 +42,7 @@ public class FragEstabFilho_Desc extends FragmentFilho {
     public void onStart() {
         super.onStart();
         inicializarProgressos();
+        consumirEspecialidades();
         setarCampos();
     }
 
@@ -69,7 +72,19 @@ public class FragEstabFilho_Desc extends FragmentFilho {
         }
     }
 
+    private void consumirEspecialidades(){
+        if(this.listaEspecialidades != null){
+            setListaEspecialidades(this.listaEspecialidades);
+        }
+        else{
+            FragEstabFilhoDescAdapter adapter = new FragEstabFilhoDescAdapter(this);
+            ConexaoSaude conexaoSaude = new ConexaoSaude(adapter);
+            conexaoSaude.getEspecialidades(this.estabelecimento.getCodUnidade());
+        }
+    }
+
     public void setListaEspecialidades(List<Especialidade> listaEspecialidades){
+        this.listaEspecialidades = listaEspecialidades;
         try{
             fecharProgressoProfissionais();
             LinearLayout layoutEspecialidades = (LinearLayout) getActivity().findViewById(R.id.f7_layoutEspecialidades);
@@ -98,19 +113,11 @@ public class FragEstabFilho_Desc extends FragmentFilho {
     //Coisas relativas ao progresso de profissionais
     private void inicializarProgressos(){
         this.progressoEspecialidades = getActivity().findViewById(R.id.f7_progressoEspecialidades);
-        if(this.msg.getListaDeProfissionais() != null){
-            setListaEspecialidades(this.msg.getListaDeEspecialidades());
-        }
     }
 
     private void fecharProgressoProfissionais(){
         this.progressoEspecialidades.setVisibility(View.GONE);
     }
-
-    public void setMsg(MsgToFragFilhos msg) {
-        this.msg = msg;
-    }
-
 
     @Override
     public int getFragmentId() {

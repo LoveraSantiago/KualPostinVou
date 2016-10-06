@@ -29,6 +29,8 @@ public class FragEstabFilho_Info extends FragmentFilho {
     private View progressoProfissionais;
     private LinearLayout layoutProfissionais;
 
+    private List<Profissional> listaDeProfissionais;
+
     private MsgToFragFilhos msg;
 
     @Nullable
@@ -47,6 +49,7 @@ public class FragEstabFilho_Info extends FragmentFilho {
     public void onStart() {
         super.onStart();
         inicializarProgressos();
+        consumirProfissionais();
         setarCampos();
     }
 
@@ -62,6 +65,15 @@ public class FragEstabFilho_Info extends FragmentFilho {
             setTextToLabel(this.estabelecimento.getTipoUnidadeCnes()           , R.id.lblUnidCnes    , getView());
             setTextToLabel(this.estabelecimento.getCategoriaUnidade()          , R.id.lblCategUnid   , getView());
         }catch (Exception e){}
+    }
+
+    private void consumirProfissionais(){
+        if(this.listaDeProfissionais != null){
+            setListaDeProfissionais(this.listaDeProfissionais);
+        }
+        else{
+
+        }
     }
 
     public void setListaDeProfissionais(List<Profissional> listaDeProfissionais){

@@ -32,7 +32,6 @@ public class FragEstabelecimentoController {
 
     private Estabelecimento estabelecimento;
     private List<Profissional> listaDeProfissionais;
-    private List<Especialidade> listaDeEspecialidades;
 
     private final FragEstabelecimento fragment;
 
@@ -62,7 +61,6 @@ public class FragEstabelecimentoController {
 
     private void inicializarFragFilhos(){
         this.fragFilhoDescricao = new FragEstabFilho_Desc();
-        this.fragFilhoDescricao.setMsg(this.fragment);
         this.fragFilhoInfo = new FragEstabFilho_Info();
         this.fragFilhoInfo.setMsg(this.fragment);
         this.fragFilhoAvaliacao = new FragEstabFilho_Avaliacao();
@@ -114,7 +112,7 @@ public class FragEstabelecimentoController {
 
     private void inicializarRestConsumers(){
         consumirProfissionais();
-        consumirEspecialidades();
+//        consumirEspecialidades();
         getAvTempoAtend_getGrupo();
     }
 
@@ -124,11 +122,11 @@ public class FragEstabelecimentoController {
         }
     }
 
-    private void consumirEspecialidades(){
-        if(this.listaDeEspecialidades == null){
-            this.conexaoSaude.getEspecialidades(this.estabelecimento.getCodUnidade());
-        }
-    }
+//    private void consumirEspecialidades(){
+//        if(this.listaDeEspecialidades == null){
+//            this.conexaoSaude.getEspecialidades(this.estabelecimento.getCodUnidade());
+//        }
+//    }
 
     private void getAvTempoAtend_getGrupo(){
         if(Aplicacao.getPessoaLogada().hasToken()){
@@ -157,15 +155,6 @@ public class FragEstabelecimentoController {
     public void setListaDeProfissionais(List<Profissional> listaDeProfissionais) {
         this.listaDeProfissionais = listaDeProfissionais;
         this.fragFilhoInfo.setListaDeProfissionais(listaDeProfissionais);
-    }
-
-    public List<Especialidade> getListaDeEspecialidades() {
-        return listaDeEspecialidades;
-    }
-
-    public void setListaDeEspecialidades(List<Especialidade> listaDeEspecialidades) {
-        this.listaDeEspecialidades = listaDeEspecialidades;
-        this.fragFilhoDescricao.setListaEspecialidades(listaDeEspecialidades);
     }
 
     public void setArguments(Bundle args){
