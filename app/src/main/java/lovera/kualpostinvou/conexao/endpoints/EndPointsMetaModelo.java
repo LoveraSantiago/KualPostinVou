@@ -6,6 +6,7 @@ import java.util.Map;
 
 import lovera.kualpostinvou.modelos.ConteudoPostagem;
 import lovera.kualpostinvou.modelos.Grupo;
+import lovera.kualpostinvou.modelos.Media;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.modelos.Instalacao;
 import lovera.kualpostinvou.modelos.Postagem;
@@ -45,5 +46,8 @@ public interface EndPointsMetaModelo {
 
     @POST("appCivicoRS/rest/postagens/{codPostagem}/conteudos}")
     Call<ResponseBody> cadastrarConteudoPostagem(@Header("appToken") String appToken, @Path("codPostagem") String codPostagem, ConteudoPostagem conteudoPostagem);
+
+    @GET("appCivicoRS/rest/postagens/tipopostagem/{codTipoPostagem}/tipoobjeto/{codTipoObjetoDestino}/objeto/{codObjetoDestino}")
+    Call<Media> getMedia(@Path("codTipoPostagem") String codTipoPostagem, @Path("codTipoObjetoDestino") String codTipoObjetoDestino, @Path("codObjetoDestino") String codObjetoDestino);
 }
 

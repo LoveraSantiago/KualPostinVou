@@ -5,6 +5,7 @@ import java.util.List;
 import lovera.kualpostinvou.modelos.ConteudoPostagem;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Grupo;
+import lovera.kualpostinvou.modelos.Media;
 import lovera.kualpostinvou.modelos.Postagem;
 
 public interface MsgFromConexaoModelo {
@@ -17,4 +18,5 @@ public interface MsgFromConexaoModelo {
     void passarErrorObjeto(ErrorObj errorObj, int codigoErro);
     void passarPostagem(Postagem postagem);
     void passarConteudoPostagem(ConteudoPostagem conteudo);
+    void passarMedia(Media media);
 }

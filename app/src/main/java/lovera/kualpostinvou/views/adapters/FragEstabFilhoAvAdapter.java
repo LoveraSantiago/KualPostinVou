@@ -6,6 +6,7 @@ import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoModelo;
 import lovera.kualpostinvou.modelos.ConteudoPostagem;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Grupo;
+import lovera.kualpostinvou.modelos.Media;
 import lovera.kualpostinvou.modelos.Postagem;
 import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Avaliacao;
 
@@ -40,5 +41,10 @@ public class FragEstabFilhoAvAdapter implements MsgFromConexaoModelo{
     @Override
     public void passarConteudoPostagem(ConteudoPostagem conteudo) {
         this.fragment.passarConteudoPostagem(conteudo);
+    }
+
+    @Override
+    public void passarMedia(Media media) {
+        this.fragment.passarMedia(media);
     }
 }

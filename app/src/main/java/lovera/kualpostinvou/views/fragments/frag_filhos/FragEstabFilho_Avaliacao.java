@@ -15,23 +15,21 @@ import lovera.kualpostinvou.modelos.ConteudoPostagem;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Grupo;
+import lovera.kualpostinvou.modelos.HoraMinuto;
 import lovera.kualpostinvou.modelos.Localizacao;
+import lovera.kualpostinvou.modelos.Media;
 import lovera.kualpostinvou.modelos.Postagem;
 import lovera.kualpostinvou.modelos.utils.Distancia;
 import lovera.kualpostinvou.modelos.utils.FactoryModelos;
 import lovera.kualpostinvou.views.PrincipalActivity;
 import lovera.kualpostinvou.views.adapters.FragEstabFilhoAvAdapter;
-import lovera.kualpostinvou.views.components.dialogs.AvAtendPermissoesDialog;
 import lovera.kualpostinvou.views.components.dialogs.AvTempoDialog;
-import lovera.kualpostinvou.views.components.dialogs.DismissDialog;
 import lovera.kualpostinvou.views.components.helpers.AvTempoComponents;
 import lovera.kualpostinvou.views.components.helpers.FragEstabFilhoAvComponents;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 import lovera.kualpostinvou.views.services.ServicesNames;
-
-import static lovera.kualpostinvou.views.utils.FactoryViews.factoryDismissDialog;
 
 public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsReceiver.Receiver{
 
@@ -43,6 +41,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     public static int ID_FRAGMENT = 2;
     public static int ICONE = R.drawable.ic_grade_black_24dp;
 
+    private HoraMinuto horaMinuto;
     private Estabelecimento estabelecimento;
     private Grupo grupoTempoAtendimento;
 
@@ -103,8 +102,8 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
 
     private void consumirAvTempoAtend(){
         if(Aplicacao.getPessoaLogada().hasToken()){
-            if(algumacoisapostagem != null){
-
+            if(this.horaMinuto != null){
+                this.tempoComponents.setTempo(this.horaMinuto);
             }
             else{
                 this.grupoTempoAtendimento = FactoryModelos.geradorDeGrupo(this.estabelecimento.getCodUnidade());
@@ -118,11 +117,16 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
 
     public void consumirAvTempoAtend_receberGrupo(Grupo grupo, int resultCode){
         if(resultCode == RESULT_GRUPO_GET){
-
+            this.conexaoModelo.getMedia(grupo.getCodGrupo(), grupo.getCodGrupo(), grupo.getCodGrupo());
         }
         else{
 
         }
+    }
+
+    public void passarMedia(Media media) {
+        this.horaMinuto = FactoryModelos.geradorHoraMinuto((int) media.getMedia());
+        this.tempoComponents.setTempo(this.horaMinuto);
     }
 
     private void cadastrarGrupo(Grupo grupo){
@@ -160,7 +164,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
                 this.components.showDialogTempoZerado();
             }
             else{
-                ConteudoPostagem conteudoPost = FactoryModelos.gerarConteudoPostagem(postagem, minutos);
+                ConteudoPostagem conteudoPost = FactoryModelos.geradorConteudoPostagem(postagem, minutos);
                 this.conexaoModelo.cadastrarConteudoPostagem(Aplicacao.getPessoaLogada().getToken(), postagem.getCodPostagem(), conteudoPost);
             }
         }

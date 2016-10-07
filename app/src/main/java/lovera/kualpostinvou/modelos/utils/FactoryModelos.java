@@ -10,6 +10,7 @@ import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.modelos.ConteudoPostagem;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Grupo;
+import lovera.kualpostinvou.modelos.HoraMinuto;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Postagem;
 import lovera.kualpostinvou.modelos.Tipo;
@@ -74,10 +75,15 @@ public class FactoryModelos {
         return geradorLocalizacao(address.getLatitude(), address.getLongitude());
     }
 
-    public static ConteudoPostagem gerarConteudoPostagem(Postagem postagem, int tempo){
+    public static ConteudoPostagem geradorConteudoPostagem(Postagem postagem, int tempo){
         ConteudoPostagem conteudoResult = new ConteudoPostagem();
         conteudoResult.setCodPostagem(postagem.getCodPostagem());
         conteudoResult.setValor(tempo);
         return conteudoResult;
+    }
+
+    public static HoraMinuto geradorHoraMinuto(int tempoMinutos){
+        HoraMinuto horaMinutoResult = new HoraMinuto(tempoMinutos / 60, tempoMinutos % 60);
+        return horaMinutoResult;
     }
 }
