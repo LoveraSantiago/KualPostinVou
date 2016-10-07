@@ -246,7 +246,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         }
         else{
             FragListaEstabelecimentos fragLista = (FragListaEstabelecimentos) this.fragmentManager.findFragmentByTag(FragListaEstabelecimentos.TITULO_FRAGMENT);
-            if(fragLista.isEstouAtiva()){
+            if(fragLista != null && fragLista.isEstouAtiva()){
                 fragLista.inicializarFragEstabelecimento();
             }
         }

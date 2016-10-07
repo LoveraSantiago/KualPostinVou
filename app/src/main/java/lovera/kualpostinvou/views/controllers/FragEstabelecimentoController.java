@@ -88,6 +88,7 @@ public class FragEstabelecimentoController {
         this.fragFilhoDescricao.setArguments(args);
         this.fragFilhoInfo.setArguments(args);
         this.fragFilhoEndereco.setArguments(args);
+        this.fragFilhoAvaliacao.setArguments(args);
     }
 
     public FragmentFilho[] getFragFilhos(){

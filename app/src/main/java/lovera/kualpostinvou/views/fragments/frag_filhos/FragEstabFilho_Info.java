@@ -73,7 +73,7 @@ public class FragEstabFilho_Info extends FragmentFilho {
         else{
             FragEstabFilhoInfoAdapter adapter = new FragEstabFilhoInfoAdapter(this);
             ConexaoSaude conexaoSaude = new ConexaoSaude(adapter);
-            conexaoSaude.getEspecialidades(this.estabelecimento.getCodUnidade());
+            conexaoSaude.getProfissionais(this.estabelecimento.getCodUnidade());
         }
     }
 
