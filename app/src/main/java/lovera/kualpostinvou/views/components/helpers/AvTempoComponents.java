@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.controllers;
+package lovera.kualpostinvou.views.components.helpers;
 
 import android.app.Activity;
 import android.view.View;
@@ -13,7 +13,7 @@ import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.HoraMinuto;
 import lovera.kualpostinvou.views.utils.Utils_View;
 
-public class AvTempoController {
+public class AvTempoComponents {
 
     public static int NECESSARIO_LOGAR = 0;
 
@@ -26,7 +26,7 @@ public class AvTempoController {
     private Button btnRegistrarAtendimento;
     private Button btnEditarAtendimento;
 
-    public AvTempoController(Activity activity) {
+    public AvTempoComponents(Activity activity) {
         this.activity = activity;
         inicializarComponentes();
         estadoInicial();

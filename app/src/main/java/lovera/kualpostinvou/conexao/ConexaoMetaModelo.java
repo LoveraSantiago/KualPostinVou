@@ -89,16 +89,16 @@ public class ConexaoMetaModelo {
         }
     }
 
-    public void getGrupo(Grupo grupo){
+    public void getGrupo(Grupo grupo, int resultCode){
         Map<String, String> mapParams = this.helper.factoryMap_EndPGrupos(grupo);
         Call<List<Grupo>> call = this.endpointMetaModelo.getGrupos(mapParams);
-        call.enqueue(new CallBackGrupos(this.msg, this.retrofit));
+        call.enqueue(new CallBackGrupos(this.msg, this.retrofit, resultCode));
 
     }
 
-    public void cadastrarGrupo(String appToken, Grupo grupo){
+    public void cadastrarGrupo(String appToken, Grupo grupo, int resultCode){
         Call<ResponseBody> call = this.endpointMetaModelo.cadastrarGrupo(appToken, grupo);
-        call.enqueue(new CallBackGrupo(this.msg, grupo));
+        call.enqueue(new CallBackGrupo(this.msg, grupo, resultCode));
     }
 
     public void cadastrarPostagem(String codApp, String appToken, Postagem postagem){

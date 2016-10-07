@@ -12,7 +12,7 @@ public interface MsgFromConexaoModelo {
     int COD_ERRO_GRUPOS = 0;
     int COD_GRUPO_INEXISTENTE = 1;
 
-    void passarGrupo(Grupo grupo);
+    void passarGrupo(Grupo grupo, int resultCode);
     void passarListaDeGrupos(List<Grupo> listaDeGrupos);
     void passarErrorObjeto(ErrorObj errorObj, int codigoErro);
     void passarPostagem(Postagem postagem);

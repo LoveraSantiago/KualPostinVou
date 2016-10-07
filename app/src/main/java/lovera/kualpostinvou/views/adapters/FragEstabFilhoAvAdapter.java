@@ -18,8 +18,8 @@ public class FragEstabFilhoAvAdapter implements MsgFromConexaoModelo{
     }
 
     @Override
-    public void passarGrupo(Grupo grupo) {
-        this.fragment.consumirAvTempoAtend_receberGrupo(grupo);
+    public void passarGrupo(Grupo grupo, int resultCode) {
+        this.fragment.consumirAvTempoAtend_receberGrupo(grupo, resultCode);
     }
 
     @Override

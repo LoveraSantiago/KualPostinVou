@@ -93,9 +93,4 @@ public class FragEstabelecimentoController {
     public FragmentFilho[] getFragFilhos(){
         return new FragmentFilho[]{this.fragFilhoDescricao, this.fragFilhoInfo, this.fragFilhoAvaliacao, this.fragFilhoEndereco};
     }
-
-    //Metodos do fragFilhoAvaliacao
-    public void showDialogCadastrarTempoDeAtendimento(){
-        this.fragFilhoAvaliacao.showDialogCadastrarTempoDeAtendimento();
-    }
 }

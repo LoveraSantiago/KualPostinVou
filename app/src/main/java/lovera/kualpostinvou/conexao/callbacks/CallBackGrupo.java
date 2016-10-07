@@ -10,12 +10,13 @@ import retrofit2.Response;
 public class CallBackGrupo implements Callback<ResponseBody>{
 
     private final MsgFromConexaoModelo msg;
-
+    private final int resultCode;
     private final Grupo grupo;
 
-    public CallBackGrupo(MsgFromConexaoModelo msg, Grupo grupo) {
+    public CallBackGrupo(MsgFromConexaoModelo msg, Grupo grupo, int resultCode) {
         this.msg = msg;
         this.grupo = grupo;
+        this.resultCode = resultCode;
     }
 
     @Override
@@ -25,7 +26,7 @@ public class CallBackGrupo implements Callback<ResponseBody>{
             int posicaoBarra = location.lastIndexOf("/");
             String codigo = location.substring(posicaoBarra, location.length());
             this.grupo.setCodGrupo(Integer.parseInt(codigo));
-            this.msg.passarGrupo(this.grupo);
+            this.msg.passarGrupo(this.grupo, this.resultCode);
         }
         else{
             //TODO error

@@ -46,7 +46,7 @@ public class FragEstabAdapter implements MsgFromConexaoSaude, MsgFromConexaoMode
     }
 
     @Override
-    public void passarGrupo(Grupo grupo) {
+    public void passarGrupo(Grupo grupo, int resultCode) {
 
     }
 

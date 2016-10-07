@@ -22,18 +22,22 @@ import lovera.kualpostinvou.modelos.utils.FactoryModelos;
 import lovera.kualpostinvou.views.PrincipalActivity;
 import lovera.kualpostinvou.views.adapters.FragEstabFilhoAvAdapter;
 import lovera.kualpostinvou.views.components.dialogs.AvAtendPermissoesDialog;
-import lovera.kualpostinvou.views.components.dialogs.DismissDialog;
 import lovera.kualpostinvou.views.components.dialogs.AvTempoDialog;
-import lovera.kualpostinvou.views.controllers.AvTempoController;
+import lovera.kualpostinvou.views.components.dialogs.DismissDialog;
+import lovera.kualpostinvou.views.components.helpers.AvTempoComponents;
+import lovera.kualpostinvou.views.components.helpers.FragEstabFilhoAvComponents;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 import lovera.kualpostinvou.views.services.ServicesNames;
-import lovera.kualpostinvou.views.utils.FactoryViews;
 
 import static lovera.kualpostinvou.views.utils.FactoryViews.factoryDismissDialog;
 
 public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsReceiver.Receiver{
+
+    public static int RESULT_GRUPO_GET = 0;
+    public static int RESULT_GRUPO_CAD = 1;
+
 
     public static String TITULO_FRAGMENT = "Filho Avaliacao";
     public static int ID_FRAGMENT = 2;
@@ -42,7 +46,8 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     private Estabelecimento estabelecimento;
     private Grupo grupoTempoAtendimento;
 
-    private AvTempoController tempoController;
+    private AvTempoComponents tempoComponents;
+    private FragEstabFilhoAvComponents components;
 
     private HelperGeolocalizacao helperGPS;
 
@@ -61,8 +66,10 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.tempoController = new AvTempoController(getActivity());
+        this.tempoComponents = new AvTempoComponents(getActivity());
+        this.components = new FragEstabFilhoAvComponents(this);
         this.helperGPS = Aplicacao.getHelperGps();
+
         inicializarConexao();
         inicializarReceivers();
         inicializarDialogAvTempo();
@@ -83,6 +90,12 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     }
 
     @Override
+    public void setArguments(Bundle args) {
+        super.setArguments(args);
+        this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         consumirAvTempoAtend();
@@ -95,37 +108,30 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
             }
             else{
                 this.grupoTempoAtendimento = FactoryModelos.geradorDeGrupo(this.estabelecimento.getCodUnidade());
-                this.conexaoModelo.getGrupo(this.grupoTempoAtendimento);
+                this.conexaoModelo.getGrupo(this.grupoTempoAtendimento, this.RESULT_GRUPO_GET);
             }
         }
         else{
-            this.tempoController.realizarAcao(AvTempoController.NECESSARIO_LOGAR);
+            this.tempoComponents.realizarAcao(AvTempoComponents.NECESSARIO_LOGAR);
         }
     }
 
-    public void consumirAvTempoAtend_receberGrupo(Grupo grupo){
+    public void consumirAvTempoAtend_receberGrupo(Grupo grupo, int resultCode){
+        if(resultCode == RESULT_GRUPO_GET){
 
+        }
+        else{
+
+        }
     }
 
     private void cadastrarGrupo(Grupo grupo){
-        this.conexaoModelo.cadastrarGrupo(Aplicacao.getPessoaLogada().getToken(), grupo);
+        this.conexaoModelo.cadastrarGrupo(Aplicacao.getPessoaLogada().getToken(), grupo, this.RESULT_GRUPO_CAD);
     }
 
     public void tratarErrorObjeto(ErrorObj error, int codigoErro){
         if(codigoErro == MsgFromConexaoModelo.COD_GRUPO_INEXISTENTE){
             cadastrarGrupo(this.grupoTempoAtendimento);
-        }
-    }
-
-    @Override
-    public void setArguments(Bundle args) {
-        super.setArguments(args);
-        this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
-    }
-
-    public void showDialogCadastrarTempoDeAtendimento(){
-        if(validarPermissoesCadastroAtendimento()){
-            dialogTimer.show();
         }
     }
 
@@ -146,12 +152,12 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         Distancia distancia = new Distancia();
         double distanciaLocal = distancia.calcularKmDistancia(localizacaoAtualizada, this.estabelecimento);
         if(distanciaLocal > 5){
-            showDialogDistanteEstabelecimento();
+            this.components.showDialogDistanteEstabelecimento();
         }
         else{
             int minutos = this.dialogTimer.getMinutos();
             if(minutos == 0){
-                showDialogTempoZerado();
+                this.components.showDialogTempoZerado();
             }
             else{
                 ConteudoPostagem conteudoPost = FactoryModelos.gerarConteudoPostagem(postagem, minutos);
@@ -163,8 +169,6 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     public void passarConteudoPostagem(ConteudoPostagem conteudo) {
     }
 
-
-
     private boolean validarPermissoesCadastroAtendimento(){
         boolean temToken = Aplicacao.getPessoaLogada().hasToken();
         boolean temLocalizacao = this.helperGPS.temLastLocation();
@@ -175,13 +179,19 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         }
         else{
             if(Aplicacao.getPessoaLogada().isServiceTokenEmAndamento()){
-                showDialogAguardeLogin();
+                this.components.showDialogAguardeLogin();
                 return false;
             }
             else{
-                showDialogPermissoes(temToken, temLocalizacao);
+                this.components.showDialogPermissoes(temToken, temLocalizacao);
                 return false;
             }
+        }
+    }
+
+    public void showDialogCadastrarTempoDeAtendimento(){
+        if(validarPermissoesCadastroAtendimento()){
+            dialogTimer.show();
         }
     }
 
@@ -214,52 +224,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
             ((PrincipalActivity) getActivity()).fecharProgresso();
         }
         else{
-            showDialogGpsCancelado();
+            this.components.showDialogGpsCancelado();
         }
-    }
-
-    private void showDialogGpsCancelado(){
-        DismissDialog dialog = factoryDismissDialog(getActivity(), "Localização Requerida",
-                "Para realizar a avaliação de tempo do estabelecimento é necessario autorizar o gps");
-        dialog.show();
-    }
-
-    private void showDialogAguardeLogin(){
-        DismissDialog dialog = factoryDismissDialog(getActivity(), "Login em Andamento",
-                "Aguarde um instante, login em andamento");
-        dialog.show();
-    }
-
-    private void showDialogDistanteEstabelecimento(){
-        DismissDialog dialog = factoryDismissDialog(getActivity(),"Distante do Estabelecimento",
-                "Só é permitido registrar avaliação sobre um estabelecimento estando proximo dele.");
-        dialog.show();
-    }
-
-    private void showDialogTempoZerado(){
-        DismissDialog dialog = factoryDismissDialog(getActivity(),"Tempo inválido",
-                "O registro de tempo deve ser diferente de zero.");
-        dialog.show();
-    }
-
-    private void showDialogPermissoes(boolean temToken, boolean temLocalizacao){
-        AvAtendPermissoesDialog dialogAtend = new AvAtendPermissoesDialog(this);
-        if(!temToken){
-            dialogAtend.configurarLinhaLogado(true, false);
-        }
-        else{
-            dialogAtend.configurarLinhaLogado(true, true);
-        }
-        if(!temLocalizacao){
-            dialogAtend.configurarLinhaGps(true, false);
-        }
-        else{
-            dialogAtend.configurarLinhaGps(true, true);
-        }
-        dialogAtend.show();
-    }
-
-    public void realizarAcao(int codigo){
-        this.tempoController.realizarAcao(codigo);
     }
 }

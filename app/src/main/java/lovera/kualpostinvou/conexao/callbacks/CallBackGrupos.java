@@ -15,10 +15,12 @@ public class CallBackGrupos implements Callback<List<Grupo>>{
 
     private final MsgFromConexaoModelo msg;
     private final Retrofit retrofit;
+    private final int resultCode;
 
-    public CallBackGrupos(MsgFromConexaoModelo msg, Retrofit retrofit) {
+    public CallBackGrupos(MsgFromConexaoModelo msg, Retrofit retrofit, int resultCode) {
         this.msg = msg;
         this.retrofit = retrofit;
+        this.resultCode = resultCode;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class CallBackGrupos implements Callback<List<Grupo>>{
         if(response.isSuccessful()){
             List<Grupo> listaGrupo = response.body();
             if(listaGrupo.size() > 0){
-                this.msg.passarGrupo(listaGrupo.get(0));
+                this.msg.passarGrupo(listaGrupo.get(0), this.resultCode);
             }
             else{
                 ErrorObj error = new ErrorObj();

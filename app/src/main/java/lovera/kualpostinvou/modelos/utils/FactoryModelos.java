@@ -12,6 +12,7 @@ import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Grupo;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Postagem;
+import lovera.kualpostinvou.modelos.Tipo;
 import lovera.kualpostinvou.views.utils.Utils_View;
 
 public class FactoryModelos {
@@ -31,18 +32,27 @@ public class FactoryModelos {
 
         postagemResult.setAutor(geradorDeAutor());
         postagemResult.setCodGrupoDestino(codGrupo);
+        postagemResult.setTipo(geradorTipo(codGrupo));
+        postagemResult.setCodTipoObjetoDestino(codGrupo);
+        postagemResult.setCodObjetoDestino(codGrupo);
 
         return postagemResult;
     }
 
     public static Postagem geradorDePostagem(Grupo grupo){
-        geradorDePostagem(grupo.getCodGrupo());
+        return geradorDePostagem(grupo.getCodGrupo());
     }
 
     public static Autor geradorDeAutor(){
         Autor autorResult = new Autor();
         autorResult.setCodPessoa(Aplicacao.getPessoaLogada().getPessoa().getCod());
         return autorResult;
+    }
+
+    public static Tipo geradorTipo(int codGrupo){
+        Tipo tipoResult = new Tipo();
+        tipoResult.setCodTipoPostagem(codGrupo);
+        return tipoResult;
     }
 
     public static Localizacao geradorLocalizacao(double latitude, double longitude){

@@ -274,13 +274,6 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
         this.frag2.consumirEstabelecimentosGeolocalizacao(view.getTag().toString());
     }
 
-    //ACOES DO FRAGMENT ESTABELECIMENTO
-    public void showDialogCadastrarTempoDeAtendimento(View view){
-        if(this.fragAtiva instanceof FragEstabelecimento){
-            ((FragEstabelecimento)this.fragAtiva).showDialogCadastrarTempoDeAtendimento();
-        }
-    }
-
     public Fragment getFragAtiva() {
         return fragAtiva;
     }
