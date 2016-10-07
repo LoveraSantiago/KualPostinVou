@@ -9,6 +9,14 @@ import lovera.kualpostinvou.views.redes_sociais.google.Google_Coisas;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 
 public class Aplicacao extends Application{
+    /**
+     * Paleta de cores
+     * #2988BC azul
+     * #2F496E azul escuro
+     * #F4EADE pastel
+     * #ED8C72 coral
+     * #FCFCFA branco
+     */
 
     public static final int COD_APLICACAO = 263;
 
