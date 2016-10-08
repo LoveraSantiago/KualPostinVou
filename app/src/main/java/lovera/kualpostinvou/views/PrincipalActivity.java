@@ -15,6 +15,7 @@ import java.util.Map;
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Pessoa;
+import lovera.kualpostinvou.views.components.dialogs.DismissDialog;
 import lovera.kualpostinvou.views.components.helpers.PrincipalActivityComponents;
 import lovera.kualpostinvou.views.contratos.FragmentInfo;
 import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
@@ -30,6 +31,7 @@ import lovera.kualpostinvou.views.receivers.ReceiversNames;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 import lovera.kualpostinvou.views.services.LocalizacaoService;
 import lovera.kualpostinvou.views.services.ServicesNames;
+import lovera.kualpostinvou.views.utils.FactoryViews;
 
 //TODO: colocar restauração dos estados das fragments principais ver => https://developer.android.com/training/basics/activity-lifecycle/recreating.html?hl=pt-br
 public class PrincipalActivity extends AppCompatActivity implements MsgFromNavigationDrawer, MsgToActivity, CommonsReceiver.Receiver{
@@ -176,6 +178,11 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
                 fecharProgresso();
                 Aplicacao.getPessoaLogada().setServiceTokenEmAndamento(false);
             }
+        }
+        if(resultCode == ServicesNames.SERVIDOR_OFF){
+            fecharProgresso();
+            DismissDialog dialog = FactoryViews.factoryDismissDialog(this, "Falha de Conexão", "Desculpe estamos com problemas técnicos temporários. Tente mais tarde por favor");
+            dialog.show();
         }
     }
 
