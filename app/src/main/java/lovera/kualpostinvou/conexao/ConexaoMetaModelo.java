@@ -65,6 +65,7 @@ public class ConexaoMetaModelo {
             CallBackAutenticar callBackAutenticar = new CallBackAutenticar(this.retrofit);
             callBackAutenticar.procedimentoSincrono(response, pessoa, token, error);
         } catch (IOException e) {
+            error.setReasonPhrase("SERVIDOR FORA");
             e.printStackTrace();
         }
     }
