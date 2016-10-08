@@ -3,6 +3,7 @@ package lovera.kualpostinvou.views.redes_sociais;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.widget.ImageView;
 
 import lovera.kualpostinvou.Aplicacao;
@@ -11,6 +12,7 @@ import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.views.PrincipalActivity;
+import lovera.kualpostinvou.views.components.helpers.ImgViewDrawerNavigComponent;
 import lovera.kualpostinvou.views.contratos.MsgToViewHolderHeader;
 import lovera.kualpostinvou.views.receivers.ReceiversNames;
 import lovera.kualpostinvou.views.services.AppCivicoTokenService;
@@ -21,13 +23,14 @@ public class PessoaLogada{
     private boolean serviceTokenEmAndamento;
 
     private Pessoa pessoa;
-    private ImageView espacoParaImg;
     private Localizacao localizacao;
-
+    
+    private ImgViewDrawerNavigComponent imgViewComponent;
     private MsgToViewHolderHeader receptorMsg;
 
     public PessoaLogada() {
         this.pessoa = new Pessoa();
+        this.imgViewComponent = new ImgViewDrawerNavigComponent();
         resetPessoa();
     }
 
@@ -87,19 +90,20 @@ public class PessoaLogada{
 
     public void getImgPessoa(ImageView imgView){
         if(isPessoaLogado()){
-            this.espacoParaImg = imgView;
+            this.imgViewComponent.setEspacoParaImg(imgView);
             ConexaoMetaModelo conexaoMetaModelo = new ConexaoMetaModelo(null);
             conexaoMetaModelo.downloadImageNaUrl(this.pessoa.getUriImgPerfil());
+            this.imgViewComponent.configurarImgViewPessoaLogada(imgView);
         }
         else{
-            imgView.setImageResource(this.pessoa.getIntImgPerfil());
-            imgView.invalidate();
+            this.imgViewComponent.configurarImgViewPessoaNLogada(imgView, this.pessoa);
         }
+        imgView.invalidate();
     }
 
+
     public void passarBitmapImg(Bitmap bitmap) {
-        this.espacoParaImg.setImageBitmap(bitmap);
-        this.espacoParaImg.invalidate();
+        this.imgViewComponent.passarBitmapImg(bitmap);
     }
 
     public void setReceptorMsg(MsgToViewHolderHeader receptorMsg) {

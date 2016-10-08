@@ -161,6 +161,7 @@ public class Facebook_Coisas {
 
     public void onStart(Activity activity){
         if(this.estouLogado){
+            Aplicacao.getPessoaLogada().inicializarPessoa();
             Aplicacao.getPessoaLogada().inicializarTokenAppCivico(activity);
         }
         else{

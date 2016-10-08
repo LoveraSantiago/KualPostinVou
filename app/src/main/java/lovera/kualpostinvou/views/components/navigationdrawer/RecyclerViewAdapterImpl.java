@@ -66,7 +66,7 @@ public class RecyclerViewAdapterImpl extends RecyclerView.Adapter<ViewHolder> im
             holder.getImageView().setImageResource(this.mapFragments.get(position).getIcone());
         }
         else{
-            this.pessoaLogada.getImgPessoa(holder.getProfile());
+            this.pessoaLogada.getImgPessoa(holder.getProfileImg());
             holder.getName().setText(this.pessoaLogada.getPessoa().getNomeCompleto());
             holder.getEmail().setText(this.pessoaLogada.getPessoa().getEmail());
         }

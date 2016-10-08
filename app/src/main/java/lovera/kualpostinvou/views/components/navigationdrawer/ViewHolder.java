@@ -20,7 +20,7 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
     private TextView textView;
     private ImageView imageView;
 
-    private ImageView profile;
+    private ImageView profileImg;
     private TextView Name;
     private TextView email;
 
@@ -44,7 +44,7 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
             Aplicacao.getPessoaLogada().setReceptorMsg(this);
             this.Name = (TextView) itemView.findViewById(R.id.nome);
             this.email = (TextView) itemView.findViewById(R.id.email);
-            this.profile = (ImageView) itemView.findViewById(R.id.circleView);
+            this.profileImg = (ImageView) itemView.findViewById(R.id.circleView);
             this.Holderid = 0;
             headerAlterado();
         }
@@ -55,7 +55,7 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
         Pessoa pessoa = Aplicacao.getPessoaLogada().getPessoa();
         this.Name.setText(pessoa.getNomeCompleto());
         this.email.setText(pessoa.getEmail());
-        Aplicacao.getPessoaLogada().getImgPessoa(this.profile);
+        Aplicacao.getPessoaLogada().getImgPessoa(this.profileImg);
     }
 
     @Override
@@ -83,8 +83,8 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
         return imageView;
     }
 
-    public ImageView getProfile() {
-        return profile;
+    public ImageView getProfileImg() {
+        return profileImg;
     }
 
     public TextView getName() {
