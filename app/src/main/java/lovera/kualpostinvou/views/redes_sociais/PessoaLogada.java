@@ -24,7 +24,7 @@ public class PessoaLogada{
 
     private Pessoa pessoa;
     private Localizacao localizacao;
-    
+
     private ImgViewDrawerNavigComponent imgViewComponent;
     private MsgToViewHolderHeader receptorMsg;
 

@@ -36,6 +36,7 @@
         <service android:name="lovera.kualpostinvou.views.services.LocalizacaoService"        android:exported="false"/>
         <service android:name="lovera.kualpostinvou.views.services.AppCivicoTokenService"     android:exported="false"/>
         <service android:name="lovera.kualpostinvou.views.services.NomeGeolocalizacaoService" android:exported="false"/>
+        <service android:name="lovera.kualpostinvou.views.services.DelayService"              android:exported="false"/>
     </application>
 
 </manifest>
