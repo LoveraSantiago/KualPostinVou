@@ -63,10 +63,10 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
         if(getAdapterPosition() == 0) return;
 
         if(this.msgV.getUltimaViewClicada() != null){
-            this.msgV.getUltimaViewClicada().setBackgroundColor(Color.WHITE);
+            this.msgV.getUltimaViewClicada().setBackgroundColor(Color.rgb(244, 234, 222));
         }
 
-        v.setBackgroundColor(Color.RED);
+        v.setBackgroundColor(Color.rgb(237, 140, 114));
         this.msgN.selectItem(getAdapterPosition());
         this.msgV.setUltimaViewClicada(v);
     }

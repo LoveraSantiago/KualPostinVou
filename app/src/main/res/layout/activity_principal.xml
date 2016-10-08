@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-s        <RelativeLayout
+        <RelativeLayout
             android:layout_below="@+id/app_bar"
             android:visibility="gone"
             android:id="@+id/a1_ui_status"
@@ -51,7 +51,7 @@ s        <RelativeLayout
         android:layout_width="320dp"
         android:layout_height="match_parent"
         android:layout_gravity="left"
-        android:background="#ffffff"
+        android:background="#F4EADE"
         android:scrollbars="vertical">
 
     </android.support.v7.widget.RecyclerView>

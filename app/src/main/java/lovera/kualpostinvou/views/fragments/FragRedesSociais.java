@@ -31,7 +31,7 @@ public class FragRedesSociais extends FragmentMenu {
 
     public static String TITULO_FRAGMENT = "Redes Sociais";
     public static int ID_FRAGMENT = 3;
-    public static int ICONE = R.drawable.ic_account_circle_black_24dp;
+    public static int ICONE = R.drawable.icn_pessoa_linha;
 
     private LoginButton faceLoginButton;
 

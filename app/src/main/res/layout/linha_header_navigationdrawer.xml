@@ -2,47 +2,51 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="178dp"
-    android:background="@drawable/background_drawer"
+    android:background="@drawable/background_drawer2"
     android:orientation="vertical"
     android:weightSum="1">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
         android:orientation="vertical"
-        android:layout_marginBottom="5dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true">
+        android:paddingLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/nome"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:textColor="#ED8C72"
-            android:text="Santuga Lovera"
-            android:textSize="25dp"
-            android:textStyle="bold"/>
+            android:src="@drawable/icn_pessoa_drawer"
+            android:id="@+id/circleView"/>
 
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/l2_layoutinfo"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#ED8C72"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="3dp"
-            android:text="santiago.lovera@gmail.com"
-            android:textSize="15dp"
-            android:textStyle="normal"/>
+            android:orientation="vertical"
+            android:layout_marginBottom="15dp"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:id="@+id/nome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ED8C72"
+                android:text="Santuga Lovera"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ED8C72"
+                android:layout_marginTop="1dp"
+                android:text="santiago.lovera@gmail.com"
+                android:textSize="15dp"
+                android:textStyle="normal"/>
+
+        </LinearLayout>
 
     </LinearLayout>
-    
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@drawable/icon_people_128"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="38dp"
-        android:id="@+id/circleView"/>
-
 </RelativeLayout>

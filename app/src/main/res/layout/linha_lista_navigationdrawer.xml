@@ -3,9 +3,9 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
-    android:background="#ffffff">
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
+    android:background="#F4EADE">
 
     <ImageView
         android:id="@+id/linhaIcone"
@@ -15,6 +15,7 @@
         android:src="@drawable/ic_check_black_24dp"/>
     
     <TextView
+        android:textColor="#2988BC"
         android:id="@+id/linhaTexto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

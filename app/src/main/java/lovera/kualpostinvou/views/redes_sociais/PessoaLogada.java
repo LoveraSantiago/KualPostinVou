@@ -72,9 +72,9 @@ public class PessoaLogada{
     }
 
     public void resetPessoa(){
-        this.pessoa.setNomeCompleto("Não Logado");
-        this.pessoa.setIntImgPerfil(R.drawable.icon_people_128);
-        this.pessoa.setEmail("temp@temp");
+        this.pessoa.setNomeCompleto("Usuario Não Logado");
+        this.pessoa.setIntImgPerfil(R.drawable.icn_pessoa_drawer);
+        this.pessoa.setEmail("usuario@nao.logado");
     }
 
     public Pessoa getPessoa() {
@@ -107,7 +107,7 @@ public class PessoaLogada{
     }
 
     public boolean isPessoaLogado(){
-        return !this.pessoa.getNomeCompleto().equals("Não Logado");
+        return !this.pessoa.getNomeCompleto().equals("Usuario Não Logado");
     }
 
     public void setToken(String token) {

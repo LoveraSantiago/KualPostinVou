@@ -17,6 +17,7 @@ import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Instalacao;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.views.receivers.ReceiversNames;
+import lovera.kualpostinvou.views.utils.FactoryViews;
 import lovera.kualpostinvou.views.utils.Utils_View;
 
 public class AppCivicoTokenService extends IntentService{
@@ -43,7 +44,7 @@ public class AppCivicoTokenService extends IntentService{
             Aplicacao.getPessoaLogada().setToken(stringBuilder.toString());//Conseguiu pegar o token
             procedimentoSucesso(resultReceiver);
         }
-        else if(errorObj.getReasonPhrase().equals("Unauthorized")){//Não conseguiu pegar o token e aponta que o erro foi de unauthorized
+        else if(errorObj.getReasonPhrase() != null && errorObj.getReasonPhrase().equals("Unauthorized")){//Não conseguiu pegar o token e aponta que o erro foi de unauthorized
             conexao.cadastrarPessoa(pessoa, stringBuilder, errorObj); //Tenta o cadastro
             if(stringBuilder.length() > 0){//resultado cadastro
 
@@ -72,6 +73,9 @@ public class AppCivicoTokenService extends IntentService{
                 Log.e("AppCivicoTokenService", "Problema ao cadastrar");
             }
         }
+        else if(errorObj.getReasonPhrase() != null && errorObj.getReasonPhrase().equals("SERVIDOR FORA")){
+            procedimentoFalho(resultReceiver);
+        }
         stopSelf();
     }
 
@@ -79,5 +83,11 @@ public class AppCivicoTokenService extends IntentService{
         Bundle bundle = new Bundle();
         bundle.putBoolean("RESULTADO", true);
         resultReceiver.send(ServicesNames.TOKEN_APPCIVICO, bundle);
+    }
+
+    private void procedimentoFalho(ResultReceiver resultReceiver){
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("RESULTADO", false);
+        resultReceiver.send(ServicesNames.SERVIDOR_OFF, bundle);
     }
 }
