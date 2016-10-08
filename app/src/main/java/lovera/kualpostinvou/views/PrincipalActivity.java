@@ -150,15 +150,22 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == HelperGeolocalizacao.USUARIO_ESCOLHENDO_OPCAO){
-            if(resultCode == PrincipalActivity.RESULT_OK){
-                Intent intent = new Intent(this, LocalizacaoService.class);
-                intent.putExtra(ReceiversNames.GPSLOCALIZACAO, this.receiverGps);
-                startService(intent);
-            }
-            else if(resultCode == PrincipalActivity.RESULT_CANCELED){
-                fecharProgresso();
-                this.receiverGps.send(ServicesNames.GPS_SERVICE, null);
-            }
+            onActivityResultDoHelperGeolocalizacao(resultCode);
+        }
+        else{
+            this.fragAtiva.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private void onActivityResultDoHelperGeolocalizacao(int resultCode){
+        if(resultCode == PrincipalActivity.RESULT_OK){
+            Intent intent = new Intent(this, LocalizacaoService.class);
+            intent.putExtra(ReceiversNames.GPSLOCALIZACAO, this.receiverGps);
+            startService(intent);
+        }
+        else if(resultCode == PrincipalActivity.RESULT_CANCELED){
+            fecharProgresso();
+            this.receiverGps.send(ServicesNames.GPS_SERVICE, null);
         }
     }
 

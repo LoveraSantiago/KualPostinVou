@@ -68,6 +68,7 @@ public class AvTempoComponents {
     }
 
     private void procedimentoPrecisaLogar(){
+        this.mensagem.setVisibility(View.VISIBLE);
         this.mensagem.setText("É necessário logar p/ ver tempo de atendimento.");
         this.progressoTemposAtendimento.setVisibility(View.GONE);
     }
