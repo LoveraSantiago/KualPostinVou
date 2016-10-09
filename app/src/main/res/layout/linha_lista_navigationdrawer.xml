@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:paddingTop="6dp"
     android:paddingBottom="6dp"
-    android:background="#F4EADE">
+    android:background="@color/mPastel">
 
     <ImageView
         android:id="@+id/linhaIcone"
@@ -15,7 +15,7 @@
         android:src="@drawable/ic_check_black_24dp"/>
     
     <TextView
-        android:textColor="#2988BC"
+        android:textColor="@color/mAzulClaro"
         android:id="@+id/linhaTexto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

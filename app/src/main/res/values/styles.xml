@@ -1,7 +1,6 @@
 <resources>
-
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
-        <item name="color">#ED8C72</item>
+        <item name="color">@color/mCoral</item>
     </style>
 
     <!-- Base application theme. -->

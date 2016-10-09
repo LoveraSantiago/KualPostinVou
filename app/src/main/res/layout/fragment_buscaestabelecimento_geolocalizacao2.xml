@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="@color/mAzulBranco"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:background="#b2cce5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -20,14 +20,12 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:background="#61C5B6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:background="#66ffcc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
@@ -41,7 +39,6 @@
                 </LinearLayout>
 
                 <RelativeLayout
-                    android:background="#CCC2FF"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -59,7 +56,6 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/f2_menos"
                         android:layout_toLeftOf="@+id/f2_mais"
-                        android:background="#FFFF00"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:max="49"/>
@@ -79,7 +75,6 @@
 
             <TextView
                 android:id="@+id/f2_lblseekbar"
-                android:background="#b3ccff"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -88,7 +83,6 @@
                 android:text="1"/>
 
             <TextView
-                android:background="#FF6666"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"

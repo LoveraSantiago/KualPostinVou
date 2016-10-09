@@ -31,7 +31,7 @@
                 android:id="@+id/nome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#ED8C72"
+                android:textColor="@color/mCoral"
                 android:text="Santuga Lovera"
                 android:textSize="20dp"
                 android:textStyle="bold"/>
@@ -40,7 +40,7 @@
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#ED8C72"
+                android:textColor="@color/mCoral"
                 android:layout_marginTop="1dp"
                 android:text="santiago.lovera@gmail.com"
                 android:textSize="15dp"

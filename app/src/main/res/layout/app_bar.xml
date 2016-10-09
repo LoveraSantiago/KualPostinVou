@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#2F496E"
-    app:titleTextColor="#ED8C72">
+    android:background="@color/mAzulEscuro"
+    app:titleTextColor="@color/mCoral">
 
 </android.support.v7.widget.Toolbar>

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layoutPrincipal"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#F4EADE"
+    android:background="@color/mPastel"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     android:paddingLeft="10dp"
@@ -12,7 +12,7 @@
     tools:context="lovera.kualpostinvou.MainActivity">
 
     <RelativeLayout
-        android:background="#ED8C72"
+        android:background="@color/mCoral"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
