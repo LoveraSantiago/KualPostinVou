@@ -78,6 +78,7 @@ public class PessoaLogada{
         this.pessoa.setNomeCompleto("Usuario Não Logado");
         this.pessoa.setIntImgPerfil(R.drawable.icn_pessoa_drawer);
         this.pessoa.setEmail("usuario@nao.logado");
+        this.pessoa.setUriImgPerfil(null);
     }
 
     public Pessoa getPessoa() {

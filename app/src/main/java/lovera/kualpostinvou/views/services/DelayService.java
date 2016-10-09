@@ -19,7 +19,7 @@ public class DelayService extends IntentService{
     @Override
     protected void onHandleIntent(Intent intent) {
         ResultReceiver resultReceiver = intent.getParcelableExtra(ReceiversNames.DELAY);
-        int tempo = intent.getIntExtra("tempo", 3000);
+        int tempo = intent.getIntExtra("tempo", 1000);
         try {
             Thread.sleep(tempo);
         } catch (InterruptedException e) {

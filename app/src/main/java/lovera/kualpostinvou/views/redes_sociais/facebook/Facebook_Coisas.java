@@ -134,6 +134,7 @@ public class Facebook_Coisas {
         if(this.estouLogado){
             LoginManager.getInstance().logOut();
             this.estouLogado = false;
+            Aplicacao.getPessoaLogada().inicializarPessoa();
         }
     }
 

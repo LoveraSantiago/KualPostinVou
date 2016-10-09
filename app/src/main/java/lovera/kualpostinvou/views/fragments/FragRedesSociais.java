@@ -59,7 +59,6 @@ public class FragRedesSociais extends FragmentMenu {
         if(requestCode == RC_SIGN_IN){
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             Aplicacao.getGoogleCoisas().onLoginFeito(getActivity(), result);
-
         }
         else{
             Aplicacao.getFaceCoisas().getCallbackManager().onActivityResult(requestCode, resultCode, data);
@@ -148,15 +147,14 @@ public class FragRedesSociais extends FragmentMenu {
             public void onClick(View v) {
                 try{
                     Aplicacao.getPessoaLogada().setToken(null);
-                    Aplicacao.getPessoaLogada().inicializarPessoa();
                     Aplicacao.getGoogleCoisas().realizarLogout();
                 }
-                catch (Exception e){}
+                catch (Exception e){ e.printStackTrace();}
 
                 try{
                     Aplicacao.getFaceCoisas().realizarLogout();
                 }
-                catch (Exception e){}
+                catch (Exception e){ e.printStackTrace();}
             }
         });
     }

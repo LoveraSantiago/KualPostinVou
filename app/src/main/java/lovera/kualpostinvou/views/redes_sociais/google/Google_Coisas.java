@@ -72,8 +72,8 @@ public class Google_Coisas implements GoogleApiClient.ConnectionCallbacks, Googl
         if(result.isSuccess()) {
             this.acount = result.getSignInAccount();
             this.estouLogado = true;
-            Aplicacao.getPessoaLogada().inicializarPessoa();
             Aplicacao.getFaceCoisas().realizarLogout();
+            Aplicacao.getPessoaLogada().inicializarPessoa();
             Aplicacao.getPessoaLogada().inicializarTokenAppCivico(activity);
         }
     }
@@ -97,6 +97,7 @@ public class Google_Coisas implements GoogleApiClient.ConnectionCallbacks, Googl
                         @Override
                         public void onResult(@NonNull Status status) {
                             estouLogado = false;
+                            Aplicacao.getPessoaLogada().inicializarPessoa();
                         }
                     }
             );
