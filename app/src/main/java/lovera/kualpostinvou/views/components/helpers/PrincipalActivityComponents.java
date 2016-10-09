@@ -1,6 +1,8 @@
 package lovera.kualpostinvou.views.components.helpers;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -45,7 +47,7 @@ public class PrincipalActivityComponents {
     }
 
     private void inicializarToolbar(AppCompatActivity activity){
-        this.toolbar = (Toolbar) activity.findViewById(R.id.app_bar);
+        this.toolbar = (Toolbar) activity.findViewById(R.id.app_bar);;
         activity.setSupportActionBar(this.toolbar);
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         activity.getSupportActionBar().setHomeButtonEnabled(true);
