@@ -29,7 +29,7 @@ import lovera.kualpostinvou.modelos.Pessoa;
 
 public class FragRedesSociais extends FragmentMenu {
 
-    public static String TITULO_FRAGMENT = "Redes Sociais";
+    public static String TITULO_FRAGMENT = "Logar";
     public static int ID_FRAGMENT = 3;
     public static int ICONE = R.drawable.icn_pessoa_linha;
 
