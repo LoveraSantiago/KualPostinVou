@@ -108,17 +108,15 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
-                        android:src="@drawable/hospital_peq"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        style="@style/paddingsBtnImg"
+                        android:src="@drawable/icn_hospital3"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
                         android:tag="Hospital"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/mAzulClaro"
                         android:text="Hospital"/>
 
                 </LinearLayout>
@@ -132,19 +130,18 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
-                        android:src="@drawable/hospital_peq"
+                        android:src="@drawable/icn_posto"
+                        style="@style/paddingsBtnImg"
                         android:layout_centerHorizontal="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
                         android:tag="Posto De Saúde"/>
 
                     <TextView
+                        android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Posto De Saúde"/>
+                        android:textColor="@color/mAzulClaro"
+                        android:text="Posto\nde Saúde"/>
 
                 </LinearLayout>
 
@@ -168,6 +165,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/mAzulClaro"
                         android:text="Urgência"/>
 
                 </LinearLayout>
@@ -184,17 +182,15 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
-                        android:src="@drawable/hospital_peq"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:src="@drawable/icn_farmacia"
+                        style="@style/paddingsBtnImg"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
                         android:tag="Farmácia"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/mAzulClaro"
                         android:text="Farmácia"/>
 
                 </LinearLayout>
@@ -209,18 +205,15 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
-                        android:src="@drawable/hospital_peq"
-                        android:layout_centerHorizontal="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:src="@drawable/icn_samu"
+                        style="@style/paddingsBtnImg"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
                         android:tag="Samu"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/mAzulClaro"
                         android:text="Samu"/>
 
                 </LinearLayout>
@@ -246,6 +239,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/mAzulClaro"
                         android:text="Clínica"/>
 
                 </LinearLayout>
@@ -261,17 +255,15 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
-                        android:src="@drawable/hospital_peq"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:src="@drawable/icn_laboratorio"
+                        style="@style/paddingsBtnImg"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
                         android:tag="Laboratório"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/mAzulClaro"
                         android:text="Laboratório"/>
 
                 </LinearLayout>
@@ -298,6 +290,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/mAzulClaro"
                         android:text="Consultório"/>
 
                 </LinearLayout>
@@ -312,18 +305,16 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
-                        android:src="@drawable/hospital_peq"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:src="@drawable/icn_adm"
+                        style="@style/paddingsBtnImg"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
-                        android:tag="Apoio à saúde"/>
+                        android:tag="unidade administrativa"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Apoio à saúde"/>
+                        android:textColor="@color/mAzulClaro"
+                        android:text="Administração"/>
 
                 </LinearLayout>
 
@@ -338,18 +329,17 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
-                        android:src="@drawable/hospital_peq"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:src="@drawable/icn_casa"
+                        style="@style/paddingsBtnImg"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
-                        android:tag="Todos"/>
+                        android:tag="Atendimento Domiciliar"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Todos"/>
+                        android:gravity="center"
+                        android:textColor="@color/mAzulClaro"
+                        android:text="Atendimento\nDomiciliar"/>
 
                 </LinearLayout>
 
@@ -363,20 +353,18 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
-                        android:src="@drawable/hospital_peq"
-                        android:layout_centerHorizontal="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:src="@drawable/icn_saude"
+                        style="@style/paddingsBtnImg"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
-                        android:tag="unidade administrativa"/>
+                        android:tag="Apoio à saúde"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Administração"/>
+                        android:gravity="center"
+                        android:textColor="@color/mAzulClaro"
+                        android:text="Apoio\nà saúde"/>
 
                 </LinearLayout>
 
@@ -401,7 +389,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Atenção Especifica"/>
+                        android:gravity="center"
+                        android:textColor="@color/mAzulClaro"
+                        android:text="Atenção\nEspecifica"/>
 
                 </LinearLayout>
 
@@ -422,13 +412,14 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
-                        android:tag="Atendimento Domiciliar"/>
+                        android:tag="Todos"/>
 
                     <TextView
                         android:layout_marginBottom="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Atendimento Domiciliar"/>
+                        android:textColor="@color/mAzulClaro"
+                        android:text="Todos"/>
 
                 </LinearLayout>
 

@@ -32,7 +32,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements Commo
     //Campos relativos a FragmentMenu
     public static String TITULO_FRAGMENT = "Estabelecimentos proximos";
     public static int ID_FRAGMENT = 2;
-    public static int ICONE = R.drawable.ic_my_location_black_24dp;
+    public static int ICONE = R.drawable.localizacao;
 
     private HelperGeolocalizacao helperGps;
     private FragBuscaEstabGeoLocAdapter adapterMgs;

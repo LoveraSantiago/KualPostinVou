@@ -49,7 +49,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:background="@drawable/mybutton"
+            android:background="@drawable/westilo_btn_deslogar"
             android:textColor="@color/mAzulEscuro"
             android:id="@+id/tempForceLogouts"
             android:layout_width="match_parent"
