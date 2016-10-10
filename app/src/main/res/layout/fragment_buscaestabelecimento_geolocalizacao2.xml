@@ -109,7 +109,7 @@
 
                     <ImageButton
                         style="@style/paddingsBtnImg"
-                        android:src="@drawable/icn_hospital3"
+                        android:src="@drawable/icn_hospital_grande"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
                         android:tag="Hospital"/>
 
@@ -154,11 +154,8 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
-                        android:src="@drawable/hospital_peq"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        style="@style/paddingsBtnImg"
+                        android:src="@drawable/icn_emergencia"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
                         android:tag="Urgência"/>
 
@@ -228,11 +225,8 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
-                        android:src="@drawable/hospital_peq"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        style="@style/paddingsBtnImg"
+                        android:src="@drawable/icn_hospital3"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
                         android:tag="Clínica"/>
 
@@ -278,12 +272,8 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
-                        android:src="@drawable/hospital_peq"
-                        android:layout_centerHorizontal="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        style="@style/paddingsBtnImg"
+                        android:src="@drawable/icn_estetoscopio"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
                         android:tag="Consultório"/>
 
@@ -378,11 +368,8 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
-                        android:src="@drawable/hospital_peq"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:src="@drawable/icn_doutor"
+                        style="@style/paddingsBtnImg"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
                         android:tag="atenção específica"/>
 
@@ -406,11 +393,8 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
-                        android:src="@drawable/hospital_peq"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:src="@drawable/icn_todos"
+                        style="@style/paddingsBtnImg"
                         android:onClick="consumirEstabelecimentosGeolocalizacao"
                         android:tag="Todos"/>
 
