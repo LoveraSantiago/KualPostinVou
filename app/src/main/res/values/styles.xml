@@ -4,8 +4,8 @@
     </style>
 
     <style name="paddingsBtnImg">
-        <item name="android:paddingLeft">8dp</item>
-        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
         <item name="android:paddingBottom">5dp</item>
         <item name="android:paddingTop">5dp</item>
         <item name="android:background">@drawable/westilo_btn_imgs_icons2</item>
