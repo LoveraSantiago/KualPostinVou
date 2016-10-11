@@ -2,7 +2,7 @@ package lovera.kualpostinvou.modelos.utils;
 
 public class Autor {
 
-    int codPessoa;
+    private int codPessoa;
 
     public int getCodPessoa() {
         return codPessoa;

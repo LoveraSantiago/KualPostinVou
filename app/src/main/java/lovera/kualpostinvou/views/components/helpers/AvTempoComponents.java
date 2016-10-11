@@ -16,6 +16,7 @@ import lovera.kualpostinvou.views.utils.Utils_View;
 public class AvTempoComponents {
 
     public static int NECESSARIO_LOGAR = 0;
+    public static int SEM_DADOS_CADASTRADOS = 1;
 
     private final Activity activity;
 
@@ -65,11 +66,20 @@ public class AvTempoComponents {
         if(codAcao == NECESSARIO_LOGAR){
             procedimentoPrecisaLogar();
         }
+        else if(codAcao == SEM_DADOS_CADASTRADOS){
+            procedimentoSemDadosCadastrados();
+        }
     }
 
     private void procedimentoPrecisaLogar(){
         this.mensagem.setVisibility(View.VISIBLE);
         this.mensagem.setText("É necessário logar p/ ver tempo de atendimento.");
+        this.progressoTemposAtendimento.setVisibility(View.GONE);
+    }
+
+    private void procedimentoSemDadosCadastrados(){
+        this.mensagem.setVisibility(View.VISIBLE);
+        this.mensagem.setText("Hoje ninguem registrou tempo de atendimento ainda.");
         this.progressoTemposAtendimento.setVisibility(View.GONE);
     }
 }

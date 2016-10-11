@@ -120,7 +120,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
             this.conexaoModelo.getMedia(grupo.getCodGrupo(), grupo.getCodGrupo(), grupo.getCodGrupo());
         }
         else{
-
+            this.tempoComponents.realizarAcao(AvTempoComponents.SEM_DADOS_CADASTRADOS);
         }
     }
 

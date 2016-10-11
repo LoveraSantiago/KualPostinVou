@@ -23,7 +23,7 @@ public class CallBackGrupo implements Callback<ResponseBody>{
     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
         if(response.isSuccessful()){
             String location = response.headers().get("location");
-            int posicaoBarra = location.lastIndexOf("/");
+            int posicaoBarra = location.lastIndexOf("/") + 1;
             String codigo = location.substring(posicaoBarra, location.length());
             this.grupo.setCodGrupo(Integer.parseInt(codigo));
             this.msg.passarGrupo(this.grupo, this.resultCode);

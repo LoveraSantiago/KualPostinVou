@@ -42,7 +42,7 @@ public class AvTempoDialog extends AlertDialog {
 
         this.pickerMin = (NumberPicker) mainView.findViewById(R.id.d2_pickerminuto);
         this.pickerMin.setMinValue(0);
-        this.pickerMin.setMaxValue(60);
+        this.pickerMin.setMaxValue(59);
 
         this.btnSair = (Button) mainView.findViewById(R.id.d2_btnsair);
         this.btnSair.setOnClickListener(new View.OnClickListener() {

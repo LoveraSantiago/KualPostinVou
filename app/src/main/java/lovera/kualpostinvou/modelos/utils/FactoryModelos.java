@@ -25,23 +25,22 @@ public class FactoryModelos {
         stringBuilder.append("CU" + codUnidade + "T");
         stringBuilder.append(Utils_View.dateToString(Calendar.getInstance().getTime(), "ddMMyyyy"));
         grupoResult.setDescricao(stringBuilder.toString());
+        grupoResult.setCodObjeto(100);//100 -> Estabelecimento de Saude
+
         return grupoResult;
     }
 
-    public static Postagem geradorDePostagem(int codGrupo){
+    public static Postagem geradorDePostagem(Grupo grupo){
         Postagem postagemResult = new Postagem();
 
         postagemResult.setAutor(geradorDeAutor());
-        postagemResult.setCodGrupoDestino(codGrupo);
-        postagemResult.setTipo(geradorTipo(codGrupo));
-        postagemResult.setCodTipoObjetoDestino(codGrupo);
-        postagemResult.setCodObjetoDestino(codGrupo);
+        postagemResult.setCodPessoaDestino(postagemResult.getAutor().getCodPessoa());
+        postagemResult.setCodGrupoDestino(grupo.getCodGrupo());
+        postagemResult.setTipo(geradorTipo());
+        postagemResult.setCodTipoObjetoDestino(100);//100 -> Estabelecimento de Saude
+        postagemResult.setCodObjetoDestino(100);//100 -> Estabelecimento de Saude
 
         return postagemResult;
-    }
-
-    public static Postagem geradorDePostagem(Grupo grupo){
-        return geradorDePostagem(grupo.getCodGrupo());
     }
 
     public static Autor geradorDeAutor(){
@@ -50,9 +49,9 @@ public class FactoryModelos {
         return autorResult;
     }
 
-    public static Tipo geradorTipo(int codGrupo){
+    public static Tipo geradorTipo(){
         Tipo tipoResult = new Tipo();
-        tipoResult.setCodTipoPostagem(codGrupo);
+        tipoResult.setCodTipoPostagem(75);//nota tempo de espera
         return tipoResult;
     }
 

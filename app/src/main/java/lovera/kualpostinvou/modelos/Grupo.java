@@ -4,9 +4,9 @@ import lovera.kualpostinvou.Aplicacao;
 
 public class Grupo {
 
-    private int codGrupo;
+    private transient int codGrupo;
     private int codAplicativo = Aplicacao.COD_APLICACAO;
-    private int codGrupoPai;
+    private transient int codGrupoPai;
     private int codObjeto;
     private String descricao;
 
