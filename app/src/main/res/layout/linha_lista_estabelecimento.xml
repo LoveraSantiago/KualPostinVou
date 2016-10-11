@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="@color/mAzulBranco"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="8dp"
@@ -13,10 +14,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15dp"
+        android:textColor="@color/mCoral"
         android:text="NOME DO ESTABELECIMENTO"/>
 
     <TextView
         android:id="@+id/l1_lblCidade"
+        android:textColor="@color/mAzulEscuro"
         android:paddingTop="3dp"
         android:paddingLeft="5dp"
         android:layout_below="@+id/l1_valNomeEstab"
@@ -28,6 +31,7 @@
         android:id="@+id/l1_valueCidade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/mAzulClaro"
         android:paddingLeft="5dp"
         android:text="Cidade qualquer"
         android:layout_alignBottom="@+id/l1_lblCidade"
@@ -36,15 +40,17 @@
 
     <TextView
         android:id="@+id/l1_lblBairro"
+        android:textColor="@color/mAzulEscuro"
         android:paddingTop="3dp"
         android:paddingLeft="5dp"
         android:layout_below="@+id/l1_lblCidade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bairro:"/>
+        android:text="Bairro  :"/>
 
     <TextView
         android:id="@+id/l1_valueBairro"
+        android:textColor="@color/mAzulClaro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="5dp"
@@ -65,10 +71,11 @@
        <ImageView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:src="@drawable/ic_room_black_24dp"/>
+           android:src="@drawable/icn_distancia"/>
 
        <TextView
            android:id="@+id/l1_km"
+           android:textColor="@color/mCoral"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:textSize="15dp"
