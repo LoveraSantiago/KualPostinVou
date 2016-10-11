@@ -22,6 +22,7 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.modelos.Localizacao;
+import lovera.kualpostinvou.modelos.utils.FactoryModelos;
 import lovera.kualpostinvou.views.PrincipalActivity;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 import lovera.kualpostinvou.views.receivers.ReceiversNames;
@@ -67,9 +68,8 @@ public class HelperGeolocalizacao implements LocationListener {
         }
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(this.mGoogleApiClient);
         if (mLastLocation != null) {
-            Localizacao localizaoTemp = new Localizacao();
-            localizaoTemp.setLatitude(mLastLocation.getLatitude());
-            localizaoTemp.setLongitude(mLastLocation.getLongitude());
+            Localizacao localizaoTemp = FactoryModelos.geradorLocalizacao(mLastLocation);
+            this.localizacaoAtualizada = FactoryModelos.gerardorLocalizacao(localizaoTemp);
             Aplicacao.getPessoaLogada().setLocalizacao(localizaoTemp);
             return true;
         }

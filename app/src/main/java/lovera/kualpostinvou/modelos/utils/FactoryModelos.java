@@ -1,6 +1,7 @@
 package lovera.kualpostinvou.modelos.utils;
 
 import android.location.Address;
+import android.location.Location;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -72,6 +73,14 @@ public class FactoryModelos {
 
     public static Localizacao geradorLocalizacao(Address address){
         return geradorLocalizacao(address.getLatitude(), address.getLongitude());
+    }
+
+    public static Localizacao geradorLocalizacao(Location location){
+        return geradorLocalizacao(location.getLatitude(), location.getLongitude());
+    }
+
+    public static Localizacao gerardorLocalizacao(Localizacao localizacao){
+        return geradorLocalizacao(localizacao.getLatitude(), localizacao.getLongitude());
     }
 
     public static ConteudoPostagem geradorConteudoPostagem(Postagem postagem, int tempo){

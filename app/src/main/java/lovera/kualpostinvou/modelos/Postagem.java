@@ -5,7 +5,7 @@ import lovera.kualpostinvou.modelos.utils.Autor;
 public class Postagem {
 
     private Autor autor;
-    private int codPostagem;
+    private transient int codPostagem;
     private int codGrupoDestino;
     private int codObjetoDestino;
     private int codPessoaDestino;

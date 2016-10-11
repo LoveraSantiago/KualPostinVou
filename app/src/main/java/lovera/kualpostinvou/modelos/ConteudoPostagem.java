@@ -2,7 +2,7 @@ package lovera.kualpostinvou.modelos;
 
 public class ConteudoPostagem {
 
-    private int codPostagem;
+    private transient int codPostagem;
     private String JSON;
     private String texto;
     private int valor;
