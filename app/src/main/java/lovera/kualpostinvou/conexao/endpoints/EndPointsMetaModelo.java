@@ -10,6 +10,7 @@ import lovera.kualpostinvou.modelos.Media;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.modelos.Instalacao;
 import lovera.kualpostinvou.modelos.Postagem;
+import lovera.kualpostinvou.modelos.TipoObjeto;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -49,5 +50,8 @@ public interface EndPointsMetaModelo {
 
     @GET("appCivicoRS/rest/postagens/tipopostagem/{codTipoPostagem}/tipoobjeto/{codTipoObjetoDestino}/objeto/{codObjetoDestino}")
     Call<Media> getMedia(@Path("codTipoPostagem") String codTipoPostagem, @Path("codTipoObjetoDestino") String codTipoObjetoDestino, @Path("codObjetoDestino") String codObjetoDestino);
+
+    @POST("appCivicoRS/rest/tipos-objeto")
+    Call<ResponseBody> cadastrarTipoObjeto(@Header("appToken") String appToken, @Body TipoObjeto tipoObjeto);
 }
 

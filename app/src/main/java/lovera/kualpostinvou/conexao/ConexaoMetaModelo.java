@@ -16,6 +16,7 @@ import lovera.kualpostinvou.conexao.callbacks.CallBackGrupos;
 import lovera.kualpostinvou.conexao.callbacks.CallBackImgPerfil;
 import lovera.kualpostinvou.conexao.callbacks.CallBackMedia;
 import lovera.kualpostinvou.conexao.callbacks.CallBackPostagem;
+import lovera.kualpostinvou.conexao.callbacks.CallBackTipoObjeto;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoModelo;
 import lovera.kualpostinvou.conexao.endpoints.EndPointsMetaModelo;
 import lovera.kualpostinvou.conexao.utils.FactoryConexao;
@@ -27,6 +28,7 @@ import lovera.kualpostinvou.modelos.Media;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.modelos.Instalacao;
 import lovera.kualpostinvou.modelos.Postagem;
+import lovera.kualpostinvou.modelos.TipoObjeto;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -129,5 +131,10 @@ public class ConexaoMetaModelo {
 
     public void getMedia(int codTipoPostagem, int codTipoObjetoDestino, int codObjetoDestino){
         getMedia(String.valueOf(codTipoPostagem), String.valueOf(codTipoObjetoDestino), String.valueOf(codObjetoDestino));
+    }
+
+    public void cadastrarTipoObjeto(String appToken, TipoObjeto tipoObjeto){
+        Call<ResponseBody> call = this.endpointMetaModelo.cadastrarTipoObjeto(appToken, tipoObjeto);
+        call.enqueue(new CallBackTipoObjeto(this.msg, tipoObjeto));
     }
 }

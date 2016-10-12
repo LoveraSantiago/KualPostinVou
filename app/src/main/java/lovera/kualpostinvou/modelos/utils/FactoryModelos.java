@@ -15,6 +15,7 @@ import lovera.kualpostinvou.modelos.HoraMinuto;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Postagem;
 import lovera.kualpostinvou.modelos.Tipo;
+import lovera.kualpostinvou.modelos.TipoObjeto;
 import lovera.kualpostinvou.views.utils.Utils_View;
 
 public class FactoryModelos {
@@ -31,7 +32,7 @@ public class FactoryModelos {
         return grupoResult;
     }
 
-    public static Postagem geradorDePostagem(Grupo grupo){
+    public static Postagem geradorDePostagem(Grupo grupo, TipoObjeto tipoObjeto){
         Postagem postagemResult = new Postagem();
 
         postagemResult.setAutor(geradorDeAutor());
@@ -39,7 +40,7 @@ public class FactoryModelos {
         postagemResult.setCodGrupoDestino(grupo.getCodGrupo());
         postagemResult.setTipo(geradorTipo());
         postagemResult.setCodTipoObjetoDestino(100);//100 -> Estabelecimento de Saude
-        postagemResult.setCodObjetoDestino(100);//100 -> Estabelecimento de Saude
+        postagemResult.setCodObjetoDestino(tipoObjeto.getCodTipoObjeto());//100 -> Estabelecimento de Saude
 
         return postagemResult;
     }
@@ -54,6 +55,12 @@ public class FactoryModelos {
         Tipo tipoResult = new Tipo();
         tipoResult.setCodTipoPostagem(75);//nota tempo de espera
         return tipoResult;
+    }
+
+    public static TipoObjeto geradorTipoObjeto(Grupo grupo){
+        TipoObjeto tipoObjetoResult = new TipoObjeto();
+        tipoObjetoResult.setDescricao(grupo.getDescricao());
+        return tipoObjetoResult;
     }
 
     public static Localizacao geradorLocalizacao(double latitude, double longitude){

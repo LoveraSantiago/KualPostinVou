@@ -8,6 +8,7 @@ import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Grupo;
 import lovera.kualpostinvou.modelos.Media;
 import lovera.kualpostinvou.modelos.Postagem;
+import lovera.kualpostinvou.modelos.TipoObjeto;
 import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Avaliacao;
 
 public class FragEstabFilhoAvAdapter implements MsgFromConexaoModelo{
@@ -46,5 +47,10 @@ public class FragEstabFilhoAvAdapter implements MsgFromConexaoModelo{
     @Override
     public void passarMedia(Media media) {
         this.fragment.passarMedia(media);
+    }
+
+    @Override
+    public void passarTipoObjeto(TipoObjeto tipoObjeto) {
+        this.fragment.consumirAvTempoAtend_receberTipoDeObjeto(tipoObjeto);
     }
 }

@@ -19,6 +19,7 @@ import lovera.kualpostinvou.modelos.HoraMinuto;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Media;
 import lovera.kualpostinvou.modelos.Postagem;
+import lovera.kualpostinvou.modelos.TipoObjeto;
 import lovera.kualpostinvou.modelos.utils.Distancia;
 import lovera.kualpostinvou.modelos.utils.FactoryModelos;
 import lovera.kualpostinvou.views.PrincipalActivity;
@@ -44,6 +45,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     private HoraMinuto horaMinuto;
     private Estabelecimento estabelecimento;
     private Grupo grupoTempoAtendimento;
+    private TipoObjeto tipoObjeto;
 
     private AvTempoComponents tempoComponents;
     private FragEstabFilhoAvComponents components;
@@ -121,7 +123,13 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         }
         else{
             this.tempoComponents.realizarAcao(AvTempoComponents.SEM_DADOS_CADASTRADOS);
+            TipoObjeto tipoObjeto = FactoryModelos.geradorTipoObjeto(grupo);
+            this.conexaoModelo.cadastrarTipoObjeto(Aplicacao.getPessoaLogada().getToken(), tipoObjeto);
         }
+    }
+
+    public void consumirAvTempoAtend_receberTipoDeObjeto(TipoObjeto tipoObjeto) {
+        this.tipoObjeto = tipoObjeto;
     }
 
     public void passarMedia(Media media) {
@@ -144,7 +152,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     }
 
     private void cadastrarTempoAtend_cadastrarPostagem(){
-        Postagem postagem = FactoryModelos.geradorDePostagem(this.grupoTempoAtendimento);
+        Postagem postagem = FactoryModelos.geradorDePostagem(this.grupoTempoAtendimento, this.tipoObjeto);
         conexaoModelo.cadastrarPostagem(Aplicacao.COD_APLICACAO , Aplicacao.getPessoaLogada().getToken(), postagem);
     }
 
