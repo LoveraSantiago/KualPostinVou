@@ -24,15 +24,18 @@ public class CallBackPostagens implements Callback<List<PostagemR>>{
         List<PostagemR> postagens = response.body();
         if(postagens.size() > 0){
 
+            PostagemR postagemResult = null;
+
             boolean usuarioPostou = false;
             long codigoPessoa = Aplicacao.getPessoaLogada().getPessoa().getCod();
             for(PostagemR postagem : postagens){
                 if(postagem.getCodAutor() == codigoPessoa){
+                    postagemResult = postagem;
                     usuarioPostou = true;
                     break;
                 }
             }
-            PostagemR postagemResult = postagens.get(0);
+            postagemResult = postagemResult == null ? postagens.get(0) : postagemResult;
             postagemResult.setTipo(FactoryModelos.geradorTipo());
             this.msg.passarPostagem(postagemResult, usuarioPostou);
         }

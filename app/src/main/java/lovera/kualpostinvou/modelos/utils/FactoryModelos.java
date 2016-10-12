@@ -16,6 +16,7 @@ import lovera.kualpostinvou.modelos.GrupoR;
 import lovera.kualpostinvou.modelos.HoraMinuto;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Postagem;
+import lovera.kualpostinvou.modelos.PostagemR;
 import lovera.kualpostinvou.modelos.Tipo;
 import lovera.kualpostinvou.modelos.TipoObjeto;
 import lovera.kualpostinvou.views.utils.Utils_View;
@@ -52,6 +53,21 @@ public class FactoryModelos {
         postagemResult.setTipo(geradorTipo());
         postagemResult.setCodTipoObjetoDestino(100);//100 -> Estabelecimento de Saude
         postagemResult.setCodObjetoDestino(tipoObjeto.getCodTipoObjeto());
+
+        return postagemResult;
+    }
+
+    public static PostagemR geradorDePostagemR(Postagem postagem){
+        PostagemR postagemResult = new PostagemR();
+
+        postagemResult.setAutor(postagem.getAutor());
+        postagemResult.setCodGrupoDestino(postagem.getCodGrupoDestino());
+        postagemResult.setCodPessoaDestino(postagem.getCodPessoaDestino());
+        postagemResult.setCodTipoObjetoDestino(postagem.getCodTipoObjetoDestino());
+        postagemResult.setLatitude(postagem.getLatitude());
+        postagemResult.setLongitude(postagem.getLongitude());
+        postagemResult.setPostagemRelacionada(postagem.getPostagemRelacionada());
+        postagemResult.setTipo(postagem.getTipo());
 
         return postagemResult;
     }
@@ -103,7 +119,7 @@ public class FactoryModelos {
         return geradorLocalizacao(localizacao.getLatitude(), localizacao.getLongitude());
     }
 
-    public static ConteudoPostagem geradorConteudoPostagem(Postagem postagem, int tempo){
+    public static ConteudoPostagem geradorConteudoPostagem(PostagemR postagem, int tempo){
         ConteudoPostagem conteudoResult = new ConteudoPostagem();
         conteudoResult.setCodConteudo(postagem.getCodPostagem());
         conteudoResult.setValor(tempo);

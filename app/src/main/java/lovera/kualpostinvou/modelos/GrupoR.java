@@ -1,5 +1,7 @@
 package lovera.kualpostinvou.modelos;
 
+import java.util.List;
+
 public class GrupoR extends Grupo{
 
     private long codGrupo;
@@ -11,4 +13,5 @@ public class GrupoR extends Grupo{
     public void setCodGrupo(long codGrupo) {
         this.codGrupo = codGrupo;
     }
+
 }

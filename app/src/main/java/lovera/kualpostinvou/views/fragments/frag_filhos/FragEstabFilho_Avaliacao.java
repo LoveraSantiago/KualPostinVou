@@ -171,7 +171,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         conexaoModelo.cadastrarPostagem(Aplicacao.COD_APLICACAO , Aplicacao.getPessoaLogada().getToken(), postagem);
     }
 
-    public void cadastrarTempoAtend_cadastrarConteudo(Postagem postagem){
+    public void cadastrarTempoAtend_cadastrarConteudo(PostagemR postagem){
         this.postagem = postagem;
 
         Localizacao localizacaoAtualizada = this.helperGPS.getLocalizacaoAtualizada();

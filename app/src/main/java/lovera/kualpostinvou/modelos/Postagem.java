@@ -3,7 +3,6 @@ package lovera.kualpostinvou.modelos;
 public class Postagem {
 
     private Autor autor;
-    private transient int codPostagem;
     private long codGrupoDestino;
     private long codObjetoDestino;
     private long codPessoaDestino;
@@ -19,14 +18,6 @@ public class Postagem {
 
     public void setAutor(Autor autor) {
         this.autor = autor;
-    }
-
-    public int getCodPostagem() {
-        return codPostagem;
-    }
-
-    public void setCodPostagem(int codPostagem) {
-        this.codPostagem = codPostagem;
     }
 
     public long getCodGrupoDestino() {
@@ -57,7 +48,7 @@ public class Postagem {
         return codTipoObjetoDestino;
     }
 
-    public void setCodTipoObjetoDestino(int codTipoObjetoDestino) {
+    public void setCodTipoObjetoDestino(long codTipoObjetoDestino) {
         this.codTipoObjetoDestino = codTipoObjetoDestino;
     }
 

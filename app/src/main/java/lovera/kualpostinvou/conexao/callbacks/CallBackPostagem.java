@@ -3,6 +3,8 @@ package lovera.kualpostinvou.conexao.callbacks;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoModelo;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoSaude;
 import lovera.kualpostinvou.modelos.Postagem;
+import lovera.kualpostinvou.modelos.PostagemR;
+import lovera.kualpostinvou.modelos.utils.FactoryModelos;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -11,11 +13,11 @@ import retrofit2.Response;
 public class CallBackPostagem implements Callback<ResponseBody>{
 
     private final MsgFromConexaoModelo msg;
-    private final Postagem postagem;
+    private final PostagemR postagem;
 
     public CallBackPostagem(MsgFromConexaoModelo msg, Postagem postagem) {
         this.msg = msg;
-        this.postagem = postagem;
+        this.postagem = FactoryModelos.geradorDePostagemR(postagem);
     }
 
     @Override
