@@ -52,9 +52,12 @@ public class AvTempoComponents {
     public void setTempo(HoraMinuto horaMinuto){
         this.progressoTemposAtendimento.setVisibility(View.GONE);
         if(horaMinuto == null){
-            this.mensagem.setVisibility(View.VISIBLE);
+            procedimentoSemDadosCadastrados();
         }
-        this.tvHora.setText(horaMinuto.toString());
+        else{
+            this.tvHora.setText(horaMinuto.toString());
+            this.mensagem.setVisibility(View.GONE);
+        }
     }
 
     public void registroRealizado(){

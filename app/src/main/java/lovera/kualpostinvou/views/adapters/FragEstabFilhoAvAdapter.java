@@ -41,7 +41,7 @@ public class FragEstabFilhoAvAdapter implements MsgFromConexaoModelo{
 
     @Override
     public void passarConteudoPostagem(ConteudoPostagem conteudo) {
-        this.fragment.passarConteudoPostagem(conteudo);
+        this.fragment.cadastrarTempoAtend_passarConteudoPostagem(conteudo);
     }
 
     @Override

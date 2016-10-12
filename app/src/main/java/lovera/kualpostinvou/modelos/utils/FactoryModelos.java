@@ -40,7 +40,7 @@ public class FactoryModelos {
         postagemResult.setCodGrupoDestino(grupo.getCodGrupo());
         postagemResult.setTipo(geradorTipo());
         postagemResult.setCodTipoObjetoDestino(100);//100 -> Estabelecimento de Saude
-        postagemResult.setCodObjetoDestino(tipoObjeto.getCodTipoObjeto());//100 -> Estabelecimento de Saude
+        postagemResult.setCodObjetoDestino(tipoObjeto.getCodTipoObjeto());
 
         return postagemResult;
     }
@@ -60,6 +60,8 @@ public class FactoryModelos {
     public static TipoObjeto geradorTipoObjeto(Grupo grupo){
         TipoObjeto tipoObjetoResult = new TipoObjeto();
         tipoObjetoResult.setDescricao(grupo.getDescricao());
+        tipoObjetoResult.setOwnerTabelaObjeto(grupo.getDescricao());
+        tipoObjetoResult.setTabelaObjeto(grupo.getDescricao());
         return tipoObjetoResult;
     }
 

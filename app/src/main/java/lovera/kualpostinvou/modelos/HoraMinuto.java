@@ -13,7 +13,7 @@ public class HoraMinuto {
 
     @Override
     public String toString() {
-        return new StringBuilder().append(String.format("#0.2d", this.hora  ) + "h " +
-                                          String.format("#0.2d", this.minuto) + "m").toString();
+        return new StringBuilder().append(String.format("%02d", this.hora  ) + "h " +
+                                          String.format("%02d", this.minuto) + "m").toString();
     }
 }

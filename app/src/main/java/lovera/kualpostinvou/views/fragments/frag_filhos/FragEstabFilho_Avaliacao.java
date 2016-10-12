@@ -45,7 +45,10 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     private HoraMinuto horaMinuto;
     private Estabelecimento estabelecimento;
     private Grupo grupoTempoAtendimento;
+    private Postagem postagem;
     private TipoObjeto tipoObjeto;
+
+    private boolean jaCadastrouTempo;
 
     private AvTempoComponents tempoComponents;
     private FragEstabFilhoAvComponents components;
@@ -120,6 +123,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     public void consumirAvTempoAtend_receberGrupo(Grupo grupo, int resultCode){
         if(resultCode == RESULT_GRUPO_GET){
             this.conexaoModelo.getMedia(grupo.getCodGrupo(), grupo.getCodGrupo(), grupo.getCodGrupo());
+
         }
         else{
             this.tempoComponents.realizarAcao(AvTempoComponents.SEM_DADOS_CADASTRADOS);
@@ -135,6 +139,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     public void passarMedia(Media media) {
         this.horaMinuto = FactoryModelos.geradorHoraMinuto((int) media.getMedia());
         this.tempoComponents.setTempo(this.horaMinuto);
+        this.jaCadastrouTempo = true;
     }
 
     private void cadastrarGrupo(Grupo grupo){
@@ -157,6 +162,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     }
 
     public void cadastrarTempoAtend_cadastrarConteudo(Postagem postagem){
+        this.postagem = postagem;
 
         Localizacao localizacaoAtualizada = this.helperGPS.getLocalizacaoAtualizada();
         this.helperGPS.desligarLocationUpdate();
@@ -164,10 +170,12 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         Distancia distancia = new Distancia();
         double distanciaLocal = distancia.calcularKmDistancia(localizacaoAtualizada, this.estabelecimento);
         if(distanciaLocal > 5){
+            this.dialogTimer.dismiss();
             this.components.showDialogDistanteEstabelecimento();
         }
         else{
             int minutos = this.dialogTimer.getMinutos();
+            this.dialogTimer.dismiss();
             if(minutos == 0){
                 this.components.showDialogTempoZerado();
             }
@@ -178,7 +186,8 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         }
     }
 
-    public void passarConteudoPostagem(ConteudoPostagem conteudo) {
+    public void cadastrarTempoAtend_passarConteudoPostagem(ConteudoPostagem conteudo) {
+        this.conexaoModelo.getMedia(this.postagem.getTipo().getCodTipoPostagem(), this.postagem.getCodTipoObjetoDestino(), this.tipoObjeto.getCodTipoObjeto());
     }
 
     private boolean validarPermissoesCadastroAtendimento(){
