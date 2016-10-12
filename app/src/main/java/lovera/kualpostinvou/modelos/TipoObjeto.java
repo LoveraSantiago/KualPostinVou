@@ -2,16 +2,16 @@ package lovera.kualpostinvou.modelos;
 
 public class TipoObjeto {
 
-    private transient int codTipoObjeto;
+    private transient long codTipoObjeto;
     private String descricao;
     private String ownerTabelaObjeto;
     private String tabelaObjeto;
 
-    public int getCodTipoObjeto() {
+    public long getCodTipoObjeto() {
         return codTipoObjeto;
     }
 
-    public void setCodTipoObjeto(int codTipoObjeto) {
+    public void setCodTipoObjeto(long codTipoObjeto) {
         this.codTipoObjeto = codTipoObjeto;
     }
 

@@ -5,7 +5,7 @@ import lovera.kualpostinvou.Aplicacao;
 public class Instalacao {
 
     private int codApp = Aplicacao.COD_APLICACAO;
-    private int codUsuario;
+    private long codUsuario;
     private String dataHora;
     private String deviceOS = "android";
     private String deviceToken;
@@ -18,11 +18,11 @@ public class Instalacao {
         this.codApp = codApp;
     }
 
-    public int getCodUsuario() {
+    public long getCodUsuario() {
         return codUsuario;
     }
 
-    public void setCodUsuario(int codUsuario) {
+    public void setCodUsuario(long codUsuario) {
         this.codUsuario = codUsuario;
     }
 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Estabelecimento implements Serializable{
 
-    private int codCnes;
+    private long codCnes;
     private String cnpj;
     private String codUnidade;
     private String nomeFantasia;
@@ -44,11 +44,11 @@ public class Estabelecimento implements Serializable{
         this.cnpj = cnpj;
     }
 
-    public int getCodCnes() {
+    public long getCodCnes() {
         return codCnes;
     }
 
-    public void setCodCnes(int codCnes) {
+    public void setCodCnes(long codCnes) {
         this.codCnes = codCnes;
     }
 

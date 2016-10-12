@@ -2,13 +2,13 @@ package lovera.kualpostinvou.modelos;
 
 public class PostagemRelacionada {
 
-    private int codPostagem;
+    private long codPostagem;
 
-    public int getCodPostagem() {
+    public long getCodPostagem() {
         return codPostagem;
     }
 
-    public void setCodPostagem(int codPostagem) {
+    public void setCodPostagem(long codPostagem) {
         this.codPostagem = codPostagem;
     }
 }

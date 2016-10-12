@@ -9,7 +9,7 @@ import java.util.List;
 public class Pessoa implements Serializable{
 
 
-    private int cod = 0;
+    private long cod;
 
     private double latitude;
     private double longitude;
@@ -166,11 +166,11 @@ public class Pessoa implements Serializable{
         this.email = email;
     }
 
-    public void setCod(int cod) {
+    public void setCod(long cod) {
         this.cod = cod;
     }
 
-    public int getCod() {
+    public long getCod() {
         return cod;
     }
 }

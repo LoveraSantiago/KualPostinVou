@@ -115,6 +115,8 @@ public class ConexaoMetaModelo {
         cadastrarPostagem(String.valueOf(codApp), appToken, postagem);
     }
 
+    public void getPostagens(String appToken, )
+
     public void cadastrarConteudoPostagem(String appToken, String codPostagem, ConteudoPostagem conteudoPostagem){
         Call<ResponseBody> call = this.endpointMetaModelo.cadastrarConteudoPostagem(appToken, codPostagem, conteudoPostagem);
         call.enqueue(new CallBackConteudoPostagem(this.msg, conteudoPostagem));

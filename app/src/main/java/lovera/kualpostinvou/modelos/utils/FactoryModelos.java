@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.Calendar;
 
 import lovera.kualpostinvou.Aplicacao;
+import lovera.kualpostinvou.modelos.Autor;
 import lovera.kualpostinvou.modelos.ConteudoPostagem;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Grupo;

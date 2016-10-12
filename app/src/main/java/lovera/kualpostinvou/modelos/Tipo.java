@@ -2,13 +2,13 @@ package lovera.kualpostinvou.modelos;
 
 public class Tipo {
 
-    private int codTipoPostagem;
+    private long codTipoPostagem;
 
-    public int getCodTipoPostagem() {
+    public long getCodTipoPostagem() {
         return codTipoPostagem;
     }
 
-    public void setCodTipoPostagem(int codTipoPostagem) {
+    public void setCodTipoPostagem(long codTipoPostagem) {
         this.codTipoPostagem = codTipoPostagem;
     }
 }

@@ -7,7 +7,7 @@ public class Grupo {
     private transient int codGrupo;
     private int codAplicativo = Aplicacao.COD_APLICACAO;
     private transient int codGrupoPai;
-    private int codObjeto;
+    private long codObjeto;
     private String descricao;
 
     public int getCodGrupo() {
@@ -34,11 +34,11 @@ public class Grupo {
         this.codGrupoPai = codGrupoPai;
     }
 
-    public int getCodObjeto() {
+    public long getCodObjeto() {
         return codObjeto;
     }
 
-    public void setCodObjeto(int codObjeto) {
+    public void setCodObjeto(long codObjeto) {
         this.codObjeto = codObjeto;
     }
 

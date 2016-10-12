@@ -1,15 +1,13 @@
 package lovera.kualpostinvou.modelos;
 
-import lovera.kualpostinvou.modelos.utils.Autor;
-
 public class Postagem {
 
     private Autor autor;
     private transient int codPostagem;
-    private int codGrupoDestino;
-    private int codObjetoDestino;
-    private int codPessoaDestino;
-    private int codTipoObjetoDestino;
+    private long codGrupoDestino;
+    private long codObjetoDestino;
+    private long codPessoaDestino;
+    private long codTipoObjetoDestino;
     private double latitude;
     private double longitude;
     private PostagemRelacionada postagemRelacionada;
@@ -31,31 +29,31 @@ public class Postagem {
         this.codPostagem = codPostagem;
     }
 
-    public int getCodGrupoDestino() {
+    public long getCodGrupoDestino() {
         return codGrupoDestino;
     }
 
-    public void setCodGrupoDestino(int codGrupoDestino) {
+    public void setCodGrupoDestino(long codGrupoDestino) {
         this.codGrupoDestino = codGrupoDestino;
     }
 
-    public int getCodObjetoDestino() {
+    public long getCodObjetoDestino() {
         return codObjetoDestino;
     }
 
-    public void setCodObjetoDestino(int codObjetoDestino) {
+    public void setCodObjetoDestino(long codObjetoDestino) {
         this.codObjetoDestino = codObjetoDestino;
     }
 
-    public int getCodPessoaDestino() {
+    public long getCodPessoaDestino() {
         return codPessoaDestino;
     }
 
-    public void setCodPessoaDestino(int codPessoaDestino) {
+    public void setCodPessoaDestino(long codPessoaDestino) {
         this.codPessoaDestino = codPessoaDestino;
     }
 
-    public int getCodTipoObjetoDestino() {
+    public long getCodTipoObjetoDestino() {
         return codTipoObjetoDestino;
     }
 
