@@ -6,6 +6,7 @@ import java.util.Map;
 
 import lovera.kualpostinvou.modelos.ConteudoPostagem;
 import lovera.kualpostinvou.modelos.Grupo;
+import lovera.kualpostinvou.modelos.GrupoR;
 import lovera.kualpostinvou.modelos.Media;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.modelos.Instalacao;
@@ -39,7 +40,7 @@ public interface EndPointsMetaModelo {
     Call<ResponseBody> downloadImageNaUrl(@Url String url);
 
     @GET("appCivicoRS/rest/grupos")
-    Call<List<Grupo>> getGrupos(@QueryMap Map<String, String> params);
+    Call<List<GrupoR>> getGrupos(@QueryMap Map<String, String> params);
 
     @POST("appCivicoRS/rest/grupos")
     Call<ResponseBody> cadastrarGrupo(@Header("appToken") String appToken, @Body Grupo grupo);

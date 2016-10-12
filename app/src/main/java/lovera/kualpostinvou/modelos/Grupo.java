@@ -4,19 +4,10 @@ import lovera.kualpostinvou.Aplicacao;
 
 public class Grupo {
 
-    private transient long codGrupo;
     private int codAplicativo = Aplicacao.COD_APLICACAO;
     private transient int codGrupoPai;
     private long codObjeto;
     private String descricao;
-
-    public long getCodGrupo() {
-        return codGrupo;
-    }
-
-    public void setCodGrupo(long codGrupo) {
-        this.codGrupo = codGrupo;
-    }
 
     public int getCodAplicativo() {
         return codAplicativo;

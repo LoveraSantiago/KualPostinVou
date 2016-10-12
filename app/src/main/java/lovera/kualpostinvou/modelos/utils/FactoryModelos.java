@@ -12,6 +12,7 @@ import lovera.kualpostinvou.modelos.Autor;
 import lovera.kualpostinvou.modelos.ConteudoPostagem;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Grupo;
+import lovera.kualpostinvou.modelos.GrupoR;
 import lovera.kualpostinvou.modelos.HoraMinuto;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Postagem;
@@ -25,7 +26,7 @@ public class FactoryModelos {
         Grupo grupoResult = new Grupo();
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("CU" + codUnidade + "T");
+        stringBuilder.append("CU").append(codUnidade).append("T");
         stringBuilder.append(Utils_View.dateToString(Calendar.getInstance().getTime(), "ddMMyyyy"));
         grupoResult.setDescricao(stringBuilder.toString());
         grupoResult.setCodObjeto(100);//100 -> Estabelecimento de Saude
@@ -33,7 +34,16 @@ public class FactoryModelos {
         return grupoResult;
     }
 
-    public static Postagem geradorDePostagem(Grupo grupo, TipoObjeto tipoObjeto){
+    public static GrupoR geradorDeGrupoR(Grupo grupo){
+        GrupoR grupoResult = new GrupoR();
+        grupoResult.setCodAplicativo(grupo.getCodAplicativo());
+        grupoResult.setCodGrupoPai(grupo.getCodGrupoPai());
+        grupoResult.setCodObjeto(grupo.getCodObjeto());
+        grupoResult.setDescricao(grupo.getDescricao());
+        return grupoResult;
+    }
+
+    public static Postagem geradorDePostagem(GrupoR grupo, TipoObjeto tipoObjeto){
         Postagem postagemResult = new Postagem();
 
         postagemResult.setAutor(geradorDeAutor());

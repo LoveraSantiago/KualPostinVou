@@ -6,6 +6,7 @@ import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoModelo;
 import lovera.kualpostinvou.modelos.Postagem;
 import lovera.kualpostinvou.modelos.PostagemR;
+import lovera.kualpostinvou.modelos.utils.FactoryModelos;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,9 +29,12 @@ public class CallBackPostagens implements Callback<List<PostagemR>>{
             for(PostagemR postagem : postagens){
                 if(postagem.getCodAutor() == codigoPessoa){
                     usuarioPostou = true;
+                    break;
                 }
             }
-            this.msg.passarPostagem(postagens.get(0), usuarioPostou);
+            PostagemR postagemResult = postagens.get(0);
+            postagemResult.setTipo(FactoryModelos.geradorTipo());
+            this.msg.passarPostagem(postagemResult, usuarioPostou);
         }
     }
 

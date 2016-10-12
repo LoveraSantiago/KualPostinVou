@@ -2,6 +2,8 @@ package lovera.kualpostinvou.conexao.callbacks;
 
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoModelo;
 import lovera.kualpostinvou.modelos.Grupo;
+import lovera.kualpostinvou.modelos.GrupoR;
+import lovera.kualpostinvou.modelos.utils.FactoryModelos;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -11,11 +13,11 @@ public class CallBackGrupo implements Callback<ResponseBody>{
 
     private final MsgFromConexaoModelo msg;
     private final int resultCode;
-    private final Grupo grupo;
+    private final GrupoR grupo;
 
     public CallBackGrupo(MsgFromConexaoModelo msg, Grupo grupo, int resultCode) {
         this.msg = msg;
-        this.grupo = grupo;
+        this.grupo = FactoryModelos.geradorDeGrupoR(grupo);
         this.resultCode = resultCode;
     }
 

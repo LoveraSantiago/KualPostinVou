@@ -25,6 +25,7 @@ import lovera.kualpostinvou.conexao.utils.HelperParams_EndPModelo;
 import lovera.kualpostinvou.modelos.ConteudoPostagem;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Grupo;
+import lovera.kualpostinvou.modelos.GrupoR;
 import lovera.kualpostinvou.modelos.Media;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.modelos.Instalacao;
@@ -98,9 +99,8 @@ public class ConexaoMetaModelo {
 
     public void getGrupo(Grupo grupo, int resultCode){
         Map<String, String> mapParams = this.helper.factoryMap_EndPGrupos(grupo);
-        Call<List<Grupo>> call = this.endpointMetaModelo.getGrupos(mapParams);
+        Call<List<GrupoR>> call = this.endpointMetaModelo.getGrupos(mapParams);
         call.enqueue(new CallBackGrupos(this.msg, this.retrofit, resultCode));
-
     }
 
     public void cadastrarGrupo(String appToken, Grupo grupo, int resultCode){
