@@ -7,6 +7,7 @@ import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Grupo;
 import lovera.kualpostinvou.modelos.Media;
 import lovera.kualpostinvou.modelos.Postagem;
+import lovera.kualpostinvou.modelos.PostagemR;
 import lovera.kualpostinvou.modelos.TipoObjeto;
 
 public interface MsgFromConexaoModelo {
@@ -21,4 +22,5 @@ public interface MsgFromConexaoModelo {
     void passarConteudoPostagem(ConteudoPostagem conteudo);
     void passarMedia(Media media);
     void passarTipoObjeto(TipoObjeto tipoObjeto);
+    void passarPostagem(PostagemR postagem, boolean usuarioPostou);
 }

@@ -63,6 +63,10 @@ public class AvTempoDialog extends AlertDialog {
         });
     }
 
+    public void show(boolean jaCadastrouTempo){
+        show();
+    }
+
     public int getMinutos() {
         return (this.hora * 60) + minuto;
     }

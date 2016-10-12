@@ -16,6 +16,7 @@ import lovera.kualpostinvou.conexao.callbacks.CallBackGrupos;
 import lovera.kualpostinvou.conexao.callbacks.CallBackImgPerfil;
 import lovera.kualpostinvou.conexao.callbacks.CallBackMedia;
 import lovera.kualpostinvou.conexao.callbacks.CallBackPostagem;
+import lovera.kualpostinvou.conexao.callbacks.CallBackPostagens;
 import lovera.kualpostinvou.conexao.callbacks.CallBackTipoObjeto;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoModelo;
 import lovera.kualpostinvou.conexao.endpoints.EndPointsMetaModelo;
@@ -28,6 +29,7 @@ import lovera.kualpostinvou.modelos.Media;
 import lovera.kualpostinvou.modelos.Pessoa;
 import lovera.kualpostinvou.modelos.Instalacao;
 import lovera.kualpostinvou.modelos.Postagem;
+import lovera.kualpostinvou.modelos.PostagemR;
 import lovera.kualpostinvou.modelos.TipoObjeto;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -115,7 +117,10 @@ public class ConexaoMetaModelo {
         cadastrarPostagem(String.valueOf(codApp), appToken, postagem);
     }
 
-    public void getPostagens(String appToken, )
+    public void getPostagens(String appToken, long codGrupo){
+        Call<List<PostagemR>> call = this.endpointMetaModelo.getPostagens(appToken, codGrupo);
+        call.enqueue(new CallBackPostagens(this.msg));
+    }
 
     public void cadastrarConteudoPostagem(String appToken, String codPostagem, ConteudoPostagem conteudoPostagem){
         Call<ResponseBody> call = this.endpointMetaModelo.cadastrarConteudoPostagem(appToken, codPostagem, conteudoPostagem);
@@ -131,7 +136,7 @@ public class ConexaoMetaModelo {
         call.enqueue(new CallBackMedia(this.msg));
     }
 
-    public void getMedia(int codTipoPostagem, int codTipoObjetoDestino, int codObjetoDestino){
+    public void getMedia(long codTipoPostagem, long codTipoObjetoDestino, long codObjetoDestino){
         getMedia(String.valueOf(codTipoPostagem), String.valueOf(codTipoObjetoDestino), String.valueOf(codObjetoDestino));
     }
 

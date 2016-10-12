@@ -19,6 +19,7 @@ import lovera.kualpostinvou.modelos.HoraMinuto;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Media;
 import lovera.kualpostinvou.modelos.Postagem;
+import lovera.kualpostinvou.modelos.PostagemR;
 import lovera.kualpostinvou.modelos.TipoObjeto;
 import lovera.kualpostinvou.modelos.utils.Distancia;
 import lovera.kualpostinvou.modelos.utils.FactoryModelos;
@@ -122,7 +123,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
 
     public void consumirAvTempoAtend_receberGrupo(Grupo grupo, int resultCode){
         if(resultCode == RESULT_GRUPO_GET){
-            this.conexaoModelo.getMedia(grupo.getCodGrupo(), grupo.getCodGrupo(), grupo.getCodGrupo());
+            this.conexaoModelo.getPostagens(Aplicacao.getPessoaLogada().getToken(), this.grupoTempoAtendimento.getCodGrupo());
 
         }
         else{
@@ -130,6 +131,12 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
             TipoObjeto tipoObjeto = FactoryModelos.geradorTipoObjeto(grupo);
             this.conexaoModelo.cadastrarTipoObjeto(Aplicacao.getPessoaLogada().getToken(), tipoObjeto);
         }
+    }
+
+    public void passarPostagensParaMedia(PostagemR postagem, boolean usuarioPostou) {
+        this.postagem = postagem;
+        this.jaCadastrouTempo = usuarioPostou;
+        cadastrarTempoAtend_passarConteudoPostagem(null);
     }
 
     public void consumirAvTempoAtend_receberTipoDeObjeto(TipoObjeto tipoObjeto) {
@@ -212,7 +219,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
 
     public void showDialogCadastrarTempoDeAtendimento(){
         if(validarPermissoesCadastroAtendimento()){
-            dialogTimer.show();
+            dialogTimer.show(this.jaCadastrouTempo);
         }
     }
 
