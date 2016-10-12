@@ -44,7 +44,7 @@ public interface EndPointsMetaModelo {
     @POST("appCivicoRS/rest/postagens")
     Call<ResponseBody> cadastrarPostagem(@Header("appIdentifier") String codApp, @Header("appToken") String appToken, @Body Postagem postagem);
 
-    @POST("appCivicoRS/rest/postagens/{codPostagem}/conteudos}")
+    @POST("appCivicoRS/rest/postagens/{codPostagem}/conteudos")
     Call<ResponseBody> cadastrarConteudoPostagem(@Header("appToken") String appToken, @Path("codPostagem") String codPostagem, @Body ConteudoPostagem conteudoPostagem);
 
     @GET("appCivicoRS/rest/postagens/tipopostagem/{codTipoPostagem}/tipoobjeto/{codTipoObjetoDestino}/objeto/{codObjetoDestino}")

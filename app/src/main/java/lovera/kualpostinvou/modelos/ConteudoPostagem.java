@@ -2,17 +2,17 @@ package lovera.kualpostinvou.modelos;
 
 public class ConteudoPostagem {
 
-    private transient int codPostagem;
+    private transient int codConteudo;
     private String JSON;
     private String texto;
     private int valor;
 
-    public int getCodPostagem() {
-        return codPostagem;
+    public int getCodConteudo() {
+        return codConteudo;
     }
 
-    public void setCodPostagem(int codPostagem) {
-        this.codPostagem = codPostagem;
+    public void setCodConteudo(int codConteudo) {
+        this.codConteudo = codConteudo;
     }
 
     public String getJSON() {

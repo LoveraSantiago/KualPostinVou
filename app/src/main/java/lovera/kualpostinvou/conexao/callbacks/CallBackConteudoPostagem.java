@@ -23,7 +23,7 @@ public class CallBackConteudoPostagem implements Callback<ResponseBody>{
             String location = response.headers().get("location");
             int posicaoBarra = location.lastIndexOf("/") + 1;
             String codigo = location.substring(posicaoBarra, location.length());
-            this.conteudo.setCodPostagem(Integer.parseInt(codigo));
+            this.conteudo.setCodConteudo(Integer.parseInt(codigo));
             this.msg.passarConteudoPostagem(this.conteudo);
         }
         else{

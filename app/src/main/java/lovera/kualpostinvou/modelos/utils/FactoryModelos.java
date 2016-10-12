@@ -85,7 +85,7 @@ public class FactoryModelos {
 
     public static ConteudoPostagem geradorConteudoPostagem(Postagem postagem, int tempo){
         ConteudoPostagem conteudoResult = new ConteudoPostagem();
-        conteudoResult.setCodPostagem(postagem.getCodPostagem());
+        conteudoResult.setCodConteudo(postagem.getCodPostagem());
         conteudoResult.setValor(tempo);
         return conteudoResult;
     }
