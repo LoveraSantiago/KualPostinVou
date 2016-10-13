@@ -10,6 +10,7 @@ import java.util.Map;
 import lovera.kualpostinvou.conexao.callbacks.CallBackAutenticar;
 import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarInstalacao;
 import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarPessoa;
+import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarCPostagem;
 import lovera.kualpostinvou.conexao.callbacks.CallBackConteudoPostagem;
 import lovera.kualpostinvou.conexao.callbacks.CallBackGrupo;
 import lovera.kualpostinvou.conexao.callbacks.CallBackGrupos;
@@ -124,11 +125,20 @@ public class ConexaoMetaModelo {
 
     public void cadastrarConteudoPostagem(String appToken, String codPostagem, ConteudoPostagem conteudoPostagem){
         Call<ResponseBody> call = this.endpointMetaModelo.cadastrarConteudoPostagem(appToken, codPostagem, conteudoPostagem);
-        call.enqueue(new CallBackConteudoPostagem(this.msg, conteudoPostagem));
+        call.enqueue(new CallBackCadastrarCPostagem(this.msg, conteudoPostagem));
     }
 
     public void cadastrarConteudoPostagem(String appToken, long codPostagem, ConteudoPostagem conteudoPostagem){
         cadastrarConteudoPostagem(appToken, String.valueOf(codPostagem), conteudoPostagem);
+    }
+
+    public void getConteudoPostagem(String appToken, String codPostagem, String codConteudo){
+        Call<ConteudoPostagem> call = this.endpointMetaModelo.getConteudoPostagem(appToken, codPostagem, codConteudo);
+        call.enqueue(new CallBackConteudoPostagem(this.msg));
+    }
+
+    public void getConteudoPostagem(String appToken, long codPostagem, long codConteudo){
+        getConteudoPostagem(appToken, String.valueOf(codPostagem), String.valueOf(codConteudo));
     }
 
     public void getMedia(String codTipoPostagem, String codTipoObjetoDestino, String codObjetoDestino){

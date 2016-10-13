@@ -20,8 +20,9 @@ public interface MsgFromConexaoModelo {
     void passarListaDeGrupos(List<Grupo> listaDeGrupos);
     void passarErrorObjeto(ErrorObj errorObj, int codigoErro);
     void passarPostagem(PostagemR postagem);
-    void passarConteudoPostagem(ConteudoPostagem conteudo);
+    void passarCodConteudoPostagem(ConteudoPostagem conteudo);
     void passarMedia(Media media);
     void passarTipoObjeto(TipoObjeto tipoObjeto);
     void passarPostagem(PostagemR postagem, boolean usuarioPostou);
+    void passarConteudoDaPostagem(ConteudoPostagem conteudoPostagem);
 }

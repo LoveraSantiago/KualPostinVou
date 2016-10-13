@@ -11,6 +11,14 @@ public class HoraMinuto {
         this.minuto = minuto;
     }
 
+    public int getHora() {
+        return hora;
+    }
+
+    public int getMinuto() {
+        return minuto;
+    }
+
     @Override
     public String toString() {
         return new StringBuilder().append(String.format("%02d", this.hora  ) + "h " +

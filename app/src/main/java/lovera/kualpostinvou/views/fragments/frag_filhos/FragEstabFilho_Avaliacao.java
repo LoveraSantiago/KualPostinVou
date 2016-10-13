@@ -139,7 +139,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         this.tipoObjeto = new TipoObjeto();
         this.tipoObjeto.setCodTipoObjeto(postagem.getCodObjetoDestino());
         this.jaCadastrouTempo = usuarioPostou;
-        cadastrarTempoAtend_passarConteudoPostagem(null);
+        cadastrarTempoAtend_passarCodConteudoPostagem(null);
     }
 
     public void consumirAvTempoAtend_receberTipoDeObjeto(TipoObjeto tipoObjeto) {
@@ -196,7 +196,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         }
     }
 
-    public void cadastrarTempoAtend_passarConteudoPostagem(ConteudoPostagem conteudo) {
+    public void cadastrarTempoAtend_passarCodConteudoPostagem(ConteudoPostagem conteudo) {
         this.conexaoModelo.getMedia(this.postagem.getTipo().getCodTipoPostagem(), this.postagem.getCodTipoObjetoDestino(), this.tipoObjeto.getCodTipoObjeto());
     }
 
@@ -222,8 +222,17 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
 
     public void showDialogCadastrarTempoDeAtendimento(){
         if(validarPermissoesCadastroAtendimento()){
-            dialogTimer.show(this.jaCadastrouTempo);
+            this.dialogTimer.show(this.jaCadastrouTempo);
+            if(this.jaCadastrouTempo){
+                PostagemR postagemTemp = (PostagemR) this.postagem;
+                this.conexaoModelo.getConteudoPostagem(Aplicacao.getPessoaLogada().getToken(), postagemTemp.getCodPostagem(), postagemTemp.getConteudos().get(0).getCodConteudoPostagem());
+            }
         }
+    }
+
+    public void passarConteudoPostagemParaDialogTimer(ConteudoPostagem conteudoPostagem){
+        HoraMinuto horaMinuto = FactoryModelos.geradorHoraMinuto(conteudoPostagem.getValor());
+        this.dialogTimer.setTempoCadastrado(horaMinuto);
     }
 
     public void ligarGps(){
