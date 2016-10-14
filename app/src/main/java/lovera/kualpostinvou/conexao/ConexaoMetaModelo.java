@@ -141,6 +141,15 @@ public class ConexaoMetaModelo {
         getConteudoPostagem(appToken, String.valueOf(codPostagem), String.valueOf(codConteudo));
     }
 
+    public void editConteudoPostagem(String appToken, String codPostagem, String codConteudo, ConteudoPostagem conteudoPostagem){
+        Call<ConteudoPostagem> call = this.endpointMetaModelo.editConteudoPostagem(appToken, codPostagem, codConteudo, conteudoPostagem);
+        call.enqueue(new CallBackConteudoPostagem(this.msg));
+    }
+
+    public void editConteudoPostagem(String appToken, long codPostagem, long codConteudo, ConteudoPostagem conteudoPostagem){
+        editConteudoPostagem(appToken, String.valueOf(codPostagem), String.valueOf(codConteudo), conteudoPostagem);
+    }
+
     public void getMedia(String codTipoPostagem, String codTipoObjetoDestino, String codObjetoDestino){
         Call<Media> call = this.endpointMetaModelo.getMedia(codTipoPostagem, codTipoObjetoDestino, codObjetoDestino);
         call.enqueue(new CallBackMedia(this.msg));

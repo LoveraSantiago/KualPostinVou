@@ -20,6 +20,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -56,6 +57,9 @@ public interface EndPointsMetaModelo {
 
     @GET("appCivicoRS/rest/postagens/{codPostagem}/conteudos/{codConteudo}")
     Call<ConteudoPostagem> getConteudoPostagem(@Header("appToken") String appToken, @Path("codPostagem") String codPostagem, @Path("codConteudo") String codConteudo);
+
+    @PUT("appCivicoRS/rest/postagens/{codPostagem}/conteudos/{codConteudo}")
+    Call<ConteudoPostagem> editConteudoPostagem(@Header("appToken") String appToken, @Path("codPostagem") String codPostagem, @Path("codConteudo") String codConteudo, @Body ConteudoPostagem conteudoPostagem);
 
     @GET("appCivicoRS/rest/postagens/tipopostagem/{codTipoPostagem}/tipoobjeto/{codTipoObjetoDestino}/objeto/{codObjetoDestino}")
     Call<Media> getMedia(@Path("codTipoPostagem") String codTipoPostagem, @Path("codTipoObjetoDestino") String codTipoObjetoDestino, @Path("codObjetoDestino") String codObjetoDestino);

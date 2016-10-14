@@ -168,6 +168,19 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         cadastrarTempoAtend_cadastrarPostagem();
     }
 
+    public void editarTempoAtend(){
+        int minutos = this.dialogTimer.getMinutos();
+        this.dialogTimer.dismiss();
+        if(minutos == 0){
+            this.components.showDialogTempoZerado();
+        }
+        else{
+            PostagemR postagemRTemp = (PostagemR) this.postagem;
+            ConteudoPostagem conteudoPost = FactoryModelos.geradorConteudoPostagem(postagemRTemp, minutos);
+            this.conexaoModelo.editConteudoPostagem(Aplicacao.getPessoaLogada().getToken(), postagemRTemp.getCodPostagem(), postagemRTemp.getConteudos().get(0).getCodConteudoPostagem(), conteudoPost);
+        }
+    }
+
     private void cadastrarTempoAtend_cadastrarPostagem(){
         Postagem postagem = FactoryModelos.geradorDePostagem(this.grupoTempoAtendimento, this.tipoObjeto);
         conexaoModelo.cadastrarPostagem(Aplicacao.COD_APLICACAO , Aplicacao.getPessoaLogada().getToken(), postagem);
@@ -176,25 +189,14 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     public void cadastrarTempoAtend_cadastrarConteudo(PostagemR postagem){
         this.postagem = postagem;
 
-        Localizacao localizacaoAtualizada = this.helperGPS.getLocalizacaoAtualizada();
-        this.helperGPS.desligarLocationUpdate();
-
-        Distancia distancia = new Distancia();
-        double distanciaLocal = distancia.calcularKmDistancia(localizacaoAtualizada, this.estabelecimento);
-        if(distanciaLocal > 5){
-            this.dialogTimer.dismiss();
-            this.components.showDialogDistanteEstabelecimento();
+        int minutos = this.dialogTimer.getMinutos();
+        this.dialogTimer.dismiss();
+        if(minutos == 0){
+            this.components.showDialogTempoZerado();
         }
         else{
-            int minutos = this.dialogTimer.getMinutos();
-            this.dialogTimer.dismiss();
-            if(minutos == 0){
-                this.components.showDialogTempoZerado();
-            }
-            else{
-                ConteudoPostagem conteudoPost = FactoryModelos.geradorConteudoPostagem(postagem, minutos);
-                this.conexaoModelo.cadastrarConteudoPostagem(Aplicacao.getPessoaLogada().getToken(), postagem.getCodPostagem(), conteudoPost);
-            }
+            ConteudoPostagem conteudoPost = FactoryModelos.geradorConteudoPostagem(postagem, minutos);
+            this.conexaoModelo.cadastrarConteudoPostagem(Aplicacao.getPessoaLogada().getToken(), postagem.getCodPostagem(), conteudoPost);
         }
     }
 
@@ -227,10 +229,22 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
 
     public void showDialogCadastrarTempoDeAtendimento(){
         if(validarPermissoesCadastroAtendimento()){
-            this.dialogTimer.show(this.jaCadastrouTempo);
             if(this.jaCadastrouTempo){
+                this.helperGPS.ligarLocationUpdate();
+                this.dialogTimer.show(this.jaCadastrouTempo);
                 PostagemR postagemTemp = (PostagemR) this.postagem;
                 this.conexaoModelo.getConteudoPostagem(Aplicacao.getPessoaLogada().getToken(), postagemTemp.getCodPostagem(), postagemTemp.getConteudos().get(0).getCodConteudoPostagem());
+            }
+            else{
+                Localizacao localizacaoAtualizada = this.helperGPS.getLocalizacaoAtualizada();
+                this.helperGPS.desligarLocationUpdate();
+
+                Distancia distancia = new Distancia();
+                double distanciaLocal = distancia.calcularKmDistancia(localizacaoAtualizada, this.estabelecimento);
+                if(distanciaLocal > 5){
+                    this.dialogTimer.dismiss();
+                    this.components.showDialogDistanteEstabelecimento();
+                }
             }
         }
     }

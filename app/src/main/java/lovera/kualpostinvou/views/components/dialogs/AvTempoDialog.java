@@ -70,7 +70,7 @@ public class AvTempoDialog extends AlertDialog {
                 minuto = pickerMin.getValue();
 
                 if(jaCadastrouTempo){
-
+                    fragment.editarTempoAtend();
                 }
                 else{
                    fragment.cadastrarTempoAtend();
