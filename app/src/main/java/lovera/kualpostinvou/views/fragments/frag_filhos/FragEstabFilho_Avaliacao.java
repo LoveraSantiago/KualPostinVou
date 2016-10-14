@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
@@ -123,8 +125,8 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     }
 
     public void consumirAvTempoAtend_receberGrupo(GrupoR grupo, int resultCode){
+        this.grupoTempoAtendimento = grupo;
         if(resultCode == RESULT_GRUPO_GET){
-            this.grupoTempoAtendimento = grupo;
             this.conexaoModelo.getPostagens(Aplicacao.getPessoaLogada().getToken(), this.grupoTempoAtendimento.getCodGrupo());
         }
         else{
@@ -197,6 +199,9 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     }
 
     public void cadastrarTempoAtend_passarCodConteudoPostagem(ConteudoPostagem conteudo) {
+        if(conteudo != null){
+            ((PostagemR) this.postagem).setConteudos(FactoryModelos.geradorDeListaDeConteudos(FactoryModelos.geradorDeConteudo(conteudo)));
+        }
         this.conexaoModelo.getMedia(this.postagem.getTipo().getCodTipoPostagem(), this.postagem.getCodTipoObjetoDestino(), this.tipoObjeto.getCodTipoObjeto());
     }
 

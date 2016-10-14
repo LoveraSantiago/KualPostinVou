@@ -5,10 +5,13 @@ import android.location.Location;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.modelos.Autor;
+import lovera.kualpostinvou.modelos.Conteudo;
 import lovera.kualpostinvou.modelos.ConteudoPostagem;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Grupo;
@@ -79,6 +82,20 @@ public class FactoryModelos {
         postagemResult.setTipo(postagem.getTipo());
 
         return postagemResult;
+    }
+
+    public static Conteudo geradorDeConteudo(ConteudoPostagem conteudoPostagem){
+        Conteudo conteudoResult = new Conteudo();
+        conteudoResult.setCodConteudoPostagem(conteudoPostagem.getCodConteudo());
+        return conteudoResult;
+    }
+
+    public static List<Conteudo> geradorDeListaDeConteudos(Conteudo... conteudos){
+        List<Conteudo> conteudosList = new ArrayList<>();
+        for(Conteudo conteudo : conteudos){
+            conteudosList.add(conteudo);
+        }
+        return conteudosList;
     }
 
     public static Autor geradorDeAutor(){

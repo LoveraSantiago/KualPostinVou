@@ -24,18 +24,20 @@ public class CallBackEstabelecimentos2 implements Callback<ResponseBody>{
 
     @Override
     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-        ResponseBody body = response.body();
-        try {
-            String result = body.string().replace("long", "longi");
+        if(response.isSuccessful()){
+            ResponseBody body = response.body();
+            try {
+                String result = body.string().replace("long", "longi");
 
-            Type listType = new TypeToken<List<Estabelecimento>>() {}.getType();
-            Gson gson = new Gson();
+                Type listType = new TypeToken<List<Estabelecimento>>() {}.getType();
+                Gson gson = new Gson();
 
-            List<Estabelecimento> listaEstabelecimentos = gson.fromJson(result, listType);
-            this.msg.passarListaDeEstabelecimentos(listaEstabelecimentos);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
+                List<Estabelecimento> listaEstabelecimentos = gson.fromJson(result, listType);
+                this.msg.passarListaDeEstabelecimentos(listaEstabelecimentos);
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
