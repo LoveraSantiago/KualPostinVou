@@ -46,7 +46,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
 
     private HoraMinuto horaMinuto;
     private Estabelecimento estabelecimento;
-    private Grupo grupoTempoAtendimento;
+    private GrupoR grupoTempoAtendimento;
     private Postagem postagem;
     private TipoObjeto tipoObjeto;
 
@@ -122,10 +122,10 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         }
     }
 
-    public void consumirAvTempoAtend_receberGrupo(Grupo grupo, int resultCode){
+    public void consumirAvTempoAtend_receberGrupo(GrupoR grupo, int resultCode){
         if(resultCode == RESULT_GRUPO_GET){
             this.grupoTempoAtendimento = grupo;
-            this.conexaoModelo.getPostagens(Aplicacao.getPessoaLogada().getToken(), ((GrupoR)this.grupoTempoAtendimento).getCodGrupo());
+            this.conexaoModelo.getPostagens(Aplicacao.getPessoaLogada().getToken(), this.grupoTempoAtendimento.getCodGrupo());
         }
         else{
             this.tempoComponents.realizarAcao(AvTempoComponents.SEM_DADOS_CADASTRADOS);
@@ -152,8 +152,8 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         this.jaCadastrouTempo = true;
     }
 
-    private void cadastrarGrupo(Grupo grupo){
-        this.conexaoModelo.cadastrarGrupo(Aplicacao.getPessoaLogada().getToken(), grupo, this.RESULT_GRUPO_CAD);
+    private void cadastrarGrupo(GrupoR grupo){
+        this.conexaoModelo.cadastrarGrupo(Aplicacao.getPessoaLogada().getToken(), FactoryModelos.geradorDeGrupo(grupo), this.RESULT_GRUPO_CAD);
     }
 
     public void tratarErrorObjeto(ErrorObj error, int codigoErro){
@@ -167,7 +167,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     }
 
     private void cadastrarTempoAtend_cadastrarPostagem(){
-        Postagem postagem = FactoryModelos.geradorDePostagem((GrupoR) this.grupoTempoAtendimento, this.tipoObjeto);
+        Postagem postagem = FactoryModelos.geradorDePostagem(this.grupoTempoAtendimento, this.tipoObjeto);
         conexaoModelo.cadastrarPostagem(Aplicacao.COD_APLICACAO , Aplicacao.getPessoaLogada().getToken(), postagem);
     }
 

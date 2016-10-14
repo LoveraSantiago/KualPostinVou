@@ -23,8 +23,8 @@ import lovera.kualpostinvou.views.utils.Utils_View;
 
 public class FactoryModelos {
 
-    public static Grupo geradorDeGrupo(String codUnidade){
-        Grupo grupoResult = new Grupo();
+    public static GrupoR geradorDeGrupo(String codUnidade){
+        GrupoR grupoResult = new GrupoR();
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("CU").append(codUnidade).append("T");
@@ -32,6 +32,15 @@ public class FactoryModelos {
         grupoResult.setDescricao(stringBuilder.toString());
         grupoResult.setCodObjeto(100);//100 -> Estabelecimento de Saude
 
+        return grupoResult;
+    }
+
+    public static Grupo geradorDeGrupo(GrupoR grupo){
+        Grupo grupoResult = new Grupo();
+        grupoResult.setCodObjeto(grupo.getCodObjeto());
+        grupoResult.setDescricao(grupo.getDescricao());
+        grupoResult.setCodGrupoPai(grupo.getCodGrupoPai());
+        grupoResult.setCodAplicativo(grupo.getCodAplicativo());
         return grupoResult;
     }
 
