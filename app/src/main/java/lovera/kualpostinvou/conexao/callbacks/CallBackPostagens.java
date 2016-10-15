@@ -21,24 +21,27 @@ public class CallBackPostagens implements Callback<List<PostagemR>>{
 
     @Override
     public void onResponse(Call<List<PostagemR>> call, Response<List<PostagemR>> response) {
-        List<PostagemR> postagens = response.body();
-        if(postagens.size() > 0){
+        try {
+            List<PostagemR> postagens = response.body();
+            if (postagens.size() > 0) {
 
-            PostagemR postagemResult = null;
+                PostagemR postagemResult = null;
 
-            boolean usuarioPostou = false;
-            long codigoPessoa = Aplicacao.getPessoaLogada().getPessoa().getCod();
-            for(PostagemR postagem : postagens){
-                if(postagem.getCodAutor() == codigoPessoa){
-                    postagemResult = postagem;
-                    usuarioPostou = true;
-                    break;
+                boolean usuarioPostou = false;
+                long codigoPessoa = Aplicacao.getPessoaLogada().getPessoa().getCod();
+                for (PostagemR postagem : postagens) {
+                    if (postagem.getCodAutor() == codigoPessoa) {
+                        postagemResult = postagem;
+                        usuarioPostou = true;
+                        break;
+                    }
                 }
+                postagemResult = postagemResult == null ? postagens.get(0) : postagemResult;
+                postagemResult.setTipo(FactoryModelos.geradorTipo());
+                this.msg.passarPostagem(postagemResult, usuarioPostou);
             }
-            postagemResult = postagemResult == null ? postagens.get(0) : postagemResult;
-            postagemResult.setTipo(FactoryModelos.geradorTipo());
-            this.msg.passarPostagem(postagemResult, usuarioPostou);
         }
+        catch (Exception e){};
     }
 
     @Override

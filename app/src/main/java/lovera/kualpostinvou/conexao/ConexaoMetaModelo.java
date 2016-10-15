@@ -12,6 +12,7 @@ import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarInstalacao;
 import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarPessoa;
 import lovera.kualpostinvou.conexao.callbacks.CallBackCadastrarCPostagem;
 import lovera.kualpostinvou.conexao.callbacks.CallBackConteudoPostagem;
+import lovera.kualpostinvou.conexao.callbacks.CallBackEditConteudoPostagem;
 import lovera.kualpostinvou.conexao.callbacks.CallBackGrupo;
 import lovera.kualpostinvou.conexao.callbacks.CallBackGrupos;
 import lovera.kualpostinvou.conexao.callbacks.CallBackImgPerfil;
@@ -142,8 +143,8 @@ public class ConexaoMetaModelo {
     }
 
     public void editConteudoPostagem(String appToken, String codPostagem, String codConteudo, ConteudoPostagem conteudoPostagem){
-        Call<ConteudoPostagem> call = this.endpointMetaModelo.editConteudoPostagem(appToken, codPostagem, codConteudo, conteudoPostagem);
-        call.enqueue(new CallBackConteudoPostagem(this.msg));
+        Call<ResponseBody> call = this.endpointMetaModelo.editConteudoPostagem(appToken, codPostagem, codConteudo, conteudoPostagem);
+        call.enqueue(new CallBackEditConteudoPostagem(this.msg, conteudoPostagem));
     }
 
     public void editConteudoPostagem(String appToken, long codPostagem, long codConteudo, ConteudoPostagem conteudoPostagem){

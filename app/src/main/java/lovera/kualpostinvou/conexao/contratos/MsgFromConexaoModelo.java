@@ -25,4 +25,5 @@ public interface MsgFromConexaoModelo {
     void passarTipoObjeto(TipoObjeto tipoObjeto);
     void passarPostagem(PostagemR postagem, boolean usuarioPostou);
     void passarConteudoDaPostagem(ConteudoPostagem conteudoPostagem);
+    void conteudoPostagemEditado(ConteudoPostagem body);
 }

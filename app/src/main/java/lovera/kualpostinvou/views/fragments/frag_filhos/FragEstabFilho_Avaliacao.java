@@ -230,19 +230,19 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     public void showDialogCadastrarTempoDeAtendimento(){
         if(validarPermissoesCadastroAtendimento()){
             if(this.jaCadastrouTempo){
-                this.helperGPS.ligarLocationUpdate();
                 this.dialogTimer.show(this.jaCadastrouTempo);
                 PostagemR postagemTemp = (PostagemR) this.postagem;
                 this.conexaoModelo.getConteudoPostagem(Aplicacao.getPessoaLogada().getToken(), postagemTemp.getCodPostagem(), postagemTemp.getConteudos().get(0).getCodConteudoPostagem());
             }
             else{
                 Localizacao localizacaoAtualizada = this.helperGPS.getLocalizacaoAtualizada();
-                this.helperGPS.desligarLocationUpdate();
-
                 Distancia distancia = new Distancia();
                 double distanciaLocal = distancia.calcularKmDistancia(localizacaoAtualizada, this.estabelecimento);
-                if(distanciaLocal > 5){
-                    this.dialogTimer.dismiss();
+
+                if(distanciaLocal < 5){
+                    this.dialogTimer.show(this.jaCadastrouTempo);
+                }
+                else{
                     this.components.showDialogDistanteEstabelecimento();
                 }
             }

@@ -66,6 +66,7 @@ public class AvTempoDialog extends AlertDialog {
 
             @Override
             public void onClick(View v) {
+                if(progresso.getVisibility() == View.VISIBLE) return;
                 hora = pickerHora.getValue();
                 minuto = pickerMin.getValue();
 
