@@ -61,6 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="decrementarDistancia"
+                android:textColor="@color/mCoral"
                 android:text="-"/>
 
             <SeekBar
@@ -80,6 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="incrementarDistancia"
+                android:textColor="@color/mCoral"
                 android:text="+"/>
 
         </RelativeLayout>

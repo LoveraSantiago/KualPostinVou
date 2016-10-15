@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#fad42e"
     android:paddingLeft="10dp"
-    android:paddingTop="10dp"
     android:paddingRight="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -19,6 +17,7 @@
             android:layout_marginTop="6dp">
 
             <TextView
+                android:textColor="@color/mCoral"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -29,16 +28,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layout_marginTop="6dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="nome fantasia"/>
-
-            <TextView
+                android:gravity="center"
+                android:textColor="@color/mAzulEscuro"
                 android:id="@+id/lblNomeFantasia"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="-"
@@ -47,180 +44,94 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
+            style="@style/bordaazul">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tipo Unidade"/>
+            <LinearLayout
+                style="@style/bordaazul.dentro">
 
-            <TextView
-                android:id="@+id/lblTipoUnidade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="-"
-                android:textSize="15dp"/>
+                <LinearLayout
+                    style="@style/linha">
 
-        </LinearLayout>
+                    <TextView
+                        style="@style/celula"
+                        android:text="Dialise"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vinculo Sus"/>
 
-            <TextView
-                android:id="@+id/lblVincSus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
+                    <ImageView
+                        android:id="@+id/lblDialise"
+                        style="@style/celula.direita"
+                        android:src="@drawable/icn_check"/>
 
-        </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/linha">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
+                    <TextView
+                        style="@style/celula"
+                        android:text="Obstetra"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fluxo Clientela"/>
+                    <ImageView
+                        android:id="@+id/lblObstetra"
+                        style="@style/celula.direita"
+                        android:src="@drawable/icn_cancelar"/>
 
-            <TextView
-                android:id="@+id/lblFlxClientela"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
+                </LinearLayout>
 
-        </LinearLayout>
+                <LinearLayout
+                    style="@style/linha">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
+                    <TextView
+                        style="@style/celula"
+                        android:text="Neonatal"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Atendimento de Urgencia"/>
+                    <TextView
+                        android:id="@+id/lblNeonatal"
+                        style="@style/celula.direita"
+                        android:text="-"/>
 
-            <TextView
-                android:id="@+id/lblAtendEmgc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
+                </LinearLayout>
 
-        </LinearLayout>
+                <LinearLayout
+                    style="@style/linha">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
+                    <TextView
+                        style="@style/celula"
+                        android:text="Centro Cirurgico"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Atendimento Ambulatorial"/>
+                    <TextView
+                        android:id="@+id/lblCCirurg"
+                        style="@style/celula.direita"
+                        android:text="-"/>
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/lblAtendAmbulat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
+                <LinearLayout
+                    style="@style/linha">
 
-        </LinearLayout>
+                    <TextView
+                        style="@style/celula"
+                        android:text="Atend. Urgencia"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
+                    <TextView
+                        android:id="@+id/lblAtendEmgc"
+                        style="@style/celula.direita"
+                        android:text="-"/>
+                </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Centro Cirurgico"/>
+                <LinearLayout
+                    style="@style/linha.ultima">
 
-            <TextView
-                android:id="@+id/lblCCirurg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
+                    <TextView
+                        style="@style/celula"
+                        android:text="Atend. Ambulatorial"/>
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/lblAtendAmbulat"
+                        style="@style/celula.direita"
+                        android:text="-"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Obstetra"/>
-
-            <TextView
-                android:id="@+id/lblObstetra"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Neonatal"/>
-
-            <TextView
-                android:id="@+id/lblNeonatal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dialise"/>
-
-            <TextView
-                android:id="@+id/lblDialise"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -264,7 +175,6 @@
         <LinearLayout
             android:id="@+id/f7_layoutEspecialidades"
             android:layout_marginTop="6dp"
-            android:background="#cce6ff"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -277,7 +187,6 @@
 
             <RelativeLayout
                 android:id="@+id/f7_progressoEspecialidades"
-                android:background="#e6ccff"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

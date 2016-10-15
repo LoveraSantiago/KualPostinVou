@@ -25,7 +25,7 @@ public class FragEstabFilho_Info extends FragmentFilho {
 
     public static String TITULO_FRAGMENT = "Filho Info";
     public static int ID_FRAGMENT = 1;
-    public static int ICONE = R.drawable.ic_info_black_24dp;
+    public static int ICONE = R.drawable.icn_info;
 
     private View progressoProfissionais;
     private LinearLayout layoutProfissionais;
@@ -55,6 +55,7 @@ public class FragEstabFilho_Info extends FragmentFilho {
     private void setarCampos(){
         try{
             setTextToLabel(this.estabelecimento.getCodCnes()                   , R.id.lblCodCnes     , getView());
+            setTextToLabel(this.estabelecimento.getTipoUnidade()               , R.id.lblTipoUnidade , getView());
             setTextToLabel(this.estabelecimento.getCnpj()                      , R.id.lblCnpj        , getView());
             setTextToLabel(this.estabelecimento.getCodUnidade()                , R.id.lblCodigo      , getView());
             setTextToLabel(this.estabelecimento.getOrigemGeografica()          , R.id.lblOrigGeograf , getView());
@@ -63,6 +64,8 @@ public class FragEstabFilho_Info extends FragmentFilho {
             setTextToLabel(this.estabelecimento.getRetencao()                  , R.id.lblRetencao    , getView());
             setTextToLabel(this.estabelecimento.getTipoUnidadeCnes()           , R.id.lblUnidCnes    , getView());
             setTextToLabel(this.estabelecimento.getCategoriaUnidade()          , R.id.lblCategUnid   , getView());
+            setTextToLabel(this.estabelecimento.getVinculoSus()                , R.id.lblVincSus     , getView());
+            setTextToLabel(this.estabelecimento.getFluxoClientela()            , R.id.lblFlxClientela, getView());
         }catch (Exception e){}
     }
 

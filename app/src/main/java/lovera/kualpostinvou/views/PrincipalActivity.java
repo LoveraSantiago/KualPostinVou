@@ -49,7 +49,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
 
     private Map<Integer, FragmentMenu> mapFragments;
     private FragmentManager fragmentManager;
-    private FragBuscaEstabelecimentos frag1;
+//    private FragBuscaEstabelecimentos frag1;
     private FragBuscaEstabGeoLocalizacao2 frag2;
     private FragRedesSociais frag3;
     private Fragment fragAtiva;
@@ -83,13 +83,13 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     }
 
     private void inicializarFragmentMap(){
-        this.frag1 = new FragBuscaEstabelecimentos();
+//        this.frag1 = new FragBuscaEstabelecimentos();
         this.frag2 = new FragBuscaEstabGeoLocalizacao2();
         this.frag3 = new FragRedesSociais();
 
         this.mapFragments = new HashMap<>();
         this.mapFragments.put(FragRedesSociais.ID_FRAGMENT, this.frag3);
-        this.mapFragments.put(FragBuscaEstabelecimentos.ID_FRAGMENT, this.frag1);
+//        this.mapFragments.put(FragBuscaEstabelecimentos.ID_FRAGMENT, this.frag1);
         this.mapFragments.put(FragBuscaEstabGeoLocalizacao2.ID_FRAGMENT, this.frag2);
     }
 
@@ -267,7 +267,7 @@ public class PrincipalActivity extends AppCompatActivity implements MsgFromNavig
     }
 
     public void consumirEstabelecimentos(View view) {
-        this.frag1.consumirEstabelecimentos();
+//        this.frag1.consumirEstabelecimentos();
     }
 
     public void cadastrarPerfilTeste(View view){

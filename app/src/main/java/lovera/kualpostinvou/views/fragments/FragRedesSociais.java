@@ -30,7 +30,7 @@ import lovera.kualpostinvou.modelos.Pessoa;
 public class FragRedesSociais extends FragmentMenu {
 
     public static String TITULO_FRAGMENT = "Logar";
-    public static int ID_FRAGMENT = 3;
+    public static int ID_FRAGMENT = 2;
     public static int ICONE = R.drawable.icn_pessoa_linha;
 
     private LoginButton faceLoginButton;

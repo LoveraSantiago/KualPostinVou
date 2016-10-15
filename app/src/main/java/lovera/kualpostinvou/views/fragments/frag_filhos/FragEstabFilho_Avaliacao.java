@@ -44,7 +44,7 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
 
     public static String TITULO_FRAGMENT = "Filho Avaliacao";
     public static int ID_FRAGMENT = 2;
-    public static int ICONE = R.drawable.ic_grade_black_24dp;
+    public static int ICONE = R.drawable.icn_estrela;
 
     private HoraMinuto horaMinuto;
     private Estabelecimento estabelecimento;

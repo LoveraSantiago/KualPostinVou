@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#bdd52b"
     android:paddingLeft="10dp"
-    android:paddingTop="10dp"
     android:paddingRight="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -20,6 +19,7 @@
             android:layout_marginTop="6dp">
 
             <TextView
+                android:textColor="@color/mCoral"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -55,7 +55,6 @@
 
         <RelativeLayout
             android:id="@+id/f8_progressoTempoAtend"
-            android:background="#e6ccff"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

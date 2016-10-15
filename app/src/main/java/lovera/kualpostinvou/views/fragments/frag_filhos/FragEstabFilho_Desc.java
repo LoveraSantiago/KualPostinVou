@@ -23,7 +23,7 @@ public class FragEstabFilho_Desc extends FragmentFilho {
 
     public static String TITULO_FRAGMENT = "Filho Descricao";
     public static int ID_FRAGMENT = 0;
-    public static int ICONE = R.drawable.ic_description_black_24dp;
+    public static int ICONE = R.drawable.icn_arquivo;
 
     private Estabelecimento estabelecimento;
 
@@ -54,15 +54,12 @@ public class FragEstabFilho_Desc extends FragmentFilho {
     private void setarCampos(){
         try{
             setTextToLabel(this.estabelecimento.getNomeFantasia()              , R.id.lblNomeFantasia, getView());
-            setTextToLabel(this.estabelecimento.getTipoUnidade()               , R.id.lblTipoUnidade , getView());
-            setTextToLabel(this.estabelecimento.getVinculoSus()                , R.id.lblVincSus     , getView());
-            setTextToLabel(this.estabelecimento.getFluxoClientela()            , R.id.lblFlxClientela, getView());
             setTextToLabel(this.estabelecimento.getTemAtendimentoUrgencia()    , R.id.lblAtendEmgc   , getView());
             setTextToLabel(this.estabelecimento.getTemAtendimentoAmbulatorial(), R.id.lblAtendAmbulat, getView());
             setTextToLabel(this.estabelecimento.getTemCentroCirurgico()        , R.id.lblCCirurg     , getView());
-            setTextToLabel(this.estabelecimento.getTemObstetra()               , R.id.lblObstetra    , getView());
+//            setTextToLabel(this.estabelecimento.getTemObstetra()               , R.id.lblObstetra    , getView());
             setTextToLabel(this.estabelecimento.getTemNeoNatal()               , R.id.lblNeonatal    , getView());
-            setTextToLabel(this.estabelecimento.getTemDialise()                , R.id.lblDialise     , getView());
+//            setTextToLabel(this.estabelecimento.getTemDialise()                , R.id.lblDialise     , getView());
             setTextToLabel(this.estabelecimento.getDescricaoCompleta()         , R.id.lblDescompl    , getView());
             setTextToLabel(this.estabelecimento.getTurnoAtendimento()          , R.id.lblTurnoAtend  , getView());
         }

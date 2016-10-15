@@ -18,7 +18,7 @@ public class FragEstabFilho_Endereco extends FragmentFilho {
 
     public static String TITULO_FRAGMENT = "Filho Enderecos";
     public static int ID_FRAGMENT = 3;
-    public static int ICONE = R.drawable.ic_room_black_24dp;
+    public static int ICONE = R.drawable.icn_distancia;
 
     @Nullable
     @Override
