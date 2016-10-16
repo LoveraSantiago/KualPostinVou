@@ -28,10 +28,18 @@
         <item name="android:layout_marginBottom">0dp</item>
     </style>
 
+    <style name="linhaunica">
+        <item name="android:background">@color/mAzulBranco</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="celula">
         <item name="android:background">@color/mAzulBranco</item>
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/mAzulClaro</item>
@@ -39,6 +47,7 @@
 
     <style name="celula.direita">
         <item name="android:layout_marginLeft">1dp</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="paddingsBtnImg">

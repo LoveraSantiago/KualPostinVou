@@ -1,6 +1,7 @@
 package lovera.kualpostinvou.views.utils;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -25,5 +26,10 @@ public class Utils_View {
 
     public static void setTextToLabel(double texto, int id, View layout){
         setTextToLabel(String.valueOf(texto), id, layout);
+    }
+
+    public static void setImageToImgView(int img, int id, View layout){
+        ImageView imgView = (ImageView) layout.findViewById(id);
+        imgView.setImageResource(img);
     }
 }

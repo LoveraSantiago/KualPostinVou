@@ -39,171 +39,190 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="-"
-                android:textSize="15dp"/>
+                android:textSize="18dp"/>
 
         </LinearLayout>
 
         <LinearLayout
-            style="@style/bordaazul">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="6dp">
 
-            <LinearLayout
-                style="@style/bordaazul.dentro">
+            <TextView
+                android:textColor="@color/mAzulClaro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Horários:"/>
+
+            <TextView
+                android:textColor="@color/mAzulEscuro"
+                android:id="@+id/lblTurnoAtend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:layout_marginLeft="5dp"
+                android:textSize="15dp"/>
+        </LinearLayout>
+
+        <LinearLayout style="@style/bordaazul">
+            <LinearLayout style="@style/bordaazul.dentro">
 
                 <LinearLayout
-                    style="@style/linha">
+                    android:layout_marginBottom="1dp"
+                    android:background="@color/mAzulClaro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="@color/mPastel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="Atendimentos"/>
+                </LinearLayout>
+
+                <LinearLayout style="@style/linha">
 
                     <TextView
                         style="@style/celula"
                         android:text="Dialise"/>
 
-
-
                     <ImageView
-                        android:id="@+id/lblDialise"
+                        android:id="@+id/imgDialise"
                         style="@style/celula.direita"
                         android:src="@drawable/icn_check"/>
-
                 </LinearLayout>
-                <LinearLayout
-                    style="@style/linha">
+                <LinearLayout style="@style/linha">
 
                     <TextView
                         style="@style/celula"
                         android:text="Obstetra"/>
 
                     <ImageView
-                        android:id="@+id/lblObstetra"
+                        android:id="@+id/imgObstetra"
                         style="@style/celula.direita"
-                        android:src="@drawable/icn_cancelar"/>
-
+                        android:src="@drawable/icn_check"/>
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/linha">
+                <LinearLayout style="@style/linha">
 
                     <TextView
                         style="@style/celula"
                         android:text="Neonatal"/>
 
-                    <TextView
-                        android:id="@+id/lblNeonatal"
+                    <ImageView
+                        android:id="@+id/imgNeonatal"
                         style="@style/celula.direita"
-                        android:text="-"/>
-
+                        android:src="@drawable/icn_check"/>
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/linha">
+                <LinearLayout style="@style/linha">
 
                     <TextView
                         style="@style/celula"
                         android:text="Centro Cirurgico"/>
 
-                    <TextView
-                        android:id="@+id/lblCCirurg"
+                    <ImageView
+                        android:id="@+id/imgCCirurg"
                         style="@style/celula.direita"
-                        android:text="-"/>
+                        android:src="@drawable/icn_check"/>
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/linha">
+                <LinearLayout style="@style/linha">
 
                     <TextView
                         style="@style/celula"
-                        android:text="Atend. Urgencia"/>
+                        android:text="Urgencia"/>
 
-                    <TextView
-                        android:id="@+id/lblAtendEmgc"
+                    <ImageView
+                        android:id="@+id/imgAtendEmgc"
                         style="@style/celula.direita"
-                        android:text="-"/>
+                        android:src="@drawable/icn_check"/>
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/linha.ultima">
+                <LinearLayout style="@style/linha.ultima">
 
                     <TextView
                         style="@style/celula"
-                        android:text="Atend. Ambulatorial"/>
+                        android:text="Ambulatorial"/>
 
-                    <TextView
-                        android:id="@+id/lblAtendAmbulat"
+                    <ImageView
+                        android:id="@+id/imgAtendAmbulat"
                         style="@style/celula.direita"
-                        android:text="-"/>
-
+                        android:src="@drawable/icn_check"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
+        <LinearLayout style="@style/bordaazul"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:id="@+id/f7_layoutEspecialidades"
+                style="@style/bordaazul.dentro">
+
+                <TextView
+                    android:textColor="@color/mPastel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Especialidades"/>
+
+                <LinearLayout
+                    android:id="@+id/f7_linha_unica"
+                    style="@style/linhaunica">
+
+                    <LinearLayout
+                        android:id="@+id/f7_progressoEspecialidades"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleSmall"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Consultando especialidades..."/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
+            android:layout_marginTop="10dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:textColor="@color/mAzulClaro"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Descricao Completa"/>
+                android:gravity="center_horizontal"
+                android:text="Descrição Completa"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView
+                android:textColor="@color/mAzulEscuro"
                 android:id="@+id/lblDescompl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"
                 android:layout_marginLeft="10dp"
                 android:textSize="15dp"/>
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Turno Atend"/>
-
-            <TextView
-                android:id="@+id/lblTurnoAtend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/f7_layoutEspecialidades"
-            android:layout_marginTop="6dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Especialidades"/>
-
-            <RelativeLayout
-                android:id="@+id/f7_progressoEspecialidades"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Consultando profissionais..."/>
-
-                <ProgressBar
-                    style="?android:attr/progressBarStyleSmall"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-            </RelativeLayout>
-        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>
