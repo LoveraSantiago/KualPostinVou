@@ -19,6 +19,7 @@ import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.views.adapters.FragEstabFilhoDescAdapter;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
 
+import static lovera.kualpostinvou.views.utils.Utils_View.gerarLinhaTabelaEspecialidade;
 import static lovera.kualpostinvou.views.utils.Utils_View.setImageToImgView;
 import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
 
@@ -94,23 +95,16 @@ public class FragEstabFilho_Desc extends FragmentFilho {
             fecharProgressoProfissionais();
             LinearLayout linhaUnica = (LinearLayout) getActivity().findViewById(R.id.f7_layoutEspecialidades);
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, 0, 0, 1);
 
             if(listaEspecialidades.size() > 0){
                 for(Especialidade especialidade : listaEspecialidades){
-                    LinearLayout linha = new LinearLayout(getActivity());
-                    linha.setLayoutParams(params);
-                    linha.setOrientation(LinearLayout.HORIZONTAL);
-                    linha.setGravity(Gravity.CENTER);
-                    linha.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.mAzulBranco));
-
+                    LinearLayout linha = gerarLinhaTabelaEspecialidade(getActivity());
                     linha.addView(gerarTxtViewPProgressProf(especialidade.getDescricaoHabilitacao() + " - " + especialidade.getDescricaoGrupo()));
                     linhaUnica.addView(linha);
                 }
             }
             else{
-                LinearLayout linha = new LinearLayout(getActivity());
+                LinearLayout linha = gerarLinhaTabelaEspecialidade(getActivity());
                 linha.addView(gerarTxtViewPProgressProf("Não há especialidades registradas"));
                 linhaUnica.addView(linha);
             }
@@ -120,6 +114,7 @@ public class FragEstabFilho_Desc extends FragmentFilho {
     private TextView gerarTxtViewPProgressProf(String texto){
         TextView textView = new TextView(getActivity());
         textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        textView.setGravity(Gravity.CENTER);
         textView.setText(texto);
         textView.setPadding(5, 0, 0, 0);
         return textView;
