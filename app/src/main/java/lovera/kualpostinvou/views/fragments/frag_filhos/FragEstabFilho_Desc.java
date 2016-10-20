@@ -116,6 +116,7 @@ public class FragEstabFilho_Desc extends FragmentFilho {
         textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         textView.setGravity(Gravity.CENTER);
         textView.setText(texto);
+        textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.mAzulEscuro));
         textView.setPadding(5, 0, 0, 0);
         return textView;
     }
