@@ -15,6 +15,12 @@
         <item name="android:padding">1dp</item>
     </style>
 
+    <style name="bordaazul.dentroEspecialidade">
+        <item name="android:paddingRight">1dp</item>
+        <item name="android:paddingLeft">1dp</item>
+        <item name="android:paddingTop">1dp</item>
+    </style>
+
     <style name="linha">
         <item name="android:layout_marginBottom">1dp</item>
         <item name="android:background">@color/mAzulClaro</item>

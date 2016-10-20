@@ -160,7 +160,7 @@
 
             <LinearLayout
                 android:id="@+id/f7_layoutEspecialidades"
-                style="@style/bordaazul.dentro">
+                style="@style/bordaazul.dentroEspecialidade">
 
                 <TextView
                     android:textColor="@color/mPastel"
