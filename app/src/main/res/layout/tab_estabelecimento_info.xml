@@ -32,15 +32,17 @@
             android:layout_marginTop="6dp">
 
             <TextView
+                android:textColor="@color/mAzulClaro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="cod cnes"/>
+                android:text="Cnes:"/>
 
             <TextView
                 android:id="@+id/lblCodCnes"
+                android:textColor="@color/mAzulEscuro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
                 android:text="-"
                 android:textSize="15dp"/>
         </LinearLayout>
@@ -51,15 +53,59 @@
             android:layout_marginTop="6dp">
 
             <TextView
+                android:textColor="@color/mAzulClaro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tipo Unidade"/>
+                android:text="Cnpj:"/>
+
+            <TextView
+                android:id="@+id/lblCnpj"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/mAzulEscuro"
+                android:text="-"
+                android:textSize="15dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp">
+
+            <TextView
+                android:textColor="@color/mAzulClaro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cod. Unidade:"/>
+
+            <TextView
+                android:id="@+id/lblCodigo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/mAzulEscuro"
+                android:text="-"
+                android:textSize="15dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp">
+
+            <TextView
+                android:textColor="@color/mAzulClaro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipo:"/>
 
             <TextView
                 android:id="@+id/lblTipoUnidade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/mAzulEscuro"
                 android:text="-"
                 android:textSize="15dp"/>
 
@@ -71,16 +117,18 @@
             android:layout_marginTop="6dp">
 
             <TextView
+                android:textColor="@color/mAzulClaro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vinculo Sus"/>
+                android:text="Vinculo Sus:"/>
 
             <TextView
                 android:id="@+id/lblVincSus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/mAzulEscuro"
                 android:textSize="15dp"/>
 
         </LinearLayout>
@@ -91,73 +139,17 @@
             android:layout_marginTop="6dp">
 
             <TextView
+                android:textColor="@color/mAzulClaro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fluxo Clientela"/>
-
-            <TextView
-                android:id="@+id/lblFlxClientela"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="cnpj"/>
-
-            <TextView
-                android:id="@+id/lblCnpj"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="-"
-                android:textSize="15dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="codigo unidade"/>
-
-            <TextView
-                android:id="@+id/lblCodigo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="-"
-                android:textSize="15dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="natureza"/>
+                android:text="Natureza:"/>
 
             <TextView
                 android:id="@+id/lblNatureza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/mAzulEscuro"
                 android:text="-"
                 android:textSize="15dp"/>
         </LinearLayout>
@@ -168,16 +160,18 @@
             android:layout_marginTop="6dp">
 
             <TextView
+                android:textColor="@color/mAzulClaro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Origem Geografica"/>
+                android:text="Origem Geografica:"/>
 
             <TextView
                 android:id="@+id/lblOrigGeograf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/mAzulEscuro"
                 android:textSize="15dp"/>
         </LinearLayout>
 
@@ -187,15 +181,17 @@
             android:layout_marginTop="6dp">
 
             <TextView
+                android:textColor="@color/mAzulClaro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Esfera Administrativa"/>
+                android:text="Esfera Administrativa:"/>
 
             <TextView
                 android:id="@+id/lblEsferaAdm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/mAzulEscuro"
                 android:text="-"
                 android:textSize="15dp"/>
         </LinearLayout>
@@ -206,15 +202,17 @@
             android:layout_marginTop="6dp">
 
             <TextView
+                android:textColor="@color/mAzulClaro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Retencao"/>
+                android:text="Retencao:"/>
 
             <TextView
                 android:id="@+id/lblRetencao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/mAzulEscuro"
                 android:text="-"
                 android:textSize="15dp"/>
         </LinearLayout>
@@ -225,18 +223,42 @@
             android:layout_marginTop="6dp">
 
             <TextView
+                android:textColor="@color/mAzulClaro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Categoria unidade"/>
+                android:text="Categoria:"/>
 
             <TextView
                 android:id="@+id/lblCategUnid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/mAzulEscuro"
                 android:textSize="15dp"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp">
+
+            <TextView
+                android:textColor="@color/mAzulClaro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clientela:"/>
+
+            <TextView
+                android:id="@+id/lblFlxClientela"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/mAzulEscuro"
+                android:textSize="15dp"/>
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -244,50 +266,59 @@
             android:layout_marginTop="6dp">
 
             <TextView
+                android:textColor="@color/mAzulClaro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tipo unidade cnes"/>
+                android:text="Tipo Unidade Cnes:"/>
 
             <TextView
                 android:id="@+id/lblUnidCnes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/mAzulEscuro"
                 android:textSize="15dp"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/f6_layoutProfissionais"
-            android:layout_marginTop="6dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <LinearLayout style="@style/bordaazul"
+            android:layout_marginTop="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Profissionais"/>
-
-            <RelativeLayout
-                android:id="@+id/f6_progressoProfissionais"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/f6_layoutProfissionais"
+                style="@style/bordaazul.dentroEspecialidade">
 
                 <TextView
+                    android:textColor="@color/mPastel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Consultando profissionais..."/>
+                    android:layout_gravity="center"
+                    android:text="Profissionais"/>
 
-                <ProgressBar
-                    style="?android:attr/progressBarStyleSmall"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    style="@style/linhaunica">
 
-            </RelativeLayout>
+                    <LinearLayout
+                        android:id="@+id/f6_progressoProfissionais"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <TextView
+                            android:textColor="@color/mAzulClaro"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Consultando profissionais..."/>
+
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

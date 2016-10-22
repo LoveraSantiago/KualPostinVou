@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +34,10 @@ public class Utils_View {
         setTextToLabel(String.valueOf(texto), id, layout);
     }
 
+    public static void setTextToLabel(long texto, int id, View layout){
+        setTextToLabel(String.valueOf(texto), id, layout);
+    }
+
     public static void setTextToLabel(double texto, int id, View layout){
         setTextToLabel(String.valueOf(texto), id, layout);
     }
@@ -42,7 +47,7 @@ public class Utils_View {
         imgView.setImageResource(img);
     }
 
-    public static LinearLayout gerarLinhaTabelaEspecialidade(Activity activity){
+    public static LinearLayout gerarLinhaParaTabela(Activity activity){
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(0, 0, 0, (int)converterDpParaPixel(1, activity));
 
@@ -52,6 +57,27 @@ public class Utils_View {
         linhaResult.setGravity(Gravity.CENTER);
         linhaResult.setBackgroundColor(ContextCompat.getColor(activity, R.color.mAzulBranco));
         return linhaResult;
+    }
+
+    public static TextView gerarTxtViewParaTabela_centro(Activity activity, String texto) {
+        TextView textView = gerarTxtViewPProgressTable_emComum(activity, texto);
+        textView.setGravity(Gravity.CENTER);
+        return textView;
+    }
+
+    public static TextView gerarTxtViewParaTabela_esquerda(Activity activity, String texto) {
+        TextView textView = gerarTxtViewPProgressTable_emComum(activity, texto);
+        textView.setGravity(Gravity.LEFT);
+        return textView;
+    }
+
+    private static TextView gerarTxtViewPProgressTable_emComum(Activity activity, String texto){
+        TextView textView = new TextView(activity);
+        textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        textView.setText(texto);
+        textView.setTextColor(ContextCompat.getColor(activity, R.color.mAzulEscuro));
+        textView.setPadding(5, 0, 0, 0);
+        return textView;
     }
 
     public static float converterDpParaPixel(float dp, Context context){

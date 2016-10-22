@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -17,7 +16,10 @@ import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.views.adapters.FragEstabFilhoInfoAdapter;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
 
+import static lovera.kualpostinvou.views.utils.Utils_View.gerarLinhaParaTabela;
 import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
+import static lovera.kualpostinvou.views.utils.Utils_View.gerarTxtViewParaTabela_centro;
+import static lovera.kualpostinvou.views.utils.Utils_View.gerarTxtViewParaTabela_esquerda;
 
 public class FragEstabFilho_Info extends FragmentFilho {
 
@@ -26,9 +28,6 @@ public class FragEstabFilho_Info extends FragmentFilho {
     public static String TITULO_FRAGMENT = "Filho Info";
     public static int ID_FRAGMENT = 1;
     public static int ICONE = R.drawable.icn_info;
-
-    private View progressoProfissionais;
-    private LinearLayout layoutProfissionais;
 
     private List<Profissional> listaDeProfissionais;
 
@@ -47,7 +46,6 @@ public class FragEstabFilho_Info extends FragmentFilho {
     @Override
     public void onStart() {
         super.onStart();
-        inicializarProgressos();
         consumirProfissionais();
         setarCampos();
     }
@@ -83,36 +81,27 @@ public class FragEstabFilho_Info extends FragmentFilho {
     public void setListaDeProfissionais(List<Profissional> listaDeProfissionais){
         this.listaDeProfissionais = listaDeProfissionais;
         try{
-
             fecharProgressoProfissionais();
-            this.layoutProfissionais = (LinearLayout) getActivity().findViewById(R.id.f6_layoutProfissionais);
+            LinearLayout linhaUnica = (LinearLayout) getActivity().findViewById(R.id.f6_layoutProfissionais);
 
             if(listaDeProfissionais.size() > 0){
                 for(Profissional profissional : listaDeProfissionais){
-                    this.layoutProfissionais.addView(gerarTxtViewPProgressProf(profissional.toString()));
+                    LinearLayout linha = gerarLinhaParaTabela(getActivity());
+                    linha.addView(gerarTxtViewParaTabela_esquerda(getActivity(), profissional.toString()));
+                    linhaUnica.addView(linha);
                 }
             }
             else{
-                this.layoutProfissionais.addView(gerarTxtViewPProgressProf("Não há profissionais cadastrados."));
+                LinearLayout linha = gerarLinhaParaTabela(getActivity());
+                linha.addView(gerarTxtViewParaTabela_centro(getActivity(), "Não há profissionais cadastrados."));
+                linhaUnica.addView(linha);
             }
         }catch (Exception e){}
     }
 
-    private TextView gerarTxtViewPProgressProf(String texto){
-        TextView textView = new TextView(getActivity());
-        textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        textView.setPadding(5, 0, 0, 0);
-        textView.setText(texto);
-        return textView;
-    }
-
-    //Coisas relativas ao progresso de profissionais
-    private void inicializarProgressos(){
-        this.progressoProfissionais = getActivity().findViewById(R.id.f6_progressoProfissionais);
-    }
-
     private void fecharProgressoProfissionais(){
-        this.progressoProfissionais.setVisibility(View.GONE);
+        View progressoProfissionais = getActivity().findViewById(R.id.f6_progressoProfissionais);
+        progressoProfissionais.setVisibility(View.GONE);
     }
 
     @Override
