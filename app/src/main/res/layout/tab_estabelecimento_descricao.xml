@@ -11,10 +11,8 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="6dp">
+            style="@style/linearLayoutComum"
+            android:gravity="center">
 
             <TextView
                 android:textColor="@color/mCoral"
@@ -26,10 +24,8 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="6dp">
+            style="@style/linearLayoutComum"
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:gravity="center"
@@ -44,25 +40,16 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="6dp">
+            style="@style/linearLayoutComum"
+            android:layout_marginBottom="10dp">
 
             <TextView
-                android:textColor="@color/mAzulClaro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/label"
                 android:text="Horários:"/>
 
             <TextView
-                android:textColor="@color/mAzulEscuro"
                 android:id="@+id/lblTurnoAtend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="5dp"
-                android:textSize="15dp"/>
+                style="@style/info"/>
         </LinearLayout>
 
         <LinearLayout style="@style/bordaazul">
@@ -196,10 +183,7 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+        <LinearLayout style="@style/linearLayoutComum">
 
             <TextView
                 android:textColor="@color/mAzulClaro"

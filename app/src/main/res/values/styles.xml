@@ -1,5 +1,26 @@
 <resources>
 
+    <style name="label">
+        <item name="android:textColor">@color/mAzulClaro</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="info">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:text">-</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:textColor">@color/mAzulEscuro</item>
+        <item name="android:textSize">15dp</item>
+    </style>
+
+    <style name="linearLayoutComum">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">6dp</item>
+    </style>
+
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/mCoral</item>
     </style>

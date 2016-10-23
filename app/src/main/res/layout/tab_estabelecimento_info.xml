@@ -13,10 +13,8 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="6dp">
+            style="@style/linearLayoutComum"
+            android:gravity="center">
 
             <TextView
                 android:textColor="@color/mCoral"
@@ -26,259 +24,128 @@
                 android:text="Informações"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
+        <LinearLayout style="@style/linearLayoutComum">
 
             <TextView
-                android:textColor="@color/mAzulClaro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/label"
                 android:text="Cnes:"/>
 
             <TextView
                 android:id="@+id/lblCodCnes"
-                android:textColor="@color/mAzulEscuro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="-"
-                android:textSize="15dp"/>
+                style="@style/info"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
+        <LinearLayout style="@style/linearLayoutComum">
             <TextView
-                android:textColor="@color/mAzulClaro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/label"
                 android:text="Cnpj:"/>
 
             <TextView
                 android:id="@+id/lblCnpj"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textColor="@color/mAzulEscuro"
-                android:text="-"
-                android:textSize="15dp"/>
+                style="@style/info"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
+        <LinearLayout style="@style/linearLayoutComum">
             <TextView
-                android:textColor="@color/mAzulClaro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/label"
                 android:text="Cod. Unidade:"/>
 
             <TextView
                 android:id="@+id/lblCodigo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textColor="@color/mAzulEscuro"
-                android:text="-"
-                android:textSize="15dp"/>
+                style="@style/info"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
+        <LinearLayout style="@style/linearLayoutComum">
             <TextView
-                android:textColor="@color/mAzulClaro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/label"
                 android:text="Tipo:"/>
 
             <TextView
                 android:id="@+id/lblTipoUnidade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textColor="@color/mAzulEscuro"
-                android:text="-"
-                android:textSize="15dp"/>
+                style="@style/info"/>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
+        <LinearLayout style="@style/linearLayoutComum">
             <TextView
-                android:textColor="@color/mAzulClaro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/label"
                 android:text="Categoria:"/>
 
             <TextView
                 android:id="@+id/lblCategUnid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="5dp"
-                android:textColor="@color/mAzulEscuro"
-                android:textSize="15dp"/>
+                style="@style/info"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
+        <LinearLayout style="@style/linearLayoutComum">
             <TextView
-                android:textColor="@color/mAzulClaro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/label"
                 android:text="Vinculo Sus:"/>
 
             <TextView
                 android:id="@+id/lblVincSus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="5dp"
-                android:textColor="@color/mAzulEscuro"
-                android:textSize="15dp"/>
+                style="@style/info"/>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
+        <LinearLayout style="@style/linearLayoutComum">
             <TextView
-                android:textColor="@color/mAzulClaro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/label"
                 android:text="Origem Geografica:"/>
 
             <TextView
                 android:id="@+id/lblOrigGeograf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="5dp"
-                android:textColor="@color/mAzulEscuro"
-                android:textSize="15dp"/>
+                style="@style/info"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
+        <LinearLayout style="@style/linearLayoutComum">
             <TextView
-                android:textColor="@color/mAzulClaro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/label"
                 android:text="Retencao:"/>
 
             <TextView
                 android:id="@+id/lblRetencao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textColor="@color/mAzulEscuro"
-                android:text="-"
-                android:textSize="15dp"/>
+                style="@style/info"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
+        <LinearLayout style="@style/linearLayoutComum">
             <TextView
-                android:textColor="@color/mAzulClaro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/label"
                 android:text="Esfera Administrativa:"/>
 
             <TextView
                 android:id="@+id/lblEsferaAdm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textColor="@color/mAzulEscuro"
-                android:text="-"
-                android:textSize="15dp"/>
+                style="@style/info"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
+        <LinearLayout style="@style/linearLayoutComum">
             <TextView
-                android:textColor="@color/mAzulClaro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/label"
                 android:text="Clientela:"/>
 
             <TextView
                 android:id="@+id/lblFlxClientela"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="5dp"
-                android:textColor="@color/mAzulEscuro"
-                android:textSize="15dp"/>
+                style="@style/info"/>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
+        <LinearLayout style="@style/linearLayoutComum">
             <TextView
-                android:textColor="@color/mAzulClaro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/label"
                 android:text="Natureza:"/>
 
             <TextView
                 android:id="@+id/lblNatureza"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textColor="@color/mAzulEscuro"
-                android:text="-"
-                android:textSize="15dp"/>
+                style="@style/info"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
+        <LinearLayout style="@style/linearLayoutComum">
             <TextView
-                android:textColor="@color/mAzulClaro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/label"
                 android:text="Tipo Unidade Cnes:"/>
 
             <TextView
                 android:id="@+id/lblUnidCnes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="5dp"
-                android:textColor="@color/mAzulEscuro"
-                android:textSize="15dp"/>
+               style="@style/info"/>
         </LinearLayout>
 
         <LinearLayout style="@style/bordaazul"
@@ -295,8 +162,7 @@
                     android:layout_gravity="center"
                     android:text="Profissionais"/>
 
-                <LinearLayout
-                    style="@style/linhaunica">
+                <LinearLayout style="@style/linhaunica">
 
                     <LinearLayout
                         android:id="@+id/f6_progressoProfissionais"
