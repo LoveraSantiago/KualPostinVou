@@ -3,92 +3,103 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
+    android:paddingTop="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="6dp">
-
-            <TextView
-                android:textColor="@color/mCoral"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="Avaliações"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tempo de Atendimento em "/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="DD/MM/YYYY"
-                android:id="@+id/f8_lbldia" />
-        </LinearLayout>
-
         <TextView
+            android:layout_gravity="center"
+            android:textColor="@color/mCoral"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="00h 00m"
-            android:textSize="60dp"
-            android:id="@+id/f8_lblHora" />
+            android:textSize="20dp"
+            android:text="Avaliações"/>
 
-        <RelativeLayout
-            android:id="@+id/f8_progressoTempoAtend"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <LinearLayout style="@style/bordaazul"
+            android:layout_marginTop="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Consultando tempos de atendimento..."/>
+            <LinearLayout
+                android:background="@color/mAzulBranco"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <ProgressBar
-                style="?android:attr/progressBarStyleSmall"
-                android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:paddingTop="0dp"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-        </RelativeLayout>
+                    <TextView
+                        style="@style/label"
+                        android:text="Tempo de Atendimento em "/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Não há registros de atendimento hoje."
-            android:id="@+id/f8_mensagem" />
+                    <TextView
+                        style="@style/label"
+                        android:text="DD/MM/YYYY"
+                        android:id="@+id/f8_lbldia" />
+                </LinearLayout>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Registrar meu tempo de atendimento"
-            android:id="@+id/f8_btnRegistrarAtend"
-            android:onClick="showDialogCadastrarTempoDeAtendimento"/>
+                <TextView
+                    style="@style/label"
+                    android:layout_gravity="center"
+                    android:text="00h 00m"
+                    android:textSize="60dp"
+                    android:id="@+id/f8_lblHora" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Editar meu tempo de atendimento"
-            android:id="@+id/f8_btnEditarAtend"/>
+                <LinearLayout
+                    android:id="@+id/f8_progressoTempoAtend"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/label"
+                        android:text="Consultando tempos de atendimento..."/>
+
+                    <ProgressBar
+                        style="?android:attr/progressBarStyleSmall"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <TextView
+                    style="@style/label"
+                    android:layout_gravity="center"
+                    android:text="Não há registros de atendimento hoje."
+                    android:id="@+id/f8_mensagem" />
+
+                <Button
+                    android:id="@+id/f8_btnRegistrarAtend"
+                    android:background="@drawable/westilo_btn_distancia"
+                    android:textColor="@color/mCoral"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Registrar meu tempo de atendimento"
+                    android:onClick="showDialogCadastrarTempoDeAtendimento"
+                    android:layout_margin="1dp"/>
+
+                <Button
+                    android:layout_margin="1dp"
+                    android:id="@+id/f8_btnEditarAtend"
+                    android:background="@drawable/westilo_btn_distancia"
+                    android:textColor="@color/mCoral"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Editar meu tempo de atendimento"/>
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
+
 </ScrollView>

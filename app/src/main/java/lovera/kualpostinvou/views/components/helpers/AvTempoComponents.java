@@ -82,7 +82,7 @@ public class AvTempoComponents {
 
     private void procedimentoSemDadosCadastrados(){
         this.mensagem.setVisibility(View.VISIBLE);
-        this.mensagem.setText("Hoje ninguem registrou tempo de atendimento ainda.");
+        this.mensagem.setText("Não há registros de atendimento hoje.");
         this.progressoTemposAtendimento.setVisibility(View.GONE);
     }
 }
