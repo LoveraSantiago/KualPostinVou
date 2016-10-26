@@ -5,7 +5,7 @@
     android:paddingTop="10dp"
     android:paddingRight="10dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">git
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:orientation="vertical"
@@ -27,194 +27,114 @@
 
     </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
+        <LinearLayout style="@style/linearLayoutComum">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Logradouro"/>
+                style="@style/label"
+                android:text="Endereço:"/>
 
             <TextView
                 android:id="@+id/lblLogradouro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
+                style="@style/info"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
+        <LinearLayout style="@style/linearLayoutComum">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="numero"/>
+                style="@style/label"
+                android:text="Numero:"/>
 
             <TextView
                 android:id="@+id/lblNumero"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
+                style="@style/info"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
+        <LinearLayout style="@style/linearLayoutComum">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bairro"/>
-
-            <TextView
-                android:id="@+id/lblBairro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cidade"/>
-
-            <TextView
-                android:id="@+id/lblCidade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Uf"/>
-
-            <TextView
-                android:id="@+id/lblUf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cep"/>
+                style="@style/label"
+                android:text="Cep:"/>
 
             <TextView
                 android:id="@+id/lblCep"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
+                style="@style/info"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
+        <LinearLayout style="@style/linearLayoutComum">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Telefone"/>
+                style="@style/label"
+                android:text="Bairro:"/>
+
+            <TextView
+                android:id="@+id/lblBairro"
+                style="@style/info"/>
+        </LinearLayout>
+
+        <LinearLayout style="@style/linearLayoutComum">
+
+            <TextView
+                style="@style/label"
+                android:text="Cidade:"/>
+
+            <TextView
+                android:id="@+id/lblCidade"
+                style="@style/info"/>
+        </LinearLayout>
+
+        <LinearLayout style="@style/linearLayoutComum">
+
+            <TextView
+                style="@style/label"
+                android:text="Uf:"/>
+
+            <TextView
+                android:id="@+id/lblUf"
+                style="@style/info"/>
+        </LinearLayout>
+
+        <LinearLayout style="@style/linearLayoutComum">
+
+            <TextView
+                style="@style/label"
+                android:text="Telefone:"/>
 
             <TextView
                 android:id="@+id/lblTelefone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
+                style="@style/info"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
+        <LinearLayout style="@style/linearLayoutComum">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="latitude"/>
+                style="@style/label"
+                android:text="Latitude:"/>
 
             <TextView
                 android:id="@+id/lblLatitude"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
+                style="@style/info"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
+        <LinearLayout style="@style/linearLayoutComum">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Longitude"/>
+                style="@style/label"
+                android:text="Longitude:"/>
 
             <TextView
                 android:id="@+id/lblLongitude"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
+                style="@style/info"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
+        <LinearLayout style="@style/linearLayoutComum">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Distancia"/>
+                style="@style/label"
+                android:text="Distância:"/>
 
             <TextView
                 android:id="@+id/lblDistancia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"/>
+                style="@style/info"/>
         </LinearLayout>
     </LinearLayout>
 
