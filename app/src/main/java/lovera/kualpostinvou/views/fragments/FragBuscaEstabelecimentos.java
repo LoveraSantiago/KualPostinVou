@@ -27,7 +27,7 @@ public class FragBuscaEstabelecimentos extends FragmentMenu implements MsgFromCo
 
     public static String TITULO_FRAGMENT = "Estabelecimentos Busca";
     public static int ID_FRAGMENT = 1;
-    public static int ICONE = R.drawable.icn1;
+    public static int ICONE = 0;
 
     private Spinner spinner;
 

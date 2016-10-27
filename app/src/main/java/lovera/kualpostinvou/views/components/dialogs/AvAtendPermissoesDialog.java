@@ -14,8 +14,8 @@ import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Avaliacao
 
 public class AvAtendPermissoesDialog extends AlertDialog{
 
-    private int imgOk = R.drawable.ic_check_black_24dp;
-    private int imgNOk = R.drawable.ic_cancel_black_24dp;
+    private int imgOk = R.drawable.icn_check;
+    private int imgNOk = R.drawable.icn_cancelar;
 
     private ImageView imgLogado;
     private ImageView imgGps;
