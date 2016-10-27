@@ -59,21 +59,6 @@ public class PessoaLogada{
         activit.startService(intent);
     }
 
-    public void factoryTestePessoa(){
-        String numero = "7";
-        pessoa.setCEP("05172-030");
-        pessoa.setBiografia("biografiatemp");
-        pessoa.setDataNascimento("1981-06-25");
-        pessoa.setEmail("santuga@gmail" + numero);
-        pessoa.setLatitude(20.20);
-        pessoa.setLongitude(19.19);
-        pessoa.setNomeCompleto("Santuga Lovera" + numero);
-        pessoa.setNomeUsuario("Santuga" + numero);
-        pessoa.setSexo("M");
-        pessoa.setTokenFacebook("IDFACETESTE" + numero);
-        pessoa.setTokenGoogle("IDGOOGLETESTE" + numero);
-    }
-
     public void resetPessoa(){
         this.pessoa.setNomeCompleto("Usuario Não Logado");
         this.pessoa.setIntImgPerfil(R.drawable.icn_pessoa_drawer);
