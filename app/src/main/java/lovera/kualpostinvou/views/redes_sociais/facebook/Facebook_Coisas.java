@@ -113,7 +113,7 @@ public class Facebook_Coisas {
                         e.printStackTrace();
                     }
                 }
-                Aplicacao.getPessoaLogada().inicializarPessoa();
+                gerarPessoaLogadaFace();
                 Aplicacao.getPessoaLogada().inicializarTokenAppCivico(activity);
             }
         });
@@ -134,25 +134,24 @@ public class Facebook_Coisas {
         if(this.estouLogado){
             LoginManager.getInstance().logOut();
             this.estouLogado = false;
-            Aplicacao.getPessoaLogada().inicializarPessoa();
+            Aplicacao.getPessoaLogada().resetPessoa();
         }
     }
 
     public void onLogoutFeito(){
-        Aplicacao.getPessoaLogada().inicializarPessoa();
+        Aplicacao.getPessoaLogada().resetPessoa();
     }
 
-    public void getPessoaLogada(){
-        if(this.estouLogado){
-            Profile profile = Profile.getCurrentProfile();
-            if(profile != null){
-                Pessoa pessoa = Aplicacao.getPessoaLogada().getPessoa();
-                pessoa.setNomeUsuario(profile.getName());
-                pessoa.setNomeCompleto(profile.getName());
-                pessoa.setUriImgPerfil(profile.getProfilePictureUri(160, 160));
-                pessoa.setTokenFacebook(profile.getId());
-                pessoa.setEmail(this.campoEmail);
-            }
+    private void gerarPessoaLogadaFace(){
+        Profile profile = Profile.getCurrentProfile();
+        if(profile != null){
+            Pessoa pessoa = Aplicacao.getPessoaLogada().getPessoa();
+            pessoa.setNomeUsuario(profile.getName());
+            pessoa.setNomeCompleto(profile.getName());
+            pessoa.setUriImgPerfil(profile.getProfilePictureUri(160, 160));
+            pessoa.setTokenFacebook(profile.getId());
+            pessoa.setEmail(this.campoEmail);
+            Aplicacao.getPessoaLogada().setPessoa(pessoa);
         }
     }
 
@@ -162,7 +161,7 @@ public class Facebook_Coisas {
 
     public void onStart(Activity activity){
         if(this.estouLogado){
-            Aplicacao.getPessoaLogada().inicializarPessoa();
+            gerarPessoaLogadaFace();
             Aplicacao.getPessoaLogada().inicializarTokenAppCivico(activity);
         }
         else{

@@ -29,20 +29,10 @@ public class PessoaLogada{
     private MsgToViewHolderHeader receptorMsg;
 
     public PessoaLogada() {
-        this.pessoa = new Pessoa();
         this.imgViewComponent = new ImgViewDrawerNavigComponent();
+        this.pessoa = new Pessoa();
+
         resetPessoa();
-    }
-
-    public void inicializarPessoa(){
-        resetPessoa();
-
-        Aplicacao.getGoogleCoisas().getPessoaLogada();
-        Aplicacao.getFaceCoisas().getPessoaLogada();
-
-        if(this.receptorMsg != null){
-            this.receptorMsg.headerAlterado();
-        }
     }
 
     public void inicializarTokenAppCivico(Activity activit){
@@ -64,6 +54,8 @@ public class PessoaLogada{
         this.pessoa.setIntImgPerfil(R.drawable.icn_pessoa_drawer);
         this.pessoa.setEmail("usuario@nao.logado");
         this.pessoa.setUriImgPerfil(null);
+
+        setPessoa(this.pessoa);
     }
 
     public Pessoa getPessoa() {
@@ -72,6 +64,13 @@ public class PessoaLogada{
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+        trocarHeaderDrawerNavigation();
+    }
+
+    private void trocarHeaderDrawerNavigation(){
+        if(this.receptorMsg != null){
+            this.receptorMsg.headerAlterado();
+        }
     }
 
     public void getImgPessoa(ImageView imgView){

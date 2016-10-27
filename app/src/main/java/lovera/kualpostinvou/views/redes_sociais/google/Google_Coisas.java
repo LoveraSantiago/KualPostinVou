@@ -73,7 +73,7 @@ public class Google_Coisas implements GoogleApiClient.ConnectionCallbacks, Googl
             this.acount = result.getSignInAccount();
             this.estouLogado = true;
             Aplicacao.getFaceCoisas().realizarLogout();
-            Aplicacao.getPessoaLogada().inicializarPessoa();
+            gerarPessoaLogadaGoogle();
             Aplicacao.getPessoaLogada().inicializarTokenAppCivico(activity);
         }
     }
@@ -97,22 +97,22 @@ public class Google_Coisas implements GoogleApiClient.ConnectionCallbacks, Googl
                         @Override
                         public void onResult(@NonNull Status status) {
                             estouLogado = false;
-                            Aplicacao.getPessoaLogada().inicializarPessoa();
+                            Aplicacao.getPessoaLogada().resetPessoa();
                         }
                     }
             );
         }
     }
 
-    public void getPessoaLogada(){
-        if(this.estouLogado){
-            Pessoa pessoa = Aplicacao.getPessoaLogada().getPessoa();
-            pessoa.setNomeUsuario(this.acount.getDisplayName());
-            pessoa.setNomeCompleto(this.acount.getDisplayName());
-            pessoa.setEmail(this.acount.getEmail());
-            pessoa.setUriImgPerfil(this.acount.getPhotoUrl());
-            pessoa.setTokenGoogle(this.acount.getId());
-        }
+    private void gerarPessoaLogadaGoogle(){
+        Pessoa pessoa = Aplicacao.getPessoaLogada().getPessoa();
+        pessoa.setNomeUsuario(this.acount.getDisplayName());
+        pessoa.setNomeCompleto(this.acount.getDisplayName());
+        pessoa.setEmail(this.acount.getEmail());
+        pessoa.setUriImgPerfil(this.acount.getPhotoUrl());
+        pessoa.setTokenGoogle(this.acount.getId());
+
+        Aplicacao.getPessoaLogada().setPessoa(pessoa);
     }
 
     public GoogleApiClient getmGoogleApiClient() {
