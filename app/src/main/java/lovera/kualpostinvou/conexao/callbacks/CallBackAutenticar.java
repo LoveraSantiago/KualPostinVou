@@ -8,13 +8,7 @@ import retrofit2.Retrofit;
 
 public class CallBackAutenticar{
 
-    private Retrofit retrofit;
-
-    public CallBackAutenticar(Retrofit retrofit) {
-        this.retrofit = retrofit;
-    }
-
-    public void procedimentoSincrono(Response<Pessoa> response, Pessoa pessoa, StringBuilder token, ErrorObj error){
+    public static void procedimentoSincrono(Retrofit retrofit, Response<Pessoa> response, Pessoa pessoa, StringBuilder token, ErrorObj error){
         token.setLength(0);
 
         if(response.isSuccessful()){
@@ -25,7 +19,7 @@ public class CallBackAutenticar{
         }
         else{
             ParserUtils parser = new ParserUtils();
-            ErrorObj errorResult = parser.parseError(this.retrofit, response);
+            ErrorObj errorResult = parser.parseError(retrofit, response);
             ErrorObj.cloneErrorObjeto(error, errorResult);
         }
     }

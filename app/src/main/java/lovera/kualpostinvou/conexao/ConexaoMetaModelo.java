@@ -69,10 +69,9 @@ public class ConexaoMetaModelo {
         Call<Pessoa> call = this.endpointMetaModelo.autenticar(mapParams);
         try {
             Response<Pessoa> response = call.execute();
-            CallBackAutenticar callBackAutenticar = new CallBackAutenticar(this.retrofit);
-            callBackAutenticar.procedimentoSincrono(response, pessoa, token, error);
+            CallBackAutenticar.procedimentoSincrono(this.retrofit, response, pessoa, token, error);
         } catch (IOException e) {
-            error.setReasonPhrase("SERVIDOR FORA");
+            error.setReasonPhrase("Exception conexaoMetaModelo -> autenticar");
             e.printStackTrace();
         }
     }
