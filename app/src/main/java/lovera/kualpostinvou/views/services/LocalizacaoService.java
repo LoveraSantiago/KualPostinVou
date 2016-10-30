@@ -32,12 +32,14 @@ public class LocalizacaoService extends IntentService{
             catch (InterruptedException e){}
             count++;
         }
+        Bundle bundle = new Bundle();
         if(helper.temLastLocation()){
-            resultReceiver.send(ServicesNames.GPS_SERVICE, new Bundle());
+            bundle.putBoolean("resultado", true);
         }
         else{
-            //TODO tratativa localização não encontrada
+            bundle.putBoolean("resultado", false);
         }
+        resultReceiver.send(ServicesNames.GPS_SERVICE, bundle);
         stopSelf();
     }
 }

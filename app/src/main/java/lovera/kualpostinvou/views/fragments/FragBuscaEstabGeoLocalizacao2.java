@@ -28,6 +28,8 @@ import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 import lovera.kualpostinvou.views.services.ServicesNames;
 
+import static lovera.kualpostinvou.views.utils.FactoryViews.factoryDismissDialog;
+
 public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements CommonsReceiver.Receiver{
 
     //Campos relativos a FragmentMenu
@@ -103,9 +105,14 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements Commo
     }
 
     private void showDialogGpsCancelado(){
-        DismissDialog dialog = new DismissDialog(getActivity());
-        dialog.setTitle("Localização Requerida");
-        dialog.setMessage("Para realizar a busca por estabelecimentos é necessario autorizar o gps");
+        DismissDialog dialog = factoryDismissDialog(getActivity(),"Localização Requerida",
+                "Para realizar a busca por estabelecimentos é necessario autorizar o gps.");
+        dialog.show();
+    }
+
+    private void showDialogGpsLocalizacaoFalha(){
+        DismissDialog dialog = factoryDismissDialog(getActivity(),"Localização Não Encontrada",
+                "Não foi possivel encontrar sua localização. Tente mais tarde por favor.");
         dialog.show();
     }
 
@@ -141,6 +148,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements Commo
         ConexaoSaude conexaoSaude = new ConexaoSaude(this.adapterMgs);
         conexaoSaude.getEstabelecimentos2(this.localizacao, Float.parseFloat(this.lblSeekBar.getText().toString()),
                 null, this.paramCategoria, "codUnidade,nomeFantasia,bairro,cidade,lat,long", 0, 200, listaDeEstabelecimentos);
+        receberListaDeEstabelecimentos(listaDeEstabelecimentos);
     }
 
     public void receberLocalizacao(Localizacao localizacao){
@@ -201,7 +209,12 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements Commo
                 showDialogGpsCancelado();
             }
             else{
-                consumirEstabelecimentos();
+                if(resultData.getBoolean("resultado")){
+                    consumirEstabelecimentos();
+                }
+                else{
+
+                }
             }
         }
     }
