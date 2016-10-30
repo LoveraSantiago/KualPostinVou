@@ -140,15 +140,21 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements Commo
 //    }
 
     private void consumirEstabelecimentos(){
-        receberLocalizacao(this.helperGps.getLocalizacao());
-        this.msgActivity.setarTextoProgresso("Buscando dados.");
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
 
-        List<Estabelecimento> listaDeEstabelecimentos = new ArrayList<>();
+                receberLocalizacao(helperGps.getLocalizacao());
+                msgActivity.setarTextoProgresso("Buscando dados.");
 
-        ConexaoSaude conexaoSaude = new ConexaoSaude(this.adapterMgs);
-        conexaoSaude.getEstabelecimentos2(this.localizacao, Float.parseFloat(this.lblSeekBar.getText().toString()),
-                null, this.paramCategoria, "codUnidade,nomeFantasia,bairro,cidade,lat,long", 0, 200, listaDeEstabelecimentos);
-        receberListaDeEstabelecimentos(listaDeEstabelecimentos);
+                List<Estabelecimento> listaDeEstabelecimentos = new ArrayList<>();
+
+                ConexaoSaude conexaoSaude = new ConexaoSaude(adapterMgs);
+                conexaoSaude.getEstabelecimentos2(localizacao, Float.parseFloat(lblSeekBar.getText().toString()),
+                        null, paramCategoria, "codUnidade,nomeFantasia,bairro,cidade,lat,long", 0, 200, listaDeEstabelecimentos);
+                receberListaDeEstabelecimentos(listaDeEstabelecimentos);
+            }
+        });
     }
 
     public void receberLocalizacao(Localizacao localizacao){
@@ -173,9 +179,8 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements Commo
     }
 
     private void showDialogListaVazia(){
-        DismissDialog dialog = new DismissDialog(getActivity());
-        dialog.setTitle("Nenhum Resultado");
-        dialog.setMessage("Não foi encontrado estabelecimentos. Tente aumentar o raio da busca.");
+        DismissDialog dialog = factoryDismissDialog(getActivity(),"Nenhum Resultado",
+                "Não foi encontrado estabelecimentos. Tente aumentar o raio da busca.");
         dialog.show();
     }
 
@@ -213,7 +218,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements Commo
                     consumirEstabelecimentos();
                 }
                 else{
-
+                    showDialogGpsLocalizacaoFalha();
                 }
             }
         }
