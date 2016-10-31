@@ -1,27 +1,21 @@
 package lovera.kualpostinvou.conexao;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import lovera.kualpostinvou.conexao.callbacks.CallBackEspecialidades;
 import lovera.kualpostinvou.conexao.callbacks.CallBackEstabelecimentos2;
-import lovera.kualpostinvou.conexao.callbacks.CallBackEstabelecimentos3;
 import lovera.kualpostinvou.conexao.callbacks.CallBackProfissionais;
 import lovera.kualpostinvou.conexao.callbacks.CallBackServicos;
 import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoSaude;
 import lovera.kualpostinvou.conexao.endpoints.EndPointsSaude;
 import lovera.kualpostinvou.conexao.utils.FactoryConexao;
 import lovera.kualpostinvou.conexao.utils.HelperParams_EndPSaude;
-import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Especialidade;
-import lovera.kualpostinvou.modelos.Estabelecimento;
-import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.modelos.Servicos;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class ConexaoSaude {
@@ -45,13 +39,11 @@ public class ConexaoSaude {
         this.helper = new HelperParams_EndPSaude();
     }
 
-    @Deprecated
     public void getEstabelelecimento(String codUnidade){
         Call<ResponseBody> call = this.endpointSaude.getEstabelecimento(codUnidade);
         call.enqueue(new CallBackEstabelecimentos2(this.msg));
     }
 
-    @Deprecated
     public void getEstabelecimentos(String municipio, String uf, List<String> campos, String especialidade, int pagina, int quantidade){
         Map<String, String> mapParams = helper.factoryMap_EndP_Estabelecimentos(municipio, uf, campos, especialidade, pagina, quantidade);
 
@@ -71,21 +63,6 @@ public class ConexaoSaude {
 
         Call<ResponseBody> call = this.endpointSaude.getEstabelecimentos(String.valueOf(latitude), String.valueOf(longitude), String.valueOf(raio) , mapParams);
         call.enqueue(new CallBackEstabelecimentos2(this.msg));
-    }
-
-    //todo: muitos parametros
-    public void getEstabelecimentos2(Localizacao localizacao, float raio, String texto, String categoria, String campos, int pagina, int quantidade,
-                                     List<Estabelecimento> estabelecimentos){
-
-        Map<String, String> mapParams = helper.factoryMap_EndP_Estabelecimentos(texto, categoria, campos, pagina, quantidade);
-
-        Call<ResponseBody> call = this.endpointSaude.getEstabelecimentos(String.valueOf(localizacao.getLatitude()), String.valueOf(localizacao.getLongitude()), String.valueOf(raio) , mapParams);
-        try {
-            Response<ResponseBody> response = call.execute();
-            CallBackEstabelecimentos3.procedimentoSincrono(this.retrofit, response, estabelecimentos);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void getEspecialidades(String codUnidade){

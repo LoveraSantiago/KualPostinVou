@@ -129,32 +129,14 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements Commo
         }
     }
 
-//    private void consumirEstabelecimentos(){
-//        receberLocalizacao(this.helperGps.getLocalizacao());
-//        this.msgActivity.setarTextoProgresso("Buscando dados.");
-//
-//        ConexaoSaude conexaoSaude = new ConexaoSaude(this.adapterMgs);
-//        conexaoSaude.getEstabelecimentos(localizacao.getLatitude(), localizacao.getLongitude(),
-//                Float.parseFloat(this.lblSeekBar.getText().toString()),
-//                null, this.paramCategoria, "codUnidade,nomeFantasia,bairro,cidade,lat,long", 0, 200);
-//    }
-
     private void consumirEstabelecimentos(){
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
+        receberLocalizacao(this.helperGps.getLocalizacao());
+        this.msgActivity.setarTextoProgresso("Buscando dados.");
 
-                receberLocalizacao(helperGps.getLocalizacao());
-                msgActivity.setarTextoProgresso("Buscando dados.");
-
-                List<Estabelecimento> listaDeEstabelecimentos = new ArrayList<>();
-
-                ConexaoSaude conexaoSaude = new ConexaoSaude(adapterMgs);
-                conexaoSaude.getEstabelecimentos2(localizacao, Float.parseFloat(lblSeekBar.getText().toString()),
-                        null, paramCategoria, "codUnidade,nomeFantasia,bairro,cidade,lat,long", 0, 200, listaDeEstabelecimentos);
-                receberListaDeEstabelecimentos(listaDeEstabelecimentos);
-            }
-        });
+        ConexaoSaude conexaoSaude = new ConexaoSaude(this.adapterMgs);
+        conexaoSaude.getEstabelecimentos(localizacao.getLatitude(), localizacao.getLongitude(),
+                Float.parseFloat(this.lblSeekBar.getText().toString()),
+                null, this.paramCategoria, "codUnidade,nomeFantasia,bairro,cidade,lat,long", 0, 200);
     }
 
     public void receberLocalizacao(Localizacao localizacao){

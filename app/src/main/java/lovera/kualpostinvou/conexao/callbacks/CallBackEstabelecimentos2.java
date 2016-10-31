@@ -15,7 +15,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 //Todo: remover classe assim que possivel
-@Deprecated
 public class CallBackEstabelecimentos2 implements Callback<ResponseBody>{
 
     private final MsgFromConexaoSaude msg;
