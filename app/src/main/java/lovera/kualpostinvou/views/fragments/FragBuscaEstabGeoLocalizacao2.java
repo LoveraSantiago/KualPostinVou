@@ -22,6 +22,11 @@ import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.utils.Distancia;
 import lovera.kualpostinvou.views.adapters.FragBuscaEstabGeoLocAdapter;
 import lovera.kualpostinvou.views.components.SeekBarChangeListenerImpl;
+import lovera.kualpostinvou.views.components.consumidores.FragBuscaEstabGeoLocalizacao_Consumer;
+import lovera.kualpostinvou.views.components.helpers.fragbuscaestabgeolocalizacao.Consumer;
+import lovera.kualpostinvou.views.components.helpers.fragbuscaestabgeolocalizacao.Dialogs;
+import lovera.kualpostinvou.views.components.helpers.fragbuscaestabgeolocalizacao.Receiver;
+import lovera.kualpostinvou.views.components.helpers.fragbuscaestabgeolocalizacao.Views;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.components.dialogs.DismissDialog;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
@@ -30,24 +35,23 @@ import lovera.kualpostinvou.views.services.ServicesNames;
 
 import static lovera.kualpostinvou.views.utils.FactoryViews.factoryDismissDialog;
 
-public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements CommonsReceiver.Receiver{
+public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu{
 
     //Campos relativos a FragmentMenu
     public static String TITULO_FRAGMENT = "Estabelecimentos proximos";
     public static int ID_FRAGMENT = 1;
     public static int ICONE = R.drawable.localizacao;
 
-    private HelperGeolocalizacao helperGps;
+    private Consumer consumer;
+    private Receiver receiver;
+    private Views views;
+    private Dialogs dialogs;
+
     private FragBuscaEstabGeoLocAdapter adapterMgs;
-    private MsgToActivity msgActivity;
 
-    //Parametros
-    private String paramCategoria;
-    private Localizacao localizacao;
+//    private TextView lblSeekBar;
 
-    private TextView lblSeekBar;
-
-    private CommonsReceiver receiver;
+//    private CommonsReceiver receiver;
 
     @Nullable
     @Override
@@ -58,11 +62,13 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements Commo
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.helperGps = Aplicacao.getHelperGps();
         this.adapterMgs = new FragBuscaEstabGeoLocAdapter(this);
+        this.views = new Views(this);
+        this.consumer = new Consumer(getActivity());
+        this.receiver = new Receiver();
+        this.dialogs = new Dialogs(getActivity());
 
-        this.msgActivity = (MsgToActivity) getActivity();
-        inicializarComponentes();
+//        inicializarComponentes();
     }
 
     @Override
@@ -70,107 +76,116 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements Commo
         super.onStart();
     }
 
-    private void inicializarComponentes(){
-        lblSeekBar  = (TextView) getView().findViewById(R.id.f2_lblseekbar);
-        final SeekBar seekBar = (SeekBar) getView().findViewById(R.id.f2_seekbar);
-        seekBar.setOnSeekBarChangeListener(new SeekBarChangeListenerImpl(this.lblSeekBar));
+//    private void inicializarComponentes(){
+//        lblSeekBar  = (TextView) getView().findViewById(R.id.f2_lblseekbar);
+//        final SeekBar seekBar = (SeekBar) getView().findViewById(R.id.f2_seekbar);
+//        seekBar.setOnSeekBarChangeListener(new SeekBarChangeListenerImpl(this.lblSeekBar));
+//
+//        Button btnDecremento = (Button) getView().findViewById(R.id.f2_menos);
+//        btnDecremento.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int result = Integer.parseInt(lblSeekBar.getText().toString()) - 2;
+//                if(result >= 0){
+//                    seekBar.setProgress(result);
+//                }
+//            }
+//        });
+//
+//        Button btnIncremento = (Button) getView().findViewById(R.id.f2_mais);
+//        btnIncremento.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int result = Integer.parseInt(lblSeekBar.getText().toString());
+//                if(result <= 50){
+//                    seekBar.setProgress(result);
+//                }
+//            }
+//        });
+////        inicializarReceivers();
+//    }
 
-        Button btnDecremento = (Button) getView().findViewById(R.id.f2_menos);
-        btnDecremento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int result = Integer.parseInt(lblSeekBar.getText().toString()) - 2;
-                if(result >= 0){
-                    seekBar.setProgress(result);
-                }
-            }
-        });
+//    private void inicializarReceivers(){
+//        this.receiver = new CommonsReceiver(new Handler());
+//        this.receiver.setReceiver(this);
+//    }
 
-        Button btnIncremento = (Button) getView().findViewById(R.id.f2_mais);
-        btnIncremento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int result = Integer.parseInt(lblSeekBar.getText().toString());
-                if(result <= 50){
-                    seekBar.setProgress(result);
-                }
-            }
-        });
-        inicializarReceivers();
+//    private void showDialogGpsCancelado(){
+//        DismissDialog dialog = factoryDismissDialog(getActivity(),"Localização Requerida",
+//                "Para realizar a busca por estabelecimentos é necessario autorizar o gps.");
+//        dialog.show();
+//    }
+//
+//    private void showDialogGpsLocalizacaoFalha(){
+//        DismissDialog dialog = factoryDismissDialog(getActivity(),"Localização Não Encontrada",
+//                "Não foi possivel encontrar sua localização. Tente mais tarde por favor.");
+//        dialog.show();
+//    }
+
+//    public void consumirEstabelecimentosGeolocalizacao(String categoria){
+//        this.msgActivity.abrirProgresso();
+//        this.msgActivity.setarTextoProgresso("Procurando sua localização.");
+//        this.paramCategoria = categoria;
+//
+//        if(this.helperGps.temLastLocation()){
+//            consumirEstabelecimentos();
+//        }
+//        else{
+//            this.helperGps.popupLigarGps(this.receiver);
+//        }
+//    }
+
+//    private void consumirEstabelecimentos(){
+//        receberLocalizacao(this.helperGps.getLocalizacao());
+//        this.msgActivity.setarTextoProgresso("Buscando dados.");
+//
+//        ConexaoSaude conexaoSaude = new ConexaoSaude(this.adapterMgs);
+//        conexaoSaude.getEstabelecimentos(localizacao.getLatitude(), localizacao.getLongitude(),
+//                Float.parseFloat(this.lblSeekBar.getText().toString()),
+//                null, this.paramCategoria, "codUnidade,nomeFantasia,bairro,cidade,lat,long", 0, 200);
+//    }
+
+//    public void receberLocalizacao(Localizacao localizacao){
+//        this.localizacao = localizacao;
+//    }
+
+//    public void receberListaDeEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos){
+//        if(listaDeEstabelecimentos.size() == 0){
+//            this.msgActivity.fecharProgresso();
+//            showDialogListaVazia();
+//            return;
+//        }
+//        else{
+//            calcularDistanciaDosEstabelecimentos(listaDeEstabelecimentos);
+//            Bundle bundle = new Bundle();
+//            bundle.putSerializable("LISTAESTABELECIMENTOS", (Serializable) listaDeEstabelecimentos);
+//
+//            FragListaEstabelecimentos fragLista = new FragListaEstabelecimentos();
+//            fragLista.setArguments(bundle);
+//            this.msgActivity.setarFragment(fragLista);
+//        }
+//    }
+
+//    private void showDialogListaVazia(){
+//        DismissDialog dialog = factoryDismissDialog(getActivity(),"Nenhum Resultado",
+//                "Não foi encontrado estabelecimentos. Tente aumentar o raio da busca.");
+//        dialog.show();
+//    }
+
+//    private void calcularDistanciaDosEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos){
+//        this.msgActivity.setarTextoProgresso("Calculando distâncias");
+//        Distancia distancia = new Distancia();
+//        distancia.calcularKmDistancia(listaDeEstabelecimentos, this.localizacao);
+//        this.msgActivity.fecharProgresso();
+//    }
+
+
+    public Dialogs getDialogs() {
+        return dialogs;
     }
 
-    private void inicializarReceivers(){
-        this.receiver = new CommonsReceiver(new Handler());
-        this.receiver.setReceiver(this);
-    }
-
-    private void showDialogGpsCancelado(){
-        DismissDialog dialog = factoryDismissDialog(getActivity(),"Localização Requerida",
-                "Para realizar a busca por estabelecimentos é necessario autorizar o gps.");
-        dialog.show();
-    }
-
-    private void showDialogGpsLocalizacaoFalha(){
-        DismissDialog dialog = factoryDismissDialog(getActivity(),"Localização Não Encontrada",
-                "Não foi possivel encontrar sua localização. Tente mais tarde por favor.");
-        dialog.show();
-    }
-
-    public void consumirEstabelecimentosGeolocalizacao(String categoria){
-        this.msgActivity.abrirProgresso();
-        this.msgActivity.setarTextoProgresso("Procurando sua localização.");
-        this.paramCategoria = categoria;
-
-        if(this.helperGps.temLastLocation()){
-            consumirEstabelecimentos();
-        }
-        else{
-            this.helperGps.popupLigarGps(this.receiver);
-        }
-    }
-
-    private void consumirEstabelecimentos(){
-        receberLocalizacao(this.helperGps.getLocalizacao());
-        this.msgActivity.setarTextoProgresso("Buscando dados.");
-
-        ConexaoSaude conexaoSaude = new ConexaoSaude(this.adapterMgs);
-        conexaoSaude.getEstabelecimentos(localizacao.getLatitude(), localizacao.getLongitude(),
-                Float.parseFloat(this.lblSeekBar.getText().toString()),
-                null, this.paramCategoria, "codUnidade,nomeFantasia,bairro,cidade,lat,long", 0, 200);
-    }
-
-    public void receberLocalizacao(Localizacao localizacao){
-        this.localizacao = localizacao;
-    }
-
-    public void receberListaDeEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos){
-        if(listaDeEstabelecimentos.size() == 0){
-            this.msgActivity.fecharProgresso();
-            showDialogListaVazia();
-            return;
-        }
-        else{
-            calcularDistanciaDosEstabelecimentos(listaDeEstabelecimentos);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("LISTAESTABELECIMENTOS", (Serializable) listaDeEstabelecimentos);
-
-            FragListaEstabelecimentos fragLista = new FragListaEstabelecimentos();
-            fragLista.setArguments(bundle);
-            this.msgActivity.setarFragment(fragLista);
-        }
-    }
-
-    private void showDialogListaVazia(){
-        DismissDialog dialog = factoryDismissDialog(getActivity(),"Nenhum Resultado",
-                "Não foi encontrado estabelecimentos. Tente aumentar o raio da busca.");
-        dialog.show();
-    }
-
-    private void calcularDistanciaDosEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos){
-        this.msgActivity.setarTextoProgresso("Calculando distâncias");
-        Distancia distancia = new Distancia();
-        distancia.calcularKmDistancia(listaDeEstabelecimentos, this.localizacao);
-        this.msgActivity.fecharProgresso();
+    public Views getViews() {
+        return views;
     }
 
     //Metodos sobrescritos herdados da classe pai FragMenu
@@ -189,20 +204,20 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu implements Commo
         return ICONE;
     }
 
-    @Override
-    public void onReceiveResult(int resultCode, Bundle resultData) {
-        if(resultCode == ServicesNames.GPS_SERVICE){
-            if(resultData == null){
-                showDialogGpsCancelado();
-            }
-            else{
-                if(resultData.getBoolean("resultado")){
-                    consumirEstabelecimentos();
-                }
-                else{
-                    showDialogGpsLocalizacaoFalha();
-                }
-            }
-        }
-    }
+//    @Override
+//    public void onReceiveResult(int resultCode, Bundle resultData) {
+//        if(resultCode == ServicesNames.GPS_SERVICE){
+//            if(resultData == null){
+//                showDialogGpsCancelado();
+//            }
+//            else{
+//                if(resultData.getBoolean("resultado")){
+//                    consumirEstabelecimentos();
+//                }
+//                else{
+//                    showDialogGpsLocalizacaoFalha();
+//                }
+//            }
+//        }
+//    }
 }

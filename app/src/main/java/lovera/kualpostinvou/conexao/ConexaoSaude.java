@@ -57,7 +57,6 @@ public class ConexaoSaude {
      * @param longitude * Obrigatóriov
      * @param raio * Obrigatório
      */
-    @Deprecated
     public void getEstabelecimentos(double latitude, double longitude, float raio, String texto, String categoria, String campos, int pagina, int quantidade){
         Map<String, String> mapParams = helper.factoryMap_EndP_Estabelecimentos(texto, categoria, campos, pagina, quantidade);
 
