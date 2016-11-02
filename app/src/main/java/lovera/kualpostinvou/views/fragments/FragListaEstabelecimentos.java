@@ -43,30 +43,16 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.i("ciclo2", "FragListaEstabelecimentos onCreateView");
         return inflater.inflate(R.layout.fragment_listaestabelecimentos, container, false);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.i("ciclo2", "FragListaEstabelecimentos onActivityCreated");
         this.msgToActivity = (MsgToActivity) getActivity();
         this.adapterMsg = new FragListaEstabAdapter(this);
         inicializarListView();
         this.estouAtiva = true;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.i("ciclo2", "FragListaEstabelecimentos onStart");
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Log.i("ciclo2", "FragListaEstabelecimentos onAtach");
     }
 
     private void inicializarListView(){
@@ -78,28 +64,14 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
     @Override
     public void setArguments(Bundle args) {
         super.setArguments(args);
-        Log.i("ciclo2", "FragListaEstabelecimentos setArguments");
         this.listaEstabelecimentos = (List<Estabelecimento>) args.get("LISTAESTABELECIMENTOS");
         this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTOSALVO");
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        Log.i("ciclo2", "FragListaEstabelecimentos onResume");
-    }
-
-    @Override
     public void onPause() {
         super.onPause();
-        Log.i("ciclo2", "FragListaEstabelecimentos onPause");
         this.estouAtiva = false;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.i("ciclo2", "FragListaEstabelecimentos onDestroy");
     }
 
     @Override
@@ -131,10 +103,6 @@ public class FragListaEstabelecimentos extends FragmentMenu implements AdapterVi
         intent.putExtra("ESTABELECIMENTO", estabelecimento);
         intent.putExtra(ReceiversNames.GEOLOCALIZACAO, fragEstabelecimento.getReceiver());
         getActivity().startService(intent);
-    }
-
-    public void resetEstabelecimento(){
-        this.estabelecimento = null;
     }
 
     //Metodos sobrescritos herdados da classe pai FragmentMenu
