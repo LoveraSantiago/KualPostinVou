@@ -58,19 +58,26 @@ class Consumer {
 
     public void callback_consumirEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos){
         if(listaDeEstabelecimentos.size() == 0){
-            this.msgActivity.fecharProgresso();
-            this.fragment.getDialogs().showDialogListaVazia();
-            return;
+            callback_consumirEstabelecimentos_FALHA();
         }
         else{
-            calcularDistanciaDosEstabelecimentos(listaDeEstabelecimentos);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("LISTAESTABELECIMENTOS", (Serializable) listaDeEstabelecimentos);
-
-            FragListaEstabelecimentos fragLista = new FragListaEstabelecimentos();
-            fragLista.setArguments(bundle);
-            this.msgActivity.setarFragment(fragLista);
+            callback_consumirEstabelecimentos_SUCESSO(listaDeEstabelecimentos);
         }
+    }
+
+    private void callback_consumirEstabelecimentos_FALHA(){
+        this.msgActivity.fecharProgresso();
+        this.fragment.getDialogs().showDialogListaVazia();
+    }
+
+    private void callback_consumirEstabelecimentos_SUCESSO(List<Estabelecimento> listaDeEstabelecimentos){
+        calcularDistanciaDosEstabelecimentos(listaDeEstabelecimentos);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("LISTAESTABELECIMENTOS", (Serializable) listaDeEstabelecimentos);
+
+        FragListaEstabelecimentos fragLista = new FragListaEstabelecimentos();
+        fragLista.setArguments(bundle);
+        this.msgActivity.setarFragment(fragLista);
     }
 
     private void calcularDistanciaDosEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos){
