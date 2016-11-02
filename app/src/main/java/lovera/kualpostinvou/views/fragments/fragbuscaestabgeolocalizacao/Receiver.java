@@ -3,6 +3,7 @@ package lovera.kualpostinvou.views.fragments.fragbuscaestabgeolocalizacao;
 import android.os.Bundle;
 import android.os.Handler;
 
+import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 import lovera.kualpostinvou.views.services.ServicesNames;
 
@@ -29,6 +30,7 @@ class Receiver implements CommonsReceiver.Receiver{
                     this.fragment.getConsumer().consumirEstabelecimentos();
                 }
                 else{
+                    ((MsgToActivity) fragment.getActivity()).fecharProgresso();
                     this.fragment.getDialogs().showDialogGpsLocalizacaoFalha();
                 }
             }
