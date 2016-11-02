@@ -1,13 +1,12 @@
-package lovera.kualpostinvou.views.components.helpers.fragbuscaestabgeolocalizacao;
+package lovera.kualpostinvou.views.fragments.fragbuscaestabgeolocalizacao;
 
 import android.os.Bundle;
 import android.os.Handler;
 
-import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao2;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 import lovera.kualpostinvou.views.services.ServicesNames;
 
-public class Receiver implements CommonsReceiver.Receiver{
+class Receiver implements CommonsReceiver.Receiver{
 
     private CommonsReceiver receiver;
     private final FragBuscaEstabGeoLocalizacao2 fragment;
@@ -27,13 +26,16 @@ public class Receiver implements CommonsReceiver.Receiver{
             }
             else{
                 if(resultData.getBoolean("resultado")){
-                    consumirEstabelecimentos();
+                    this.fragment.getConsumer().consumirEstabelecimentos();
                 }
                 else{
                     this.fragment.getDialogs().showDialogGpsLocalizacaoFalha();
                 }
             }
         }
+    }
 
+    public CommonsReceiver getCommonsReceiver() {
+        return receiver;
     }
 }

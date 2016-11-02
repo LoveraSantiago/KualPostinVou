@@ -20,8 +20,7 @@ import lovera.kualpostinvou.views.components.helpers.PrincipalActivityComponents
 import lovera.kualpostinvou.views.contratos.FragmentInfo;
 import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
-import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao2;
-import lovera.kualpostinvou.views.fragments.FragBuscaEstabelecimentos;
+import lovera.kualpostinvou.views.fragments.fragbuscaestabgeolocalizacao.FragBuscaEstabGeoLocalizacao2;
 import lovera.kualpostinvou.views.fragments.FragEstabelecimento;
 import lovera.kualpostinvou.views.fragments.FragListaEstabelecimentos;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;

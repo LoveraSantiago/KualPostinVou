@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.components.helpers.fragbuscaestabgeolocalizacao;
+package lovera.kualpostinvou.views.fragments.fragbuscaestabgeolocalizacao;
 
 import android.app.Activity;
 
@@ -6,7 +6,7 @@ import lovera.kualpostinvou.views.components.dialogs.DismissDialog;
 
 import static lovera.kualpostinvou.views.utils.FactoryViews.factoryDismissDialog;
 
-public class Dialogs {
+class Dialogs {
 
     private final Activity activity;
 

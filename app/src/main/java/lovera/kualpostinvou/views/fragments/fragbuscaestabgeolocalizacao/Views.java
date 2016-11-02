@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.components.helpers.fragbuscaestabgeolocalizacao;
+package lovera.kualpostinvou.views.fragments.fragbuscaestabgeolocalizacao;
 
 import android.view.View;
 import android.widget.Button;
@@ -7,9 +7,8 @@ import android.widget.TextView;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.views.components.SeekBarChangeListenerImpl;
-import lovera.kualpostinvou.views.fragments.FragBuscaEstabGeoLocalizacao2;
 
-public class Views {
+class Views {
 
     private TextView lblSeekBar;
 

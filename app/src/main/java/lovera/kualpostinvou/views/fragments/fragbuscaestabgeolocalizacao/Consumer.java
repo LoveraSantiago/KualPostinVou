@@ -1,6 +1,5 @@
-package lovera.kualpostinvou.views.components.helpers.fragbuscaestabgeolocalizacao;
+package lovera.kualpostinvou.views.fragments.fragbuscaestabgeolocalizacao;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import java.io.Serializable;
@@ -11,27 +10,30 @@ import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.utils.Distancia;
-import lovera.kualpostinvou.views.components.dialogs.DismissDialog;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.fragments.FragListaEstabelecimentos;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 
-import static lovera.kualpostinvou.views.utils.FactoryViews.factoryDismissDialog;
+class Consumer {
 
-public class Consumer {
+    private final FragBuscaEstabGeoLocalizacao2 fragment;
 
-    private MsgToActivity msgActivity;
-    private HelperGeolocalizacao helperGps;
+    private final MsgToActivity msgActivity;
+    private final HelperGeolocalizacao helperGps;
+    private final Adapter adapterMgs;
 
     private String paramCategoria;
+
     private Localizacao localizacao;
 
-    public Consumer(Activity activity) {
+    public Consumer(FragBuscaEstabGeoLocalizacao2 fragment) {
+        this.fragment = fragment;
         this.helperGps = Aplicacao.getHelperGps();
-        this.msgActivity = (MsgToActivity) activity;
+        this.msgActivity = (MsgToActivity) fragment.getActivity();
+        this.adapterMgs = new Adapter(this);
     }
 
-    public void consumirEstabelecimentosGeolocalizacao(String categoria){
+    public void inicioConsumirEstabelecimentos(String categoria){
         this.msgActivity.abrirProgresso();
         this.msgActivity.setarTextoProgresso("Procurando sua localização.");
         this.paramCategoria = categoria;
@@ -40,28 +42,24 @@ public class Consumer {
             consumirEstabelecimentos();
         }
         else{
-            this.helperGps.popupLigarGps(this.receiver);
+            this.helperGps.popupLigarGps(this.fragment.getReceiver().getCommonsReceiver());
         }
     }
 
-    private void consumirEstabelecimentos(){
-        receberLocalizacao(this.helperGps.getLocalizacao());
+    public void consumirEstabelecimentos(){
+        setLocalizacao(this.helperGps.getLocalizacao());
         this.msgActivity.setarTextoProgresso("Buscando dados.");
 
         ConexaoSaude conexaoSaude = new ConexaoSaude(this.adapterMgs);
         conexaoSaude.getEstabelecimentos(localizacao.getLatitude(), localizacao.getLongitude(),
-                Float.parseFloat(this.lblSeekBar.getText().toString()),
+                Float.parseFloat(this.fragment.getViews().getLblSeekBar().getText().toString()),
                 null, this.paramCategoria, "codUnidade,nomeFantasia,bairro,cidade,lat,long", 0, 200);
     }
 
-    public void receberLocalizacao(Localizacao localizacao){
-        this.localizacao = localizacao;
-    }
-
-    public void receberListaDeEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos){
+    public void callback_consumirEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos){
         if(listaDeEstabelecimentos.size() == 0){
             this.msgActivity.fecharProgresso();
-            showDialogListaVazia();
+            this.fragment.getDialogs().showDialogListaVazia();
             return;
         }
         else{
@@ -82,5 +80,7 @@ public class Consumer {
         this.msgActivity.fecharProgresso();
     }
 
-
+    private void setLocalizacao(Localizacao localizacao){
+        this.localizacao = localizacao;
+    }
 }
