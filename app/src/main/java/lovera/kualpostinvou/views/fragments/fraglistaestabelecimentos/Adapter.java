@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.adapters;
+package lovera.kualpostinvou.views.fragments.fraglistaestabelecimentos;
 
 import java.util.List;
 
@@ -7,25 +7,24 @@ import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.modelos.Servicos;
-import lovera.kualpostinvou.views.fragments.FragListaEstabelecimentos;
 
-public class FragListaEstabAdapter implements MsgFromConexaoSaude {
+public class Adapter implements MsgFromConexaoSaude {
 
-    private FragListaEstabelecimentos fragment;
+    private Consumer consumer;
 
 
-    public FragListaEstabAdapter(FragListaEstabelecimentos fragment) {
-        this.fragment = fragment;
+    public Adapter(Consumer consumer) {
+        this.consumer = consumer;
     }
 
     @Override
     public void passarListaDeEstabelecimentos(List<Estabelecimento> listaDeEstabelecimentos) {
-        this.fragment.receberEstabelecimento(listaDeEstabelecimentos.get(0));
+        this.consumer.callback_ConsumirEstabelecimento(listaDeEstabelecimentos.get(0));
     }
 
     @Override
     public void passarEstabelecimento(Estabelecimento estabelecimento) {
-        this.fragment.receberEstabelecimento(estabelecimento);
+        this.consumer.callback_ConsumirEstabelecimento(estabelecimento);
     }
 
     @Override

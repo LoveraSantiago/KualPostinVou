@@ -11,7 +11,7 @@ import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.utils.Distancia;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
-import lovera.kualpostinvou.views.fragments.FragListaEstabelecimentos;
+import lovera.kualpostinvou.views.fragments.fraglistaestabelecimentos.FragListaEstabelecimentos;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 
 class Consumer {

@@ -13,6 +13,7 @@ import lovera.kualpostinvou.modelos.Estabelecimento;
 
 import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
 
+//todo: Apos remover ListaEstabelecimentosAcitivity mover essa classe para dentro do package fraglistaestabelecimentos
 public class ListEstabAdapter extends BaseAdapter {
 
     private Context context;
