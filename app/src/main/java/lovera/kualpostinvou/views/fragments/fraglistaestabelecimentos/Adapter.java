@@ -8,7 +8,7 @@ import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.modelos.Servicos;
 
-public class Adapter implements MsgFromConexaoSaude {
+class Adapter implements MsgFromConexaoSaude {
 
     private Consumer consumer;
 

@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.adapters;
+package lovera.kualpostinvou.views.fragments.fragestabelecimento;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,12 +9,12 @@ import java.util.List;
 
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
 
-public class ViewPagerEstabAdapter extends FragmentStatePagerAdapter{
+class ViewPagerAdapter extends FragmentStatePagerAdapter{
 
     private final List<Fragment> listaFragments;
     private final List<String> listaTitulos;
 
-    public ViewPagerEstabAdapter(FragmentManager fm) {
+    public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
         this.listaFragments = new ArrayList<>();
         this.listaTitulos = new ArrayList<>();

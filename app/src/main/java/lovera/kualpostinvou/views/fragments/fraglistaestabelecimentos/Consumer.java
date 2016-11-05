@@ -8,7 +8,7 @@ import java.util.List;
 import lovera.kualpostinvou.conexao.ConexaoSaude;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
-import lovera.kualpostinvou.views.fragments.FragEstabelecimento;
+import lovera.kualpostinvou.views.fragments.fragestabelecimento.FragEstabelecimento;
 import lovera.kualpostinvou.views.receivers.ReceiversNames;
 import lovera.kualpostinvou.views.services.NomeGeolocalizacaoService;
 
@@ -50,7 +50,7 @@ class Consumer {
 
         Intent intent = new Intent(this.fragment.getActivity(), NomeGeolocalizacaoService.class);
         intent.putExtra("ESTABELECIMENTO", estabelecimento);
-        intent.putExtra(ReceiversNames.GEOLOCALIZACAO, fragEstabelecimento.getReceiver());
+        intent.putExtra(ReceiversNames.GEOLOCALIZACAO, fragEstabelecimento.getCommonsReceiver());
         this.fragment.getActivity().startService(intent);
     }
 

@@ -1,6 +1,5 @@
 package lovera.kualpostinvou.views.fragments.fraglistaestabelecimentos;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,11 +10,7 @@ import java.util.List;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
-import lovera.kualpostinvou.views.contratos.MsgToActivity;
-import lovera.kualpostinvou.views.fragments.FragEstabelecimento;
 import lovera.kualpostinvou.views.fragments.FragmentMenu;
-import lovera.kualpostinvou.views.receivers.ReceiversNames;
-import lovera.kualpostinvou.views.services.NomeGeolocalizacaoService;
 
 public class FragListaEstabelecimentos extends FragmentMenu{
 

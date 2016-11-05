@@ -21,7 +21,7 @@ import lovera.kualpostinvou.views.contratos.FragmentInfo;
 import lovera.kualpostinvou.views.contratos.MsgFromNavigationDrawer;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.fragments.fragbuscaestabgeolocalizacao.FragBuscaEstabGeoLocalizacao2;
-import lovera.kualpostinvou.views.fragments.FragEstabelecimento;
+import lovera.kualpostinvou.views.fragments.fragestabelecimento.FragEstabelecimento;
 import lovera.kualpostinvou.views.fragments.fraglistaestabelecimentos.FragListaEstabelecimentos;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;
 import lovera.kualpostinvou.views.fragments.FragmentMenu;

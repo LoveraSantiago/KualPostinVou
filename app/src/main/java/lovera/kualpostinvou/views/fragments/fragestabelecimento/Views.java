@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.components.helpers;
+package lovera.kualpostinvou.views.fragments.fragestabelecimento;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,17 +12,17 @@ import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.maps.model.LatLng;
 
 import lovera.kualpostinvou.R;
-import lovera.kualpostinvou.views.adapters.ViewPagerEstabAdapter;
 import lovera.kualpostinvou.views.components.OnTabSelectedListenerImpl;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
 
-public class FragEstabelecimentoComponents {
+class Views {
 
     private ViewPager viewPager;
-    private StreetViewPanoramaView streetViewPanoramaView;
-    StreetViewPanorama panorama;
 
-    public FragEstabelecimentoComponents(Activity activity, Bundle savedInstanceState, FragmentFilho... fragFilhos) {
+    private StreetViewPanoramaView streetViewPanoramaView;
+    private StreetViewPanorama panorama;
+
+    public Views(Activity activity, Bundle savedInstanceState, FragmentFilho... fragFilhos) {
         inicializarComponentes(activity, savedInstanceState, fragFilhos);
     }
 
@@ -36,10 +36,10 @@ public class FragEstabelecimentoComponents {
         AppCompatActivity activity = (AppCompatActivity) activityParam;
         this.viewPager = (ViewPager) activityParam.findViewById(R.id.f5_viewpager);
 
-        ViewPagerEstabAdapter adapter = new ViewPagerEstabAdapter(activity.getSupportFragmentManager());
-        //               fragFilhoDescricao, fragFilhoInfo, fragFilhoAvaliacao, fragFilhoEndereco
-        adapter.addFrags(fragFilhos[0]     , fragFilhos[1], fragFilhos[2]     , fragFilhos[3]);
-        this.viewPager.setAdapter(adapter);
+        ViewPagerAdapter vpAdapter = new ViewPagerAdapter(activity.getSupportFragmentManager());
+        //                 fragFilhoDescricao, fragFilhoInfo, fragFilhoAvaliacao, fragFilhoEndereco
+        vpAdapter.addFrags(fragFilhos[0]     , fragFilhos[1], fragFilhos[2]     , fragFilhos[3]);
+        this.viewPager.setAdapter(vpAdapter);
     }
 
     private void inicializarTabLayout(Activity activityParam, FragmentFilho... fragFilhos){

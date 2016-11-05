@@ -1,38 +1,29 @@
-package lovera.kualpostinvou.views.fragments;
+package lovera.kualpostinvou.views.fragments.fragestabelecimento;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import lovera.kualpostinvou.R;
-import lovera.kualpostinvou.views.components.helpers.FragEstabelecimentoComponents;
-import lovera.kualpostinvou.views.controllers.FragEstabelecimentoController;
+import lovera.kualpostinvou.views.fragments.FragmentMenu;
 import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 
-public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver.Receiver{
+public class FragEstabelecimento extends FragmentMenu{
 
     //Campos relativos a FragmentMenu
     public static String TITULO_FRAGMENT = "Estabelecimento";
     public static int ID_FRAGMENT = 5;
     public static int ICONE = 0;
 
-    private FragEstabelecimentoComponents components;
-    private FragEstabelecimentoController controller;
-
-    private CommonsReceiver receiver;
+    private Views views;
+    private Controller controller;
+    private Receiver receiver2;
 
     public FragEstabelecimento() {
-        inicializarReceivers();
-        this.controller = new FragEstabelecimentoController(this);
-    }
-
-    private void inicializarReceivers(){
-        this.receiver = new CommonsReceiver(new Handler());
-        this.receiver.setReceiver(this);
+        this.controller = new Controller(this);
     }
 
     @Nullable
@@ -44,7 +35,7 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     @Override
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.components = new FragEstabelecimentoComponents(getActivity(), savedInstanceState, this.controller.getFragFilhos());
+        this.views = new Views(getActivity(), savedInstanceState, this.controller.getFragFilhos());
         this.controller.onActivityCreated(savedInstanceState);
         this.controller.recuperarObjetosSalvos(savedInstanceState);
     }
@@ -52,32 +43,32 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     @Override
     public void onResume() {
         super.onResume();
-        this.components.onResume();
+        this.views.onResume();
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        this.components.onLowMemory();
+        this.views.onLowMemory();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        this.components.onSaveInstanceState(outState);
+        this.views.onSaveInstanceState(outState);
         this.controller.onSaveInstanceState(outState);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        this.components.onPause();
+        this.views.onPause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-       this.components.onDestroy();
+       this.views.onDestroy();
     }
 
     @Override
@@ -91,12 +82,20 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
         this.controller.setArguments(args);
     }
 
-    public FragEstabelecimentoComponents getComponents() {
-        return components;
+    public Views getViews() {
+        return views;
     }
 
-    public CommonsReceiver getReceiver() {
-        return receiver;
+    public Controller getController() {
+        return controller;
+    }
+
+    public Receiver getReceiver2() {
+        return receiver2;
+    }
+
+    public CommonsReceiver getCommonsReceiver(){
+        return  this.receiver2.getCommonsReceiver();
     }
 
     @Override
@@ -119,5 +118,4 @@ public class FragEstabelecimento extends FragmentMenu implements CommonsReceiver
     public int getIcone() {
         return ICONE;
     }
-
 }

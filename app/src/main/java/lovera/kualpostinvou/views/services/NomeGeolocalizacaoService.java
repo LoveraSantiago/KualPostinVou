@@ -43,12 +43,15 @@ public class NomeGeolocalizacaoService extends IntentService{
         }
 
         Bundle bundle = new Bundle();
+        Localizacao localizacao = null;
         if(listAddress != null && listAddress.size() > 0){
             Address address = listAddress.get(0);
-
-            Localizacao localizacao = FactoryModelos.geradorLocalizacao(address);
-            bundle.putSerializable("LOCALIZACAO", localizacao);
+            localizacao = FactoryModelos.geradorLocalizacao(address);
         }
+        else{
+            localizacao = FactoryModelos.geradorLocalizacao(estabelecimento);
+        }
+        bundle.putSerializable("LOCALIZACAO", localizacao);
         resultReceiver.send(ServicesNames.NOME_GEOLOCALIZACAO, bundle);
     }
 

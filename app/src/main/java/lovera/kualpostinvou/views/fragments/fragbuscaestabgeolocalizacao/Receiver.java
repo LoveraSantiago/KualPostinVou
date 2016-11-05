@@ -1,21 +1,17 @@
 package lovera.kualpostinvou.views.fragments.fragbuscaestabgeolocalizacao;
 
 import android.os.Bundle;
-import android.os.Handler;
 
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
-import lovera.kualpostinvou.views.receivers.CommonsReceiver;
+import lovera.kualpostinvou.views.receivers.ReceiverPai;
 import lovera.kualpostinvou.views.services.ServicesNames;
 
-class Receiver implements CommonsReceiver.Receiver{
+class Receiver extends ReceiverPai{
 
-    private CommonsReceiver receiver;
     private final FragBuscaEstabGeoLocalizacao2 fragment;
 
     public Receiver(FragBuscaEstabGeoLocalizacao2 fragment) {
-        this.receiver = new CommonsReceiver(new Handler());
-        this.receiver.setReceiver(this);
-
+        super();
         this.fragment = fragment;
     }
 
@@ -35,9 +31,5 @@ class Receiver implements CommonsReceiver.Receiver{
                 }
             }
         }
-    }
-
-    public CommonsReceiver getCommonsReceiver() {
-        return receiver;
     }
 }
