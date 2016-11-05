@@ -33,20 +33,20 @@ class Consumer {
         this.adapterMgs = new Adapter(this);
     }
 
-    public void inicioConsumirEstabelecimentos(String categoria){
+    public void inicio_ConsumirEstabelecimentos(String categoria){
         this.msgActivity.abrirProgresso();
         this.msgActivity.setarTextoProgresso("Procurando sua localização.");
         this.paramCategoria = categoria;
 
         if(this.helperGps.temLastLocation()){
-            consumirEstabelecimentos();
+            inicio2_consumirEstabelecimentos();
         }
         else{
             this.helperGps.popupLigarGps(this.fragment.getReceiver().getCommonsReceiver());
         }
     }
 
-    public void consumirEstabelecimentos(){
+    public void inicio2_consumirEstabelecimentos(){
         setLocalizacao(this.helperGps.getLocalizacao());
         this.msgActivity.setarTextoProgresso("Buscando dados.");
 

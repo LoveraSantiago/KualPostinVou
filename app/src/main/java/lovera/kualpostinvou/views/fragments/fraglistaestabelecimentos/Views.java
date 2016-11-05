@@ -27,6 +27,6 @@ class Views implements AdapterView.OnItemClickListener{
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        this.fragment.getConsumer().inicioConsumirEstabelecimento(position);
+        this.fragment.getConsumer().inicio_ConsumirEstabelecimento(position);
     }
 }

@@ -28,7 +28,7 @@ class Consumer {
         this.adapter = new Adapter(this);
     }
 
-    public void inicioConsumirEstabelecimento(int posicao){
+    public void inicio_ConsumirEstabelecimento(int posicao){
         if(this.msgToActivity.isAbertoProgresso()) return;
         this.msgToActivity.abrirProgresso();
         this.msgToActivity.setarTextoProgresso("Consultando estabelecimento.");

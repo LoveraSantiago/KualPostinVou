@@ -42,7 +42,7 @@ public class FragBuscaEstabGeoLocalizacao2 extends FragmentMenu {
     }
 
     public void consumirEstabelecimentosGeolocalizacao(String categoria) {
-        this.consumer.inicioConsumirEstabelecimentos(categoria);
+        this.consumer.inicio_ConsumirEstabelecimentos(categoria);
     }
 
     //getters Componentes

@@ -27,7 +27,7 @@ class Receiver implements CommonsReceiver.Receiver{
             }
             else{
                 if(resultData.getBoolean("resultado")){
-                    this.fragment.getConsumer().consumirEstabelecimentos();
+                    this.fragment.getConsumer().inicio2_consumirEstabelecimentos();
                 }
                 else{
                     ((MsgToActivity) fragment.getActivity()).fecharProgresso();
