@@ -28,6 +28,10 @@ public class FragListaEstabelecimentos extends FragmentMenu{
 
     private boolean estouAtiva;
 
+    public FragListaEstabelecimentos() {
+        this.consumer = new Consumer(this);//precisa ser inicializado aqui por causa do setArguments
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,13 +42,7 @@ public class FragListaEstabelecimentos extends FragmentMenu{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.estouAtiva = true;
-
-        inicializarComponentes();
-    }
-
-    private void inicializarComponentes() {
         this.views = new Views(this);
-        this.consumer = new Consumer(this);
     }
 
     @Override
