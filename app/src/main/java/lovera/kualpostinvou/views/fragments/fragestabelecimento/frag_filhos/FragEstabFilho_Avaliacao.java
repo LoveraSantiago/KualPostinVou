@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.fragments.frag_filhos;
+package lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-
 import lovera.kualpostinvou.Aplicacao;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.conexao.ConexaoMetaModelo;
@@ -16,7 +14,6 @@ import lovera.kualpostinvou.conexao.contratos.MsgFromConexaoModelo;
 import lovera.kualpostinvou.modelos.ConteudoPostagem;
 import lovera.kualpostinvou.modelos.ErrorObj;
 import lovera.kualpostinvou.modelos.Estabelecimento;
-import lovera.kualpostinvou.modelos.Grupo;
 import lovera.kualpostinvou.modelos.GrupoR;
 import lovera.kualpostinvou.modelos.HoraMinuto;
 import lovera.kualpostinvou.modelos.Localizacao;

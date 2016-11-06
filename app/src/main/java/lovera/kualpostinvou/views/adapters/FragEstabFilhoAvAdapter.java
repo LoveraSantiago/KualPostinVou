@@ -10,7 +10,7 @@ import lovera.kualpostinvou.modelos.GrupoR;
 import lovera.kualpostinvou.modelos.Media;
 import lovera.kualpostinvou.modelos.PostagemR;
 import lovera.kualpostinvou.modelos.TipoObjeto;
-import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Avaliacao;
+import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Avaliacao;
 
 public class FragEstabFilhoAvAdapter implements MsgFromConexaoModelo{
 

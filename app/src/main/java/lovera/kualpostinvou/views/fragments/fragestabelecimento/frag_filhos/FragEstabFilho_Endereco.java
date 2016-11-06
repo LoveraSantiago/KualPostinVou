@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.fragments.frag_filhos;
+package lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

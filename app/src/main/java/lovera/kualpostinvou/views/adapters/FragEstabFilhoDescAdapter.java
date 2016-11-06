@@ -7,7 +7,7 @@ import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.modelos.Servicos;
-import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Desc;
+import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Desc;
 
 public class FragEstabFilhoDescAdapter implements MsgFromConexaoSaude{
 

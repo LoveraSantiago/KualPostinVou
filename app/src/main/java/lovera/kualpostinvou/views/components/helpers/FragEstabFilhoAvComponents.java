@@ -6,7 +6,7 @@ import android.widget.Button;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.views.components.dialogs.AvAtendPermissoesDialog;
 import lovera.kualpostinvou.views.components.dialogs.DismissDialog;
-import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Avaliacao;
+import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Avaliacao;
 
 import static lovera.kualpostinvou.views.utils.FactoryViews.factoryDismissDialog;
 

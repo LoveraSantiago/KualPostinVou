@@ -9,7 +9,7 @@ import android.widget.NumberPicker;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.HoraMinuto;
-import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Avaliacao;
+import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Avaliacao;
 
 public class AvTempoDialog extends AlertDialog {
 

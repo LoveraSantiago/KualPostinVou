@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.views.PrincipalActivity;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;
-import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Avaliacao;
+import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Avaliacao;
 
 public class AvAtendPermissoesDialog extends AlertDialog{
 

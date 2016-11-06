@@ -4,16 +4,14 @@ import android.os.Bundle;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Localizacao;
 import lovera.kualpostinvou.modelos.utils.FactoryModelos;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
-import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Avaliacao;
-import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Desc;
-import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Endereco;
-import lovera.kualpostinvou.views.fragments.frag_filhos.FragEstabFilho_Info;
-import lovera.kualpostinvou.views.services.ServicesNames;
+import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Avaliacao;
+import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Desc;
+import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Endereco;
+import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Info;
 
 class Controller {
 
