@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos;
+package lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.descricao;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,10 +18,8 @@ import lovera.kualpostinvou.views.fragments.FragmentFilho;
 
 import static lovera.kualpostinvou.views.utils.Utils_View.gerarLinhaParaTabela;
 import static lovera.kualpostinvou.views.utils.Utils_View.gerarTxtViewParaTabela_centro;
-import static lovera.kualpostinvou.views.utils.Utils_View.setImageToImgView;
-import static lovera.kualpostinvou.views.utils.Utils_View.setTextToLabel;
 
-public class FragEstabFilho_Desc extends FragmentFilho {
+public class FragFilho_Descricao extends FragmentFilho {
 
     public static String TITULO_FRAGMENT = "Filho Descricao";
     public static int ID_FRAGMENT = 0;
@@ -30,6 +28,8 @@ public class FragEstabFilho_Desc extends FragmentFilho {
     private Estabelecimento estabelecimento;
 
     private List<Especialidade> listaEspecialidades;
+
+    private Views views;
 
     @Nullable
     @Override
@@ -41,36 +41,15 @@ public class FragEstabFilho_Desc extends FragmentFilho {
     public void onStart() {
         super.onStart();
         consumirEspecialidades();
-        setarCampos();
+
+        this.views = new Views();
+        this.views.setarEstabelecimento(this.estabelecimento, getView());
     }
 
     @Override
     public void setArguments(Bundle args) {
         super.setArguments(args);
         this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
-    }
-
-    private void setarCampos(){
-        try{
-            setTextToLabel(this.estabelecimento.getNomeFantasia()              , R.id.lblNomeFantasia, getView());
-            setTextToLabel(this.estabelecimento.getDescricaoCompleta()         , R.id.lblDescompl    , getView());
-            setTextToLabel(this.estabelecimento.getTurnoAtendimento()          , R.id.lblTurnoAtend  , getView());
-
-            setImageToImgView(setImage(this.estabelecimento.getTemDialise())                , R.id.imgDialise     , getView());
-            setImageToImgView(setImage(this.estabelecimento.getTemObstetra())               , R.id.imgObstetra    , getView());
-            setImageToImgView(setImage(this.estabelecimento.getTemNeoNatal())               , R.id.imgNeonatal    , getView());
-            setImageToImgView(setImage(this.estabelecimento.getTemCentroCirurgico())        , R.id.imgCCirurg     , getView());
-            setImageToImgView(setImage(this.estabelecimento.getTemNeoNatal())               , R.id.imgNeonatal    , getView());
-            setImageToImgView(setImage(this.estabelecimento.getTemAtendimentoUrgencia())    , R.id.imgAtendEmgc   , getView());
-            setImageToImgView(setImage(this.estabelecimento.getTemAtendimentoAmbulatorial()), R.id.imgAtendAmbulat, getView());
-        }
-        catch(Exception e){
-//            e.printStackTrace();
-        }
-    }
-
-    private int setImage(String campo){
-        return campo.equals("Sim") ? R.drawable.icn_check : R.drawable.icn_cancelar;
     }
 
     private void consumirEspecialidades(){
@@ -111,6 +90,7 @@ public class FragEstabFilho_Desc extends FragmentFilho {
         progressoEspecialidades.setVisibility(View.GONE);
     }
 
+    //Metodos sobrescritos herdados da classe pai FragMenu
     @Override
     public int getFragmentId() {
         return ID_FRAGMENT;

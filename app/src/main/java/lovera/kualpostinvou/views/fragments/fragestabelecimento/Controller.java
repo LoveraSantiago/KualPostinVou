@@ -9,7 +9,7 @@ import lovera.kualpostinvou.modelos.utils.FactoryModelos;
 import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
 import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Avaliacao;
-import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Desc;
+import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.descricao.FragFilho_Descricao;
 import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Endereco;
 import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Info;
 
@@ -21,7 +21,7 @@ class Controller {
 
     private final FragEstabelecimento fragment;
 
-    private FragEstabFilho_Desc fragFilhoDescricao;
+    private FragFilho_Descricao fragFilhoDescricao;
     private FragEstabFilho_Info fragFilhoInfo;
     private FragEstabFilho_Avaliacao fragFilhoAvaliacao;
     private FragEstabFilho_Endereco fragFilhoEndereco;
@@ -36,7 +36,7 @@ class Controller {
     }
 
     private void inicializarFragFilhos(){
-        this.fragFilhoDescricao = new FragEstabFilho_Desc();
+        this.fragFilhoDescricao = new FragFilho_Descricao();
         this.fragFilhoInfo      = new FragEstabFilho_Info();
         this.fragFilhoAvaliacao = new FragEstabFilho_Avaliacao();
         this.fragFilhoEndereco  = new FragEstabFilho_Endereco();
