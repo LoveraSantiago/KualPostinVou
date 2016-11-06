@@ -18,13 +18,12 @@ class Consumer {
     private Estabelecimento estabelecimento;
 
     private final FragListaEstabelecimentos fragment;
-    private final MsgToActivity msgToActivity;
+    private MsgToActivity msgToActivity;
 
     private final Adapter adapter;
 
     public Consumer(FragListaEstabelecimentos fragment) {
         this.fragment = fragment;
-        this.msgToActivity = (MsgToActivity) fragment.getActivity();
         this.adapter = new Adapter(this);
     }
 
@@ -64,6 +63,10 @@ class Consumer {
 
     public void setListaEstabelecimentos(List<Estabelecimento> listaEstabelecimentos) {
         this.listaEstabelecimentos = listaEstabelecimentos;
+    }
+
+    public void setMsgToActivity(MsgToActivity msgToActivity){
+        this.msgToActivity = msgToActivity;
     }
 
     public Estabelecimento getEstabelecimento() {

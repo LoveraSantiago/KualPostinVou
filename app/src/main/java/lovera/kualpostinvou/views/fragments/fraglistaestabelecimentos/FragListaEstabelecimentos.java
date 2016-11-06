@@ -10,6 +10,7 @@ import java.util.List;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.Estabelecimento;
+import lovera.kualpostinvou.views.contratos.MsgToActivity;
 import lovera.kualpostinvou.views.fragments.FragmentMenu;
 
 public class FragListaEstabelecimentos extends FragmentMenu{
@@ -38,6 +39,7 @@ public class FragListaEstabelecimentos extends FragmentMenu{
         super.onActivityCreated(savedInstanceState);
         this.estouAtiva = true;
         this.views = new Views(this);
+        this.consumer.setMsgToActivity((MsgToActivity) this.getActivity());
     }
 
     @Override
