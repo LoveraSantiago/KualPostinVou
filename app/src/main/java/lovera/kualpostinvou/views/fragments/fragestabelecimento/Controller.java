@@ -19,7 +19,7 @@ class Controller {
 
     private LatLng latLng;
 
-    private Estabelecimento estabelecimento;
+//    private Estabelecimento estabelecimento;
 
     private final FragEstabelecimento fragment;
 
@@ -57,14 +57,12 @@ class Controller {
     public void recuperarObjetosSalvos(Bundle bundle){
         if(bundle != null){
             Localizacao localizacao = (Localizacao) bundle.getSerializable("LOCALIZACAO");
-            this.latLng = new LatLng(localizacao.getLatitude(), localizacao.getLongitude());
-            this.fragment.getViews().setarPosicaoToPanorama(this.latLng);
-            this.msgToActivity.fecharProgresso();
+            setLocalizacao(localizacao);
         }
     }
 
     public void setArguments(Bundle args){
-        this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
+//        this.estabelecimento = (Estabelecimento) args.get("ESTABELECIMENTO");
 
         this.fragFilhoDescricao.setArguments(args);
         this.fragFilhoInfo.setArguments(args);
@@ -72,16 +70,13 @@ class Controller {
         this.fragFilhoAvaliacao.setArguments(args);
     }
 
+    public void setLocalizacao(Localizacao localizacao){
+        this.latLng = new LatLng(localizacao.getLatitude(), localizacao.getLongitude());
+        this.fragment.getViews().setarPosicaoToPanorama(this.latLng);
+        this.msgToActivity.fecharProgresso();
+    }
+
     public FragmentFilho[] getFragFilhos(){
         return new FragmentFilho[]{this.fragFilhoDescricao, this.fragFilhoInfo, this.fragFilhoAvaliacao, this.fragFilhoEndereco};
     }
-
-//    public void onReceiveResult(int resultCode, Bundle resultData){
-//        if(resultCode == ServicesNames.NOME_GEOLOCALIZACAO){
-//            Localizacao localizacao = getLocalizacaoDoOnReceiveResult(resultData);
-//            this.latLng = new LatLng(localizacao.getLatitude(), localizacao.getLongitude());
-//            this.fragment.getViews().setarPosicaoToPanorama(this.latLng);
-//            this.msgToActivity.fecharProgresso();
-//        }
-//    }
 }

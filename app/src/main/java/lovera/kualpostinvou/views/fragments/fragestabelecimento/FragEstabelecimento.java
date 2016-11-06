@@ -1,7 +1,6 @@
 package lovera.kualpostinvou.views.fragments.fragestabelecimento;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +18,12 @@ public class FragEstabelecimento extends FragmentMenu{
     public static int ICONE = 0;
 
     private Views views;
-    private Controller controller;
-    private Receiver receiver2;
+    private final Controller controller;
+    private final Receiver receiver;
 
     public FragEstabelecimento() {
         this.controller = new Controller(this);
+        this.receiver = new Receiver(this);
     }
 
     @Nullable
@@ -90,17 +90,12 @@ public class FragEstabelecimento extends FragmentMenu{
         return controller;
     }
 
-    public Receiver getReceiver2() {
-        return receiver2;
+    public Receiver getReceiver() {
+        return receiver;
     }
 
     public CommonsReceiver getCommonsReceiver(){
-        return  this.receiver2.getCommonsReceiver();
-    }
-
-    @Override
-    public void onReceiveResult(int resultCode, Bundle resultData) {
-        this.controller.onReceiveResult(resultCode, resultData);
+        return  this.receiver.getCommonsReceiver();
     }
 
     //Metodos sobrescritos herdados da classe pai FragMenu
