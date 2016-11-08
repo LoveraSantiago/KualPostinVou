@@ -19,6 +19,10 @@ public class FragFilho_Descricao extends FragmentFilho {
     private Views views;
     private Consumer consumer;
 
+    public FragFilho_Descricao() {
+        this.consumer = new Consumer(this);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,7 +33,6 @@ public class FragFilho_Descricao extends FragmentFilho {
     public void onStart() {
         super.onStart();
 
-        this.consumer = new Consumer(this);
         this.consumer.inicio_consumirEspecialidades();
 
         this.views = new Views(this);
