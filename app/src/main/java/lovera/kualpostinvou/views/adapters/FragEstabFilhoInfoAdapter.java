@@ -7,13 +7,13 @@ import lovera.kualpostinvou.modelos.Especialidade;
 import lovera.kualpostinvou.modelos.Estabelecimento;
 import lovera.kualpostinvou.modelos.Profissional;
 import lovera.kualpostinvou.modelos.Servicos;
-import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Info;
+import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.informacao.FragFilho_Informacao;
 
 public class FragEstabFilhoInfoAdapter implements MsgFromConexaoSaude{
 
-    private FragEstabFilho_Info fragment;
+    private FragFilho_Informacao fragment;
 
-    public FragEstabFilhoInfoAdapter(FragEstabFilho_Info fragment) {
+    public FragEstabFilhoInfoAdapter(FragFilho_Informacao fragment) {
         this.fragment = fragment;
     }
 

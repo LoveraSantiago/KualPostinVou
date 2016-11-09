@@ -11,7 +11,7 @@ import lovera.kualpostinvou.views.fragments.FragmentFilho;
 import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Avaliacao;
 import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.descricao.FragFilho_Descricao;
 import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Endereco;
-import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Info;
+import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.informacao.FragFilho_Informacao;
 
 class Controller {
 
@@ -22,7 +22,7 @@ class Controller {
     private final FragEstabelecimento fragment;
 
     private FragFilho_Descricao fragFilhoDescricao;
-    private FragEstabFilho_Info fragFilhoInfo;
+    private FragFilho_Informacao fragFilhoInfo;
     private FragEstabFilho_Avaliacao fragFilhoAvaliacao;
     private FragEstabFilho_Endereco fragFilhoEndereco;
 
@@ -37,7 +37,7 @@ class Controller {
 
     private void inicializarFragFilhos(){
         this.fragFilhoDescricao = new FragFilho_Descricao();
-        this.fragFilhoInfo      = new FragEstabFilho_Info();
+        this.fragFilhoInfo      = new FragFilho_Informacao();
         this.fragFilhoAvaliacao = new FragEstabFilho_Avaliacao();
         this.fragFilhoEndereco  = new FragEstabFilho_Endereco();
     }
