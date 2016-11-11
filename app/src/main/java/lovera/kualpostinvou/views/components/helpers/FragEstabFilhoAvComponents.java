@@ -6,15 +6,15 @@ import android.widget.Button;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.views.components.dialogs.AvAtendPermissoesDialog;
 import lovera.kualpostinvou.views.components.dialogs.DismissDialog;
-import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Avaliacao;
+import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.avaliacao.FragFilho_Avaliacao;
 
 import static lovera.kualpostinvou.views.utils.FactoryViews.factoryDismissDialog;
 
 public class FragEstabFilhoAvComponents {
     
-    private FragEstabFilho_Avaliacao fragment;
+    private FragFilho_Avaliacao fragment;
 
-    public FragEstabFilhoAvComponents(FragEstabFilho_Avaliacao fragment) {
+    public FragEstabFilhoAvComponents(FragFilho_Avaliacao fragment) {
         this.fragment = fragment;
         inicializarComponentes();
     }

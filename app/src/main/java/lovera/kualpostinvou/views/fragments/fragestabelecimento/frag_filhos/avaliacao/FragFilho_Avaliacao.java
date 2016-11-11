@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos;
+package lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.avaliacao;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,11 +33,10 @@ import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
 import lovera.kualpostinvou.views.services.ServicesNames;
 
-public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsReceiver.Receiver{
+public class FragFilho_Avaliacao extends FragmentFilho{
 
     public static int RESULT_GRUPO_GET = 0;
     public static int RESULT_GRUPO_CAD = 1;
-
 
     public static String TITULO_FRAGMENT = "Filho Avaliacao";
     public static int ID_FRAGMENT = 2;
@@ -58,9 +57,9 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
 
     private ConexaoMetaModelo conexaoModelo;
 
-    private CommonsReceiver receiver;
-
     private AvTempoDialog dialogTimer;
+
+    private Receiver receiver;
 
     @Nullable
     @Override
@@ -76,18 +75,16 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         this.helperGPS = Aplicacao.getHelperGps();
 
         inicializarConexao();
-        inicializarReceivers();
         inicializarDialogAvTempo();
+    }
+
+    private void inicializarComponentes(){
+        this.receiver = new Receiver(this);
     }
 
     private void inicializarConexao(){
         FragEstabFilhoAvAdapter adapter = new FragEstabFilhoAvAdapter(this);
         this.conexaoModelo = new ConexaoMetaModelo(adapter);
-    }
-
-    private void inicializarReceivers(){
-        this.receiver = new CommonsReceiver(new Handler());
-        this.receiver.setReceiver(this);
     }
 
     private void inicializarDialogAvTempo() {
@@ -256,7 +253,11 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
         principalActivity.abrirProgresso();
         principalActivity.setarTextoProgresso("Buscando localização.");
 
-        this.helperGPS.popupLigarGps(this.receiver);
+        this.helperGPS.popupLigarGps(this.receiver.getCommonsReceiver());
+    }
+
+    public FragEstabFilhoAvComponents getComponents() {
+        return components;
     }
 
     @Override
@@ -272,15 +273,5 @@ public class FragEstabFilho_Avaliacao extends FragmentFilho implements CommonsRe
     @Override
     public int getIcone() {
         return ICONE;
-    }
-
-    @Override
-    public void onReceiveResult(int resultCode, Bundle resultData) {
-        if(resultCode == ServicesNames.GPS_SERVICE && resultData != null){
-            ((PrincipalActivity) getActivity()).fecharProgresso();
-        }
-        else{
-            this.components.showDialogGpsCancelado();
-        }
     }
 }

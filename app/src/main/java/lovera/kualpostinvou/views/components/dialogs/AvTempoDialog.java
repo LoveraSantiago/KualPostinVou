@@ -9,7 +9,7 @@ import android.widget.NumberPicker;
 
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.HoraMinuto;
-import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Avaliacao;
+import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.avaliacao.FragFilho_Avaliacao;
 
 public class AvTempoDialog extends AlertDialog {
 
@@ -27,7 +27,7 @@ public class AvTempoDialog extends AlertDialog {
     private int hora;
     private int minuto;
 
-    public AvTempoDialog(FragEstabFilho_Avaliacao fragment) {
+    public AvTempoDialog(FragFilho_Avaliacao fragment) {
         super(fragment.getActivity());
         View mainView = inflarDialogXML(fragment.getActivity());
         inicializarComponentes(fragment, mainView);
@@ -40,7 +40,7 @@ public class AvTempoDialog extends AlertDialog {
         return mainView;
     }
 
-    private void inicializarComponentes(final FragEstabFilho_Avaliacao fragment, View mainView){
+    private void inicializarComponentes(final FragFilho_Avaliacao fragment, View mainView){
         this.body = mainView.findViewById(R.id.d2_body);
         this.progresso = mainView.findViewById(R.id.d2_progresso);
 

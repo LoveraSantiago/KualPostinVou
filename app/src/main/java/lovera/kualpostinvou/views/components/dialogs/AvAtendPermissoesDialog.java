@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.views.PrincipalActivity;
 import lovera.kualpostinvou.views.fragments.FragRedesSociais;
-import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.FragEstabFilho_Avaliacao;
+import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.avaliacao.FragFilho_Avaliacao;
 
 public class AvAtendPermissoesDialog extends AlertDialog{
 
@@ -26,7 +26,7 @@ public class AvAtendPermissoesDialog extends AlertDialog{
     private View linhaLogado;
     private View linhaGpsLigado;
 
-    public AvAtendPermissoesDialog(FragEstabFilho_Avaliacao fragment) {
+    public AvAtendPermissoesDialog(FragFilho_Avaliacao fragment) {
         super(fragment.getActivity());
         View mainView = inflarDialogXML(fragment.getActivity());
         inicializarComponentes(mainView, fragment);
@@ -40,7 +40,7 @@ public class AvAtendPermissoesDialog extends AlertDialog{
         return mainView;
     }
 
-    private void inicializarComponentes(View mainView, final FragEstabFilho_Avaliacao fragment){
+    private void inicializarComponentes(View mainView, final FragFilho_Avaliacao fragment){
         this.linhaLogado = mainView.findViewById(R.id.d1_linhaLogado);
         this.linhaGpsLigado = mainView.findViewById(R.id.d1_linhaGpsLigado);
 
