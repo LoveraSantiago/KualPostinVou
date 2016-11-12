@@ -21,7 +21,7 @@ class Receiver extends ReceiverPai{
             ((PrincipalActivity) this.fragment.getActivity()).fecharProgresso();
         }
         else{
-            this.fragment.getComponents().showDialogGpsCancelado();
+            this.fragment.getViews().getDialogs().showDialogGpsCancelado();
         }
     }
 }

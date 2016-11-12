@@ -1,7 +1,6 @@
 package lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.avaliacao;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,12 +25,8 @@ import lovera.kualpostinvou.modelos.utils.FactoryModelos;
 import lovera.kualpostinvou.views.PrincipalActivity;
 import lovera.kualpostinvou.views.adapters.FragEstabFilhoAvAdapter;
 import lovera.kualpostinvou.views.components.dialogs.AvTempoDialog;
-import lovera.kualpostinvou.views.components.helpers.AvTempoComponents;
-import lovera.kualpostinvou.views.components.helpers.FragEstabFilhoAvComponents;
 import lovera.kualpostinvou.views.fragments.FragmentFilho;
-import lovera.kualpostinvou.views.receivers.CommonsReceiver;
 import lovera.kualpostinvou.views.redes_sociais.google.HelperGeolocalizacao;
-import lovera.kualpostinvou.views.services.ServicesNames;
 
 public class FragFilho_Avaliacao extends FragmentFilho{
 
@@ -50,15 +45,12 @@ public class FragFilho_Avaliacao extends FragmentFilho{
 
     private boolean jaCadastrouTempo;
 
-    private AvTempoComponents tempoComponents;
-    private FragEstabFilhoAvComponents components;
-
     private HelperGeolocalizacao helperGPS;
 
     private ConexaoMetaModelo conexaoModelo;
 
-    private AvTempoDialog dialogTimer;
-
+    private Controller controller;
+    private Views views;
     private Receiver receiver;
 
     @Nullable
@@ -70,25 +62,21 @@ public class FragFilho_Avaliacao extends FragmentFilho{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.tempoComponents = new AvTempoComponents(getActivity());
-        this.components = new FragEstabFilhoAvComponents(this);
-        this.helperGPS = Aplicacao.getHelperGps();
+        inicializarComponentes();
 
         inicializarConexao();
-        inicializarDialogAvTempo();
     }
 
     private void inicializarComponentes(){
         this.receiver = new Receiver(this);
+        this.views = new Views(this);
+        this.controller = new Controller();
+        this.helperGPS = Aplicacao.getHelperGps();
     }
 
     private void inicializarConexao(){
         FragEstabFilhoAvAdapter adapter = new FragEstabFilhoAvAdapter(this);
         this.conexaoModelo = new ConexaoMetaModelo(adapter);
-    }
-
-    private void inicializarDialogAvTempo() {
-        this.dialogTimer = new AvTempoDialog(this);
     }
 
     @Override
@@ -106,7 +94,7 @@ public class FragFilho_Avaliacao extends FragmentFilho{
     private void consumirAvTempoAtend(){
         if(Aplicacao.getPessoaLogada().hasToken()){
             if(this.horaMinuto != null){
-                this.tempoComponents.setTempo(this.horaMinuto);
+                this.views.getTempoComponent().setTempo(this.horaMinuto);
             }
             else{
                 this.grupoTempoAtendimento = FactoryModelos.geradorDeGrupo(this.estabelecimento.getCodUnidade());
@@ -114,7 +102,7 @@ public class FragFilho_Avaliacao extends FragmentFilho{
             }
         }
         else{
-            this.tempoComponents.realizarAcao(AvTempoComponents.NECESSARIO_LOGAR);
+            this.views.getTempoComponent().realizarAcao(AvTempoComponent.NECESSARIO_LOGAR);
         }
     }
 
@@ -124,7 +112,7 @@ public class FragFilho_Avaliacao extends FragmentFilho{
             this.conexaoModelo.getPostagens(Aplicacao.getPessoaLogada().getToken(), this.grupoTempoAtendimento.getCodGrupo());
         }
         else{
-            this.tempoComponents.realizarAcao(AvTempoComponents.SEM_DADOS_CADASTRADOS);
+            this.views.getTempoComponent().realizarAcao(AvTempoComponent.SEM_DADOS_CADASTRADOS);
             TipoObjeto tipoObjeto = FactoryModelos.geradorTipoObjeto(grupo);
             this.conexaoModelo.cadastrarTipoObjeto(Aplicacao.getPessoaLogada().getToken(), tipoObjeto);
         }
@@ -144,7 +132,7 @@ public class FragFilho_Avaliacao extends FragmentFilho{
 
     public void passarMedia(Media media) {
         this.horaMinuto = FactoryModelos.geradorHoraMinuto((int) media.getMedia());
-        this.tempoComponents.setTempo(this.horaMinuto);
+        this.views.getTempoComponent().setTempo(this.horaMinuto);
         this.jaCadastrouTempo = true;
     }
 
@@ -163,10 +151,10 @@ public class FragFilho_Avaliacao extends FragmentFilho{
     }
 
     public void editarTempoAtend(){
-        int minutos = this.dialogTimer.getMinutos();
-        this.dialogTimer.dismiss();
+        int minutos = this.views.getAvTempoDialog().getMinutos();
+        this.views.getAvTempoDialog().dismiss();
         if(minutos == 0){
-            this.components.showDialogTempoZerado();
+            this.views.getDialogs().showDialogTempoZerado();
         }
         else{
             PostagemR postagemRTemp = (PostagemR) this.postagem;
@@ -183,10 +171,10 @@ public class FragFilho_Avaliacao extends FragmentFilho{
     public void cadastrarTempoAtend_cadastrarConteudo(PostagemR postagem){
         this.postagem = postagem;
 
-        int minutos = this.dialogTimer.getMinutos();
-        this.dialogTimer.dismiss();
+        int minutos = this.views.getAvTempoDialog().getMinutos();
+        this.views.getAvTempoDialog().dismiss();
         if(minutos == 0){
-            this.components.showDialogTempoZerado();
+            this.views.getDialogs().showDialogTempoZerado();
         }
         else{
             ConteudoPostagem conteudoPost = FactoryModelos.geradorConteudoPostagem(postagem, minutos);
@@ -201,51 +189,9 @@ public class FragFilho_Avaliacao extends FragmentFilho{
         this.conexaoModelo.getMedia(this.postagem.getTipo().getCodTipoPostagem(), this.postagem.getCodTipoObjetoDestino(), this.tipoObjeto.getCodTipoObjeto());
     }
 
-    private boolean validarPermissoesCadastroAtendimento(){
-        boolean temToken = Aplicacao.getPessoaLogada().hasToken();
-        boolean temLocalizacao = this.helperGPS.temLastLocation();
-
-        if(temToken && temLocalizacao){
-            this.helperGPS.ligarLocationUpdate();
-            return true;
-        }
-        else{
-            if(Aplicacao.getPessoaLogada().isServiceTokenEmAndamento()){
-                this.components.showDialogAguardeLogin();
-                return false;
-            }
-            else{
-                this.components.showDialogPermissoes(temToken, temLocalizacao);
-                return false;
-            }
-        }
-    }
-
-    public void showDialogCadastrarTempoDeAtendimento(){
-        if(validarPermissoesCadastroAtendimento()){
-            if(this.jaCadastrouTempo){
-                this.dialogTimer.show(this.jaCadastrouTempo);
-                PostagemR postagemTemp = (PostagemR) this.postagem;
-                this.conexaoModelo.getConteudoPostagem(Aplicacao.getPessoaLogada().getToken(), postagemTemp.getCodPostagem(), postagemTemp.getConteudos().get(0).getCodConteudoPostagem());
-            }
-            else{
-                Localizacao localizacaoAtualizada = this.helperGPS.getLocalizacaoAtualizada();
-                Distancia distancia = new Distancia();
-                double distanciaLocal = distancia.calcularKmDistancia(localizacaoAtualizada, this.estabelecimento);
-
-                if(distanciaLocal < 5){
-                    this.dialogTimer.show(this.jaCadastrouTempo);
-                }
-                else{
-                    this.components.showDialogDistanteEstabelecimento();
-                }
-            }
-        }
-    }
-
     public void passarConteudoPostagemParaDialogTimer(ConteudoPostagem conteudoPostagem){
         HoraMinuto horaMinuto = FactoryModelos.geradorHoraMinuto(conteudoPostagem.getValor());
-        this.dialogTimer.setTempoCadastrado(horaMinuto);
+        this.views.getAvTempoDialog().setTempoCadastrado(horaMinuto);
     }
 
     public void ligarGps(){
@@ -256,8 +202,12 @@ public class FragFilho_Avaliacao extends FragmentFilho{
         this.helperGPS.popupLigarGps(this.receiver.getCommonsReceiver());
     }
 
-    public FragEstabFilhoAvComponents getComponents() {
-        return components;
+    public Controller getController() {
+        return controller;
+    }
+
+    public Views getViews() {
+        return views;
     }
 
     @Override

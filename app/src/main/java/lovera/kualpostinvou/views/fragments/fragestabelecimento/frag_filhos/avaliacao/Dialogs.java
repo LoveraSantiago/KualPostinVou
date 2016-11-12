@@ -1,32 +1,16 @@
-package lovera.kualpostinvou.views.components.helpers;
+package lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.avaliacao;
 
-import android.view.View;
-import android.widget.Button;
-
-import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.views.components.dialogs.AvAtendPermissoesDialog;
 import lovera.kualpostinvou.views.components.dialogs.DismissDialog;
-import lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.avaliacao.FragFilho_Avaliacao;
 
 import static lovera.kualpostinvou.views.utils.FactoryViews.factoryDismissDialog;
 
-public class FragEstabFilhoAvComponents {
-    
-    private FragFilho_Avaliacao fragment;
+class Dialogs {
 
-    public FragEstabFilhoAvComponents(FragFilho_Avaliacao fragment) {
+    private final FragFilho_Avaliacao fragment;
+
+    public Dialogs(FragFilho_Avaliacao fragment) {
         this.fragment = fragment;
-        inicializarComponentes();
-    }
-
-    private void inicializarComponentes(){
-        Button btnRegistrarTempo = (Button) this.fragment.getActivity().findViewById(R.id.f8_btnRegistrarAtend);
-        btnRegistrarTempo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fragment.showDialogCadastrarTempoDeAtendimento();
-            }
-        });
     }
 
     public void showDialogGpsCancelado(){

@@ -1,4 +1,4 @@
-package lovera.kualpostinvou.views.components.helpers;
+package lovera.kualpostinvou.views.fragments.fragestabelecimento.frag_filhos.avaliacao;
 
 import android.app.Activity;
 import android.view.View;
@@ -13,7 +13,7 @@ import lovera.kualpostinvou.R;
 import lovera.kualpostinvou.modelos.HoraMinuto;
 import lovera.kualpostinvou.views.utils.Utils_View;
 
-public class AvTempoComponents {
+class AvTempoComponent {
 
     public static int NECESSARIO_LOGAR = 0;
     public static int SEM_DADOS_CADASTRADOS = 1;
@@ -27,7 +27,7 @@ public class AvTempoComponents {
     private Button btnRegistrarAtendimento;
     private Button btnEditarAtendimento;
 
-    public AvTempoComponents(Activity activity) {
+    public AvTempoComponent(Activity activity) {
         this.activity = activity;
         inicializarComponentes();
         estadoInicial();
